@@ -2,7 +2,7 @@
 
 LBAW's repository for Group 35
 
-##Tema 4. Event Manegement - ArtNow
+## Tema 4. Event Manegement - ArtNow
 
 O projeto tem como objetivo planear, especificar, desenvolver e promover uma aplicação Web que permita fazer a gestão de eventos na área das artes, nomeadamente concertos e festivais de música, espetáculos de dança, peças de teatro e exposições de arte, entre outros.
 
