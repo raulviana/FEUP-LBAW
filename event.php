@@ -16,8 +16,14 @@
         <div class="container">
             <div id="event_row" class="row align-items-center">
                 <!-- description -->
-                <p id="event_description" class="col-sm-7">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam venenatis dui augue, ut condimentum ante interdum nec. Donec sed magna dolor. Ut consequat pharetra blandit. Etiam convallis eu nisi et rutrum. Suspendisse placerat augue nec rutrum commodo. Mauris vestibulum nisi vel odio pretium, quis vestibulum tellus pellentesque. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae.</p>
-            
+                <div  class="col-sm-7">
+                    <p id="event_description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam venenatis dui augue, ut condimentum ante interdum nec. Donec sed magna dolor. Ut consequat pharetra blandit. Etiam convallis eu nisi et rutrum. Suspendisse placerat augue nec rutrum commodo. Mauris vestibulum nisi vel odio pretium, quis vestibulum tellus pellentesque. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae.</p>
+                    <div id="event_sm">
+                        <a class="btn btn-dark" href="#" role="button">Website</a>
+                        <a class="btn btn-dark" href="#" role="button">Facebook</a>
+                        <a class="btn btn-dark" href="#" role="button">Instagram</a>
+                    </div>
+                </div>
                 <div id="event_info" class="col-sm-5">
                     <!-- location -->
                     <h4><a href="https://www.google.com/maps/search/?api=1&query=altice+arena" class="event_location">Altice Arena, Lisbon</a></h3>
@@ -43,11 +49,6 @@
             <p>meo@meo.pt</p>
             <p>210 210 210</p>
         </div>
-        <!-- event footer - social media and website-->
-        <div id="event_footer">
-            <a class="btn btn-dark" href="#" role="button">Website</a>
-            <a class="btn btn-dark" href="#" role="button">Facebook</a>
-            <a class="btn btn-dark" href="#" role="button">Instagram</a>
-        </div>
+        <!--     FOOTER     -->
     </body>
 </html> 
