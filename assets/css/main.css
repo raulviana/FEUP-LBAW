@@ -1,0 +1,112 @@
+/*body*/
+body{
+  background-color: #f7f7f7;
+}
+    /* Nav bar */
+.navbar {
+    text-transform: uppercase;
+    font-size: .9rem;
+    font-weight: 600;
+}
+
+/* Buttons */
+.btn-margin {
+    margin: 12.5px;
+}
+
+/* Footer */
+.footer-credits{
+    color:white;
+}
+
+#recover_password {
+    text-transform: none;
+}
+
+
+button#dropdown-navbar.btn.dropdown-toggle {
+    color: #292b2c;
+    background-color: #f7f7f7; /* light-grey */
+    text-align: center;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: none;
+    font-size: 0.8rem;
+    font-weight: 650;
+}
+
+
+button#dropdown-navbar.btn.dropdown-toggle:hover{
+    background-color: lightgrey; 
+}
+
+
+button#tag-button.btn {
+    color: white;
+    font-size: 0.65rem;
+    padding-bottom: 0.2rem;
+    padding-top: 0.2rem;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+    font-weight: 500;
+}
+
+
+button#tag-button.btn.theater-tag{
+    background: #c43227; /* dark red */
+}
+
+button#tag-button.btn.dance-tag{
+    background: #4c3ac2; /* indigo */
+}
+
+button#tag-button.btn.sculpture-tag{
+    background: #e0d426; /* yellow */
+}
+
+button#tag-button.btn.music-tag{
+    background: #db27d5; /* purple */
+}
+
+button#tag-button.btn.literature-tag{
+    background: #43b52a; /* green */
+}
+
+button#tag-button.btn.comedy-tag{
+    background: #2a97b5; /* dark cyan */
+}
+
+button#tag-button.btn.paintings-tag{
+    background: #d45008; /* dark orage */
+}
+
+
+button#tag-button.btn:hover {
+    background:  lightgrey;
+}
+
+p#search-by{
+    font-size: 0.8rem; 
+    margin-bottom: 0.1rem; 
+    font-style: italic;
+}
+
+p#user-about {
+    text-align: justify;
+    font-size: 0.8rem;
+}
+
+p#about-us {
+    text-align: justify;
+    font-size: 0.8rem;
+}
+
+hr {
+border: solid 0.05rem;
+color: lightgray;
+width: 100%;
+}
+
+button#delete-button.btn{
+    padding: 0.5rem;
+}

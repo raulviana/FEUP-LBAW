@@ -1,57 +1,27 @@
-<!doctype html>
-<html lang="en">
+<?php
+    include_once('../templates/header.php');
+    include_once('../templates/navbar.php');
+    include_once('../templates/edit_profile.php');
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+   draw_topbar();
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+?>
 
-    <title>EventNow About</title>
-</head>
-
-<body>
-    <!-- NAVBAR-->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <a class="navbar-brand" href="#">CompanyName</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">About</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Events</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Contact</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-
+    <br><br><br>
 
     <div class="container">
 
-        <h3 class="mt3">About Us</h1>
+        <h4 class="mt3">About Us</h1>
             <hr>
 
             <div class="row justify-content-start">
                 <div class="col-xs-5 col-lg-5">
-                    <p>
+                    <p id="about-us">
                         EventNow platform allows the art events management, namely gigs and music festivals, dance
                         shows,
                         theatre, and art exhibitions, among others.
                     </p>
-                    <p>
+                    <p id="about-us">
                         We think, that nowadays, it would be useful such a platform, allowing users to not only organize
                         and
                         search for events
@@ -62,18 +32,18 @@
                     </p>
                 </div>
                 <div class="col">
-                    <img src="about_us.jpg" alt="Events" class="rouded-float-left">
+                    <img style="width: 75%; heigth:auto;" src="../../assets/images/about_us.jpg" alt="Events" class="rouded-float-left">
                 </div>
             </div>
 
 
-            <h3 class="mt3">Our Team</h1>
+            <h4 class="mt3">Our Team</h1>
                 <hr>
                 <!--TEAM CARDS-->
                 <div class="row text-center row-cols-4">
                     <div class="col d-flex justity-content-center">
                         <div class="card text-center">
-                            <img class="card-img-topimg-fluid" src="default.jpg" alt="Raul Photo">
+                            <img class="card-img-topimg-fluid" src="../../assets/images/default.jpg" alt="Raul Photo">
                             <div class="card-body">
                                 <h5 class="card-title">Raul Viana</h5>
                                 <p class="card-text">up201208089@fe.up.pt</p>
@@ -83,7 +53,7 @@
                     </div>
                     <div class="col d-flex justity-content-center">
                         <div class="card text-center">
-                            <img class="card-img-topimg-fluid" src="default.jpg" alt="Claudia Photo">
+                            <img class="card-img-topimg-fluid" src="../../assets/images/default.jpg" alt="Claudia Photo">
                             <div class="card-body">
                                 <h5 class="card-title">Cláudia Mamede</h5>
                                 <p class="card-text">up201604832@fe.up.pt</p>
@@ -94,7 +64,7 @@
 
                     <div class="col d-flex justity-content-center">
                         <div class="card text-center">
-                            <img class="card-img-topimg-fluid" src="default.jpg" alt="Leonor Photo">
+                            <img class="card-img-topimg-fluid" src="../../assets/images/default.jpg" alt="Leonor Photo">
                             <div class="card-body">
                                 <h5 class="card-title">Leonor Sousa</h5>
                                 <p class="card-text">up201705377@fe.up.pt</p>
@@ -104,7 +74,7 @@
                     </div>
                     <div class="col d-flex justity-content-center">
                         <div class="card text-center">
-                            <img class="card-img-topimg-fluid" src="default.jpg" alt="Miguel Photo">
+                            <img class="card-img-topimg-fluid" src="../../assets/images/default.jpg" alt="Miguel Photo">
                             <div class="card-body">
                                 <h5 class="card-title">Miguel Romariz</h5>
                                 <p class="card-text">up201708809@fe.up.pt</p>
@@ -116,17 +86,7 @@
     </div>
 
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
-</body>
 
-</html>
+<?php
+include_once('../templates/footer.php');
+?>
