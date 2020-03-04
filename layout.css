@@ -1,37 +1,3 @@
-body{
-    width:75%;
-    margin:auto;
-}
-
-#event_title{
-    margin: 0.5em 0;
-}
-
-#event_info{
-    padding: 1em;
-    text-align: center;
-}
-
-#event_description{
-    text-align: justify;
-    padding-right: 3em;
-}
-
-#event_row{
-    margin-top: 1em;
-}
-
-.container{
-    margin:0;
-    padding: 0;
-}
-
-#event_tag{
-    display: inline;
-}
-
-#org_info{
-    padding-top: 2em;
-    margin-top: 2em;
-    text-align: center;
+body { 
+    padding-top: 65px; 
 }
