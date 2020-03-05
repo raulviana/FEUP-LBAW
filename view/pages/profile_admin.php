@@ -10,7 +10,6 @@
 ?>
     
 
-     <br><br><br><br>
 <div class="container">
        <div class="row profile justify-content-center">
 		   <div class="col-lg-10 push-lg-4">
