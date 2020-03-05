@@ -2,6 +2,7 @@
     include_once('../templates/header.php');
     include_once('../templates/navbar.php');
     include_once('../templates/edit_profile.php');
+    include_once('../templates/event-card.php');
 
    draw_topbar();
 
@@ -27,16 +28,16 @@
                     <br>
                     <div class="row">
                         <div class="col-md-6">
-                           <center><img src="https://res.cloudinary.com/mhmd/image/upload/v1564991372/image_pxlho1.svg" alt="" width="150" class="mb-4">
+                           <center><img src="https://media-manager.noticiasaominuto.com/1920/1569938681/naom_59ad8a23b9585.jpg?crop_params=eyJwb3J0cmFpdCI6eyJjcm9wV2lkdGgiOjEwNTAsImNyb3BIZWlnaHQiOjE4NjYsImNyb3BYIjoxMDI5LCJjcm9wWSI6MH0sImxhbmRzY2FwZSI6eyJjcm9wV2lkdGgiOjI4MDAsImNyb3BIZWlnaHQiOjE1NzQsImNyb3BYIjowLCJjcm9wWSI6Njd9fQ==" alt="" width="400" class="mb-4">
                             <p> <b>Upload image</b></p>
                             </center>
                         </div>
                         
                         <div class="col-md-6">
-                            <h4><center>User full name</center></h4><br>
+                            <h4><center>Mark Zuckerberg</center></h4><br>
                             <h6>About</h6>
                             <p id="user-about">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam venenatis dui augue, ut condimentum ante interdum nec. Donec sed magna dolor. Ut consequat pharetra blandit. Etiam convallis eu nisi et rutrum. Suspendisse placerat augue nec rutrum commodo.
+                                Programador e empresário norte-americano, conhecido internacionalmente por ser um dos fundadores do Facebook, a rede social mais acessada do mundo.
                             </p>
                             <h6>Preferences</h6>
                             <!-- hardcoded -->
@@ -60,15 +61,33 @@
                         
                         
                         <div class="col-md-12">
-                            <h4 class="m-t-2"><span class="fa fa-clock-o ion-clock pull-xs-right"></span> Going to </h4>
+                            <h4 class="m-t-2">Going to </h4>
                         </div>
                         
-                          <div class="col-md-12">
-                            <h4 class="m-t-2"><span class="fa fa-clock-o ion-clock pull-xs-right"></span> My events </h4>
-                        </div>
+                               <?php
+
+                draw_single_eventcard("../../assets/images/HarryPotter.png", "HARRY POTTER THE EXHIBITION ", "Lisboa", "Março de 2020", "Mergulha no Mundo Mágico e descobre as decorações icónicas e as peças originais dos filmes da saga. A partir de 16 de novembro, no Pavilhão de Portugal.", 56);
+                
+              
+                
+                draw_single_eventcard("../../assets/images/comedyclub.jpeg", "Stand Up Comedy - Pinguim Comedy Club", "Porto", "7 de Março de 2020", "Estamos de regresso depois de duas noites lotadas! O cartaz já está a ser empratado e começa a ser servido amanhã. Os lugares sentados são limitados. Até já!", 123);
+                
+                                
+                                ?>
                         
                           <div class="col-md-12">
-                            <h4 class="m-t-2"><span class="fa fa-clock-o ion-clock pull-xs-right"></span>  Wishlist  </h4>
+                            <h4 class="m-t-2">My events </h4>
+                              </div>
+                                <?php
+                draw_single_eventcard("../../assets/images/party.jpg", "Jantar de aniversario", "Lisboa", "11 de Maio de 2020", "Jantar de aniversario informal para os amigos mais proximos no restaurante XXXXXXXX", 12);
+                        
+                       
+                                
+                                ?>
+                        
+                        
+                          <div class="col-md-12">
+                            <h4 class="m-t-2">Wishlist  </h4>
                         </div>
                     </div>
                     <!--/row-->

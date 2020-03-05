@@ -1,11 +1,11 @@
 <?php function draw_banner(){ ?>
 
 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-    <ol class="carousel-indicators">
+    <!-- <ol class="carousel-indicators">
         <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
         <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
         <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-    </ol>
+    </ol> -->
     <div class="carousel-inner">
         <div class="carousel-item active">
             <img class="d-block w-100" src="../../assets/images/slide_1.png" alt="First slide">
@@ -33,7 +33,7 @@
     <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="sr-only">Next</span>
-    </a>
+    </a> 
 </div>
 
 <?php } ?>
