@@ -80,6 +80,9 @@ button#tag-button.btn.paintings-tag{
     background: #d45008; /* dark orage */
 }
 
+button#tag-button.btn.others-tag{
+    background: #000FFF; /* dark orage */
+}
 
 button#tag-button.btn:hover {
     background:  lightgrey;
@@ -130,4 +133,9 @@ p#event-card-body {
 img#event-card-img {
     width: 100%;
     height: 180px;
+}
+
+button#event-card-button.btn.btn-sm.btn-dark:hover{
+    background: darkgrey;
+    outline-color: darkgrey;
 }

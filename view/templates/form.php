@@ -3,7 +3,7 @@
 ?>
 
 <ul class="nav navbar-nav flex-row justify-content-between ml-auto">
-    <li class="nav-item order-2 order-md-1"><a href="#" class="nav-link" title="settings"><i class="fa fa-cog fa-fw fa-lg"></i></a></li>
+    <li class="nav-item order-2 order-md-1"><a href="#" class="nav-link" title="settings"></a></li>
         <li class="dropdown order-1">
             <button type="button" id="dropdown-navbar" data-toggle="dropdown" class="btn dropdown-toggle">LOGIN <span class="caret"></span></button>
             <ul class="dropdown-menu dropdown-menu-right mt-2">
@@ -59,7 +59,7 @@
 <?php function draw_register_form(){ ?>
     
 <ul class="nav navbar-nav flex-row justify-content-between ml-auto">
-    <li class="nav-item order-2 order-md-1"><a href="#" class="nav-link" title="settings"><i class="fa fa-cog fa-fw fa-lg"></i></a></li>
+    <li class="nav-item order-2 order-md-1"><a href="#" class="nav-link" title="settings"></a></li>
         <li class="dropdown order-1">
             <button type="button" id="dropdown-navbar" data-toggle="dropdown" class="btn dropdown-toggle ">SIGN UP <span class="caret"></span></button>
             <ul class="dropdown-menu dropdown-menu-right mt-2">
