@@ -1,22 +1,17 @@
 
 
 <?php
-    include_once('../templates/header.php');
+    include_once('../templates/head.php');
     include_once('../templates/navbar.php');
-    include_once('../templates/slideshow.php');
+    include_once('../templates/photo_display.php');
     include_once('../templates/event-card.php');
 ?>
 
  <?php draw_topbar(); ?>
- <?php draw_banner(); ?>
+ <?php draw_header(); ?> 
+ <?php draw_target_areas(); ?>
 
 
-<!-- Jumbotron -->
-<div class="jumbotron jumbotron-fluid">
-  <div class="container">
-    <p class="text-center lead">Talvez identificar as áreas dos eventos: dança, teatro, comédia, música, pintura</p>
-  </div>
-</div>
 
 <main id="event-list">
     <br><br><br>
@@ -36,8 +31,6 @@
                  draw_single_eventcard("../../assets/images/comedyclub.jpeg", "Stand Up Comedy - Pinguim Comedy Club", "Porto", "7 de Março de 2020", "Estamos de regresso depois de duas noites lotadas! O cartaz já está a ser empratado e começa a ser servido amanhã. Os lugares sentados são limitados. Até já!", 123);
                 
                  draw_single_eventcard("../../assets/images/HarryPotter.png", "HARRY POTTER THE EXHIBITION ", "Lisboa", "Março de 2020", "Mergulha no Mundo Mágico e descobre as decorações icónicas e as peças originais dos filmes da saga. A partir de 16 de novembro, no Pavilhão de Portugal.", 56);
-                
-                 
                 
                 ?>
             </div>

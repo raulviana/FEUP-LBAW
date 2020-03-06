@@ -4,6 +4,7 @@ body{
 }
     /* Nav bar */
 .navbar {
+    background: #292b2c ;
     text-transform: uppercase;
     font-size: .9rem;
     font-weight: 600;
@@ -135,7 +136,68 @@ img#event-card-img {
     height: 180px;
 }
 
+
+
+
+button#event-card-button.btn.btn-sm.btn-dark {
+    color: #f7f7f7;  /* light-grey */
+    background-color: #292b2c ;
+    text-align: center;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: none;
+    font-size: 0.65rem;
+    font-weight: 625;
+}
+
+
 button#event-card-button.btn.btn-sm.btn-dark:hover{
-    background: darkgrey;
-    outline-color: darkgrey;
+    background-color: lightgrey; 
+}
+
+
+
+.image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  transition: .5s ease;
+  background-color: #008CBA;
+}
+
+.container:hover .overlay {
+  opacity: 1;
+}
+
+div#overlay-text.text {
+  color: white;
+  font-size: 0.85rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+div.text-centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+    text-transform: uppercase;
+    font-weight: 650;
+    font-size: 0.65rem;
 }

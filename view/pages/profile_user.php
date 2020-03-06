@@ -1,5 +1,5 @@
 <?php
-    include_once('../templates/header.php');
+    include_once('../templates/head.php');
     include_once('../templates/navbar.php');
     include_once('../templates/edit_profile.php');
     include_once('../templates/event-card.php');
