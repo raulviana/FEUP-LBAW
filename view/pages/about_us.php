@@ -24,8 +24,8 @@
                     <p id="about-us">
                         We think, that nowadays, it would be useful such a platform, allowing users to not only organize
                         and
-                        search for events
-                        , but also advertise and show low visibility artists and bands. These events can change in
+                        search for events, 
+                        but also advertise and show low visibility artists and bands. These events can change in
                         dimension, ranging from
                         organizing the gig of a newly formed band to bigger scale events, like a music or a dance
                         festival.
