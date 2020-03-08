@@ -90,9 +90,9 @@
                         <img src="https://www.mercia-group.co.uk/media/2817/jonathan-eddy.jpg?center=0.31519274376417233,0.54931972789115646&amp;mode=crop&amp;width=448&amp;height=448&amp;rnd=132134651380000000" class="rounded-circle mr-2" alt="Collaborator" width="50px"> 
                         <img src="https://evada-images.global.ssl.fastly.net/76d1ea39-a4eb-4270-b9dc-899653415f8f/home-tile-person-3.jpg?width=345&height=345" class="rounded-circle mr-2" alt="Collaborator" width="50px"> 
                         <!-- only for owner -->
-                        <button type="button" class="btn" data-toggle="modal" data-target="#exampleModal">
+                        <!--<button type="button" class="btn" data-toggle="modal" data-target="#exampleModal">
                             <img src="https://media.istockphoto.com/vectors/plus-flat-blue-simple-icon-with-long-shadow-vector-id522539379?k=6&m=522539379&s=612x612&w=0&h=oBs3Qmw78sfKoPEc03pgcKkXhsUoGjHxCV-UBouwcck=" class="rounded-circle" alt="Add" width="50px">
-                        </button>
+                        </button>-->
                         <!-- Modal -->
                         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
