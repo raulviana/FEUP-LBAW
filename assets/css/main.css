@@ -201,3 +201,20 @@ div.text-centered {
     font-weight: 650;
     font-size: 0.65rem;
 }
+
+
+button#button-header.btn.btn-light.btn-sm.btn-margin {
+    color: #292b2c;
+    background-color: #f7f7f7; /* light-grey */
+    text-align: center;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: none;
+    font-size: 0.7rem;
+    font-weight: 650;
+
+}
+
+button#button-header.btn.btn-light.btn-sm.btn-margin:hover{
+    background-color: lightgrey; 
+}

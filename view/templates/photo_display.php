@@ -6,9 +6,9 @@
                 <h5>Join us to find great events near you!</h5>
                 
             
-                <button type="button" class="btn btn-light btn-sm btn-margin">Create your event</button>
+                <button id="button-header"  type="button" class="btn btn-light btn-sm btn-margin">Create your event</button>
                 
-                <button onclick="location.href = '#event-list';" type="button" class="btn btn-light btn-sm btn-margin">Search for events</button>
+                <button id="button-header" onclick="location.href = '#event-list';" type="button" class="btn btn-light btn-sm btn-margin">Search for events</button>
             </div>
         </div>
 
