@@ -4,9 +4,8 @@
             <div class="carousel-caption d-none d-md-block">
                 <h3 class="display-2"><b>Art Now</b></h3>
                 <h5>Join us to find great events near you!</h5>
-                
             
-                <button id="button-header"  type="button" class="btn btn-light btn-sm btn-margin">Create your event</button>
+                <button id="button-header" onclick="location.href = '../pages/edit_event.php';"  type="button" class="btn btn-light btn-sm btn-margin">Create your event</button>
                 
                 <button id="button-header" onclick="location.href = '#event-list';" type="button" class="btn btn-light btn-sm btn-margin">Search for events</button>
             </div>

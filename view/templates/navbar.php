@@ -112,8 +112,13 @@
                 <a class="nav-link" href="#">Buy</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">⚙️</a>
+                <a class="nav-link" href="../pages/edit_event.php">⚙️</a>
             </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="../pages/edit_event.php">🗑️</a>
+            </li>
+
         </ul>
     </div>
 </nav>

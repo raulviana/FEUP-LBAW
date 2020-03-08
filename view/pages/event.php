@@ -55,12 +55,12 @@
                     <!-- tags -->                  
                     <div class="row">            
                         <div class="col">
-                      
-                           <center>
+                        <p id="search-by">Event tags: </p>
+                           
                            <button style="margin-right: 1.25rem;" id="tag-button" type="button" class="btn music-tag">Music</button> 
                            <button style="margin-right: 1.25rem;" id="tag-button" type="button" class="btn dance-tag">Dance</button> 
                            <button style="margin-right: 1.25rem;" id="tag-button" type="button" class="btn others-tag">Others</button> 
-                           </center>
+                           
                         </div>
                     </div>
                     
