@@ -40,15 +40,20 @@
                     <div class="row">
                         <div class="col-md-6">
                            <center><img src="https://res.cloudinary.com/mhmd/image/upload/v1564991372/image_pxlho1.svg" alt="LOGO ARTNOW" width="150" class="mb-4">
-                            <p> <b>Upload image</b></p>
+            
                             </center>
                         </div>
                         
                         <div class="col-md-6">
-                            <h4><center>Administrator</center></h4><br>
-                            <h6>Information</h6>
+                            <h4><center>ART NOW</center></h4><br>
+                            <h6>About</h6>
                             <p id="user-about">
-                                Informamos os nossos utilizadores que fizemos uma parceria com a empresa XXXXX e pode agora usufruir de 10% de desconto numa compra através no site, com o codigo ARTNOW10.
+                                A plataforma que permite aos utilizadores não só organizar e procurar eventos, mas também publicitar e expor artistas ou bandas que tenham pouca visibilidade. Os eventos podem variar de dimensão, passando pela organização de um concerto de uma banda jovem, até eventos de maior escala, como um festival de música ou de dança.
+                            </p>
+                            <h6>Parcerias</h6>
+                            <p id="user-about">
+                                Atualmente, contamos com as seguintes parcerias:
+                                
                             </p>
                         </div>
                     </div>

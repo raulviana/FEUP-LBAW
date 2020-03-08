@@ -18,8 +18,8 @@
                     
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
-                      <button id="event-card-button" type="button" class="btn btn-sm btn-dark ">View</button>
-                      <button id="event-card-button"  type="button" class="btn btn-sm btn-dark">Buy</button>
+                      <a id="event-card-button" class="btn btn-sm btn-dark" href="../pages/event.php" role="button" >View</a>
+                      <a id="event-card-button" class="btn btn-sm btn-dark" href="../pages/event.php" role="button">Buy</a>
                     </div>
                     <small class="text-muted"><?php echo $counter ?> going</small>
                   </div>
