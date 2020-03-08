@@ -201,3 +201,22 @@ div.text-centered {
     font-weight: 650;
     font-size: 0.65rem;
 }
+
+.second-nav{
+    top:65px;
+}
+
+.event_content{
+    padding-top: 130px;
+}
+
+.post{
+    background-color: lightgray;
+}
+
+.event_input{
+    background-color: #f7f7f7;
+    border-style: none none solid none;
+    border-color: #292b2c;
+    border-width: thin;
+}
