@@ -15,7 +15,7 @@
 <div class="container">
        <div class="row profile justify-content-center">
 		   <div class="col-lg-10 push-lg-4">
-
+            <br style="line-height:100;">
             <img style="height:35%; width:100%;"src="../../assets/images/maresvivas.png" alt="Queen Concert" class="img-fluid" width="100%">
                
             <?php draw_eventbar("Meo Marés Vivas"); ?>
@@ -56,17 +56,18 @@
                     <div class="row">            
                         <div class="col">
                       
-                           <p id="search-by">Event tags: </p>
+                           <center>
                            <button style="margin-right: 1.25rem;" id="tag-button" type="button" class="btn music-tag">Music</button> 
                            <button style="margin-right: 1.25rem;" id="tag-button" type="button" class="btn dance-tag">Dance</button> 
                            <button style="margin-right: 1.25rem;" id="tag-button" type="button" class="btn others-tag">Others</button> 
+                           </center>
                         </div>
                     </div>
                     
                     <br>
                   
                     <!-- description -->
-                    <h4>About</h4>
+                    <h4>Details</h4>
                     <p class="text-justify">MEO Marés Vivas é um festival de música realizado em Vila Nova de Gaia, em Julho. Teve a sua primeira edição em 1999 e em 2010 foi realizada a sua oitava edição, contando com bandas como Placebo, Morcheeba e Ben Harper. Em 2011, a nona edição contou com nomes como Manu Chao, Skunk Anansie, Moby, The Cranberries , Aurea e Mika. Em 2013, a décima primeira edição tem o nome de MEO Marés Vivas, com o namming sponsor do MEO e realiza-se nos dias 18, 19 e 20 de Julho. Em 2016, o festival contou com Elthon John, Tom Odell, Kodaline, Dengaz, Lost Frenquencies, Rui Veloso, James Bay, Kelis e D.A.M.A. nos dias 14,15 e 16 de Julho.</p>
                     
                     <!-- end info's first section -->

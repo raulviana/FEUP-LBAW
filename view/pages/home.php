@@ -24,7 +24,7 @@
         <div class="container">
             <div class="row">
                 <?php
-                draw_single_eventcard("../../assets/images/maresvivas.png", "Festival Meo Marés Vivas", "Vila Nova de Gaia", "14 a 16 de Julho de 2020", "O MEO Marés Vivas está de volta a Vila Nova de Gaia de 19 a 21 de Julho! Acompanhem a página oficial para saber mais novidades!", 12234);
+                 draw_single_eventcard("../../assets/images/maresvivas.png", "Festival Meo Marés Vivas", "Vila Nova de Gaia", "14 a 16 de Julho de 2020", "O MEO Marés Vivas está de volta a Vila Nova de Gaia de 19 a 21 de Julho! Acompanhem a página oficial para saber mais novidades!", 12234);
                 
                  draw_single_eventcard("../../assets/images/arte.jpg", "O IMPRESSIONISMO E OS NOVOS CLÁSSICOS NA MÚSICA FRANCESA", "Porto", "9 de Março de 2020", "O Curso Livre de História da Música é dirigido a todos os públicos, independentemente da sua formação musical, e na sua 11ª edição mantém uma ligação próxima com a programação da Casa da Música. ", 494);
                 
