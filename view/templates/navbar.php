@@ -84,6 +84,10 @@
            <div class="col px-md-6">
               <button id="tag-button" type="button" class="btn literature-tag">Literature</button> 
           </div>
+          
+           <div class="col px-md-6">
+              <button id="tag-button" type="button" class="btn others-tag">Others</button> 
+          </div>
         </div>
     </div>
     <!-- tags -->
