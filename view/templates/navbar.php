@@ -98,8 +98,8 @@
 
 
 <?php function draw_eventbar($event_title){ ?>
-<nav id="event-navbar" class="navbar navbar-expand-md navbar-dark">
-    <a class="navbar-brand"><?php echo $event_title?></a>
+<nav id="event-navbar" class="navbar navbar-expand-md navbar-light bg-light">
+    <a id="event-title" class="navbar-brand"><?php echo $event_title?></a>
     <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
