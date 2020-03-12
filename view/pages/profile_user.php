@@ -14,7 +14,7 @@ draw_topbar();
     <div class="row profile justify-content-center">
         <div class="col-lg-10 push-lg-4">
 
-            <ul class="nav nav-tabs bg-light">
+            <ul class="nav nav-tabs" id="user-tab">
                 <li class="nav-item">
                     <a href="#" data-target="#profile" data-toggle="tab" class="nav-link active">Profile</a>
                 </li>
@@ -23,7 +23,7 @@ draw_topbar();
                     <a href="#" data-target="#edit" data-toggle="tab" class="nav-link">Edit profile</a>
                 </li>
             </ul>
-            <div class="tab-content p-b-3">
+            <div class="tab-content p-b-3" id="tab-user-content">
                 <div class="tab-pane active" id="profile">
 
                     <br>
