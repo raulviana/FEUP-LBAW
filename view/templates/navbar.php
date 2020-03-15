@@ -1,6 +1,3 @@
-<?php
-    include_once('../templates/form.php');
-?>
 
 <?php function draw_topbar() { ?>
 
@@ -28,9 +25,7 @@
     
     
         <ul class="nav navbar-nav navbar-right ml-auto">
-             <li><?php draw_login_form(); ?></li>
-            <li><?php draw_register_form(); ?></li>
-            
+             <a class="nav-link" href="../pages/login.php"> LOGIN </a>   
 		</ul>
  
     </div>

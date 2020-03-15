@@ -11,7 +11,7 @@
 
     <div class="container">
 
-        <h4 class="mt3">About Us</h1>
+        <h4 class="mt3">About Us</h4>
             <hr>
 
             <div class="row justify-content-start">
@@ -56,7 +56,7 @@
                             <div class="card-body">
                                 <h5 class="card-title">Cláudia Mamede</h5>
                                 <p class="card-text">up201604832@fe.up.pt</p>
-                                </di>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -67,7 +67,7 @@
                             <div class="card-body">
                                 <h5 class="card-title">Leonor Sousa</h5>
                                 <p class="card-text">up201705377@fe.up.pt</p>
-                                </di>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -77,7 +77,7 @@
                             <div class="card-body">
                                 <h5 class="card-title">Miguel Romariz</h5>
                                 <p class="card-text">up201708809@fe.up.pt</p>
-                                </di>
+                                </div>
                             </div>
                         </div>
                     </div>

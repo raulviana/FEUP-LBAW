@@ -383,12 +383,13 @@ button#button-save-changes{
 
 
 button#button-save-changes:hover{
-        background: lightgray;
+    background: lightgray;
 }
 
 div.tab-pane.active{
     padding: 1.5rem;
     background: white;
+    margin-bottom: 5rem;
 }
 
 div.tab-pane.active{
@@ -399,4 +400,40 @@ div.tab-pane.active{
 div#edit-event{
         padding: 1.5rem;
     background: white;
+}
+
+
+
+button#btn-login.btn.float-right{
+    text-transform: uppercase;
+    padding-bottom:  0.2rem;
+    padding-top:  0.2rem;
+    padding-right:  0.5rem;
+    padding-left:  0.5rem;
+    background: #292b2c;
+    color: #f7f7f7;
+    font-weight: 600;
+    font-size: 0.80rem;
+}
+
+button#btn-login.btn.float-right:hover{
+ background: lightgray;   
+}
+
+div#text-banner-login.centered{
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+}
+
+div#text-banner-login.container{
+    text-transform: uppercase;
+    font-weight: 550;
+  position: relative;
+  text-align: center;
+  color: white;
+    font-size: 2rem;
 }
