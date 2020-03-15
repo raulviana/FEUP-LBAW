@@ -1,5 +1,5 @@
-
 <?php
+
     function draw_single_eventcard($image, $title, $local, $schedule, $description, $counter){
 ?>
         <div class="col-md-4">
@@ -40,5 +40,3 @@
             </div>
 <?php   
     }
-?>
-

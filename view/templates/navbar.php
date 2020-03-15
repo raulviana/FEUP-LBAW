@@ -98,29 +98,35 @@
 
 
 <?php function draw_eventbar($event_title){ ?>
-<nav id="event-navbar" class="navbar navbar-expand-md navbar-dark">
-    <a class="navbar-brand"><?php echo $event_title?></a>
-    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="#">WISHLIST</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Going</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Buy</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="../pages/edit_event.php">⚙️</a>
-            </li>
+<nav id="event-navbar" class="navbar navbar-expand-md">
+   
+    <a id="event-title" class="navbar-brand"><?php echo $event_title?></a>
+    
+    <div class="navbar-collapse w-100">
+        <div class="row navbar-nav ml-auto">
+    
+                <li class="nav-item">
+                    <a class="nav-link" href="#"> ❤︎ </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"> 🚶 </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"> 🛒 </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../pages/edit_event.php">⚙️</a>
+                </li>
 
-              <li class="nav-item">
-                <a class="nav-link" href="../pages/edit_event.php">🗑️</a>
-            </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="../pages/edit_event.php">🗑️</a>
+                </li>
 
-        </ul>
+           
+        </div>
     </div>
+    
+
 </nav>
 
 
