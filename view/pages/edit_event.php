@@ -45,6 +45,8 @@
                         <div class="col">
                             <p style="margin-bottom:0" id="event-info"> 📌 <b>Where:</b> <input class="form-control form-control-sm" type="text" placeholder="Location..."> </p>
                             <p id="event-info">🕒 <b>When:</b><input class="form-control form-control-sm" type="text" placeholder="Date and time... "> </p>
+                                      
+                        
                         </div>
                     </div>
                  
