@@ -417,7 +417,8 @@ button#btn-login.btn.float-right{
 }
 
 button#btn-login.btn.float-right:hover{
- background: lightgray;   
+ background: lightgray;  
+    border-color: #292b2c;
 }
 
 div#text-banner-login.centered{
