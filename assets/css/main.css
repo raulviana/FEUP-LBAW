@@ -391,3 +391,12 @@ div.tab-pane.active{
     background: white;
 }
 
+div.tab-pane.active{
+    padding: 1.5rem;
+    background: white;
+}
+
+div#edit-event{
+        padding: 1.5rem;
+    background: white;
+}
