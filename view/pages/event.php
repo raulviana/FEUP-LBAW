@@ -14,47 +14,45 @@ include_once('../templates/event-card.php');
 <div class="container">
     <div class="row profile justify-content-center">
         <div class="col-lg-10 push-lg-4">
-            <br style="line-height:100;">
+       
             <img style="height:35%; width:100%;" src="../../assets/images/maresvivas.png" alt="Queen Concert" class="img-fluid" width="100%">
 
+         
+            <div class="row justify-content-center">
+                <div class="col-12">
+                    <ul class="nav nav-tabs nav-fill w-100">
+                        <li class="nav-item">
+                            <a href="" data-target="#info" data-toggle="tab" class="nav-link active">Info</a>
+                        </li>
 
+                        <li class="nav-item">
+                            <a href="" data-target="#posts" data-toggle="tab" class="nav-link">Posts</a>
+                        </li>
 
-            <?php draw_eventbar("FESTIVAL MEO MARÉS VIVAS"); ?>
+                        <li class="nav-item">
+                            <a href="" data-target="#related" data-toggle="tab" class="nav-link">Related</a>
+                        </li>
+                    </ul>
 
-            <br style="line-height:200;">
-            
-                <div class="row justify-content-center">
-                    <div class="col-10">
-                        <ul class="nav nav-tabs nav-fill w-100">
-                            <li class="nav-item">
-                                <a href="" data-target="#info" data-toggle="tab" class="nav-link active">Info</a>
-                            </li>
+                    
+                    <?php draw_eventbar("festival meo mares vivas") ?>
 
-                            <li class="nav-item">
-                                <a href="" data-target="#posts" data-toggle="tab" class="nav-link">Posts</a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a href="" data-target="#related" data-toggle="tab" class="nav-link">Related</a>
-                            </li>
-                        </ul>
-
-                        <div class="tab-content p-b-3">
-                            <div class="tab-pane active" id="info">
-                                <br>
-                                <h4>Where & When</h4>
-                                <!-- location + date -->
-                                <div class="row">
-                                    <div class="col">
-                                        <p style="margin-bottom:0" id="event-info"> 📌 <b>Where:</b> Vila Nova de Gaia </p>
-                                        <p id="event-info">🕒 <b>When:</b> 17/07 – 19/07/2020 </p>
-                                    </div>
-                                    <div class="col">
-                                        <div class="float-right">
-                                            <a id="event-maps-button" class="btn btn-light d-inline" href="https://www.google.com/maps/search/?api=1&query=vila+nova+de+gaia" role="button">Go to Google Maps</a>
-                                        </div>
+                    <div class="tab-content p-b-3">
+                        <div class="tab-pane active" id="info">
+                               
+                            <h5>Where & When</h5>
+                            <!-- location + date -->
+                            <div class="row">
+                                <div class="col">
+                                    <p style="margin-bottom:0" id="event-info"> 📌 <b>Where:</b> Vila Nova de Gaia </p>
+                                    <p id="event-info">🕒 <b>When:</b> 17/07 – 19/07/2020 </p>
+                                </div>
+                                <div class="col">
+                                    <div class="float-right">
+                                        <a id="event-maps-button" class="btn btn-light d-inline" href="https://www.google.com/maps/search/?api=1&query=vila+nova+de+gaia" role="button">Go to Google Maps</a>
                                     </div>
                                 </div>
+                            </div>
 
                                 <!-- tags -->
                                 <div class="row">
@@ -70,12 +68,13 @@ include_once('../templates/event-card.php');
                                 <br>
 
                                 <!-- description -->
-                                <h4>Details</h4>
-                                <p class="text-justify">MEO Marés Vivas é um festival de música realizado em Vila Nova de Gaia, em Julho. Teve a sua primeira edição em 1999 e em 2010 foi realizada a sua oitava edição, contando com bandas como Placebo, Morcheeba e Ben Harper. Em 2011, a nona edição contou com nomes como Manu Chao, Skunk Anansie, Moby, The Cranberries , Aurea e Mika. Em 2013, a décima primeira edição tem o nome de MEO Marés Vivas, com o namming sponsor do MEO e realiza-se nos dias 18, 19 e 20 de Julho. Em 2016, o festival contou com Elthon John, Tom Odell, Kodaline, Dengaz, Lost Frenquencies, Rui Veloso, James Bay, Kelis e D.A.M.A. nos dias 14,15 e 16 de Julho.</p>
+                                <h5>Details</h5>
+                                <p >MEO Marés Vivas é um festival de música realizado em Vila Nova de Gaia, em Julho. Teve a sua primeira edição em 1999 e em 2010 foi realizada a sua oitava edição, contando com bandas como Placebo, Morcheeba e Ben Harper. Em 2011, a nona edição contou com nomes como Manu Chao, Skunk Anansie, Moby, The Cranberries , Aurea e Mika. Em 2013, a décima primeira edição tem o nome de MEO Marés Vivas, com o namming sponsor do MEO e realiza-se nos dias 18, 19 e 20 de Julho. Em 2016, o festival contou com Elthon John, Tom Odell, Kodaline, Dengaz, Lost Frenquencies, Rui Veloso, James Bay, Kelis e D.A.M.A. nos dias 14,15 e 16 de Julho.</p>
 
                                 <!-- end info's first section -->
                                 <hr>
-                                <h4>Contacts</h4>
+                            
+                                <h5>Contacts</h5>
 
                                 <div class="container">
 
@@ -88,7 +87,8 @@ include_once('../templates/event-card.php');
                                 </div>
 
                                 <hr>
-                                <h4>Organisers</h4>
+                            
+                                <h5>Organisers</h5>
                                 <img src="https://pbs.twimg.com/profile_images/973548356462051329/PldBA7ID_400x400.jpg" class="rounded-circle mr-2" alt="Owner" width="50px">
                                 <img src="https://www.mercia-group.co.uk/media/2817/jonathan-eddy.jpg?center=0.31519274376417233,0.54931972789115646&amp;mode=crop&amp;width=448&amp;height=448&amp;rnd=132134651380000000" class="rounded-circle mr-2" alt="Collaborator" width="50px">
                                 <img src="https://evada-images.global.ssl.fastly.net/76d1ea39-a4eb-4270-b9dc-899653415f8f/home-tile-person-3.jpg?width=345&height=345" class="rounded-circle mr-2" alt="Collaborator" width="50px">
@@ -140,6 +140,8 @@ include_once('../templates/event-card.php');
                                     <p id="comment-datetime" class="text-right">04-03-2020, 13:56</p>
                                 </article>
 
+                                <hr>
+                                
 
                                 <article class="post p-3 mb-3">
                                     <div class="d-flex flex-row align-items-center">
@@ -150,7 +152,8 @@ include_once('../templates/event-card.php');
                                     <p id="comment-datetime" class="text-right">04-03-2020, 13:56</p>
                                 </article>
 
-
+                                <hr>
+                                
                                 <article class="post p-3 mb-3">
                                     <div class="d-flex flex-row align-items-center">
                                         <img src="https://pbs.twimg.com/profile_images/973548356462051329/PldBA7ID_400x400.jpg" class="rounded-circle mr-2" alt="Owner" width="50px">
@@ -160,11 +163,12 @@ include_once('../templates/event-card.php');
                                     <p id="comment-datetime" class="text-right">04-03-2020, 13:56</p>
                                 </article>
 
-
+                                
+                                
                             </div>
 
                             <div class="tab-pane" id="related">
-                                <br>
+                                
                                 <div class="row">
 
                                     <?php

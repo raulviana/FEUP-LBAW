@@ -39,6 +39,7 @@ button#dropdown-navbar.btn.dropdown-toggle {
 
 button#dropdown-navbar.btn.dropdown-toggle:hover{
     background-color: lightgrey; 
+
 }
 
 
@@ -54,39 +55,49 @@ button#tag-button.btn {
 
 
 button#tag-button.btn.theater-tag{
+    font-size: 0.9rem;
     background: #c43227; /* dark red */
 }
 
 button#tag-button.btn.dance-tag{
+     font-size: 0.9rem;
     background: #4c3ac2; /* indigo */
 }
 
 button#tag-button.btn.sculpture-tag{
+     font-size: 0.9rem;
     background: #e0d426; /* yellow */
 }
 
 button#tag-button.btn.music-tag{
+     font-size: 0.9rem;
     background: #db27d5; /* purple */
 }
 
 button#tag-button.btn.literature-tag{
+     font-size: 0.9rem;
     background: #43b52a; /* green */
 }
 
 button#tag-button.btn.comedy-tag{
+     font-size: 0.9rem;
     background: #2a97b5; /* dark cyan */
 }
 
 button#tag-button.btn.paintings-tag{
+     font-size: 0.9rem;
     background: #d45008; /* dark orage */
 }
 
 button#tag-button.btn.others-tag{
+     font-size: 0.95rem;
     background: #000FFF; /* dark orage */
 }
 
 button#tag-button.btn:hover {
+     font-size: 0.95rem;
     background:  lightgrey;
+        border-color: #292b2c;
 }
 
 p#search-by{
@@ -106,7 +117,7 @@ p#about-us {
 }
 
 hr {
-border: solid 0.05rem;
+border: solid 0.035rem;
 color: lightgray;
 width: 100%;
 }
@@ -122,12 +133,12 @@ p#event-card-title {
 }
 
 p#event-card-info {
-    font-size: 0.65rem;
+    font-size: 0.675rem;
 
 }
 
 p#event-card-body {
-    text-align: justify;
+   
     font-size: 0.75rem;
 }
 
@@ -139,23 +150,30 @@ img#event-card-img {
 
 
 
-a#event-card-button.btn.btn-sm.btn-dark {
+a#event-card-button.btn.btn-sm{
     color: #f7f7f7;  /* light-grey */
     background-color: #292b2c ;
     text-align: center;
     text-transform: uppercase;
     text-decoration: none;
-    border: none;
-    font-size: 0.65rem;
+
+    font-size: 0.7rem;
     font-weight: 625;
 }
 
 
-a#event-card-button.btn.btn-sm.btn-dark:hover{
+a#event-card-button.btn.btn-sm:hover{
     background-color: lightgrey; 
+       border-color: #292b2c;
 }
 
-
+a#event-card-button-buy.btn.btn-sm.btn-outline-dark{
+    text-align: center;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-size: 0.7rem;
+    font-weight: 625;
+}
 
 .image {
   display: block;
@@ -184,7 +202,7 @@ div#overlay-text.text {
   color: white;
   font-size: 0.85rem;
   position: absolute;
-  top: 50%;
+  top: 34%;
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
@@ -193,13 +211,14 @@ div#overlay-text.text {
 }
 
 div.text-centered {
+  font-size: 0.85rem;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
     text-transform: uppercase;
     font-weight: 650;
-    font-size: 0.65rem;
+
 }
 
 
@@ -227,12 +246,13 @@ p#event-info{
 a#event-maps-button {
         background: #292b2c;
     color: #f7f7f7;
-    font-size: 0.75rem;
-    padding-right: 1.15rem;
-    padding-left: 1.15rem;
+    font-size: 0.7rem;
+    padding-right: 1.1rem;
+    padding-left: 1.1rem;
     padding-bottom: 0.5rem;
     padding-top: 0.5rem;
     font-weight: 500;
+    text-transform: uppercase
 }
 
 a#event-maps-button:hover{
@@ -299,13 +319,19 @@ div#event-title {
 
 
 nav#event-navbar{
- text-transform: uppercase;
-    font-size: .9rem;
-    font-weight: 600; 
-    color: #080808;
+    background: white;
+    padding: 1.5rem;
+    padding-bottom: 0.35rem;
+    text-transform: uppercase;
+  font-size: 1rem;
+
 }
 
-
+a#event-title.navbar-brand{
+    font-size: 1.75rem;
+    font-weight: 550;
+    
+}
 
 
 #upload {
@@ -358,4 +384,19 @@ button#button-save-changes{
 
 button#button-save-changes:hover{
         background: lightgray;
+}
+
+div.tab-pane.active{
+    padding: 1.5rem;
+    background: white;
+}
+
+div.tab-pane.active{
+    padding: 1.5rem;
+    background: white;
+}
+
+div#edit-event{
+        padding: 1.5rem;
+    background: white;
 }
