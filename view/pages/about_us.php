@@ -11,7 +11,7 @@
 
     <div class="container">
 
-        <h4 class="mt3">About Us</h1>
+        <h4 class="mt3">About Us</h4>
             <hr>
 
             <div class="row justify-content-start">
@@ -23,9 +23,8 @@
                     </p>
                     <p id="about-us">
                         We think, that nowadays, it would be useful such a platform, allowing users to not only organize
-                        and
-                        search for events
-                        , but also advertise and show low visibility artists and bands. These events can change in
+                        and search for events, 
+                        but also advertise and show low visibility artists and bands. These events can change in
                         dimension, ranging from
                         organizing the gig of a newly formed band to bigger scale events, like a music or a dance
                         festival.
@@ -57,7 +56,7 @@
                             <div class="card-body">
                                 <h5 class="card-title">Cláudia Mamede</h5>
                                 <p class="card-text">up201604832@fe.up.pt</p>
-                                </di>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -68,7 +67,7 @@
                             <div class="card-body">
                                 <h5 class="card-title">Leonor Sousa</h5>
                                 <p class="card-text">up201705377@fe.up.pt</p>
-                                </di>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -78,7 +77,7 @@
                             <div class="card-body">
                                 <h5 class="card-title">Miguel Romariz</h5>
                                 <p class="card-text">up201708809@fe.up.pt</p>
-                                </di>
+                                </div>
                             </div>
                         </div>
                     </div>

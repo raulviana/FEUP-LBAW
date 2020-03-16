@@ -22,7 +22,7 @@
                     <h2 class="mb-0">
                         <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
                             aria-expanded="false" aria-controls="collapseOne">
-                            What's the purpose of ArtNow?
+                            What's the purpose of Art Now?
                         </button>
                     </h2>
                 </div>
@@ -45,7 +45,7 @@
                     <h2 class="mb-0">
                         <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseTwo"
                             aria-expanded="false" aria-controls="collapseTwo">
-                            What can I use ArtNow for?
+                            What can I use Art Now for?
                         </button>
                     </h2>
                 </div>
@@ -93,7 +93,7 @@
                     <h2 class="mb-0">
                         <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseFour"
                             aria-expanded="false" aria-controls="collapseFour">
-                            How can I advertise my event on ArtNow?
+                            How can I advertise my event on Art Now?
                         </button>
                     </h2>
                 </div>
@@ -112,7 +112,7 @@
                 </div>
             </div>
         </div>
-
+    </div>
         
 <?php
 include_once('../templates/footer.php');

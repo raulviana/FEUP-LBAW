@@ -1,6 +1,3 @@
-<?php
-    include_once('../templates/form.php');
-?>
 
 <?php function draw_topbar() { ?>
 
@@ -28,9 +25,7 @@
     
     
         <ul class="nav navbar-nav navbar-right ml-auto">
-             <li><?php draw_login_form(); ?></li>
-            <li><?php draw_register_form(); ?></li>
-            
+             <a class="nav-link" href="../pages/login.php"> LOGIN </a>   
 		</ul>
  
     </div>
@@ -97,3 +92,38 @@
                                         ?>
 
 
+<?php function draw_eventbar($event_title){ ?>
+<nav id="event-navbar" class="navbar navbar-expand-md">
+   
+    <a id="event-title" class="navbar-brand"><?php echo $event_title?></a>
+    
+    <div class="navbar-collapse w-100">
+        <div class="row navbar-nav ml-auto">
+    
+                <li class="nav-item">
+                    <a class="nav-link" href="#"> ❤︎ </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"> 🚶 </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"> 🛒 </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../pages/edit_event.php">⚙️</a>
+                </li>
+
+                  <li class="nav-item">
+                    <a class="nav-link" href="../pages/edit_event.php">🗑️</a>
+                </li>
+
+           
+        </div>
+    </div>
+    
+
+</nav>
+
+
+
+<?php } ?>
