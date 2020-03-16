@@ -17,7 +17,7 @@
             <div class="row justify-content-start">
                 <div class="col-xs-5 col-lg-5">
                     <p id="about-us">
-                        EventNow platform allows the art events management, namely gigs and music festivals, dance
+                        ArtNow platform allows the art events management, namely gigs and music festivals, dance
                         shows,
                         theatre, and art exhibitions, among others.
                     </p>

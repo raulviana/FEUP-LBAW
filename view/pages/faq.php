@@ -22,7 +22,7 @@
                     <h2 class="mb-0">
                         <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
                             aria-expanded="false" aria-controls="collapseOne">
-                            What's the purpose of EventNow?
+                            What's the purpose of ArtNow?
                         </button>
                     </h2>
                 </div>
@@ -45,7 +45,7 @@
                     <h2 class="mb-0">
                         <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseTwo"
                             aria-expanded="false" aria-controls="collapseTwo">
-                            What can I use EventNow for?
+                            What can I use ArtNow for?
                         </button>
                     </h2>
                 </div>
@@ -93,7 +93,7 @@
                     <h2 class="mb-0">
                         <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseFour"
                             aria-expanded="false" aria-controls="collapseFour">
-                            How can I advertise my event on EventNow?
+                            How can I advertise my event on ArtNow?
                         </button>
                     </h2>
                 </div>
