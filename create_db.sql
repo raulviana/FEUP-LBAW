@@ -20,22 +20,21 @@ DROP TABLE IF EXISTS "Event_Tags" CASCADE;
 DROP TABLE IF EXISTS "Post" CASCADE;
 DROP TABLE IF EXISTS "Review" CASCADE;
 DROP TABLE IF EXISTS "Collaborators" CASCADE;
-DROP TABLE IF EXISTS "Event_Social_Media" CASCADE;
-DROP TABLE IF EXISTS "Wishlist" CASCADE;
+DROP TABLE IF EXISTS "Event_SocialMedia" CASCADE;
+DROP TABLE IF EXISTS "Wish_List" CASCADE;
 DROP TABLE IF EXISTS "Invitation" CASCADE;
 DROP TABLE IF EXISTS "Local";
+DROP TABLE IF EXISTS "Collaborators_Event";
 
 
 
 --CREATE TABLES
 
---Criar tipo coordinates????? 
 CREATE TABLE "Local" (
     local_id SERIAL PRIMARY KEY,
     name TEXT NOT NULL, 
     coordinates TEXT
 );
-
 
 CREATE TABLE "File" (
     file_id SERIAL PRIMARY KEY,
@@ -73,13 +72,9 @@ CREATE TABLE "Event" (
     local INTEGER NOT NULL REFERENCES "Local" (local_id) ON UPDATE SET NULL,
     photo INTEGER REFERENCES "Photo" (photo_id) ON UPDATE SET NULL,
     TYPE event_type NOT NULL,
-    owner_id INTEGER NOT NULL REFERENCES "Artist" (user_id)
-    --constrait start_date // end_date
+    owner_id INTEGER NOT NULL REFERENCES "Artist" (user_id),
+    CONSTRAINT valid_date CHECK (start_date < end_date)
 );
-
-
---Criar tipo coordinates????? 
-
 
 CREATE TABLE "Social_Media" (
     social_media_id SERIAL PRIMARY KEY,
