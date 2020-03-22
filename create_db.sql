@@ -20,13 +20,31 @@ DROP TABLE IF EXISTS "Event_Tags" CASCADE;
 DROP TABLE IF EXISTS "Post" CASCADE;
 DROP TABLE IF EXISTS "Review" CASCADE;
 DROP TABLE IF EXISTS "Collaborators" CASCADE;
-DROP TABLE IF EXISTS "Event_Social_Media" CASCADE;
-DROP TABLE IF EXISTS "Wishlist" CASCADE;
+DROP TABLE IF EXISTS "Event_SocialMedia" CASCADE;
+DROP TABLE IF EXISTS "Wish_List" CASCADE;
 DROP TABLE IF EXISTS "Invitation" CASCADE;
+DROP TABLE IF EXISTS "Local";
+DROP TABLE IF EXISTS "Collaborators_Event";
 
 
 
 --CREATE TABLES
+
+CREATE TABLE "Local" (
+    local_id SERIAL PRIMARY KEY,
+    name TEXT NOT NULL, 
+    coordinates TEXT
+);
+
+CREATE TABLE "File" (
+    file_id SERIAL PRIMARY KEY,
+    url TEXT NOT NULL CONSTRAINT file_url_uk UNIQUE
+);
+
+CREATE TABLE "Photo" (
+    photo_id INTEGER NOT NULL REFERENCES "File" (file_id) ON UPDATE CASCADE,
+    PRIMARY KEY (photo_id)
+);
 
 CREATE TABLE "User" (
     id SERIAL PRIMARY KEY,
@@ -36,8 +54,9 @@ CREATE TABLE "User" (
 );
 
 CREATE TABLE "Artist" (
-    user_id INTEGER NOT NULL REFERENCES "User" (id) ON UPDATE SET NULL,
-    about text
+    user_id INTEGER NOT NULL UNIQUE REFERENCES "User" (id) ON UPDATE SET NULL,
+    about text,
+	PRIMARY KEY (user_id)
 );
 
 CREATE TABLE "Admin" (
@@ -50,19 +69,11 @@ CREATE TABLE "Event" (
     details TEXT,
     start_date TIMESTAMP NOT NULL,
     end_date TIMESTAMP NOT NULL,
-    local TEXT NOT NULL REFERENCES "Local" (local_id) ON UPDATE SET NULL,
+    local INTEGER NOT NULL REFERENCES "Local" (local_id) ON UPDATE SET NULL,
     photo INTEGER REFERENCES "Photo" (photo_id) ON UPDATE SET NULL,
     TYPE event_type NOT NULL,
-    owner_id INTEGER NOT NULL REFERENCES "Artist" (user_id)
-    --constrait start_date // end_date
-);
-
-
---Criar tipo coordinates????? 
-CREATE TABLE "Local" (
-    local_id SERIAL PRIMARY KEY,
-    name TEXT NOT NULL, 
-    coordinates TEXT
+    owner_id INTEGER NOT NULL REFERENCES "Artist" (user_id),
+    CONSTRAINT valid_date CHECK (start_date < end_date)
 );
 
 CREATE TABLE "Social_Media" (
@@ -76,20 +87,10 @@ CREATE TABLE "Tags" (
     name TEXT NOT NULL CONSTRAINT tag_name_uk UNIQUE
 );
 
-CREATE TABLE "File" (
-    file_id SERIAL PRIMARY KEY,
-    url TEXT NOT NULL CONSTRAINT file_url_uk UNIQUE
-);
-
-CREATE TABLE "Photo" (
-    photo_id INTEGER NOT NULL REFERENCES "File" (file_id) ON UPDATE CASCADE,
-    PRIMARY KEY (photo_id)
-);
-
 CREATE TABLE "Event_Tags" (
     event_id INTEGER NOT NULL REFERENCES "Event" (event_id) ON UPDATE CASCADE,
     id_event_tags INTEGER NOT NULL REFERENCES "Tags" (tags_id) ON UPDATE SET NULL,
-    PRIMARY KEY (event_id, id_events_tags)
+    PRIMARY KEY (event_id, id_event_tags)
 );
 
 CREATE TABLE "Post" (
@@ -97,7 +98,7 @@ CREATE TABLE "Post" (
     file_id INTEGER REFERENCES "File" (file_id) ON UPDATE SET NULL,
     content TEXT,
     date DATE NOT NULL DEFAULT CURRENT_DATE,
-    time TIMESTAMP NOT NULL DEFAULT CURRENT_TIME,
+    post_time TIMESTAMP WITH TIME zone NOT NULL DEFAULT current_timestamp,
     event_id INTEGER NOT NULL REFERENCES "Event" (event_id) ON UPDATE CASCADE,
     user_id INTEGER NOT NULL REFERENCES "Artist" (user_id) ON UPDATE SET NULL
 );
