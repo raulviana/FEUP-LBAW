@@ -8,136 +8,135 @@ END $$;
 
 --PREPARE
 
-DROP TABLE IF EXISTS "Artist" CASCADE;
-DROP TABLE IF EXISTS "User" CASCADE;
-DROP TABLE IF EXISTS "Admin" CASCADE;
-DROP TABLE IF EXISTS "Event" CASCADE;
-DROP TABLE IF EXISTS "Social_Media" CASCADE;
-DROP TABLE IF EXISTS "Tags" CASCADE;
-DROP TABLE IF EXISTS "File" CASCADE;
-DROP TABLE IF EXISTS "Photo" CASCADE;
-DROP TABLE IF EXISTS "Event_Tags" CASCADE;
-DROP TABLE IF EXISTS "Post" CASCADE;
-DROP TABLE IF EXISTS "Review" CASCADE;
-DROP TABLE IF EXISTS "Collaborators" CASCADE;
-DROP TABLE IF EXISTS "Event_SocialMedia" CASCADE;
-DROP TABLE IF EXISTS "Wish_List" CASCADE;
-DROP TABLE IF EXISTS "Invitation" CASCADE;
-DROP TABLE IF EXISTS "Local";
-DROP TABLE IF EXISTS "Collaborators_Event";
+DROP TABLE IF EXISTS "user" CASCADE;
+DROP TABLE IF EXISTS artist CASCADE;
+DROP TABLE IF EXISTS "event" CASCADE;
+DROP TABLE IF EXISTS social_media CASCADE;
+DROP TABLE IF EXISTS tags CASCADE;
+DROP TABLE IF EXISTS "file" CASCADE;
+DROP TABLE IF EXISTS photo CASCADE;
+DROP TABLE IF EXISTS event_tags CASCADE;
+DROP TABLE IF EXISTS post CASCADE;
+DROP TABLE IF EXISTS review CASCADE;
+DROP TABLE IF EXISTS event_social_media CASCADE;
+DROP TABLE IF EXISTS wish_list CASCADE;
+DROP TABLE IF EXISTS invitation CASCADE;
+DROP TABLE IF EXISTS "local";
+DROP TABLE IF EXISTS collaborators_event;
 
 
 
 --CREATE TABLES
 
-CREATE TABLE "Local" (
+CREATE TABLE "local" (
     local_id SERIAL PRIMARY KEY,
     name TEXT NOT NULL, 
     coordinates TEXT
 );
 
-CREATE TABLE "File" (
+CREATE TABLE "file" (
     file_id SERIAL PRIMARY KEY,
     url TEXT NOT NULL CONSTRAINT file_url_uk UNIQUE
 );
 
-CREATE TABLE "Photo" (
-    photo_id INTEGER NOT NULL REFERENCES "File" (file_id) ON UPDATE CASCADE,
+CREATE TABLE photo (
+    photo_id INTEGER NOT NULL REFERENCES "file" (file_id) ON UPDATE CASCADE,
     PRIMARY KEY (photo_id)
 );
 
-CREATE TABLE "User" (
+CREATE TABLE "user" (
     id SERIAL PRIMARY KEY,
-    email text NOT NULL CONSTRAINT user_email_uk UNIQUE,
+    email text NOT NULL UNIQUE,
     name text NOT NULL,
     password text NOT NULL
 );
 
-CREATE TABLE "Artist" (
-    user_id INTEGER NOT NULL UNIQUE REFERENCES "User" (id) ON UPDATE SET NULL,
+CREATE TABLE artist (
+    user_id INTEGER NOT NULL UNIQUE REFERENCES "user" (id) ON UPDATE SET NULL,
     about text,
+    admin BOOLEAN,
 	PRIMARY KEY (user_id)
 );
 
-CREATE TABLE "Admin" (
-    user_id INTEGER NOT NULL REFERENCES "User" (id) ON UPDATE SET NULL
-);
 
-CREATE TABLE "Event" (
+CREATE TABLE "event" (
     event_id SERIAL PRIMARY KEY,
     title TEXT NOT NULL,
     details TEXT,
     start_date TIMESTAMP NOT NULL,
     end_date TIMESTAMP NOT NULL,
-    local INTEGER NOT NULL REFERENCES "Local" (local_id) ON UPDATE SET NULL,
-    photo INTEGER REFERENCES "Photo" (photo_id) ON UPDATE SET NULL,
+    local INTEGER NOT NULL REFERENCES "local" (local_id) ON UPDATE SET NULL,
+    photo INTEGER REFERENCES photo (photo_id) ON UPDATE SET NULL,
     TYPE event_type NOT NULL,
-    owner_id INTEGER NOT NULL REFERENCES "Artist" (user_id),
+    owner_id INTEGER NOT NULL REFERENCES artist (user_id),
     CONSTRAINT valid_date CHECK (start_date < end_date)
 );
 
-CREATE TABLE "Social_Media" (
+CREATE TABLE social_media (
     social_media_id SERIAL PRIMARY KEY,
     name TEXT NOT NULL,
     url TEXT NOT NULL
 );
 
-CREATE TABLE "Tags" (
+CREATE TABLE tag (
     tags_id SERIAL PRIMARY KEY,
     name TEXT NOT NULL CONSTRAINT tag_name_uk UNIQUE
 );
 
 
-
-
-CREATE TABLE "Event_Tags" (
-    event_id INTEGER NOT NULL REFERENCES "Event" (event_id) ON UPDATE CASCADE,
-    id_event_tags INTEGER NOT NULL REFERENCES "Tags" (tags_id) ON UPDATE SET NULL,
+CREATE TABLE event_tag (
+    event_id INTEGER NOT NULL REFERENCES event (event_id) ON UPDATE CASCADE,
+    id_event_tags INTEGER NOT NULL REFERENCES tag (tags_id) ON UPDATE SET NULL,
     PRIMARY KEY (event_id, id_event_tags)
 );
 
-CREATE TABLE "Post" (
+CREATE TABLE post (
     post_id SERIAL PRIMARY KEY,
-    file_id INTEGER REFERENCES "File" (file_id) ON UPDATE SET NULL,
+    file_id INTEGER REFERENCES "file" (file_id) ON UPDATE SET NULL,
     content TEXT,
     date DATE NOT NULL DEFAULT CURRENT_DATE,
     post_time TIMESTAMP WITH TIME zone NOT NULL DEFAULT current_timestamp,
-    event_id INTEGER NOT NULL REFERENCES "Event" (event_id) ON UPDATE CASCADE,
-    user_id INTEGER NOT NULL REFERENCES "Artist" (user_id) ON UPDATE SET NULL
+    event_id INTEGER NOT NULL REFERENCES "event" (event_id) ON UPDATE CASCADE,
+    user_id INTEGER NOT NULL REFERENCES artist (user_id) ON UPDATE SET NULL
 );
 
-CREATE TABLE "Review" (
-    event_id INTEGER REFERENCES "Event" (event_id) ON UPDATE CASCADE,
-    user_id INTEGER REFERENCES "Artist" (user_id) ON UPDATE SET NULL,
+CREATE TABLE review (
+    event_id INTEGER REFERENCES "event" (event_id) ON UPDATE CASCADE,
+    user_id INTEGER REFERENCES artist (user_id) ON UPDATE SET NULL,
     score INTEGER,
     CONSTRAINT score_positive CHECK (score > 0),
     PRIMARY KEY (event_id, user_id)
 );
 
-CREATE TABLE "Collaborators_Event" (
-    event_id INTEGER REFERENCES "Event" (event_id) ON UPDATE CASCADE,
-    user_id INTEGER REFERENCES "Artist" (user_id) ON UPDATE SET NULL,
+CREATE TABLE collaborators_event (
+    event_id INTEGER REFERENCES "event" (event_id) ON UPDATE CASCADE,
+    user_id INTEGER REFERENCES artist (user_id) ON UPDATE SET NULL,
     PRIMARY KEY (event_id, user_id)
 );
 
-CREATE TABLE "Event_SocialMedia" (
-    event_id INTEGER REFERENCES "Event" ON UPDATE CASCADE,
-    social_media_id INTEGER REFERENCES "Social_Media" ON UPDATE SET NULL,
+CREATE TABLE event_social_media (
+    event_id INTEGER REFERENCES "event" ON UPDATE CASCADE,
+    social_media_id INTEGER REFERENCES social_media ON UPDATE SET NULL,
     PRIMARY KEY (event_id, social_media_id)
 );
 
-CREATE TABLE "Wish_List" (
-    event_id INTEGER REFERENCES "Event" ON UPDATE SET NULL,
-    user_id INTEGER REFERENCES "Artist" ON UPDATE SET NULL,
+CREATE TABLE wish_list (
+    event_id INTEGER REFERENCES "event" ON UPDATE SET NULL,
+    user_id INTEGER REFERENCES artist ON UPDATE SET NULL,
     PRIMARY KEY (event_id, user_id)
 );
 
-CREATE TABLE "Invitation" (
+CREATE TABLE invitation (
     invitation_id SERIAL PRIMARY KEY,
-    event_id INTEGER REFERENCES "Event" (event_id) ON UPDATE CASCADE,
-    invited_id INTEGER REFERENCES "Artist" (user_id) ON UPDATE SET NULL,
-    inviter_id INTEGER REFERENCES "Artist" (user_id) ON UPDATE SET NULL,
+    event_id INTEGER REFERENCES "event" (event_id) ON UPDATE CASCADE,
+    invited_id INTEGER REFERENCES artist (user_id) ON UPDATE SET NULL,
+    inviter_id INTEGER REFERENCES artist (user_id) ON UPDATE SET NULL,
     message TEXT NOT NULL,
     date DATE NOT NULL DEFAULT CURRENT_DATE,
     accepted BOOLEAN
 );
+
+ALTER TABLE "file" DROP CONSTRAINT IF EXISTS file_url_uk;
+ALTER TABLE tag DROP CONSTRAINT IF EXISTS tag_name_uk;
+ALTER TABLE "file" ADD CONSTRAINT file_url_uk UNIQUE (url);
+ALTER TABLE tag ADD CONSTRAINT tag_name_uk  UNIQUE (tags_id);
