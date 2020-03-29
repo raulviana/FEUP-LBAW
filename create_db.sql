@@ -1,3 +1,4 @@
+
 --TYPES
 DO $$ BEGIN
     CREATE TYPE event_type AS ENUM ('private', 'public');
@@ -12,10 +13,10 @@ DROP TABLE IF EXISTS "user" CASCADE;
 DROP TABLE IF EXISTS artist CASCADE;
 DROP TABLE IF EXISTS "event" CASCADE;
 DROP TABLE IF EXISTS social_media CASCADE;
-DROP TABLE IF EXISTS tags CASCADE;
+DROP TABLE IF EXISTS tag CASCADE;
 DROP TABLE IF EXISTS "file" CASCADE;
 DROP TABLE IF EXISTS photo CASCADE;
-DROP TABLE IF EXISTS event_tags CASCADE;
+DROP TABLE IF EXISTS event_tag CASCADE;
 DROP TABLE IF EXISTS post CASCADE;
 DROP TABLE IF EXISTS review CASCADE;
 DROP TABLE IF EXISTS event_social_media CASCADE;
@@ -140,3 +141,38 @@ ALTER TABLE "file" DROP CONSTRAINT IF EXISTS file_url_uk;
 ALTER TABLE tag DROP CONSTRAINT IF EXISTS tag_name_uk;
 ALTER TABLE "file" ADD CONSTRAINT file_url_uk UNIQUE (url);
 ALTER TABLE tag ADD CONSTRAINT tag_name_uk  UNIQUE (tags_id);
+
+--TRIGGERS
+
+CREATE OR REPLACE FUNCTION past_event() RETURNS TRIGGER AS
+$BODY$
+BEGIN
+    IF EXISTS (SELECT * FROM "event" WHERE NEW.start_date <= now()) THEN
+        RAISE EXCEPTION 'Cannot create an evente with start date before date of creation';
+    END IF;
+    RETURN NEW;
+END
+$BODY$
+LANGUAGE plpgsql;
+CREATE TRIGGER past_event
+    BEFORE INSERT OR UPDATE ON event
+    FOR EACH ROW
+    EXECUTE PROCEDURE past_event();
+
+
+
+CREATE OR REPLACE FUNCTION owner_not_invited() RETURNS TRIGGER AS
+$BODY$
+BEGIN
+    IF EXISTS (SELECT * FROM invitation WHERE NEW.invited_id = NEW.inviter_id) THEN
+        RAISE EXCEPTION 'The event owner cannot invite himself';
+    END IF;
+    RETURN NEW;
+END
+$BODY$
+LANGUAGE plpgsql;
+CREATE TRIGGER past_event
+    BEFORE INSERT OR UPDATE ON invitation
+    FOR EACH ROW
+    EXECUTE PROCEDURE owner_not_invited();
+	
