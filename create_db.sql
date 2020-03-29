@@ -194,8 +194,12 @@ CREATE TRIGGER association_time
     FOR EACH ROW
     EXECUTE PROCEDURE association_time();
 --INDEXES
+DROP INDEX IF EXISTS event_local;
+DROP INDEX IF EXISTS event_tags;
+DROP INDEX IF EXISTS id_artist;
+DROP INDEX IF EXISTS owner_events;
 
-CREATE INDEX IF NOT EXISTS event_local ON "event" USING hash(local);
-CREATE INDEX IF NOT EXISTS event_tags ON "event" USING hash(tags_id);
-CREATE INDEX IF NOT EXISTS id_artist ON artist USING hash(user_id);
-CREATE INDEX IF NOT EXISTS owner_events ON "event" USING hash(owner_id);
+CREATE INDEX event_local ON "event" USING hash(local);
+CREATE INDEX event_tags ON "event_tag" USING hash(id_event_tags);
+CREATE INDEX id_artist ON artist USING hash(user_id);
+CREATE INDEX owner_events ON "event" USING hash(owner_id);
