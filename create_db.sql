@@ -175,4 +175,11 @@ CREATE TRIGGER past_event
     BEFORE INSERT OR UPDATE ON invitation
     FOR EACH ROW
     EXECUTE PROCEDURE owner_not_invited();
-	
+
+
+--INDEXES
+
+CREATE INDEX IF NOT EXISTS event_local ON "event" USING hash(local);
+CREATE INDEX IF NOT EXISTS event_tags ON "event" USING hash(tags_id);
+CREATE INDEX IF NOT EXISTS id_artist ON artist USING hash(user_id);
+CREATE INDEX IF NOT EXISTS owner_events ON "event" USING hash(owner_id);
