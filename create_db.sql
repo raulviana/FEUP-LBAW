@@ -198,8 +198,30 @@ DROP INDEX IF EXISTS event_local;
 DROP INDEX IF EXISTS event_tags;
 DROP INDEX IF EXISTS id_artist;
 DROP INDEX IF EXISTS owner_events;
+DROP INDEX IF EXISTS user_whishlist;
+DROP INDEX IF EXISTS search_idx;
 
 CREATE INDEX event_local ON "event" USING hash(local);
 CREATE INDEX event_tags ON "event_tag" USING hash(id_event_tags);
 CREATE INDEX id_artist ON artist USING hash(user_id);
 CREATE INDEX owner_events ON "event" USING hash(owner_id);
+CREATE INDEX user_whislist ON wish_list USING hash(user_id);
+
+CREATE INDEX search_idx ON Event USING GIST (to_tsvector('portuguese', title || ' ' || details));
+
+
+--TRANSACTIONS
+
+$BODY$
+BEGIN
+    SET TRANSACTION ISOLATION LEVEL SERIALIZABLE
+    DELETE FROM "post" WHERE "post".event_id=$id
+    DELETE FROM review WHERE review.event_id=$id
+    DELETE FROM event_tag WHERE event_tags.event_id=$id
+    DELETE FROM social_media_event WHERE event_social_media.event_id=$id
+    DELETE FROM collaborators_event WHERE collaborators_event.event_id=$id
+    DELETE FROM wish_list WHERE wish_list.event_id=$id
+    DELETE FROM invitation WHERE invitation.event_id=$id
+
+    DELETE FROM "event" WHERE event.id=$id
+COMMIT
