@@ -177,6 +177,22 @@ CREATE TRIGGER past_event
     EXECUTE PROCEDURE owner_not_invited();
 
 
+CREATE OR REPLACE FUNCTION association_time() RETURNS TRIGGER AS
+$BODY$
+BEGIN
+    IF EXISTS (SELECT * FROM invitation 
+        INNER JOIN "event" ON "event".event_id = invitation.event_id
+        WHERE NEW.date = date  AND NEW.date <= "event".start_date) THEN
+        RAISE EXCEPTION 'The association date must be lesser than event start date';
+    END IF;
+    RETURN NEW;
+END
+$BODY$
+LANGUAGE plpgsql;
+CREATE TRIGGER association_time
+    BEFORE INSERT OR UPDATE ON invitation
+    FOR EACH ROW
+    EXECUTE PROCEDURE association_time();
 --INDEXES
 
 CREATE INDEX IF NOT EXISTS event_local ON "event" USING hash(local);
