@@ -193,19 +193,30 @@ CREATE TRIGGER association_time
     BEFORE INSERT OR UPDATE ON invitation
     FOR EACH ROW
     EXECUTE PROCEDURE association_time();
+<<<<<<< HEAD
+=======
+    
+>>>>>>> 8b5ff936f991bdd6de231311bb57f99c2785958a
 --INDEXES
 DROP INDEX IF EXISTS event_local;
 DROP INDEX IF EXISTS event_tags;
 DROP INDEX IF EXISTS id_artist;
 DROP INDEX IF EXISTS owner_events;
+<<<<<<< HEAD
 DROP INDEX IF EXISTS user_whishlist;
 DROP INDEX IF EXISTS search_idx;
+=======
+>>>>>>> 8b5ff936f991bdd6de231311bb57f99c2785958a
 
 CREATE INDEX event_local ON "event" USING hash(local);
 CREATE INDEX event_tags ON "event_tag" USING hash(id_event_tags);
 CREATE INDEX id_artist ON artist USING hash(user_id);
+<<<<<<< HEAD
 CREATE INDEX owner_events ON "event" USING hash(owner_id);
 CREATE INDEX user_whislist ON wish_list USING hash(user_id);
 
 CREATE INDEX search_idx ON Event USING GIST (to_tsvector('portuguese', title || ' ' || details));
 
+=======
+CREATE INDEX owner_events ON "event" USING hash(owner_id);
+>>>>>>> 8b5ff936f991bdd6de231311bb57f99c2785958a
