@@ -193,6 +193,7 @@ CREATE TRIGGER association_time
     BEFORE INSERT OR UPDATE ON invitation
     FOR EACH ROW
     EXECUTE PROCEDURE association_time();
+    
 --INDEXES
 DROP INDEX IF EXISTS event_local;
 DROP INDEX IF EXISTS event_tags;
