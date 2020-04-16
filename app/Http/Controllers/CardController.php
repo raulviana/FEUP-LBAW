@@ -32,13 +32,13 @@ class CardController extends Controller
      */
     public function list()
     {
-      if (!Auth::check()) return redirect('/login');
+  /*    if (!Auth::check()) return redirect('/login');
 
       $this->authorize('list', Card::class);
 
-      $cards = Auth::user()->cards()->orderBy('id')->get();
+      //$cards = Auth::user()->cards()->orderBy('id')->get();
 
-      return view('pages.cards', ['cards' => $cards]);
+      return view('pages.cards', ['cards' => $cards]); */
     }
 
     /**
@@ -48,7 +48,7 @@ class CardController extends Controller
      */
     public function create(Request $request)
     {
-      $card = new Card();
+ /*     $card = new Card();
 
       $this->authorize('create', $card);
 
@@ -57,15 +57,15 @@ class CardController extends Controller
       $card->save();
 
       return $card;
-    }
+    */}
 
     public function delete(Request $request, $id)
     {
-      $card = Card::find($id);
+   /*   $card = Card::find($id);
 
       $this->authorize('delete', $card);
       $card->delete();
 
-      return $card;
+      return $card;*/
     }
 }

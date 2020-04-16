@@ -1,6 +1,9 @@
 @extends('layouts.app')
 
+@section('title', 'Artnow - Register')
+
 @section('content')
+<br><br><br><br>
 <form method="POST" action="{{ route('register') }}">
     {{ csrf_field() }}
 

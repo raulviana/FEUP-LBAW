@@ -11,7 +11,10 @@
 |
 */
 
-Route::get('/', 'Auth\LoginController@home');
+Route::get('/',  'Auth\LoginController@showLoginForm ');
+Route::get('/home', 'HomepageController@show')->name('home');
+
+
 // Cards
 Route::get('cards', 'CardController@list');
 Route::get('cards/{id}', 'CardController@show');
@@ -30,3 +33,8 @@ Route::post('login', 'Auth\LoginController@login');
 Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
 Route::post('register', 'Auth\RegisterController@register');
+
+// Static pages
+Route::view('faq' , 'pages.static.faq')->name('faq');
+Route::view('aboutus', 'pages.static.aboutus')->name('aboutus');
+
