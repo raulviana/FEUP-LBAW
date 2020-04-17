@@ -1,5 +1,5 @@
 <div class="carousel-item active d-none d-sm-block">
-    <img class="d-block w-100" src="{{asset('images/banner.jpg')}}" alt="First slide">
+    <img class="d-block w-100" src="images/banner.jpg" alt="First slide">
     <div class="carousel-caption d-none d-md-block">
         <h3 class="display-2"><b>Art Now</b></h3>
         <h5>Join us to find great events near you!</h5>

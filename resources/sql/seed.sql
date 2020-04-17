@@ -1,44 +1,3 @@
-DROP TABLE IF EXISTS users CASCADE;
-DROP TABLE IF EXISTS cards CASCADE;
-DROP TABLE IF EXISTS items CASCADE;
-
-CREATE TABLE users (
-  id SERIAL PRIMARY KEY,
-  name VARCHAR NOT NULL,
-  email VARCHAR UNIQUE NOT NULL,
-  password VARCHAR NOT NULL,
-  remember_token VARCHAR
-);
-
-CREATE TABLE cards (
-  id SERIAL PRIMARY KEY,
-  name VARCHAR NOT NULL,
-  user_id INTEGER REFERENCES users NOT NULL
-);
-
-CREATE TABLE items (
-  id SERIAL PRIMARY KEY,
-  card_id INTEGER NOT NULL REFERENCES cards ON DELETE CASCADE,
-  description VARCHAR NOT NULL,
-  done BOOLEAN NOT NULL DEFAULT FALSE
-);
-
-INSERT INTO users VALUES (
-  DEFAULT,
-  'John Doe',
-  'john@example.com',
-  '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W'
-); -- Password is 1234. Generated using Hash::make('1234')
-
-INSERT INTO cards VALUES (DEFAULT, 'Things to do', 1);
-INSERT INTO items VALUES (DEFAULT, 1, 'Buy milk');
-INSERT INTO items VALUES (DEFAULT, 1, 'Walk the dog', true);
-
-INSERT INTO cards VALUES (DEFAULT, 'Things not to do', 1);
-INSERT INTO items VALUES (DEFAULT, 2, 'Break a leg');
-INSERT INTO items VALUES (DEFAULT, 2, 'Crash the car');
-
-
 
 --TYPES
 DO $$ BEGIN
@@ -200,6 +159,8 @@ CREATE TRIGGER past_event
     FOR EACH ROW
     EXECUTE PROCEDURE past_event();
 
+
+
 CREATE OR REPLACE FUNCTION owner_not_invited() RETURNS TRIGGER AS
 $BODY$
 BEGIN
@@ -232,6 +193,7 @@ CREATE TRIGGER association_time
     BEFORE INSERT OR UPDATE ON invitation
     FOR EACH ROW
     EXECUTE PROCEDURE association_time();
+    
 --INDEXES
 DROP INDEX IF EXISTS event_local;
 DROP INDEX IF EXISTS event_tags;
@@ -248,6 +210,7 @@ CREATE INDEX user_whislist ON wish_list USING hash(user_id);
 
 CREATE INDEX search_idx ON Event USING GIST (to_tsvector('portuguese', title || ' ' || details));
 
+--POPULATE
 ---------------------------------------------------- LOCAL ---------------------------------------------------- 
 insert into local (local_id, name, coordinates) values (1, 'Praia Fluvial do Taboão', NULL);
 insert into local (local_id, name, coordinates) values (2, 'Casa da Guitarra', '41.145010 -8.610890');
@@ -427,4 +390,3 @@ insert into invitation (invitation_id, event_id, invited_id, inviter_id, message
 insert into invitation (invitation_id, event_id, invited_id, inviter_id, message, date, accepted) values (2, 2, 6, 20, 'Vem a este evento fantástico!', '10-03-2020', FALSE);
 insert into invitation (invitation_id, event_id, invited_id, inviter_id, message, date, accepted) values (3, 2, 7, 20, 'Vem a este evento fantástico!', '10-03-2020', TRUE);
 insert into invitation (invitation_id, event_id, invited_id, inviter_id, message, date, accepted) values (4, 2, 1, 17, 'Hey my friend! Thought you might me interested in this great exhibition!', '05-03-2020', TRUE);
-
