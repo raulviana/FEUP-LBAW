@@ -2,16 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Event;
+
 
 use Illuminate\Http\Request;
 
+use App\Event;
+
+
 class HomepageController extends Controller
 {
-    public function show(){
 
-        $events = Event::with('owner', 'local')->get();
+    const ITEMS_PER_PAGE = 10;
 
+    public function display(){
+        $events = Event::all();
         return view('pages.homepage', ['events' => $events]);
     }
 }

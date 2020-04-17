@@ -6,16 +6,8 @@
 
 @include('partials.homeheader')
 
-<main id="event-list">
-    <div class="album py-5 bg-light" >
-        <div class="container">
-            <div class="row">
+<br>
 
-                @each('partials.eventcard', $events, 'event')
-
-            </div>
-        </div>
-    </div>
-</main>
+@include('partials.events.events')
             
 @endsection

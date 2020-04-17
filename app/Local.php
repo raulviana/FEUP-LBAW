@@ -11,8 +11,8 @@ class Local extends Model
     protected $table = 'local';
     protected $primaryKey = 'local_id';
 
- 
     public function events(){
         return $this->hasMany('App\Event');
     }
+    
 }

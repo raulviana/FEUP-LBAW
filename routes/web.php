@@ -11,8 +11,10 @@
 |
 */
 
-Route::get('/',  'Auth\LoginController@showLoginForm ');
-Route::get('/home', 'HomepageController@show')->name('home');
+Route::get('/',  function(){
+    return redirect('/home');
+});
+Route::get('/home', 'HomepageController@display')->name('home');
 
 
 // Cards
@@ -37,4 +39,12 @@ Route::post('register', 'Auth\RegisterController@register');
 // Static pages
 Route::view('faq' , 'pages.static.faq')->name('faq');
 Route::view('aboutus', 'pages.static.aboutus')->name('aboutus');
+
+
+//Events
+Route::get('events', 'EventController@list');
+Route::get('events/{id}', 'EventController@show');
+
+Route::delete('api/events/{id}', 'EventController@delete')->name('delete_evnt');
+
 
