@@ -11,10 +11,8 @@
 |
 */
 
-Route::get('/',  function(){
-    return redirect('/home');
-});
-Route::get('/home', 'HomepageController@display')->name('home');
+
+Route::get('/', 'HomepageController@display')->name('home');
 
 
 // Cards
