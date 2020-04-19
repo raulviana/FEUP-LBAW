@@ -4,8 +4,12 @@
         <h3 class="display-2"><b>Art Now</b></h3>
         <h5>Join us to find great events near you!</h5>
     
-        <button id="button-header" onclick="location.href = 'events/create';"  type="button" class="btn btn-light btn-sm btn-margin">Create your event</button>
-        
+        @if(Auth::guest())
+          <button id="button-header" onclick="location.href = 'login';" type="button" class="btn btn-light btn-sm btn-margin">Create your event</button>
+        @else
+          <button id="button-header" onclick="location.href = 'events/create';" type="button" class="btn btn-light btn-sm btn-margin">Create your event</button>
+        @endif
+
         <button id="button-header" onclick="location.href = '#event-list';" type="button" class="btn btn-light btn-sm btn-margin">Search for events</button>
     </div>
 </div>
