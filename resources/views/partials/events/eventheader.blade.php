@@ -19,7 +19,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link delete-evnt" href="#">🗑️</a> 
+                    <a class="nav-link delete-evnt" href="">🗑️</a> 
                 </li>
 
            

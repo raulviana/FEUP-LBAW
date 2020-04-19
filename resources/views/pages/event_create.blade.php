@@ -9,13 +9,25 @@
 <div class="container">
     <div class="row profile justify-content-center">
         <div id="edit-event" class="col-lg-10 push-lg-4">
-        <form method="post" action="{{empty($event) ? "/events/create" : 0 /*: "/event/".$event->id."/edit"*/}}" >
-            {{ csrf_field() }}
+           
+                <form method="post" action="{{empty($event) ? "/events/create" : "/events/".$event->event_id."/edit"}}" method="post"> 
+                    {{ csrf_field() }}
+       
+                 @if(!empty($event))
+
+                    {{$event}}
+
+                    @endif
+                    
                 <div class="row">
                     <div class="col">          
-                        <input class="form-control form-control-md" name="title" type="text" placeholder="Event Title">
+                        <input class="form-control form-control-md" name="title" type="text" placeholder={{empty($event) ? " Event title " : $event->title }} >
 
-                    <label class="checkbox-inline mr-2"><input name="is_private" type="checkbox" ><span style="font-size:0.9rem;"><i> This is a private event.</i></span></label>
+             
+    
+                        <label class="checkbox-inline mr-2"><input name="is_private" type="checkbox" ><span style="font-size:0.9rem;"><i> This is a private event.</i></span></label>
+                   
+
                     </div>
                 
                 <!--
@@ -84,13 +96,13 @@
                                 
                 <h4>Details</h4>
                 <div class="form-group">
-                    <textarea class="form-control" rows="3" name="details" placeholder="Tell more about your event"></textarea>
-                </div>
-                                    
+                    <textarea class="form-control" rows="3" name="details" placeholder={{empty($event) ? " Event title " : $event['details']}}></textarea>
+                </div>                
            
+                @include('partials.inc.messages')
+
                 <button id="button-save-changes" type="submit" class="btn"> {{empty($event) ? "Create" : "Confirm Changes"}} </button>           
         
-
             </form>
         </div>
     </div>

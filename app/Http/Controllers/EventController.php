@@ -7,6 +7,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Event;
+use App\User;
 
 class EventController extends Controller
 {
@@ -41,21 +42,31 @@ class EventController extends Controller
         ]);
 
         $event = new Event;
+        
         $event->title = $request->input('title');
         $event->details = $request->input('details');
         $event->start_date = $request->input('start_date');
         $event->end_date = $request->input('end_date');
-        $event->local = $request->input('local');
+        $event->local = 1;
         if($request->input('is_private') == 'off')
             $event->type = 'public';
         else
             $event->type = 'private';
             
         $event->owner_id = 1;
+
         $event->save();
         
-        return redirect('/home')->with('success', 'Event created');
+        return redirect('/')->with('success', 'Event created');
     }
 
+    public function edit($id){
+        $event = Event::find($id);
+        return view('pages.event_create', ['event' => $event]);
+    }
+
+    public function update(Request $request){
+        return 123;
+    }
 
 }
