@@ -20,12 +20,17 @@
         </ul>
         
     
-    
-        <ul class="nav navbar-nav navbar-right ml-auto">
-             <li><a class="nav-link" href="{{route('login')}}"> LOGIN </a>   </li>
-             <li><a class="nav-link" href="{{route('register')}}"> REGISTER </a>   </li>
-             <li><a class="nav-link" href="{{route('logout')}}"> LOGOUT </a>   </li>
-		</ul>
+        @if(Auth::guest())
+            <ul class="nav navbar-nav navbar-right ml-auto">
+                <li><a class="nav-link" href="{{route('login')}}"> LOGIN </a>   </li>
+                <li><a class="nav-link" href="{{route('register')}}"> REGISTER </a>   </li>
+                
+            </ul>
+        @else
+            <ul class="nav navbar-nav navbar-right ml-auto">
+                <li><a class="nav-link" href="{{route('logout')}}"> LOGOUT </a>   </li>
+            </ul>
+        @endif
  
     </div>
     
