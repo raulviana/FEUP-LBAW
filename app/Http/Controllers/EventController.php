@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 
 use App\Event;
 
-
 class EventController extends Controller
 {
 
@@ -37,11 +36,26 @@ class EventController extends Controller
             'title' => 'required',
             'local' => 'required',
             'start_date' => 'required',
+            'end_date' => 'required',
             'details' => 'required'
         ]);
+
+        $event = new Event;
+        $event->title = $request->input('title');
+        $event->details = $request->input('details');
+        $event->start_date = $request->input('start_date');
+        $event->end_date = $request->input('end_date');
+        $event->local = $request->input('local');
+        if($request->input('is_private') == 'off')
+            $event->type = 'public';
+        else
+            $event->type = 'private';
+            
+        $event->owner_id = 1;
+        $event->save();
         
-        return $request;
+        return redirect('/home')->with('success', 'Event created');
     }
 
-    
+
 }
