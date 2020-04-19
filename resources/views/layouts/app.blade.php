@@ -27,8 +27,12 @@
     <header>
       @include('partials.inc.navbar')
     </header>
-    
+  
       <section id="content">
+        <div class="container">
+          <br><br><br>
+          @include('partials.inc.messages')
+        </div>
         @yield('content')
       </section>
 

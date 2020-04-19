@@ -42,9 +42,13 @@ Route::view('aboutus', 'pages.static.aboutus')->name('aboutus');
 
 
 //Events
-Route::get('events', 'EventController@list');
-Route::get('events/{id}', 'EventController@show');
+Route::resource('events', 'EventController');
+//Route::get('events', 'EventController@list');
+//Route::get('events/{id}', 'EventController@show');
+//Route::get('events/create', 'EventController@create');
+Route::post('/events/create', 'EventController@store');
 
-Route::delete('api/events/{id}', 'EventController@delete')->name('delete_evnt');
+
+//Route::delete('api/events/{id}', 'EventController@delete')->name('delete_evnt');
 
 

@@ -27,10 +27,21 @@ class EventController extends Controller
       return view('pages.event', ['event' => $event]);
     }
 
-    public function delete($id)
+    public function create()
     {
-        $event = Event::find($id);
-        $event->delete();
-        return $event;
+        return view('pages.event_create');
     }
+
+    public function store(Request $request){
+        $this->validate($request, [
+            'title' => 'required',
+            'local' => 'required',
+            'start_date' => 'required',
+            'details' => 'required'
+        ]);
+        
+        return $request;
+    }
+
+    
 }

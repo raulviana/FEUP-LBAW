@@ -15,7 +15,7 @@
                     <a class="nav-link" href="#"> 🛒 </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="">⚙️</a>
+                <a class="nav-link" href="/events/{{$event_id}}/edit">⚙️</a>
                 </li>
 
                 <li class="nav-item">
