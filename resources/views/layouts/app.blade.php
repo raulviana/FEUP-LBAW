@@ -29,11 +29,11 @@
     </header>
   
       <section id="content">
+        @yield('content')
         <div class="container">
-          <br><br><br>
           @include('partials.inc.messages')
         </div>
-        @yield('content')
+       
       </section>
 
     <footer>

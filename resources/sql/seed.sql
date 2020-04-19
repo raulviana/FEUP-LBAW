@@ -8,7 +8,7 @@ END $$;
 
 
 --PREPARE
-
+DROP TABLE IF EXISTS users CASCADE;
 DROP TABLE IF EXISTS "user" CASCADE;
 DROP TABLE IF EXISTS artist CASCADE;
 DROP TABLE IF EXISTS "event" CASCADE;
@@ -28,6 +28,22 @@ DROP TABLE IF EXISTS collaborators_event;
 
 
 --CREATE TABLES
+CREATE TABLE users (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR NOT NULL,
+  email VARCHAR UNIQUE NOT NULL,
+  password VARCHAR NOT NULL,
+  remember_token VARCHAR
+);
+
+INSERT INTO users VALUES (
+  DEFAULT,
+  'John Doe',
+  'john@example.com',
+  '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W'
+); -- Password is 1234. Generated using Hash::make('1234')
+
+
 
 CREATE TABLE "local" (
     local_id SERIAL PRIMARY KEY,
