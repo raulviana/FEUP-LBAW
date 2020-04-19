@@ -1,4 +1,5 @@
 
+
 --TYPES
 DO $$ BEGIN
     CREATE TYPE event_type AS ENUM ('private', 'public');
@@ -9,8 +10,7 @@ END $$;
 
 --PREPARE
 
-DROP TABLE IF EXISTS "user" CASCADE;
-DROP TABLE IF EXISTS artist CASCADE;
+DROP TABLE IF EXISTS "users" CASCADE;
 DROP TABLE IF EXISTS "event" CASCADE;
 DROP TABLE IF EXISTS social_media CASCADE;
 DROP TABLE IF EXISTS tag CASCADE;
@@ -45,18 +45,12 @@ CREATE TABLE photo (
     PRIMARY KEY (photo_id)
 );
 
-CREATE TABLE "user" (
+CREATE TABLE "users" (
     id SERIAL PRIMARY KEY,
     email text NOT NULL UNIQUE,
     name text NOT NULL,
-    password text NOT NULL
-);
-
-CREATE TABLE artist (
-    user_id INTEGER NOT NULL UNIQUE REFERENCES "user" (id) ON UPDATE SET NULL,
-    about text,
-    admin BOOLEAN,
-	PRIMARY KEY (user_id)
+    password text NOT NULL,
+    admin BOOLEAN
 );
 
 
@@ -69,7 +63,7 @@ CREATE TABLE "event" (
     local INTEGER NOT NULL REFERENCES "local" (local_id) ON UPDATE SET NULL,
     photo INTEGER REFERENCES photo (photo_id) ON UPDATE SET NULL,
     TYPE event_type NOT NULL,
-    owner_id INTEGER NOT NULL REFERENCES artist (user_id),
+    owner_id INTEGER NOT NULL REFERENCES "users" (id),
     CONSTRAINT valid_date CHECK (start_date < end_date)
 );
 
@@ -98,12 +92,12 @@ CREATE TABLE post (
     date DATE NOT NULL DEFAULT CURRENT_DATE,
     post_time TIMESTAMP WITH TIME zone NOT NULL DEFAULT current_timestamp,
     event_id INTEGER NOT NULL REFERENCES "event" (event_id) ON UPDATE CASCADE,
-    user_id INTEGER NOT NULL REFERENCES artist (user_id) ON UPDATE SET NULL
+    user_id INTEGER NOT NULL REFERENCES "users" (id) ON UPDATE SET NULL
 );
 
 CREATE TABLE review (
     event_id INTEGER REFERENCES "event" (event_id) ON UPDATE CASCADE,
-    user_id INTEGER REFERENCES artist (user_id) ON UPDATE SET NULL,
+    user_id INTEGER REFERENCES "users" (id) ON UPDATE SET NULL,
     score INTEGER,
     CONSTRAINT score_positive CHECK (score > 0),
     PRIMARY KEY (event_id, user_id)
@@ -111,7 +105,7 @@ CREATE TABLE review (
 
 CREATE TABLE collaborators_event (
     event_id INTEGER REFERENCES "event" (event_id) ON UPDATE CASCADE,
-    user_id INTEGER REFERENCES artist (user_id) ON UPDATE SET NULL,
+    user_id INTEGER REFERENCES "users" (id) ON UPDATE SET NULL,
     PRIMARY KEY (event_id, user_id)
 );
 
@@ -123,15 +117,15 @@ CREATE TABLE event_social_media (
 
 CREATE TABLE wish_list (
     event_id INTEGER REFERENCES "event" ON UPDATE SET NULL,
-    user_id INTEGER REFERENCES artist ON UPDATE SET NULL,
+    user_id INTEGER REFERENCES "users" ON UPDATE SET NULL,
     PRIMARY KEY (event_id, user_id)
 );
 
 CREATE TABLE invitation (
     invitation_id SERIAL PRIMARY KEY,
     event_id INTEGER REFERENCES "event" (event_id) ON UPDATE CASCADE,
-    invited_id INTEGER REFERENCES artist (user_id) ON UPDATE SET NULL,
-    inviter_id INTEGER REFERENCES artist (user_id) ON UPDATE SET NULL,
+    inviter_id INTEGER REFERENCES "users" (id) ON UPDATE SET NULL,
+    invited_id INTEGER REFERENCES "users" (id) ON UPDATE SET NULL,
     message TEXT NOT NULL,
     date DATE NOT NULL DEFAULT CURRENT_DATE,
     accepted BOOLEAN
@@ -197,33 +191,29 @@ CREATE TRIGGER association_time
 --INDEXES
 DROP INDEX IF EXISTS event_local;
 DROP INDEX IF EXISTS event_tags;
-DROP INDEX IF EXISTS id_artist;
+DROP INDEX IF EXISTS id;
 DROP INDEX IF EXISTS owner_events;
-DROP INDEX IF EXISTS user_whishlist;
-DROP INDEX IF EXISTS search_idx;
 
 CREATE INDEX event_local ON "event" USING hash(local);
 CREATE INDEX event_tags ON "event_tag" USING hash(id_event_tags);
-CREATE INDEX id_artist ON artist USING hash(user_id);
+CREATE INDEX id ON "users" USING hash(id);
 CREATE INDEX owner_events ON "event" USING hash(owner_id);
-CREATE INDEX user_whislist ON wish_list USING hash(user_id);
 
-CREATE INDEX search_idx ON Event USING GIST (to_tsvector('portuguese', title || ' ' || details));
 
---POPULATE
----------------------------------------------------- LOCAL ---------------------------------------------------- 
-insert into local (local_id, name, coordinates) values (1, 'Praia Fluvial do Taboão', NULL);
-insert into local (local_id, name, coordinates) values (2, 'Casa da Guitarra', '41.145010 -8.610890');
-insert into local (local_id, name, coordinates) values (3, 'Europarque', NULL);
-insert into local (local_id, name, coordinates) values (4, 'Rivoli', NULL);
-insert into local (local_id, name, coordinates) values (5, 'National Gallery', '51.507550 -0.127900');
+
+--------------------------------------------------- LOCAL ---------------------------------------------------- 
+insert into "local" (local_id, name, coordinates) values (1, 'Praia Fluvial do Taboão', NULL);
+insert into "local" (local_id, name, coordinates) values (2, 'Casa da Guitarra', '41.145010 -8.610890');
+insert into "local" (local_id, name, coordinates) values (3, 'Europarque', NULL);
+insert into "local" (local_id, name, coordinates) values (4, 'Rivoli', NULL);
+insert into "local" (local_id, name, coordinates) values (5, 'National Gallery', '51.507550 -0.127900');
 
 ---------------------------------------------------- FILE ---------------------------------------------------- 
-insert into file (file_id, url) values (1, 'event/1.jpeg');
-insert into file (file_id, url) values (2, 'event/2.jpg');
-insert into file (file_id, url) values (3, 'event/3.jpeg');
-insert into file (file_id, url) values (4, 'event/4.jpg');
-insert into file (file_id, url) values (5, 'event/5.jpg');
+insert into "file" (file_id, url) values (1, 'images/event/1.jpeg');
+insert into "file" (file_id, url) values (2, 'images/event/2.jpg');
+insert into "file" (file_id, url) values (3, 'images/event/3.jpeg');
+insert into "file" (file_id, url) values (4, 'images/event/4.jpg');
+insert into "file" (file_id, url) values (5, 'images/event/5.jpg');
 
 ---------------------------------------------------- PHOTO ---------------------------------------------------- 
 insert into photo (photo_id) values (1);
@@ -234,60 +224,40 @@ insert into photo (photo_id) values (5);
 
 ---------------------------------------------------- USER ----------------------------------------------------  
 -- hashed pasword using php5 algorithm
-insert into "user" (id, email, name, password) values (1, 'akippie0@virginia.edu', 'Athene Kippie', '$2y$10$WHE2vxMvLe2tSb9fuU.9U./M24m0EbdTyqyfOkhHlv.ri4ihPI7DG'); --2tDNckscS9YK
-insert into "user" (id, email, name, password) values (2, 'korrah1@posterous.com', 'Katya Orrah', '$2y$10$ULw9BCNOz922SN7sn7TgRuzQbuFAmD3lV9vgVFpoI2/4lSYAB/FDe'); --GB6uGx
-insert into "user" (id, email, name, password) values (3, 'iradcliffe2@dropbox.com', 'Ignacius Radcliffe', '$2y$10$WROkhpLWVyj1Z7e489746.xhvZUGjBgCk96J7BVg05RKEwgbapkpm'); --1k9Rxx
-insert into "user" (id, email, name, password) values (4, 'gstoney3@omniture.com', 'Gabriel Stoney', '$2y$10$tikQRwd1jXCjWsfSHgc9r.Rcir0NiXFneRzVOgRmofwFn74ymdi0W'); --kykWXnVth
-insert into "user" (id, email, name, password) values (5, 'kpoytres4@deviantart.com', 'Kati Poytres', '$2y$10$Si0e59qZ9iafoRqxvf4Fous7nnOMVeUDNkotMVV/S0aido2wBHk02'); --Rm876cW
-insert into "user" (id, email, name, password) values (6, 'ecardall5@shop-pro.jp', 'Evonne Cardall', '$2y$10$Vdat1Ok9jkqAsaOvUyRVweIAbFo0cs2XQ17XghdLuzd/REeN4ozF2'); --UIiXARyJ1
-insert into "user" (id, email, name, password) values (7, 'chertwell6@fotki.com', 'Chic Hertwell', '$2y$10$IAHhV.EADQKKJRZPPu4A5O2VHETPnCA5VNLlgBWMAxBHHDZ7E9T/G'); --zoUdQRHaY
-insert into "user" (id, email, name, password) values (8, 'splumptre7@illinois.edu', 'Selena Plumptre', '$2y$10$BvqdYpB/g7os22obPoRREeVWLbRhLsM/cIRtVzQ3u/3JXzWRzyyQi'); --EjTj1J4f
-insert into "user" (id, email, name, password) values (9, 'elegrave8@amazon.de', 'Elga Legrave', '$2y$10$nWgha.UFsltv0oJl5ckj8unOwgLolcvsbsVHiDoRIBS5tW5dzvDBS'); --WrwEiFz8Q
-insert into "user" (id, email, name, password) values (10, 'kcallf9@g.co', 'Karly Callf', '$2y$10$LkqfbL/4ahFVRnp/tUt4IO4cKJNDEPWcOyliWSXgSI2OBcHiv04li'); --B79NhfdKu
-insert into "user" (id, email, name, password) values (11, 'gscafea@lycos.com', 'Gertrude Scafe', '$2y$10$ZOK2tLgUdEXnGD5j9euWTeo2H1JZiGUHfiSesdMj6m8EPMFhW1zc2'); --l1ZlyzC9A
-insert into "user" (id, email, name, password) values (12, 'mdomeniconeb@upenn.edu', 'Marcille Domenicone', '$2y$10$.mUJlaoOojK.JXBitesunuGSeGlhcHrbcx0z5K7Se04x6Nbc.o5Ne'); --jLulNo3D17bw
-insert into "user" (id, email, name, password) values (13, 'mbernardosc@unc.edu', 'Micheal Bernardos', '$2y$10$1vVWZ65TTB0hi4amM3CAu.otX48d4jJIQ/VwfKZpdWxABJ1bEXRHq'); --1Eca1BX3sns
-insert into "user" (id, email, name, password) values (14, 'dsabattierd@omniture.com', 'Derrik Sabattier', '$2y$10$ZZyGxEKqiEJHZoBga1eR8.Dbmkpspb4JmCXb5dLb//On3YFW1t6Ci'); --6DLWnvR
-insert into "user" (id, email, name, password) values (15, 'rweinse@samsung.com', 'Rick Weins', '$2y$10$j4ifWo/PVaJQVrnFebeiTOdbn6jSREBQQwA2TGskchjoYg/4FhMBm'); --wyFKYt9IYQv
-insert into "user" (id, email, name, password) values (16, 'aalldridgef@netvibes.com', 'Adams Alldridge', '$2y$10$jj/Etq/DVuymWBGJ7waq8O/HMzGSUDPYcl8fLPRCQJGv9nhxu6MUe'); --yU2fYMg
-insert into "user" (id, email, name, password) values (17, 'akneelg@discovery.com', 'Abbe Kneel', '$2y$10$x/4PIVOqzcoSqJaQzVHe/OOzIq9x.rrMPm.srfoGn4UIVeQkwlqGi'); --NjR1ufVQ
-insert into "user" (id, email, name, password) values (18, 'apeachmanh@globo.com', 'Alyosha Peachman', '$2y$10$Vn5whD6rFZRZS/SHBsQUruXNb6f5cNI1WdYgM/Us4msKnpSJK406O'); --csP2RACoiT1
-insert into "user" (id, email, name, password) values (19, 'klorenci@creativecommons.org', 'Katerina Lorenc', '$2y$10$IMQOQwCEbMnhfmtRANEj6u/i5/VnCQkZHqEFPwKk7Ffgzj7TDEeWa'); --Ey2DVRgwXKmU
-insert into "user" (id, email, name, password) values (20, 'llightowlersj@reference.com', 'Linnell Lightowlers', '$2y$10$JxJyls4HxPUpn/ZVcmoXQermyXTIHzdf9JajK7rhMYNod31aRF5MK'); --NG6pFUwFEPOk
-insert into "user" (id, email, name, password) values (21, 'vfrancklynk@army.mil', 'Vivyanne Francklyn', '$2y$10$v5CqeJLhURAgU17.qRdhl.uylgXUA9a8NzUUDvViQW.67yFy.M536'); --wI0jcvO
-insert into "user" (id, email, name, password) values (22, 'mkeddlel@wufoo.com', 'Mikkel Keddle', '$2y$10$rz.fSXHdKAbA3IL0L499Ruq1H8hE64VaEYOXGLUB0GW3r4W08uwWu'); --hzAzcLg4hN
-insert into "user" (id, email, name, password) values (23, 'cscedallm@pagesperso-orange.fr', 'Claybourne Scedall', '$2y$10$U26N4goH/l0TDD.K25721.ZgNnyNx2fVES3FVwXDWwz0Wx.4zqVLO'); --7zrPUp
-insert into "user" (id, email, name, password) values (24, 'cleaburnn@nhs.uk', 'Carlin Leaburn', '$2y$10$MY3qNfrHE.W4Vbu9m5AnweYSqgpUaKpYHt6KCY27YE6ieUSjF/3.W'); --yLB12RVTw
-insert into "user" (id, email, name, password) values (25, 'sfalliso@alibaba.com', 'Stanislaw Fallis', '$2y$10$6jJ461PrEziK/W0fJm7yquxMCYyoXSJ.aCDrSllshIpdwyn9HN7I.'); --ZRqaTrEN
+insert into "users" (id, email, name, password, admin) values (DEFAULT, 'akippie0@virginia.edu', 'Athene Kippie', '$2y$10$WHE2vxMvLe2tSb9fuU.9U./M24m0EbdTyqyfOkhHlv.ri4ihPI7DG', FALSE); --2tDNckscS9YK
+insert into "users" (id, email, name, password, admin) values (DEFAULT, 'korrah1@posterous.com', 'Katya Orrah', '$2y$10$ULw9BCNOz922SN7sn7TgRuzQbuFAmD3lV9vgVFpoI2/4lSYAB/FDe', FALSE); --GB6uGx
+insert into "users" (id, email, name, password, admin) values (DEFAULT, 'iradcliffe2@dropbox.com', 'Ignacius Radcliffe', '$2y$10$WROkhpLWVyj1Z7e489746.xhvZUGjBgCk96J7BVg05RKEwgbapkpm', FALSE); --1k9Rxx
+insert into "users" (id, email, name, password, admin) values (DEFAULT, 'gstoney3@omniture.com', 'Gabriel Stoney', '$2y$10$tikQRwd1jXCjWsfSHgc9r.Rcir0NiXFneRzVOgRmofwFn74ymdi0W', FALSE); --kykWXnVth
+insert into "users" (id, email, name, password, admin) values (DEFAULT, 'kpoytres4@deviantart.com', 'Kati Poytres', '$2y$10$Si0e59qZ9iafoRqxvf4Fous7nnOMVeUDNkotMVV/S0aido2wBHk02', FALSE); --Rm876cW
+insert into "users" (id, email, name, password, admin) values (DEFAULT, 'ecardall5@shop-pro.jp', 'Evonne Cardall', '$2y$10$Vdat1Ok9jkqAsaOvUyRVweIAbFo0cs2XQ17XghdLuzd/REeN4ozF2', FALSE); --UIiXARyJ1
+insert into "users" (id, email, name, password, admin) values (DEFAULT, 'chertwell6@fotki.com', 'Chic Hertwell', '$2y$10$IAHhV.EADQKKJRZPPu4A5O2VHETPnCA5VNLlgBWMAxBHHDZ7E9T/G', FALSE); --zoUdQRHaY
+insert into "users" (id, email, name, password, admin) values (DEFAULT, 'splumptre7@illinois.edu', 'Selena Plumptre', '$2y$10$BvqdYpB/g7os22obPoRREeVWLbRhLsM/cIRtVzQ3u/3JXzWRzyyQi', FALSE); --EjTj1J4f
+insert into "users" (id, email, name, password, admin) values (DEFAULT, 'elegrave8@amazon.de', 'Elga Legrave', '$2y$10$nWgha.UFsltv0oJl5ckj8unOwgLolcvsbsVHiDoRIBS5tW5dzvDBS', FALSE); --WrwEiFz8Q
+insert into "users" (id, email, name, password, admin) values (DEFAULT, 'kcallf9@g.co', 'Karly Callf', '$2y$10$LkqfbL/4ahFVRnp/tUt4IO4cKJNDEPWcOyliWSXgSI2OBcHiv04li', FALSE); --B79NhfdKu
+insert into "users" (id, email, name, password, admin) values (DEFAULT, 'gscafea@lycos.com', 'Gertrude Scafe', '$2y$10$ZOK2tLgUdEXnGD5j9euWTeo2H1JZiGUHfiSesdMj6m8EPMFhW1zc2', FALSE); --l1ZlyzC9A
+insert into "users" (id, email, name, password, admin) values (DEFAULT, 'mdomeniconeb@upenn.edu', 'Marcille Domenicone', '$2y$10$.mUJlaoOojK.JXBitesunuGSeGlhcHrbcx0z5K7Se04x6Nbc.o5Ne', FALSE); --jLulNo3D17bw
+insert into "users" (id, email, name, password, admin) values (DEFAULT, 'mbernardosc@unc.edu', 'Micheal Bernardos', '$2y$10$1vVWZ65TTB0hi4amM3CAu.otX48d4jJIQ/VwfKZpdWxABJ1bEXRHq', FALSE); --1Eca1BX3sns
+insert into "users" (id, email, name, password, admin) values (DEFAULT, 'dsabattierd@omniture.com', 'Derrik Sabattier', '$2y$10$ZZyGxEKqiEJHZoBga1eR8.Dbmkpspb4JmCXb5dLb//On3YFW1t6Ci', FALSE); --6DLWnvR
+insert into "users" (id, email, name, password, admin) values (DEFAULT, 'rweinse@samsung.com', 'Rick Weins', '$2y$10$j4ifWo/PVaJQVrnFebeiTOdbn6jSREBQQwA2TGskchjoYg/4FhMBm', FALSE); --wyFKYt9IYQv
+insert into "users" (id, email, name, password, admin) values (DEFAULT, 'aalldridgef@netvibes.com', 'Adams Alldridge', '$2y$10$jj/Etq/DVuymWBGJ7waq8O/HMzGSUDPYcl8fLPRCQJGv9nhxu6MUe', FALSE); --yU2fYMg
+insert into "users" (id, email, name, password, admin) values (DEFAULT, 'akneelg@discovery.com', 'Abbe Kneel', '$2y$10$x/4PIVOqzcoSqJaQzVHe/OOzIq9x.rrMPm.srfoGn4UIVeQkwlqGi', FALSE); --NjR1ufVQ
+insert into "users" (id, email, name, password, admin) values (DEFAULT, 'apeachmanh@globo.com', 'Alyosha Peachman', '$2y$10$Vn5whD6rFZRZS/SHBsQUruXNb6f5cNI1WdYgM/Us4msKnpSJK406O', FALSE); --csP2RACoiT1
+insert into "users" (id, email, name, password, admin) values (DEFAULT, 'klorenci@creativecommons.org', 'Katerina Lorenc', '$2y$10$IMQOQwCEbMnhfmtRANEj6u/i5/VnCQkZHqEFPwKk7Ffgzj7TDEeWa', FALSE); --Ey2DVRgwXKmU
+insert into "users" (id, email, name, password, admin) values (DEFAULT, 'llightowlersj@reference.com', 'Linnell Lightowlers', '$2y$10$JxJyls4HxPUpn/ZVcmoXQermyXTIHzdf9JajK7rhMYNod31aRF5MK', FALSE); --NG6pFUwFEPOk
+insert into "users" (id, email, name, password, admin) values (DEFAULT, 'vfrancklynk@army.mil', 'Vivyanne Francklyn', '$2y$10$v5CqeJLhURAgU17.qRdhl.uylgXUA9a8NzUUDvViQW.67yFy.M536', FALSE); --wI0jcvO
+insert into "users" (id, email, name, password, admin) values (DEFAULT, 'mkeddlel@wufoo.com', 'Mikkel Keddle', '$2y$10$rz.fSXHdKAbA3IL0L499Ruq1H8hE64VaEYOXGLUB0GW3r4W08uwWu', FALSE); --hzAzcLg4hN
+insert into "users" (id, email, name, password, admin) values (DEFAULT, 'cscedallm@pagesperso-orange.fr', 'Claybourne Scedall', '$2y$10$U26N4goH/l0TDD.K25721.ZgNnyNx2fVES3FVwXDWwz0Wx.4zqVLO', FALSE); --7zrPUp
+insert into "users" (id, email, name, password, admin) values (DEFAULT, 'cleaburnn@nhs.uk', 'Carlin Leaburn', '$2y$10$MY3qNfrHE.W4Vbu9m5AnweYSqgpUaKpYHt6KCY27YE6ieUSjF/3.W', FALSE); --yLB12RVTw
+insert into "users" (id, email, name, password, admin) values (DEFAULT, 'sfalliso@alibaba.com', 'Stanislaw Fallis', '$2y$10$6jJ461PrEziK/W0fJm7yquxMCYyoXSJ.aCDrSllshIpdwyn9HN7I.', FALSE); --ZRqaTrEN
 
-----------------------------------------------------Artist--------------------------------------------------------------
+INSERT INTO users VALUES (
+  DEFAULT,
+  'john@example.com',
+  'John Doe',
+  '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',
+  FALSE
+); -- Password is 1234. Generated using Hash::make('1234')
 
-
-insert into artist (user_id, about, admin) values (1, 'disruptive', FALSE);
-insert into artist (user_id, about, admin) values (2, 'adroit', FALSE);
-insert into artist (user_id, about, admin) values (3, 'acclaimed', FALSE);
-insert into artist (user_id, about, admin) values (4, 'ethereal', FALSE);
-insert into artist (user_id, about, admin) values (5, 'bold', FALSE);
-insert into artist (user_id, about, admin) values (6, 'epochal', FALSE);
-insert into artist (user_id, about, admin) values (7, 'traditional', FALSE);
-insert into artist (user_id, about, admin) values (8, 'surreal', FALSE);
-insert into artist (user_id, about, admin) values (9, 'impassioned', FALSE);
-insert into artist (user_id, about, admin) values (10,' mystical', FALSE);
-insert into artist (user_id, about, admin) values (11,' talented', FALSE);
-insert into artist (user_id, about, admin) values (12,' thought-provoking', FALSE);
-insert into artist (user_id, about, admin) values (13,' unconventional', FALSE);
-insert into artist (user_id, about, admin) values (14,' engrossing', FALSE);
-insert into artist (user_id, about, admin) values (15,' emerging', FALSE);
-insert into artist (user_id, about, admin) values (16,' refreshing', FALSE);
-insert into artist (user_id, about, admin) values (17,' hyper-creative', FALSE);
-insert into artist (user_id, about, admin) values (18,' boundless', FALSE);
-insert into artist (user_id, about, admin) values (19,' deeply thoughtful', FALSE);
-insert into artist (user_id, about, admin) values (20,' paradoxical', FALSE);
-insert into artist (user_id, about, admin) values (21,' supple', FALSE);
-insert into artist (user_id, about, admin) values (22,' pictorial', FALSE);
-insert into artist (user_id, about, admin) values (23,' sublime', FALSE);
-insert into artist (user_id, about, admin) values (24,' touching', FALSE);
-insert into artist (user_id, about, admin) values (25,' mosaiclike', FALSE);
 ---------------------------------------------------- EVENT ----------------------------------------------------  
 insert into "event" (event_id, title, start_date, end_date, "local", photo, "type", owner_id, details) values (1, 'Vodafone Paredes De Coura 2020', '2020-08-19 17:00:00', '2020-08-29 04:00:00', 1, 1, 'public', 1, 'A história da música em Portugal não seria a mesma sem o Festival Paredes de Coura. Ao longo dos seus 26 anos de existência, o mais antigo e carismático festival português tem feito história na descoberta de novas promessas musicais e na apresentação dos nomes mais consagrados da música a nível mundial. Com uma programação cuidada e coerente, sempre fiel ao espírito alternativo que o caracteriza, o Festival Paredes de Coura, que acontece junto à praia fluvial do Taboão já foi considerado um dos 5 melhores festivais de música da Europa pela revista Rolling Stone. Arcade Fire, Pixies, Nick Cave, PJ Harvey, Coldplay e Morrisey, são apenas alguns dos nomes que já pisaram o palco deste festival. Depois de um ano que ficou marcado na memória das mais de 100.000 pessoas presentes na última edição o Vodafone Paredes de Coura está de regresso nos dias 19, 20, 21 e 22 de Agosto 2020.');
 insert into "event" (event_id, title, start_date, end_date, "local", photo, "type", owner_id, details) values (2, 'Porto: Fado Show with Port Wine', '2020-07-19 07:00:00', '2020-07-19 10:00:00', 2, 2, 'private', 20, 'Have a meeting with portuguese culture, contacting with very unique cultural values – fado, portuguese tradicional stringed instruments, wine – deeply related with the history of Portugal.
@@ -390,3 +360,5 @@ insert into invitation (invitation_id, event_id, invited_id, inviter_id, message
 insert into invitation (invitation_id, event_id, invited_id, inviter_id, message, date, accepted) values (2, 2, 6, 20, 'Vem a este evento fantástico!', '10-03-2020', FALSE);
 insert into invitation (invitation_id, event_id, invited_id, inviter_id, message, date, accepted) values (3, 2, 7, 20, 'Vem a este evento fantástico!', '10-03-2020', TRUE);
 insert into invitation (invitation_id, event_id, invited_id, inviter_id, message, date, accepted) values (4, 2, 1, 17, 'Hey my friend! Thought you might me interested in this great exhibition!', '05-03-2020', TRUE);
+
+
