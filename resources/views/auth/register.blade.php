@@ -3,7 +3,7 @@
 @section('title', 'Artnow - Register')
 
 @section('content')
-<br><br><br><br>
+<br><br><br>
 
 <form method="POST" action="{{ route('register') }}">
 
@@ -18,47 +18,42 @@
                               
                               <div id="text-banner-login" class="container">
                                   <img style="height:25%; width:100%;filter: brightness(80%);" src="{{asset('images/banner_2.jpg')}}" class="img-fluid" width="100%">
-                                  <div id="text-banner-login" class="centered">Sign in</div>
+                                  <div id="text-banner-login" class="centered">Register</div>
                               </div>
                                                                  
                               <div class="card-body">
-                                  <form class="form" role="form" autocomplete="off" id="formLogin" novalidate="" method="POST">
-                                      <div class="form-group">
-                                          <label for="inputsm">Email</label>
-                                          <input id="email" class="form-control input-sm" type="email" name="email" value="{{ old('email') }}" required autofocus>
-                                          @if ($errors->has('email'))
-                                          <span class="error">
-                                            {{ $errors->first('email') }}
-                                          </span>
-                                      @endif
-                                      </div>
+                                    
+                                  <div class="form-group">
+                                    <label for="inputsm">Email</label>
+                                    <input id="email" class="form-control input-sm" type="email" name="email" value="{{ old('email') }}" required>
+                                  </div>
 
-                                      <div class="form-group">
-                                          <label for="inputsm">Password</label>
-                                          <input id="password" class="form-control input-sm" type="password" name="password" required>
-                                          @if ($errors->has('password'))
-                                              <span class="error">
-                                                  {{ $errors->first('password') }}
-                                              </span>
-                                          @endif
-                                      </div>
+                                  <div class="form-group">
+                                    <label for="inputsm">Name</label>
+                                    <input id="name" class="form-control input-sm" type="text" name="name" value="{{ old('name') }}" required autofocus>
+                                  </div>
 
-                                      <div class="row">
-                                          <div class="col">
-                                              <div class="form-group">
-                                                  <small id="recover_password"><a href="#" data-toggle="modal" data-target="#modalPassword">Forgot your password?</a></small>
-                                              </div>
-                                          </div>
-                                          <div class="col">
-                                               <button type="submit" class="btn float-right" id="btn-login">Sign in</button>                                   
-                                          </div>
-                                      </div>
+                                  <div class="form-group">
+                                    <label for="inputsm">Password</label>                                   
+                                    <input id="password" class="form-control input-sm" type="password" name="password" required>
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="inputsm">Confirm password</label>
+                                    <input id="password" class="form-control input-sm" type="password" name="password_confirmation" required>
+                                  </div>
 
-                                      <br>
+                                  <div class="row">
+                                    
+                                    <div class="col">
+                                         <button type="submit" class="btn float-right" id="btn-login">Register</button>                                   
+                                    </div>
+                                </div>
 
-                                      <p class="text-center"> Don't have an account? <br> <a class="button button-outline" href="{{ route('register') }}">Click here to sign up!</a></p>
-                                     
-                                  </form>
+                                @include('partials.inc.messages')
+                            
+                                <p class="text-center"> Already have an account? <br> <a class="button button-outline" href="{{ route('login') }}">Click here to sign in!</a></p>
+                               
+
                               </div>
                           </div>
                       </div>
@@ -66,41 +61,5 @@
               </div>
       </div>
   </div>
-</form>
-
-<form method="POST" action="{{ route('register') }}">
-    {{ csrf_field() }}
-
-    <label for="name">Name</label>
-    <input id="name" type="text" name="name" value="{{ old('name') }}" required autofocus>
-    @if ($errors->has('name'))
-      <span class="error">
-          {{ $errors->first('name') }}
-      </span>
-    @endif
-
-    <label for="email">E-Mail Address</label>
-    <input id="email" type="email" name="email" value="{{ old('email') }}" required>
-    @if ($errors->has('email'))
-      <span class="error">
-          {{ $errors->first('email') }}
-      </span>
-    @endif
-
-    <label for="password">Password</label>
-    <input id="password" type="password" name="password" required>
-    @if ($errors->has('password'))
-      <span class="error">
-          {{ $errors->first('password') }}
-      </span>
-    @endif
-
-    <label for="password-confirm">Confirm Password</label>
-    <input id="password-confirm" type="password" name="password_confirmation" required>
-
-    <button type="submit">
-      Register
-    </button>
-    <a class="button button-outline" href="{{ route('login') }}">Login</a>
 </form>
 @endsection

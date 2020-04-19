@@ -3,7 +3,7 @@
 @section('title', 'Artnow - Login')
 
 @section('content')
-<br><br><br><br>
+<br><br><br>
 <form method="POST" action="{{ route('login') }}">
 
     {{ csrf_field() }}
@@ -21,25 +21,15 @@
                                 </div>
                                                                    
                                 <div class="card-body">
-                                    <form class="form" role="form" autocomplete="off" id="formLogin" novalidate="" method="POST">
+                                   
                                         <div class="form-group">
                                             <label for="inputsm">Email</label>
                                             <input id="email" class="form-control input-sm" type="email" name="email" value="{{ old('email') }}" required autofocus>
-                                            @if ($errors->has('email'))
-                                            <span class="error">
-                                              {{ $errors->first('email') }}
-                                            </span>
-                                        @endif
                                         </div>
 
                                         <div class="form-group">
                                             <label for="inputsm">Password</label>
-                                            <input id="password" class="form-control input-sm" type="password" name="password" required>
-                                            @if ($errors->has('password'))
-                                                <span class="error">
-                                                    {{ $errors->first('password') }}
-                                                </span>
-                                            @endif
+                                            <input id="password" class="form-control input-sm" type="password" name="password" required>                               
                                         </div>
 
                                         <div class="row">
@@ -53,11 +43,11 @@
                                             </div>
                                         </div>
 
-                                        <br>
-
-                                        <p class="text-center"> Don't have an account? <br> <a class="button button-outline" href="{{ route('register') }}">Click here to sign up!</a></p>
+                                        @include('partials.inc.messages')
+                                    
+                                        <p class="text-center"> Don't have an account? <br> <a class="button button-outline" href="{{ route('register') }}">Click here to register!</a></p>
                                        
-                                    </form>
+                                     
                                 </div>
                             </div>
                         </div>
@@ -66,5 +56,4 @@
         </div>
     </div>
 </form>
-
 @endsection
