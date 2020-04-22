@@ -40,7 +40,7 @@
                   </li>
 
             @endif         
-                <li><a class="nav-link" href=""> MY PROFILE </a> </li>
+                <li><a class="nav-link" href="/profile/{{Auth::user()->id}}"> MY PROFILE </a> </li>
             
                 <li><a class="nav-link" href="{{route('logout')}}"> LOGOUT </a>   </li>
             </ul>

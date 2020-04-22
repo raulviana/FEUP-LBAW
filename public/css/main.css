@@ -412,10 +412,27 @@ button#btn-login.btn.float-right{
     background: #292b2c;
     color: #f7f7f7;
     font-weight: 600;
-    font-size: 0.80rem;
+    font-size: 0.85rem;
 }
 
 button#btn-login.btn.float-right:hover{
+ background: lightgray;  
+    border-color: #292b2c;
+}
+
+button#btn-login.btn.float-left{
+    text-transform: uppercase;
+    padding-bottom:  0.2rem;
+    padding-top:  0.2rem;
+    padding-right:  0.5rem;
+    padding-left:  0.5rem;
+    background: #292b2c;
+    color: #f7f7f7;
+    font-weight: 600;
+    font-size: 0.85rem;
+}
+
+button#btn-login.btn.float-left:hover{
  background: lightgray;  
     border-color: #292b2c;
 }

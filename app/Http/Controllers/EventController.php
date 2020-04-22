@@ -21,9 +21,6 @@ class EventController extends Controller
     public function show($id)
     {
       $event = Event::find($id);
-
-//      $this->authorize('show', $card);
-
       return view('pages.event', ['event' => $event]);
     }
 

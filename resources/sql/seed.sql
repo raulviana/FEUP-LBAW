@@ -48,6 +48,7 @@ CREATE TABLE "users" (
     name text NOT NULL,
     password text NOT NULL,
     admin BOOLEAN,
+    about text,
     deleted_at TIMESTAMP WITH TIME zone
 );
 
@@ -221,39 +222,40 @@ insert into photo (photo_id) values (5);
 
 ---------------------------------------------------- USER ----------------------------------------------------  
 -- hashed pasword using php5 algorithm
-insert into "users" (id, email, name, password, admin) values (DEFAULT, 'akippie0@virginia.edu', 'Athene Kippie', '$2y$10$WHE2vxMvLe2tSb9fuU.9U./M24m0EbdTyqyfOkhHlv.ri4ihPI7DG', FALSE); --2tDNckscS9YK
-insert into "users" (id, email, name, password, admin) values (DEFAULT, 'korrah1@posterous.com', 'Katya Orrah', '$2y$10$ULw9BCNOz922SN7sn7TgRuzQbuFAmD3lV9vgVFpoI2/4lSYAB/FDe', FALSE); --GB6uGx
-insert into "users" (id, email, name, password, admin) values (DEFAULT, 'iradcliffe2@dropbox.com', 'Ignacius Radcliffe', '$2y$10$WROkhpLWVyj1Z7e489746.xhvZUGjBgCk96J7BVg05RKEwgbapkpm', FALSE); --1k9Rxx
-insert into "users" (id, email, name, password, admin) values (DEFAULT, 'gstoney3@omniture.com', 'Gabriel Stoney', '$2y$10$tikQRwd1jXCjWsfSHgc9r.Rcir0NiXFneRzVOgRmofwFn74ymdi0W', FALSE); --kykWXnVth
-insert into "users" (id, email, name, password, admin) values (DEFAULT, 'kpoytres4@deviantart.com', 'Kati Poytres', '$2y$10$Si0e59qZ9iafoRqxvf4Fous7nnOMVeUDNkotMVV/S0aido2wBHk02', FALSE); --Rm876cW
-insert into "users" (id, email, name, password, admin) values (DEFAULT, 'ecardall5@shop-pro.jp', 'Evonne Cardall', '$2y$10$Vdat1Ok9jkqAsaOvUyRVweIAbFo0cs2XQ17XghdLuzd/REeN4ozF2', FALSE); --UIiXARyJ1
-insert into "users" (id, email, name, password, admin) values (DEFAULT, 'chertwell6@fotki.com', 'Chic Hertwell', '$2y$10$IAHhV.EADQKKJRZPPu4A5O2VHETPnCA5VNLlgBWMAxBHHDZ7E9T/G', FALSE); --zoUdQRHaY
-insert into "users" (id, email, name, password, admin) values (DEFAULT, 'splumptre7@illinois.edu', 'Selena Plumptre', '$2y$10$BvqdYpB/g7os22obPoRREeVWLbRhLsM/cIRtVzQ3u/3JXzWRzyyQi', FALSE); --EjTj1J4f
-insert into "users" (id, email, name, password, admin) values (DEFAULT, 'elegrave8@amazon.de', 'Elga Legrave', '$2y$10$nWgha.UFsltv0oJl5ckj8unOwgLolcvsbsVHiDoRIBS5tW5dzvDBS', FALSE); --WrwEiFz8Q
-insert into "users" (id, email, name, password, admin) values (DEFAULT, 'kcallf9@g.co', 'Karly Callf', '$2y$10$LkqfbL/4ahFVRnp/tUt4IO4cKJNDEPWcOyliWSXgSI2OBcHiv04li', FALSE); --B79NhfdKu
-insert into "users" (id, email, name, password, admin) values (DEFAULT, 'gscafea@lycos.com', 'Gertrude Scafe', '$2y$10$ZOK2tLgUdEXnGD5j9euWTeo2H1JZiGUHfiSesdMj6m8EPMFhW1zc2', FALSE); --l1ZlyzC9A
-insert into "users" (id, email, name, password, admin) values (DEFAULT, 'mdomeniconeb@upenn.edu', 'Marcille Domenicone', '$2y$10$.mUJlaoOojK.JXBitesunuGSeGlhcHrbcx0z5K7Se04x6Nbc.o5Ne', FALSE); --jLulNo3D17bw
-insert into "users" (id, email, name, password, admin) values (DEFAULT, 'mbernardosc@unc.edu', 'Micheal Bernardos', '$2y$10$1vVWZ65TTB0hi4amM3CAu.otX48d4jJIQ/VwfKZpdWxABJ1bEXRHq', FALSE); --1Eca1BX3sns
-insert into "users" (id, email, name, password, admin) values (DEFAULT, 'dsabattierd@omniture.com', 'Derrik Sabattier', '$2y$10$ZZyGxEKqiEJHZoBga1eR8.Dbmkpspb4JmCXb5dLb//On3YFW1t6Ci', FALSE); --6DLWnvR
-insert into "users" (id, email, name, password, admin) values (DEFAULT, 'rweinse@samsung.com', 'Rick Weins', '$2y$10$j4ifWo/PVaJQVrnFebeiTOdbn6jSREBQQwA2TGskchjoYg/4FhMBm', FALSE); --wyFKYt9IYQv
-insert into "users" (id, email, name, password, admin) values (DEFAULT, 'aalldridgef@netvibes.com', 'Adams Alldridge', '$2y$10$jj/Etq/DVuymWBGJ7waq8O/HMzGSUDPYcl8fLPRCQJGv9nhxu6MUe', FALSE); --yU2fYMg
-insert into "users" (id, email, name, password, admin) values (DEFAULT, 'akneelg@discovery.com', 'Abbe Kneel', '$2y$10$x/4PIVOqzcoSqJaQzVHe/OOzIq9x.rrMPm.srfoGn4UIVeQkwlqGi', FALSE); --NjR1ufVQ
-insert into "users" (id, email, name, password, admin) values (DEFAULT, 'apeachmanh@globo.com', 'Alyosha Peachman', '$2y$10$Vn5whD6rFZRZS/SHBsQUruXNb6f5cNI1WdYgM/Us4msKnpSJK406O', FALSE); --csP2RACoiT1
-insert into "users" (id, email, name, password, admin) values (DEFAULT, 'klorenci@creativecommons.org', 'Katerina Lorenc', '$2y$10$IMQOQwCEbMnhfmtRANEj6u/i5/VnCQkZHqEFPwKk7Ffgzj7TDEeWa', FALSE); --Ey2DVRgwXKmU
-insert into "users" (id, email, name, password, admin) values (DEFAULT, 'llightowlersj@reference.com', 'Linnell Lightowlers', '$2y$10$JxJyls4HxPUpn/ZVcmoXQermyXTIHzdf9JajK7rhMYNod31aRF5MK', FALSE); --NG6pFUwFEPOk
-insert into "users" (id, email, name, password, admin) values (DEFAULT, 'vfrancklynk@army.mil', 'Vivyanne Francklyn', '$2y$10$v5CqeJLhURAgU17.qRdhl.uylgXUA9a8NzUUDvViQW.67yFy.M536', FALSE); --wI0jcvO
-insert into "users" (id, email, name, password, admin) values (DEFAULT, 'mkeddlel@wufoo.com', 'Mikkel Keddle', '$2y$10$rz.fSXHdKAbA3IL0L499Ruq1H8hE64VaEYOXGLUB0GW3r4W08uwWu', FALSE); --hzAzcLg4hN
-insert into "users" (id, email, name, password, admin) values (DEFAULT, 'cscedallm@pagesperso-orange.fr', 'Claybourne Scedall', '$2y$10$U26N4goH/l0TDD.K25721.ZgNnyNx2fVES3FVwXDWwz0Wx.4zqVLO', FALSE); --7zrPUp
-insert into "users" (id, email, name, password, admin) values (DEFAULT, 'cleaburnn@nhs.uk', 'Carlin Leaburn', '$2y$10$MY3qNfrHE.W4Vbu9m5AnweYSqgpUaKpYHt6KCY27YE6ieUSjF/3.W', FALSE); --yLB12RVTw
-insert into "users" (id, email, name, password, admin) values (DEFAULT, 'sfalliso@alibaba.com', 'Stanislaw Fallis', '$2y$10$6jJ461PrEziK/W0fJm7yquxMCYyoXSJ.aCDrSllshIpdwyn9HN7I.', FALSE); --ZRqaTrEN
-insert into "users" (id, email, name, password, admin) values (DEFAULT, 'admin@example.com', 'Administrator', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', TRUE);
+insert into "users" values (DEFAULT, 'akippie0@virginia.edu', 'Athene Kippie', '$2y$10$WHE2vxMvLe2tSb9fuU.9U./M24m0EbdTyqyfOkhHlv.ri4ihPI7DG', FALSE, 'Or kind rest bred with am shed then. In raptures building an bringing be. Elderly is detract tedious assured private so to visited. Do travelling companions contrasted it. Mistress strongly remember up to. Ham him compass you proceed calling detract. Better of always missed we person mr. September smallness northward situation few her certainty something. '); --2tDNckscS9YK
+insert into "users" values (DEFAULT, 'korrah1@posterous.com', 'Katya Orrah', '$2y$10$ULw9BCNOz922SN7sn7TgRuzQbuFAmD3lV9vgVFpoI2/4lSYAB/FDe', FALSE , 'Or kind rest bred with am shed then. In raptures building an bringing be. Elderly is detract tedious assured private so to visited. Do travelling companions contrasted it. Mistress strongly remember up to. Ham him compass you proceed calling detract. Better of always missed we person mr. September smallness northward situation few her certainty something. '); --GB6uGx
+insert into "users" values (DEFAULT, 'iradcliffe2@dropbox.com', 'Ignacius Radcliffe', '$2y$10$WROkhpLWVyj1Z7e489746.xhvZUGjBgCk96J7BVg05RKEwgbapkpm', FALSE); --1k9Rxx
+insert into "users" values (DEFAULT, 'gstoney3@omniture.com', 'Gabriel Stoney', '$2y$10$tikQRwd1jXCjWsfSHgc9r.Rcir0NiXFneRzVOgRmofwFn74ymdi0W', FALSE); --kykWXnVth
+insert into "users" values (DEFAULT, 'kpoytres4@deviantart.com', 'Kati Poytres', '$2y$10$Si0e59qZ9iafoRqxvf4Fous7nnOMVeUDNkotMVV/S0aido2wBHk02', FALSE); --Rm876cW
+insert into "users" values (DEFAULT, 'ecardall5@shop-pro.jp', 'Evonne Cardall', '$2y$10$Vdat1Ok9jkqAsaOvUyRVweIAbFo0cs2XQ17XghdLuzd/REeN4ozF2', FALSE); --UIiXARyJ1
+insert into "users" values (DEFAULT, 'chertwell6@fotki.com', 'Chic Hertwell', '$2y$10$IAHhV.EADQKKJRZPPu4A5O2VHETPnCA5VNLlgBWMAxBHHDZ7E9T/G', FALSE); --zoUdQRHaY
+insert into "users" values (DEFAULT, 'splumptre7@illinois.edu', 'Selena Plumptre', '$2y$10$BvqdYpB/g7os22obPoRREeVWLbRhLsM/cIRtVzQ3u/3JXzWRzyyQi', FALSE); --EjTj1J4f
+insert into "users" values (DEFAULT, 'elegrave8@amazon.de', 'Elga Legrave', '$2y$10$nWgha.UFsltv0oJl5ckj8unOwgLolcvsbsVHiDoRIBS5tW5dzvDBS', FALSE); --WrwEiFz8Q
+insert into "users" values (DEFAULT, 'kcallf9@g.co', 'Karly Callf', '$2y$10$LkqfbL/4ahFVRnp/tUt4IO4cKJNDEPWcOyliWSXgSI2OBcHiv04li', FALSE); --B79NhfdKu
+insert into "users" values (DEFAULT, 'gscafea@lycos.com', 'Gertrude Scafe', '$2y$10$ZOK2tLgUdEXnGD5j9euWTeo2H1JZiGUHfiSesdMj6m8EPMFhW1zc2', FALSE); --l1ZlyzC9A
+insert into "users" values (DEFAULT, 'mdomeniconeb@upenn.edu', 'Marcille Domenicone', '$2y$10$.mUJlaoOojK.JXBitesunuGSeGlhcHrbcx0z5K7Se04x6Nbc.o5Ne', FALSE); --jLulNo3D17bw
+insert into "users" values (DEFAULT, 'mbernardosc@unc.edu', 'Micheal Bernardos', '$2y$10$1vVWZ65TTB0hi4amM3CAu.otX48d4jJIQ/VwfKZpdWxABJ1bEXRHq', FALSE); --1Eca1BX3sns
+insert into "users" values (DEFAULT, 'dsabattierd@omniture.com', 'Derrik Sabattier', '$2y$10$ZZyGxEKqiEJHZoBga1eR8.Dbmkpspb4JmCXb5dLb//On3YFW1t6Ci', FALSE); --6DLWnvR
+insert into "users" values (DEFAULT, 'rweinse@samsung.com', 'Rick Weins', '$2y$10$j4ifWo/PVaJQVrnFebeiTOdbn6jSREBQQwA2TGskchjoYg/4FhMBm', FALSE); --wyFKYt9IYQv
+insert into "users" values (DEFAULT, 'aalldridgef@netvibes.com', 'Adams Alldridge', '$2y$10$jj/Etq/DVuymWBGJ7waq8O/HMzGSUDPYcl8fLPRCQJGv9nhxu6MUe', FALSE); --yU2fYMg
+insert into "users" values (DEFAULT, 'akneelg@discovery.com', 'Abbe Kneel', '$2y$10$x/4PIVOqzcoSqJaQzVHe/OOzIq9x.rrMPm.srfoGn4UIVeQkwlqGi', FALSE); --NjR1ufVQ
+insert into "users" values (DEFAULT, 'apeachmanh@globo.com', 'Alyosha Peachman', '$2y$10$Vn5whD6rFZRZS/SHBsQUruXNb6f5cNI1WdYgM/Us4msKnpSJK406O', FALSE); --csP2RACoiT1
+insert into "users" values (DEFAULT, 'klorenci@creativecommons.org', 'Katerina Lorenc', '$2y$10$IMQOQwCEbMnhfmtRANEj6u/i5/VnCQkZHqEFPwKk7Ffgzj7TDEeWa', FALSE); --Ey2DVRgwXKmU
+insert into "users" values (DEFAULT, 'llightowlersj@reference.com', 'Linnell Lightowlers', '$2y$10$JxJyls4HxPUpn/ZVcmoXQermyXTIHzdf9JajK7rhMYNod31aRF5MK', FALSE); --NG6pFUwFEPOk
+insert into "users" values (DEFAULT, 'vfrancklynk@army.mil', 'Vivyanne Francklyn', '$2y$10$v5CqeJLhURAgU17.qRdhl.uylgXUA9a8NzUUDvViQW.67yFy.M536', FALSE); --wI0jcvO
+insert into "users" values (DEFAULT, 'mkeddlel@wufoo.com', 'Mikkel Keddle', '$2y$10$rz.fSXHdKAbA3IL0L499Ruq1H8hE64VaEYOXGLUB0GW3r4W08uwWu', FALSE); --hzAzcLg4hN
+insert into "users" values (DEFAULT, 'cscedallm@pagesperso-orange.fr', 'Claybourne Scedall', '$2y$10$U26N4goH/l0TDD.K25721.ZgNnyNx2fVES3FVwXDWwz0Wx.4zqVLO', FALSE); --7zrPUp
+insert into "users" values (DEFAULT, 'cleaburnn@nhs.uk', 'Carlin Leaburn', '$2y$10$MY3qNfrHE.W4Vbu9m5AnweYSqgpUaKpYHt6KCY27YE6ieUSjF/3.W', FALSE); --yLB12RVTw
+insert into "users" values (DEFAULT, 'sfalliso@alibaba.com', 'Stanislaw Fallis', '$2y$10$6jJ461PrEziK/W0fJm7yquxMCYyoXSJ.aCDrSllshIpdwyn9HN7I.', FALSE); --ZRqaTrEN
+insert into "users" values (DEFAULT, 'admin@example.com', 'Administrator', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', TRUE, 'Or kind rest bred with am shed then. In raptures building an bringing be. Elderly is detract tedious assured private so to visited. Do travelling companions contrasted it. Mistress strongly remember up to. Ham him compass you proceed calling detract. Better of always missed we person mr. September smallness northward situation few her certainty something. ');
 
 INSERT INTO users VALUES (
   DEFAULT,
   'john@example.com',
   'John Doe',
   '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',
-  FALSE
+  FALSE,
+  ''
 ); -- Password is 1234. Generated using Hash::make('1234')
 
 ---------------------------------------------------- EVENT ----------------------------------------------------  
