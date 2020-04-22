@@ -18,4 +18,12 @@ class HomepageController extends Controller
         $events = Event::all();
         return view('pages.homepage', ['events' => $events]);
     }
+
+    public function faq(){
+        return view('pages.static.faq');
+    }
+
+    public function about(){
+        return view('pages.static.aboutus');
+    }
 }

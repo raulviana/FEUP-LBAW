@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-dark bg-dark  fixed-top"> 
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top"> 
     
     <a class="navbar-brand">ART NOW</a>
     
@@ -28,6 +28,20 @@
             </ul>
         @else
             <ul class="nav navbar-nav navbar-right ml-auto">
+            @if(Auth::user()->admin)
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="{{ route('admin-users') }}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        MANAGEMENT
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <a class="dropdown-item" href="{{ route('admin-users') }}">Manage users</a>
+                      <a class="dropdown-item" href="{{ route('admin-events') }}">Manage events</a>
+                    </div>
+                  </li>
+
+            @endif         
+                <li><a class="nav-link" href=""> MY PROFILE </a> </li>
+            
                 <li><a class="nav-link" href="{{route('logout')}}"> LOGOUT </a>   </li>
             </ul>
         @endif

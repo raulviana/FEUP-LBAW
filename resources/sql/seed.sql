@@ -47,7 +47,8 @@ CREATE TABLE "users" (
     email text NOT NULL UNIQUE,
     name text NOT NULL,
     password text NOT NULL,
-    admin BOOLEAN
+    admin BOOLEAN,
+    deleted_at TIMESTAMP WITH TIME zone
 );
 
 CREATE TABLE "event" (

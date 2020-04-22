@@ -25,20 +25,26 @@ Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('re
 Route::post('register', 'Auth\RegisterController@register');
 
 // Static pages
-Route::view('faq' , 'pages.static.faq')->name('faq');
-Route::view('aboutus', 'pages.static.aboutus')->name('aboutus');
+Route::get('faq' , 'HomepageController@faq')->name('faq');
+Route::get('aboutus', 'HomepageController@about')->name('aboutus');
+
+//Admin
+//Route::get('/admin/users', 'AdminController@display')->name('admin');
+Route::get('/admin/users', 'AdminController@users')->name('admin-users');
+Route::delete('api/admin/users/{id}', 'AdminController@deleteUser')->name('admin-del-user');
+Route::get('/admin/events', 'AdminController@events')->name('admin-events');
 
 
 //Events
 //Route::resource('events', 'EventController');
-Route::get('events', 'EventController@list');
-Route::get('events/{id}', 'EventController@show');
-Route::get('events/create', 'EventController@create');
+Route::get('/events', 'EventController@list');
+Route::get('/events/{id}', 'EventController@show');
+Route::get('/events/create', 'EventController@create');
 Route::post('/events/create', 'EventController@store');
 Route::get('/events/{id}/edit', 'EventController@edit');
 Route::post('/events/{id}/edit', 'EventController@update');
+//TODO : delete posts
 
 
-//Route::delete('api/events/{id}', 'EventController@delete')->name('delete_evnt');
 
 

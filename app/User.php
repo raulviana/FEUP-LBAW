@@ -2,17 +2,18 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
     use Notifiable;
+    use SoftDeletes;
 
     // Don't add create and update timestamps in database.
     public $timestamps  = false;
-  //  protected $table = 'user';
-
+    public $dates = ['deleted_at'];
 
     /**
      * The attributes that are mass assignable.
@@ -38,4 +39,6 @@ class User extends Authenticatable
      public function events() {
       return $this->hasMany('App\Event');
     }
+
+
 }

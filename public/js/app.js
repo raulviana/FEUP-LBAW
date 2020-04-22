@@ -1,27 +1,12 @@
+/* GET BUTTONS */
+//const deleteUserBtn = document.getElementById("delete-user-btn");
+
+
 function addEventListeners() {
-  let itemCheckers = document.querySelectorAll('article.card li.item input[type=checkbox]');
-  [].forEach.call(itemCheckers, function(checker) {
-    checker.addEventListener('change', sendItemUpdateRequest);
+  let userDeleters = document.querySelectorAll("div#manage-users button");
+  [].forEach.call(userDeleters, function(deleter) {
+    deleter.addEventListener('click', sendDeleteUserRequest);
   });
-
-  let itemCreators = document.querySelectorAll('article.card form.new_item');
-  [].forEach.call(itemCreators, function(creator) {
-    creator.addEventListener('submit', sendCreateItemRequest);
-  });
-
-  let itemDeleters = document.querySelectorAll('article.card li a.delete');
-  [].forEach.call(itemDeleters, function(deleter) {
-    deleter.addEventListener('click', sendDeleteItemRequest);
-  });
-
-  let cardDeleters = document.querySelectorAll('article.card header a.delete');
-  [].forEach.call(cardDeleters, function(deleter) {
-    deleter.addEventListener('click', sendDeleteCardRequest);
-  });
-
-  let cardCreator = document.querySelector('article.card form.new_card');
-  if (cardCreator != null)
-    cardCreator.addEventListener('submit', sendCreateCardRequest);
 }
 
 function encodeForAjax(data) {
@@ -41,13 +26,39 @@ function sendAjaxRequest(method, url, data, handler) {
   request.send(encodeForAjax(data));
 }
 
-function sendItemUpdateRequest() {
-  let item = this.closest('li.item');
-  let id = item.getAttribute('data-id');
-  let checked = item.querySelector('input[type=checkbox]').checked;
-
-  sendAjaxRequest('post', '/api/item/' + id, {done: checked}, itemUpdatedHandler);
+function sendDeleteUserRequest() { 
+  event.preventDefault();
+ 
+  let id = this.closest('button').getAttribute('data-id');
+  sendAjaxRequest("delete", `/api/admin/users/${id}`, {}, userDeletedHandler);
 }
+
+function userDeletedHandler() {
+  if (this.status != 200) window.location = '/';
+
+  let user = JSON.parse(this.responseText);
+
+  const alert = document.createElement('div');
+  alert.classList.add("alert", "alert-danger");
+  alert.innerText = "User " + user.name + " was suspended.";
+
+  let btn = document.querySelector('button[data-id="' + user.id + '"]');
+  btn.disabled=true;
+
+  let state = document.querySelector('td[data-id="' + user.id + '"]');
+  state.innerHTML="Suspended";
+
+  const manageUserDiv = document.querySelector('div#admin-management');
+  (manageUserDiv.parentElement).insertBefore(alert, manageUserDiv);
+
+
+  setTimeout(() => {
+    alert.parentElement.removeChild(alert);
+  }, 3000);
+}
+
+
+
 
 function sendDeleteItemRequest() {
   let id = this.closest('li.item').getAttribute('data-id');
