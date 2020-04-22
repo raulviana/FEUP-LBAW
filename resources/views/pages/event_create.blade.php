@@ -10,7 +10,7 @@
     <div class="row profile justify-content-center">
         <div id="edit-event" class="col-lg-10 push-lg-4">
            
-                <form method="post" action="{{empty($event) ? "/events/create" : "/events/".$event->event_id."/edit"}}" method="post"> 
+                <form method="post" action="{{empty($event) ? "/events/create" : "/events/".$event->event_id."/edit"}}"> 
                     {{ csrf_field() }}
        
                  @if(!empty($event))

@@ -38,7 +38,7 @@
         <div class="row text-center row-cols-4">
             <div class="col d-flex justity-content-center">
                 <div class="card text-center">
-                    <img class="card-img-topimg-fluid" src="images/default.jpg" alt="Raul Photo">
+                    <img class="card-img-topimg-fluid" src= {{ asset('storage/team_photos/raul.jpg') }} alt="Raul Photo">
                     <div class="card-body">
                         <h5 class="card-title">Raul Viana</h5>
                         <p class="card-text">up201208089@fe.up.pt</p>
@@ -48,7 +48,7 @@
 
             <div class="col d-flex justity-content-center">
                 <div class="card text-center">
-                    <img class="card-img-topimg-fluid" src="images/default.jpg" alt="Claudia Photo">
+                    <img class="card-img-topimg-fluid" src={{ asset('storage/team_photos/claudia.jpg') }} alt="Claudia Photo">
                     <div class="card-body">
                         <h5 class="card-title">Cláudia Mamede</h5>
                         <p class="card-text">up201604832@fe.up.pt</p>
@@ -57,7 +57,7 @@
             </div>
             <div class="col d-flex justity-content-center">
                 <div class="card text-center">
-                    <img class="card-img-topimg-fluid" src="images/default.jpg" alt="Leonor Photo">
+                    <img class="card-img-topimg-fluid" src={{ asset('storage/team_photos/leonor.jpg') }} alt="Leonor Photo">
                     <div class="card-body">
                         <h5 class="card-title">Leonor Sousa</h5>
                         <p class="card-text">up201705377@fe.up.pt</p>
@@ -67,7 +67,7 @@
 
             <div class="col d-flex justity-content-center">
                 <div class="card text-center">
-                    <img class="card-img-topimg-fluid" src="images/default.jpg" alt="Miguel Photo">
+                    <img class="card-img-topimg-fluid" src={{ asset('storage/team_photos/miguel.jpg') }} alt="Miguel Photo">
                     <div class="card-body">
                         <h5 class="card-title">Miguel Romariz</h5>
                         <p class="card-text">up201708809@fe.up.pt</p>
@@ -75,5 +75,6 @@
                 </div>
             </div>
         </div>
+        <br><br><br>
 
         @endsection

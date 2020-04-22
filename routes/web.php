@@ -38,11 +38,12 @@ Route::get('/admin/events', 'AdminController@events')->name('admin-events');
 //Events
 //Route::resource('events', 'EventController');
 Route::get('/events', 'EventController@list');
-Route::get('/events/{id}', 'EventController@show');
+
 Route::get('/events/create', 'EventController@create');
 Route::post('/events/create', 'EventController@store');
 Route::get('/events/{id}/edit', 'EventController@edit');
 Route::post('/events/{id}/edit', 'EventController@update');
+Route::get('/events/{id}', 'EventController@show');
 //TODO : delete posts
 
 
