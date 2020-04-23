@@ -9,7 +9,6 @@ class Event extends Model
   // Don't add create and update timestamps in database.
   public $timestamps  = false;
   protected $table = 'event';
-  protected $primaryKey = 'event_id';
 
   /**
    * Owner of this event.
@@ -19,7 +18,7 @@ class Event extends Model
   }
 
   public function local(){
-    return $this->belongsTo('App\Local', 'local');
+    return $this->belongsTo('App\Local', 'local_id');
   }
 
 }

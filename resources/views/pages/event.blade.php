@@ -4,11 +4,15 @@
 
 @section('content')
 
+
 <div class="container">
     <div class="row profile justify-content-center">
         <div class="col-lg-10 push-lg-4">
        
             <img style="height:35%; width:100%;" src="../../assets/images/maresvivas.png" alt="" class="img-fluid" width="100%">
+           
+            {{$event}}
+
 
             @include('partials.events.eventheader', ['event_title' => $event['title'], 'event_id' => $event['event_id']])
          
