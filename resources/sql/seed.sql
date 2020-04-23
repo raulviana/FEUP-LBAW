@@ -286,29 +286,26 @@ insert into social_media (name, url) values ('website', 'http://www.fantasporto.
 insert into social_media (name, url) values ('website', 'https://www.nationalgallery.org.uk/exhibitions/titian-love-desire-death');
 
 ---------------------------------------------------- TAG ---------------------------------------------------- 
-insert into tag (name) values ('music');
-insert into tag (name) values ('dance');
-insert into tag (name) values ('sculpture');
-insert into tag (name) values ('painting');
-insert into tag (name) values ('theater');
-insert into tag (name) values ('cinema');
-insert into tag (name) values ('litearature');
-insert into tag (name) values ('comedy');
-insert into tag (name) values ('traditional');
-insert into tag (name) values ('festival');
-insert into tag (name) values ('classics');
+insert into tag (name) values ('Music');
+insert into tag (name) values ('Dance');
+insert into tag (name) values ('Sculpture');
+insert into tag (name) values ('Painting');
+insert into tag (name) values ('Theater');
+insert into tag (name) values ('Literature');
+insert into tag (name) values ('Comedy');
+insert into tag (name) values ('Others');
 
 ---------------------------------------------------- EVENT TAG ---------------------------------------------------- 
 insert into event_tag (event_id, tag_id) values (1, 1);
-insert into event_tag (event_id, tag_id) values (1, 10);
+insert into event_tag (event_id, tag_id) values (1, 3);
 insert into event_tag (event_id, tag_id) values (2, 1);
-insert into event_tag (event_id, tag_id) values (2, 9);
+insert into event_tag (event_id, tag_id) values (2, 4);
 insert into event_tag (event_id, tag_id) values (3, 2);
-insert into event_tag (event_id, tag_id) values (3, 10);
+insert into event_tag (event_id, tag_id) values (3, 8);
 insert into event_tag (event_id, tag_id) values (4, 6);
-insert into event_tag (event_id, tag_id) values (4, 10);
+insert into event_tag (event_id, tag_id) values (4, 4);
 insert into event_tag (event_id, tag_id) values (5, 4);
-insert into event_tag (event_id, tag_id) values (5, 11);
+insert into event_tag (event_id, tag_id) values (5, 3);
 
 ---------------------------------------------------- POST ---------------------------------------------------- 
 insert into post (file_id, content, date, post_time, event_id, user_id) values (null, 'Great event!!!', '2020-06-21', '2020-06-21 03:00:00+00', 2, 2);

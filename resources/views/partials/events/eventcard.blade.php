@@ -1,4 +1,3 @@
-
 <div class="col-md-4">
     <div class="card mb-4 box-shadow">
      <!-- <img id="event-card-img" class="card-img-top" src="" alt="Card image cap"> -->
@@ -7,7 +6,7 @@
   
       <div class="row">
           <div class="col">
-            <p style="margin-bottom:0" id="event-card-info" class="card-text"> 📌 {{$event['local']}} </p>
+            <p style="margin-bottom:0" id="event-card-info" class="card-text"> 📌 {{$event['local']['name']}} </p>
 
         
             <p id="event-card-info" class="card-text">🕒 {{$event['start_date']}}  </p>
@@ -26,15 +25,14 @@
       
     <div class="row justify-content-between align-items-center">
       <div class="col">
-        <a id="event-card-button" class="btn btn-sm" href="/events/{{ $event->event_id }}" role="button" >View +</a>
+        <a id="event-card-button" class="btn btn-sm" href="/events/{{ $event['id'] }}" role="button" >View +</a>
         </div>
         
       <div class="col text-right">
         <a id="event-card-button-buy" class="btn btn-sm btn-outline-dark" href="" role="button">Buy</a>
       </div>
     </div>
-  </div>
-     
+  </div>   
     </div>
 </div>
 

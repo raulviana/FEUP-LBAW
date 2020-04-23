@@ -1,20 +1,16 @@
 @extends('layouts.app')
 
-@section('title', $event['title'])
+@section('title', '')
 
 @section('content')
-
 
 <div class="container">
     <div class="row profile justify-content-center">
         <div class="col-lg-10 push-lg-4">
        
             <img style="height:35%; width:100%;" src="../../assets/images/maresvivas.png" alt="" class="img-fluid" width="100%">
-           
-            {{$event}}
 
-
-            @include('partials.events.eventheader', ['event_title' => $event['title'], 'event_id' => $event['event_id']])
+            @include('partials.events.eventheader', ['event_title' => $event['title'], 'event_id' => $event['id']])
          
             <div class="row justify-content-center">
                 <div class="col-12">
@@ -39,10 +35,10 @@
                         <div class="tab-pane active" id="info">
                                
                             <h5>Where & When</h5>
-                            <!-- location + date -->
+
                             <div class="row">
                                 <div class="col">
-                                    <p style="margin-bottom:0" id="event-info"> 📌 <b>Where:</b> {{$event['local']}}</p>
+                                    <p style="margin-bottom:0" id="event-info"> 📌 <b>Where:</b> {{$event['local']['name']}}</p>
                                     <p id="event-info">🕒 <b>When:</b> {{$event['start_date'] }} </p>
                                 </div>
                                 <div class="col">
@@ -52,23 +48,21 @@
                                 </div>
                             </div>
 
-                                <!-- tags -->
-                                <div class="row">
-                                    <div class="col">
-                                        <center>
-                                            <button style="margin-right: 1.25rem;" id="tag-button" type="button" class="btn music-tag">Music</button>
-                                            <button style="margin-right: 1.25rem;" id="tag-button" type="button" class="btn dance-tag">Dance</button>
-                                            <button style="margin-right: 1.25rem;" id="tag-button" type="button" class="btn others-tag">Others</button>
-                                        </center>
-                                    </div>
-                                </div>
+                               
+                            <div class="row text-center">
 
+                                      @if(count($event->tags) > 0)
+                                        @each('partials.events.tags', $event->tags, 'tag')  
+                                      @else 
+                                        <small> This event has no tags </small>
+                                      @endif
+                                    
+                            </div>
                                 <br>
 
-                                <!-- description -->
+                           
                                 <h5>Details</h5>
                                 <p> {{$event['details']}}</p>
-                                <!-- end info's first section -->
                                 <hr>
                             
                                 <h5>Contacts</h5>
@@ -84,15 +78,16 @@
 
                                 <hr>
                             
-                                <h5>Organisers</h5>
-                                <p>
+                                <h5>Organisers</h5>  {{$event['owner_id']}}
+                                <p> 
                                 <img src="https://pbs.twimg.com/profile_images/973548356462051329/PldBA7ID_400x400.jpg" class="rounded-circle mr-2" alt="Owner" width="50px">
                                 <img src="https://www.mercia-group.co.uk/media/2817/jonathan-eddy.jpg?center=0.31519274376417233,0.54931972789115646&amp;mode=crop&amp;width=448&amp;height=448&amp;rnd=132134651380000000" class="rounded-circle mr-2" alt="Collaborator" width="50px">
                                 <img src="https://evada-images.global.ssl.fastly.net/76d1ea39-a4eb-4270-b9dc-899653415f8f/home-tile-person-3.jpg?width=345&height=345" class="rounded-circle mr-2" alt="Collaborator" width="50px">
                                 
                                 
-                                <!-- only for owner -->
+                               
                                 <button type="button" class="btn" data-toggle="modal" data-target="#exampleModal">
+                                    
                                     <img src="https://media.istockphoto.com/vectors/plus-flat-blue-simple-icon-with-long-shadow-vector-id522539379?k=6&m=522539379&s=612x612&w=0&h=oBs3Qmw78sfKoPEc03pgcKkXhsUoGjHxCV-UBouwcck=" class="rounded-circle" alt="Add" width="50px">
                                 </button>
                                 <!-- Modal -->

@@ -36,7 +36,7 @@ class User extends Authenticatable
     /**
      * The events this user owns.
      */
-     public function events() {
+    public function events() {
       return $this->hasMany('App\Event');
     }
 
