@@ -22,13 +22,7 @@
             <div id="collapseOne" class="panel-collapse collapse in" aria-labelledby="HOne"
                 data-parent="#FAQ">
                 <div class="card-body">
-                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.
-                    3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt
-                    laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin
-                    coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes
-                    anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings
-                    occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard
-                    of them accusamus labore sustainable VHS.
+                ArtNow is a web platform where you can advertise your art event. Music festivals, band gigs, painting exhibitions, reading meetings. Small, medium, huge. It's art? We will help you spread the word. 
                 </div>
             </div>
         </div>
@@ -46,13 +40,7 @@
             <div id="collapseTwo" class="panel-collapse collapse in" aria-labelledby="HTwo"
                 data-parent="#FAQ">
                 <div class="card-body">
-                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.
-                    3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt
-                    laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin
-                    coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes
-                    anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings
-                    occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard
-                    of them accusamus labore sustainable VHS.
+                ArtNow can be used to either organize a small event with your friends, sending invitations to who you would like to show up, or advertize a big event publicly, to the whole world.
                 </div>
             </div>
         </div>
@@ -70,13 +58,7 @@
             <div id="collapseThree" class="panel-collapse collapse in" aria-labelledby="HThree"
                 data-parent="#FAQ">
                 <div class="card-body">
-                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.
-                    3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt
-                    laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin
-                    coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes
-                    anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings
-                    occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard
-                    of them accusamus labore sustainable VHS.
+                You can search for events in the general search, by keywords, or you can use the buttons with the corresponding tag: theater, sculpture, dance, music, paintings, comedy, literature, others.
                 </div>
             </div>
         </div>
@@ -94,13 +76,7 @@
             <div id="collapseFour" class="panel-collapse collapse in" aria-labelledby="HFour"
                 data-parent="#FAQ">
                 <div class="card-body">
-                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.
-                    3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt
-                    laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin
-                    coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes
-                    anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings
-                    occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard
-                    of them accusamus labore sustainable VHS.
+                Just create an event, fill in the forms with its information, and start sending invites. You can invite sponsors, partners and users. 
                 </div>
             </div>
         </div>

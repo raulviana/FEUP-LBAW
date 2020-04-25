@@ -24,4 +24,8 @@ class Event extends Model
   public function tags() {
     return $this->belongsToMany('App\Tag', 'event_tag', 'event_id', 'tag_id');        
   }
+
+  public function photo() {
+    return $this->belongsTo('App\EventPhoto');
+  }
 }

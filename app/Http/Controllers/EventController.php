@@ -13,9 +13,7 @@ class EventController extends Controller
 {
 
     public function list(){
-        $events = Event::with('owner', 'local', 'tags')->get();
-
- 
+        $events = Event::with('owner', 'local', 'tags', 'photo')->get();
 
         return view('pages.events', ['events' => $events]);
     }

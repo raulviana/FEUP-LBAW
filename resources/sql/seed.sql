@@ -17,6 +17,7 @@ DROP TABLE IF EXISTS social_media CASCADE;
 DROP TABLE IF EXISTS tag CASCADE;
 DROP TABLE IF EXISTS "file" CASCADE;
 DROP TABLE IF EXISTS photo CASCADE;
+DROP TABLE IF EXISTS event_photo CASCADE;
 DROP TABLE IF EXISTS event_tag CASCADE;
 DROP TABLE IF EXISTS post CASCADE;
 DROP TABLE IF EXISTS review CASCADE;
@@ -31,6 +32,12 @@ CREATE TABLE "local" (
     id SERIAL PRIMARY KEY,
     name TEXT NOT NULL, 
     coordinates TEXT
+);
+
+CREATE TABLE event_photo (
+    event_id INTEGER NOT NULL REFERENCES event (id) ON UPDATE CASCADE, 
+    id SERIAL PRIMARY KEY,
+    url TEXT NOT NULL
 );
 
 CREATE TABLE "file" (
@@ -60,7 +67,7 @@ CREATE TABLE "event" (
     start_date TIMESTAMP NOT NULL,
     end_date TIMESTAMP NOT NULL,
     local_id INTEGER NOT NULL REFERENCES "local" (id) ON UPDATE SET NULL,
-    photo_id INTEGER REFERENCES photo (id) ON UPDATE SET NULL,
+    photo_id INTEGER REFERENCES event_photo (id) ON UPDATE SET NULL,
     TYPE event_type NOT NULL,
     owner_id INTEGER NOT NULL REFERENCES "users" (id),
     CONSTRAINT valid_date CHECK (start_date < end_date)
@@ -220,6 +227,13 @@ insert into photo values (2);
 insert into photo values (3);
 insert into photo values (4);
 insert into photo values (5);
+
+--------------------------------------------------- EVENT PHOTO ---------------------------------------------------- 
+insert into event_photo (id, url) values (1, 1, '1.jpeg');
+insert into event_photo (id, url) values (2, 2, '2.jpeg');
+insert into event_photo (id, url) values (3, 3, '3.jpeg');
+insert into event_photo (id, url) values (4, 4, '4.jpeg');
+insert into event_photo (id, url) values (5, 5, '5.jpeg');
 
 
 ---------------------------------------------------- USER ----------------------------------------------------  
