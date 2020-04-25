@@ -13,9 +13,7 @@ class EventController extends Controller
 {
 
     public function list(){
-        $events = Event::with('owner', 'local', 'tags')->get();
-
- 
+        $events = Event::with('owner', 'local', 'tags', 'posts')->get();
 
         return view('pages.events', ['events' => $events]);
     }
@@ -66,6 +64,11 @@ class EventController extends Controller
     }
 
     public function update(Request $request){
+        return 123;
+    }
+
+    public function showWithTag($id){
+        
         return 123;
     }
 

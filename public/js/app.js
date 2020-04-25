@@ -1,12 +1,16 @@
 /* GET BUTTONS */
 //const deleteUserBtn = document.getElementById("delete-user-btn");
-
+const addPostBtn = document.querySelector("div#new-post button");
 
 function addEventListeners() {
   let userDeleters = document.querySelectorAll("div#manage-users button");
   [].forEach.call(userDeleters, function(deleter) {
     deleter.addEventListener('click', sendDeleteUserRequest);
   });
+
+  if(addPostBtn){
+    addPostBtn.addEventListener('click', sendCreatePostRequest);
+  }
 }
 
 function encodeForAjax(data) {
@@ -25,12 +29,60 @@ function sendAjaxRequest(method, url, data, handler) {
   request.addEventListener('load', handler);
   request.send(encodeForAjax(data));
 }
-
+/* SENDERS */
 function sendDeleteUserRequest() { 
   event.preventDefault();
  
   let id = this.closest('button').getAttribute('data-id');
+
   sendAjaxRequest("delete", `/api/admin/users/${id}`, {}, userDeletedHandler);
+}
+
+function sendCreatePostRequest(event){
+  event.preventDefault();
+
+  let eventid = this.closest('button').getAttribute('data-event-id');
+  let userid = this.closest('button').getAttribute('data-user-id');
+  let content = document.querySelector('div#new-post textarea').value;
+
+
+  sendAjaxRequest("put", `/api/events/${eventid}/posts/create`, {eventid: eventid, userid: userid, content: content}, postCreatedHandler);
+
+}
+/*--------*/
+
+/* HANDLERS */
+function postCreatedHandler() {
+  //if(this.status != 200) window.location = '/';
+  let post = JSON.parse(this.responseText);
+
+  let new_post = document.createElement('article');
+  new_post.classList.add('post', 'p-3', 'mb-3');
+  new_post.innerHTML = `
+    <div class="d-flex flex-row align-items-center">
+        <img src="https://pbs.twimg.com/profile_images/973548356462051329/PldBA7ID_400x400.jpg" class="rounded-circle mr-2" alt="Owner" width="50px">
+        <h6> <b>${post.user_id}</b> says... </h6>
+    </div>
+    <p id="comment-body">${post.content}</p>
+    <p id="comment-datetime" class="text-right">${post.post_time}</p>
+    <hr>
+  `;
+  
+  let posts_list = document.querySelector('div#post-listing article');
+
+  if(posts_list){
+    (posts_list.parentElement).insertBefore(new_post, posts_list);
+  }
+  else{
+    let warning = document.querySelector('div#post-listing p');
+    warning.remove();
+
+    let posts_list = document.querySelector('div#post-listing');
+    posts_list.appendChild(new_post);
+  }
+
+  let form_field = document.querySelector('textarea#post-content');
+  form_field.value="";
 }
 
 function userDeletedHandler() {
@@ -56,8 +108,6 @@ function userDeletedHandler() {
     alert.parentElement.removeChild(alert);
   }, 3000);
 }
-
-
 
 
 function sendDeleteItemRequest() {

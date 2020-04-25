@@ -201,7 +201,7 @@ div#overlay-text.text {
   color: white;
   font-size: 0.85rem;
   position: absolute;
-  top: 34%;
+  top: 45%;
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
@@ -401,8 +401,6 @@ div#edit-event{
     background: white;
 }
 
-
-
 button#btn-login.btn.float-right{
     text-transform: uppercase;
     padding-bottom:  0.2rem;
@@ -416,6 +414,24 @@ button#btn-login.btn.float-right{
 }
 
 button#btn-login.btn.float-right:hover{
+ background: lightgray;  
+    border-color: #292b2c;
+}
+
+
+button#btn-add-post.btn.float-right{
+    text-transform: uppercase;
+    padding-bottom:  0.2rem;
+    padding-top:  0.2rem;
+    padding-right:  0.5rem;
+    padding-left:  0.5rem;
+    background: #292b2c;
+    color: #f7f7f7;
+    font-weight: 600;
+    font-size: 0.85rem;
+}
+
+button#btn-add-post.btn.float-right:hover{
  background: lightgray;  
     border-color: #292b2c;
 }

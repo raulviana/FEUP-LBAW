@@ -40,5 +40,12 @@ class User extends Authenticatable
       return $this->hasMany('App\Event');
     }
 
+    /**
+     * The posts that were written by the user
+     */
+    public function posts(){
+        return $this->hasMany('App\Post');
+    }
+
 
 }

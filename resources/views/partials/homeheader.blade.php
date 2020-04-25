@@ -1,5 +1,5 @@
 <div class="carousel-item active d-none d-sm-block">
-    <img class="d-block w-100" src="images/banner.jpg" alt="First slide">
+    <img class="d-block w-100" src="images/banner.jpg">
     <div class="carousel-caption d-none d-md-block">
         <h3 class="display-2"><b>Art Now</b></h3>
         <h5>Join us to find great events near you!</h5>
@@ -20,7 +20,7 @@
               <img src="{{asset('images/p.png')}}" alt="Avatar" class="image">
               <div style="color: #c43227" class="text-centered">#THEATER</div>
               <div style="background: #c43227" class="overlay">
-                <div id="overlay-text" class="text">Click to search for <b>#THEATER</b></div>
+                <div onclick="location.href='events/tags/theater';" id="overlay-text" class="text">Click to search for <b>#THEATER</b></div>
               </div>
         </div>
         
