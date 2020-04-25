@@ -322,9 +322,9 @@ insert into event_tag (event_id, tag_id) values (5, 4);
 insert into event_tag (event_id, tag_id) values (5, 3);
 
 ---------------------------------------------------- POST ---------------------------------------------------- 
-insert into post (file_id, content, date, post_time, event_id, user_id) values (null, 'Great event!!!', '2020-06-21', '2020-06-21 03:00:00+00', 2, 2);
-insert into post (file_id, content, date, post_time, event_id, user_id) values (null, 'Fantastic exhibiton! Higly recomend it!', '2020-07-21', '2020-07-21 03:45:00+00', 5, 19);
-insert into post (file_id, content, date, post_time, event_id, user_id) values (null, 'Wow! Just wow!', '2020-07-14', '2020-07-14 11:23:00+00', 5, 21);
+insert into post (file_id, content, date, post_time, event_id, user_id) values (null, 'Great event!!!', '2020-06-21', '2020-02-21 03:00:00+00', 1, 2);
+insert into post (file_id, content, date, post_time, event_id, user_id) values (null, 'Fantastic exhibiton! Higly recomend it!', '2020-02-21', '2020-07-21 03:45:00+00', 5, 19);
+insert into post (file_id, content, date, post_time, event_id, user_id) values (null, 'Wow! Just wow!', '2020-07-14', '2020-02-14 11:23:00+00', 5, 21);
 
 ---------------------------------------------------- REVIEW ---------------------------------------------------- 
 insert into review (event_id, user_id, score) values (2, 2, 5);

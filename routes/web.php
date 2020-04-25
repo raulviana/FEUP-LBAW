@@ -38,17 +38,20 @@ Route::delete('api/admin/users/{id}', 'AdminController@deleteUser')->name('admin
 Route::get('/admin/events', 'AdminController@events')->name('admin-events');
 
 
+
 //Events
 //Route::resource('events', 'EventController');
 Route::get('/events', 'EventController@list');
-
 Route::get('/events/create', 'EventController@create');
 Route::post('/events/create', 'EventController@store');
 Route::get('/events/{id}/edit', 'EventController@edit');
 Route::post('/events/{id}/edit', 'EventController@update');
 Route::get('/events/{id}', 'EventController@show');
-//TODO : delete posts
+Route::get('/events/tags/{name}', 'EventController@showWithTag'); //TODO !
+ 
 
+//Posts
+Route::put('api/events/{id}/posts/create', 'PostController@store');
 
 
 

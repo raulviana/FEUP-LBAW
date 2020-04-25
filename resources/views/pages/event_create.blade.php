@@ -13,11 +13,7 @@
                 <form method="post" action="{{empty($event) ? "/events/create" : "/events/".$event->event_id."/edit"}}"> 
                     {{ csrf_field() }}
        
-                 @if(!empty($event))
-
-                    {{$event}}
-
-                    @endif
+                 
                     
                 <div class="row">
                     <div class="col">          

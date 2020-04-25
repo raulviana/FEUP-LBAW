@@ -123,42 +123,23 @@
 
                             </div>
 
-                            <div class="tab-pane" id="posts">
+                            <div class="tab-pane" id="posts">   
+                                @if(Auth::check())
+                                    <h5>Add new post</h5>
+                                    @include('partials.events.create_post', ['event' => $event])
+                                @else 
+                                    <p class="text-center"> Don't have an account? <br> <a class="button button-outline" href="{{ route('register') }}">Click here to register and leave posts!</a></p>
+                                @endif
 
-                                <article class="post p-3 mb-3">
-                                    <div class="d-flex flex-row align-items-center">
-                                        <img src="https://pbs.twimg.com/profile_images/973548356462051329/PldBA7ID_400x400.jpg" class="rounded-circle mr-2" alt="Owner" width="50px">
-                                        <h6>Liam Black</h6>
-                                    </div>
-                                    <p id="comment-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut malesuada lobortis mi, vitae facilisis nulla elementum nec. Sed finibus neque et nunc scelerisque, id elementum risus venenatis. Nunc ut mi congue, vehicula nunc id, maximus libero. Pellentesque aliquet mollis sapien, vel blandit sem elementum nec. Pellentesque convallis nunc sed purus feugiat pharetra.</p>
-                                    <p id="comment-datetime" class="text-right">04-03-2020, 13:56</p>
-                                </article>
+                                <div class="wrapper" id="post-listing">
+                                    @if(count ($event->posts()->orderBy('post_time', 'desc')->get()) > 0)
+                                        @each('partials.events.post_article', $event->posts, 'post')
+                                    @else 
+                                        <p id="warning-nopost" class="text-center"> There are no posts! :( </p>
+                                    @endif
+                                    
+                                </div>
 
-                                <hr>
-                                
-
-                                <article class="post p-3 mb-3">
-                                    <div class="d-flex flex-row align-items-center">
-                                        <img src="https://pbs.twimg.com/profile_images/973548356462051329/PldBA7ID_400x400.jpg" class="rounded-circle mr-2" alt="Owner" width="50px">
-                                        <h6>Liam Black</h6>
-                                    </div>
-                                    <p id="comment-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut malesuada lobortis mi, vitae facilisis nulla elementum nec. Sed finibus neque et nunc scelerisque, id elementum risus venenatis. Nunc ut mi congue, vehicula nunc id, maximus libero. Pellentesque aliquet mollis sapien, vel blandit sem elementum nec. Pellentesque convallis nunc sed purus feugiat pharetra.</p>
-                                    <p id="comment-datetime" class="text-right">04-03-2020, 13:56</p>
-                                </article>
-
-                                <hr>
-                                
-                                <article class="post p-3 mb-3">
-                                    <div class="d-flex flex-row align-items-center">
-                                        <img src="https://pbs.twimg.com/profile_images/973548356462051329/PldBA7ID_400x400.jpg" class="rounded-circle mr-2" alt="Owner" width="50px">
-                                        <h6>Liam Black</h6>
-                                    </div>
-                                    <p id="comment-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut malesuada lobortis mi, vitae facilisis nulla elementum nec. Sed finibus neque et nunc scelerisque, id elementum risus venenatis. Nunc ut mi congue, vehicula nunc id, maximus libero. Pellentesque aliquet mollis sapien, vel blandit sem elementum nec. Pellentesque convallis nunc sed purus feugiat pharetra.</p>
-                                    <p id="comment-datetime" class="text-right">04-03-2020, 13:56</p>
-                                </article>
-
-                                
-                                
                             </div>
 
                             <div class="tab-pane" id="related">  

@@ -28,4 +28,8 @@ class Event extends Model
   public function photo() {
     return $this->belongsTo('App\EventPhoto');
   }
+  
+  public function posts(){
+    return $this->hasMany('App\Post');
+  }
 }
