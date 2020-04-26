@@ -1,13 +1,3 @@
-<!-- search bar -->
-<div class="container">
-    <!-- Search form -->
-    <div class="active-purple-3 active-purple-4 mb-4">
-      <input class="form-control" type="text" placeholder="Search" aria-label="Search">
-    </div>
-</div>
-<!-- search bar -->
-
-
 <!-- tags -->
 <div class="container">
 <p id="search-by">Search by tag: </p>

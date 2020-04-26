@@ -5,8 +5,6 @@
 @section('content')
 
 <br><br><br><br>
-{{$user}}
-
 
 <div class="container">
     <div class="row profile justify-content-center">

@@ -45,7 +45,7 @@
              </div>
 
              <div class="tab-pane fade" id="manage-susp-users">
-                <table class="table table-striped">
+             <!--   <table class="table table-striped">
                     <thead>
                         <tr>
                         <th scope="col">#</th>
@@ -55,14 +55,17 @@
                         <th scope="col">State</th>
                         </tr>
                     </thead>
-                    <tbody>                             
-                        @foreach ($susp_users as $susp_user)
-                            @include('partials.admin.user_row', ['user' => $susp_user])
-                        @endforeach
+                   <tbody>   
+                                                 
+                        foreach (susp_users as susp_user)
+                            include('partials.admin.user_row', ['user' => susp_user])
+                        endforeach
                     </tbody>
+                
                    
                 </table>
-                {{ $susp_users->links() }}
+                 $susp_users->links() 
+            -->
             </div>
         </div>
     </div>

@@ -65,6 +65,7 @@
 
                         <p id="search-by">Choose some tags related to your event</p>
                         <br>
+                        <!-- todo: change checkbox to label button --> 
 
                         <label class="checkbox-inline mr-2"><input type="checkbox" name="tag_theater"><button id="tag-button" type="button" class="btn theater-tag">Theater</button></label>
 
