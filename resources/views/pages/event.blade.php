@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', '{{$event->title}} - Artnow')
+@section('title', $event->title.' - Artnow')
 
 @section('content')
 
@@ -8,7 +8,7 @@
     <div class="row profile justify-content-center">
         <div class="col-lg-10 push-lg-4">
        
-            <img style="height:35%; width:100%;" src="../../assets/images/maresvivas.png" alt="" class="img-fluid" width="100%">
+            <img style="height:35%; width:100%;" src={{ Storage::url('/event_photo/'.$event->photo['url']) }} alt="" class="img-fluid" width="100%">
 
             @include('partials.events.eventheader', ['event_title' => $event['title'], 'event_id' => $event['id']])
          
@@ -78,7 +78,7 @@
 
                                 <hr>
                             
-                                <h5>Organisers</h5>  {{$event['owner_id']}}
+                                <h5>Organisers</h5>  {{$event['owner']['name']}}
                                 <p> 
                                 <img src="https://pbs.twimg.com/profile_images/973548356462051329/PldBA7ID_400x400.jpg" class="rounded-circle mr-2" alt="Owner" width="50px">
                                 <img src="https://www.mercia-group.co.uk/media/2817/jonathan-eddy.jpg?center=0.31519274376417233,0.54931972789115646&amp;mode=crop&amp;width=448&amp;height=448&amp;rnd=132134651380000000" class="rounded-circle mr-2" alt="Collaborator" width="50px">

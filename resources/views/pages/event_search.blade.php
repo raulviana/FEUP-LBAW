@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', '{{$tag->name}} - Artnow')
+@section('title', '#'.$tag->name.' - Artnow')
   
 @section('content')
 
