@@ -10,11 +10,11 @@
           <button id="button-header" onclick="location.href = '/events/create';" type="button" class="btn btn-light btn-sm btn-margin">Create your event</button>
         @endif
 
-        <button id="button-header" onclick="location.href = '#event-list';" type="button" class="btn btn-light btn-sm btn-margin">Search for events</button>
+        <button id="button-header" onclick="location.href = '#tags-search';" type="button" class="btn btn-light btn-sm btn-margin">Search for events</button>
     </div>
 </div>
 
-<div style="background: black; padding-bottom:2rem;" class="container-fluid py-3 d-none d-sm-block">
+<div style="background: black; padding-bottom:2rem;" class="container-fluid py-3 d-none d-sm-block" id="tags-search">
     <div class="row">
         <div class="col container">
               <img src="{{asset('images/p.png')}}" alt="Avatar" class="image">
