@@ -35,7 +35,6 @@ CREATE TABLE "local" (
 );
 
 CREATE TABLE event_photo (
-    event_id INTEGER NOT NULL REFERENCES event (id) ON UPDATE CASCADE, 
     id SERIAL PRIMARY KEY,
     url TEXT NOT NULL
 );
@@ -229,11 +228,11 @@ insert into photo values (4);
 insert into photo values (5);
 
 --------------------------------------------------- EVENT PHOTO ---------------------------------------------------- 
-insert into event_photo (id, url) values (1, 1, '1.jpeg');
-insert into event_photo (id, url) values (2, 2, '2.jpeg');
-insert into event_photo (id, url) values (3, 3, '3.jpeg');
-insert into event_photo (id, url) values (4, 4, '4.jpeg');
-insert into event_photo (id, url) values (5, 5, '5.jpeg');
+insert into event_photo (id, url) values (1, '1.jpeg');
+insert into event_photo (id, url) values (2, '2.jpeg');
+insert into event_photo (id, url) values (3, '3.jpeg');
+insert into event_photo (id, url) values (4, '4.jpeg');
+insert into event_photo (id, url) values (5, '5.jpeg');
 
 
 ---------------------------------------------------- USER ----------------------------------------------------  

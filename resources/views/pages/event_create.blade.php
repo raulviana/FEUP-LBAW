@@ -37,6 +37,15 @@
                         </div>
                     </div>
                 -->          
+                <div class="col-lg-6 mx-auto text-right">
+                <form class="md-form">
+  <div class="file-field">
+      <i class="fas fa-paperclip" aria-hidden="true"></i>
+      <input type="file" name="photo">
+  
+  </div>
+</form> 
+</div> 
                 </div>
 
 
@@ -103,6 +112,6 @@
         </div>
     </div>
 </div>
-
+<br><br>
 
 @endsection

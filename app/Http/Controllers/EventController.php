@@ -13,11 +13,7 @@ class EventController extends Controller
 {
 
     public function list(){
-<<<<<<< HEAD
-        $events = Event::with('owner', 'local', 'tags', 'photo')->get();
-=======
         $events = Event::with('owner', 'local', 'tags', 'posts')->get();
->>>>>>> 9bcbf6211e249a2f50dbcb238805fa0d6bad1464
 
         return view('pages.events', ['events' => $events]);
     }
@@ -40,7 +36,8 @@ class EventController extends Controller
             'local' => 'required',
             'start_date' => 'required',
             'end_date' => 'required',
-            'details' => 'required'
+            'details' => 'required',
+            'photo' => 'required'
         ]);
 
         $event = new Event;
