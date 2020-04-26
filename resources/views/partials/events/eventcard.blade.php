@@ -1,6 +1,6 @@
 <div class="col-md-4">
     <div class="card mb-4 box-shadow">
-     <img id="event-card-img" class="card-img-top" src={{ Storage::url('event_photo/'.$event->photo['url']) }} alt="Card image cap">
+     <img id="event-card-img" class="card-img-top" src={{ Storage::url('/event_photo/'.$event->photo['url']) }} alt="Card image cap">
      <div class="card-body">
       <p style="margin-bottom:0.5rem;" id="event-card-title" class="card-text"> {{$event['title']}} </p>
   

@@ -13,7 +13,7 @@ class EventController extends Controller
 {
 
     public function list(){
-        $events = Event::with('owner', 'local', 'tags', 'posts')->get();
+        $events = Event::with('owner', 'local', 'tags', 'photo' , 'posts')->get();
 
         return view('pages.events', ['events' => $events]);
     }
@@ -36,9 +36,11 @@ class EventController extends Controller
             'local' => 'required',
             'start_date' => 'required',
             'end_date' => 'required',
-            'details' => 'required',
-            'photo' => 'required'
+            'details' => 'required'
+           // , 'photo' => 'required'
         ]);
+
+        $path = $request->file('photo')->store('storage/app/public/event_photo/');
 
         $event = new Event;
         
@@ -46,7 +48,7 @@ class EventController extends Controller
         $event->details = $request->input('details');
         $event->start_date = $request->input('start_date');
         $event->end_date = $request->input('end_date');
-        $event->local = 1;
+        $event->local_id = 1;
         if($request->input('is_private') == 'off')
             $event->type = 'public';
         else
