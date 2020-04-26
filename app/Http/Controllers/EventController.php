@@ -49,6 +49,7 @@ class EventController extends Controller
         $event->start_date = $request->input('start_date');
         $event->end_date = $request->input('end_date');
         $event->local_id = 1;
+        
         if($request->input('is_private') == 'off')
             $event->type = 'public';
         else

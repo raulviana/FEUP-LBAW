@@ -229,11 +229,10 @@ insert into photo values (5);
 
 --------------------------------------------------- EVENT PHOTO ---------------------------------------------------- 
 insert into event_photo (id, url) values (1, '1.jpeg');
-insert into event_photo (id, url) values (2, '2.jpeg');
+insert into event_photo (id, url) values (2, '2.jpg');
 insert into event_photo (id, url) values (3, '3.jpeg');
 insert into event_photo (id, url) values (4, '4.jpeg');
-insert into event_photo (id, url) values (5, '5.jpeg');
-
+insert into event_photo (id, url) values (5, '5.jpg');
 
 ---------------------------------------------------- USER ----------------------------------------------------  
 -- hashed pasword using php5 algorithm
