@@ -36,7 +36,8 @@ class EventController extends Controller
             'local' => 'required',
             'start_date' => 'required',
             'end_date' => 'required',
-            'details' => 'required'
+            'details' => 'required',
+            'photo' => 'required'
         ]);
 
         $event = new Event;

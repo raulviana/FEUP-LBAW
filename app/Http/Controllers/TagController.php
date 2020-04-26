@@ -8,9 +8,11 @@ use App\Tag;
 class TagController extends Controller
 {
     public function show($name){
-        $tag = Tag::where('name', 'Theater')->get();
+        $uppercase_name = ucfirst(trans($name));
 
-        return $tag;
+        $tag = Tag::where('name', 'like', $uppercase_name)->with('events')->get();
+
+        return view('pages.event_search', ['tag' => $tag[0]]);
     }
 
 }
