@@ -20,7 +20,7 @@
               <img src="{{asset('images/p.png')}}" alt="Avatar" class="image">
               <div style="color: #c43227" class="text-centered">#THEATER</div>
               <div style="background: #c43227" class="overlay">
-                <div onclick="location.href='events/tags/theater';" id="overlay-text" class="text">Click to search for <b>#THEATER</b></div>
+                <div onclick="location.href='tags/theater';" id="overlay-text" class="text">Click to search for <b>#THEATER</b></div>
               </div>
         </div>
         

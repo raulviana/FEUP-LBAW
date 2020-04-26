@@ -13,11 +13,7 @@ class EventController extends Controller
 {
 
     public function list(){
-<<<<<<< HEAD
-        $events = Event::with('owner', 'local', 'tags', 'photo')->get();
-=======
-        $events = Event::with('owner', 'local', 'tags', 'posts')->get();
->>>>>>> 9bcbf6211e249a2f50dbcb238805fa0d6bad1464
+        $events = Event::with('owner', 'local', 'tags', 'photo', 'posts')->get();
 
         return view('pages.events', ['events' => $events]);
     }
@@ -71,9 +67,13 @@ class EventController extends Controller
         return 123;
     }
 
-    public function showWithTag($id){
+    public function showWithTag($name){
+
+        $events = Event::with('owner', 'local', 'tags', 'photo', 'posts')->where('tags', 'id', '1')->get();
+
+
         
-        return 123;
+        return $events;
     }
 
 }

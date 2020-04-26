@@ -16,7 +16,7 @@ class PostController extends Controller
         $post->user_id = $request->input('userid');
         $post->event_id = $request->input('eventid');
         $post->content = $request->input('content');
-        $post->post_time = Carbon::now('UTC');
+        $post->post_time = Carbon::now('UTC'); //param => timezone
 
         $post->save();
 
