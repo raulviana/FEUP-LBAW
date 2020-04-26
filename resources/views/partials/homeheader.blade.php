@@ -52,7 +52,7 @@
               <img src="{{asset('images/p.png')}}" alt="Avatar" class="image">
             <div style="color: #d45008;"  class="text-centered">#PAINTINGS</div>
               <div style="background: #d45008;" class="overlay">
-                <div onclick="location.href='tags/paintings';" id="overlay-text" class="text">Click to search for <b>#PAINTINGS</b></div>
+                <div onclick="location.href='tags/painting';" id="overlay-text" class="text">Click to search for <b>#PAINTINGS</b></div>
               </div>
         </div>
         
