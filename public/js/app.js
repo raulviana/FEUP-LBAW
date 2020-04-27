@@ -1,6 +1,9 @@
 /* GET BUTTONS */
 //const deleteUserBtn = document.getElementById("delete-user-btn");
 const addPostBtn = document.querySelector("div#new-post button");
+const passwordField = document.getElementById('password');
+const confirmPasswordField = document.getElementById('confirm-password');
+
 
 function addEventListeners() {
   let userDeleters = document.querySelectorAll("div#manage-users button");
@@ -10,6 +13,23 @@ function addEventListeners() {
 
   if(addPostBtn){
     addPostBtn.addEventListener('click', sendCreatePostRequest);
+  }
+
+  if(passwordField){
+    if(confirmPasswordField){
+      passwordField.addEventListener('onchange', validatePassword);
+      confirmPasswordField.addEventListener('onkeyup', validatePassword);
+    }
+  }
+}
+
+function validatePassword(){
+  console.log(passwordField);
+  
+  if(passwordField.value != confirmPasswordField.value) {
+    confirmPasswordField.setCustomValidity("Passwords Don't Match");
+  } else {
+    confirmPasswordField.setCustomValidity('');
   }
 }
 
@@ -238,20 +258,6 @@ function createItem(item) {
   return new_item;
 }
 
-const passwordField = document.getElementById('password');
-const confirmPasswordField = document.getElementById('confirm-password');
 
-function validatePassword(){
-  console.log(passwordField);
-  
-  if(passwordField.value != confirmPasswordField.value) {
-    confirmPasswordField.setCustomValidity("Passwords Don't Match");
-  } else {
-    confirmPasswordField.setCustomValidity('');
-  }
-}
-
-passwordField.onchange = validatePassword;
-confirmPasswordField.onkeyup = validatePassword;
 
 addEventListeners();
