@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Event;
 use App\User;
 use Auth;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class EventController extends Controller
 {
@@ -71,9 +72,21 @@ class EventController extends Controller
         return 123;
     }
 
-    public function showWithTag($id){
-        
-        return 123;
-    }
+    public function delete(Request $request){
 
+        $event = Event::find($request['id']);
+        
+        try{
+            $event->is_active = false;
+            $event->save();
+
+            $request->session()->flash('success', $event->title.' was deleted');
+            return response()->json([], 200);
+        } catch(ModelNotFoundException $e){
+            
+            $request->session()->flash('error', 'Ups! The event was not deleted');
+            return response()->json([], 404);
+        } 
+
+    }
 }

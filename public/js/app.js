@@ -1,12 +1,14 @@
 /* GET BUTTONS */
 //const deleteUserBtn = document.getElementById("delete-user-btn");
 const addPostBtn = document.querySelector("div#new-post button");
+
 const passwordField = document.getElementById('password');
 const confirmPasswordField = document.getElementById('confirm-password');
 
 const likeBtn = document.querySelector("a#up-vote");
 const dislikeBtn  =document.querySelector("a#down-vote");
 
+const delEventBtn = document.querySelector("button#del-event");
 
 function addEventListeners() {
   let userDeleters = document.querySelectorAll("div#manage-users button");
@@ -24,6 +26,10 @@ function addEventListeners() {
 
   if(dislikeBtn){
     dislikeBtn.addEventListener('click', sendDislikeVoteRequest);
+  }
+
+  if(delEventBtn){
+    delEventBtn.addEventListener('click', sendDeleteEventRequest);
   }
 }
 
@@ -88,9 +94,23 @@ function sendCreatePostRequest(event){
   sendAjaxRequest("put", `/api/events/${eventid}/posts/create`, {eventid: eventid, userid: userid, content: content}, postCreatedHandler);
 
 }
+
+function sendDeleteEventRequest(event){
+  event.preventDefault();
+  
+  let id = this.closest('button').getAttribute('data-id');
+
+  sendAjaxRequest("delete", `/api/events/${id}/delete`, {id: id}, eventDeletedHandler);
+}
 /*--------*/
 
 /* HANDLERS */
+
+function eventDeletedHandler(){
+  if(this.status==200){
+    window.location = '/';
+  }
+}
 
 function reviewEventHandler(){
   let review = JSON.parse(this.responseText);

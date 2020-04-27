@@ -70,6 +70,7 @@ CREATE TABLE "event" (
     TYPE event_type NOT NULL,
     owner_id INTEGER NOT NULL REFERENCES "users" (id),
     review INTEGER DEFAULT 0,
+    is_active BOOLEAN DEFAULT true,
     CONSTRAINT valid_date CHECK (start_date < end_date)
 );
 

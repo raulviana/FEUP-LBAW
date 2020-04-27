@@ -48,6 +48,7 @@ Route::post('/events/create', 'EventController@store');
 Route::get('/events/{id}/edit', 'EventController@edit');
 Route::post('/events/{id}/edit', 'EventController@update');
 Route::get('/events/{id}', 'EventController@show');
+Route::delete('api/events/{id}/delete', 'EventController@delete');
 
 
 //Tags

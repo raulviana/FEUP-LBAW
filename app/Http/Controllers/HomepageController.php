@@ -15,7 +15,7 @@ class HomepageController extends Controller
     const ITEMS_PER_PAGE = 10;
 
     public function display(){
-        $events = Event::all();
+        $events = Event::where('is_active', true)->get();
         return view('pages.homepage', ['events' => $events]);
     }
 
