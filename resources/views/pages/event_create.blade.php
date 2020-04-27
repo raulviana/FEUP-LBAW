@@ -12,17 +12,10 @@
 
             <form method="post" enctype="multipart/form-data" action="{{empty($event) ? "/events/create" : "/events/".$event->event_id."/edit"}}">
                 {{ csrf_field() }}
-
-
-
                 <div class="row">
                     <div class="col">
                         <input class="form-control form-control-md" name="title" type="text" placeholder={{empty($event) ? " Event title " : $event->title }}>
-
-
-
                         <label class="checkbox-inline mr-2"><input name="is_private" type="checkbox"><span style="font-size:0.9rem;"><i> This is a private event.</i></span></label>
-
 
                     </div>
 
@@ -93,8 +86,6 @@
                 <div class="form-group">
                     <textarea class="form-control" rows="3" name="details" placeholder={{empty($event) ? " Event title " : $event['details']}}></textarea>
                 </div>
-
-                @include('partials.inc.messages')
 
                 <button id="button-save-changes" type="submit" class="btn"> {{empty($event) ? "Create" : "Confirm Changes"}} </button>
 

@@ -14,18 +14,11 @@ function addEventListeners() {
   if(addPostBtn){
     addPostBtn.addEventListener('click', sendCreatePostRequest);
   }
-
-  if(passwordField){
-    if(confirmPasswordField){
-      passwordField.addEventListener('onchange', validatePassword);
-      confirmPasswordField.addEventListener('onkeyup', validatePassword);
-    }
-  }
 }
 
 function validatePassword(){ 
   if(passwordField.value != confirmPasswordField.value) {
-    confirmPasswordField.setCustomValidity("Passwords Don't Match");
+    confirmPasswordField.setCustomValidity("Passwords don't match");
   } else {
     confirmPasswordField.setCustomValidity('');
   }

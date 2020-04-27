@@ -10,7 +10,12 @@ class UserController extends Controller
 {
     public function show($id){
         $user = User::find($id);
-        return view('pages.profile', ['user' => $user]);
+        return view('pages.profile.profile', ['user' => $user]);
+    }
+
+    public function edit($id){
+        $user = User::find($id);
+        return view('pages.profile.edit_profile', ['user' => $user]);
     }
 
     public function update(Request $request){
@@ -30,7 +35,6 @@ class UserController extends Controller
                 'password' => 'required|string|min:6|confirmed',
             ]);
             $user->password = bcrypt($request->input('password'));
-
         }
 
         if(!is_null($request->input('about'))){
@@ -39,6 +43,6 @@ class UserController extends Controller
        
         $user->save();
 
-        return redirect('/profile/'.$id.'#edit');     
+        return redirect('/profile/'.$id)->with('success', 'Your profile is up to date!');     
     }
 }

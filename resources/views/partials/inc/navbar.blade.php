@@ -49,3 +49,6 @@
     </div>
     
 </nav>
+
+
+@include('partials.inc.messages')

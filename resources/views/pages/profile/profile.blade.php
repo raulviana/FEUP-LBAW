@@ -3,28 +3,21 @@
 @section('title', 'My profile - Artnow')
   
 @section('content')
-
 <br><br><br><br>
-
 <div class="container">
     <div class="row profile justify-content-center">
-        <div class="col-lg-10 push-lg-4">
-
-            <ul class="nav nav-tabs" id="user-tab">
-                <li class="nav-item">
-                    <a href="#" data-target="#profile" data-toggle="tab" class="nav-link active">Profile</a>
-                </li>
-
-                @if(Auth::user()->id == $user->id)
-                    <li class="nav-item">
-                        <a href="#" data-target="#edit" data-toggle="tab" class="nav-link">Edit profile</a>
-                    </li>
-                @endif
-            </ul>
-
-            <div class="tab-content p-b-3" id="tab-user-content">
-                <div class="tab-pane active" id="profile">
+        <div class="col-lg-12 push-lg-4">
+              <div class="tab-pane active" id="profile">
+                  <div class="row">
+                      <div class="col">
                     <h4 style="margin-bottom: 1.5rem; font-weight: 900;">Profile</h4>
+                      </div>
+                      @if(Auth::user()->id == $user->id)
+                        <a class="nav-link" href="/profile/{{$user->id}}/edit">⚙️</a>
+                      @endif
+                      
+                  </div>
+
 
                     <div class="row">
                         <div class="col-md-6">
@@ -69,18 +62,8 @@
                         <div class="col-md-12">
                             <h4 class="m-t-2">Wishlist </h4>
                         </div>
-                    </div>
-                </div>
-
-
-
-                <div class="tab-pane" id="edit">
-                    <h4 style="margin-bottom: 1.5rem; font-weight: 900;">Edit Profile</h4>
-                    @include('partials.edit_profile')
-                
-                </div>
-
-            </div>
+                   </div>
+             </div>
         </div>
     </div>
 </div>

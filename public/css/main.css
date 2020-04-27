@@ -470,3 +470,10 @@ div#text-banner-login.container{
   color: white;
     font-size: 2rem;
 }
+
+
+div#session-alerts{
+    position: absolute;
+    right:2.5%;
+    top:8.5%;
+}
