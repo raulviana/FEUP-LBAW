@@ -238,6 +238,20 @@ function createItem(item) {
   return new_item;
 }
 
+const passwordField = document.getElementById('password');
+const confirmPasswordField = document.getElementById('confirm-password');
 
+function validatePassword(){
+  console.log(passwordField);
+  
+  if(passwordField.value != confirmPasswordField.value) {
+    confirmPasswordField.setCustomValidity("Passwords Don't Match");
+  } else {
+    confirmPasswordField.setCustomValidity('');
+  }
+}
+
+passwordField.onchange = validatePassword;
+confirmPasswordField.onkeyup = validatePassword;
 
 addEventListeners();

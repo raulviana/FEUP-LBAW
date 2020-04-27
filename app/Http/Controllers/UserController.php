@@ -30,6 +30,7 @@ class UserController extends Controller
                 'password' => 'required|string|min:6|confirmed',
             ]);
             $user->password = $request->input('password');
+
         }
 
         if(!is_null($request->input('about'))){
@@ -38,6 +39,6 @@ class UserController extends Controller
        
         $user->save();
 
-        return redirect('/profile/'.$id);     
+        return redirect('/profile/'.$id.'#edit');     
     }
 }

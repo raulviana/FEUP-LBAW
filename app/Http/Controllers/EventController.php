@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 use App\Event;
 use App\User;
+use Auth;
 
 class EventController extends Controller
 {
@@ -40,7 +41,7 @@ class EventController extends Controller
             'photo' => 'required'
         ]);
 
-        $path = $request->file('photo')->store('event_photo');
+        $path = $request->file('photo')->store('public/event_photo');
         $filename = basename($path);
         $event = new Event;
         
@@ -55,7 +56,7 @@ class EventController extends Controller
         else
             $event->type = 'private';
             
-        $event->owner_id = 1;
+        $event->owner_id = Auth::user()->id;
 
         $event->save();
         
