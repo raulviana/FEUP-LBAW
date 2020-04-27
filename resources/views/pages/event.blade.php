@@ -5,10 +5,11 @@
 @section('content')
 
 <div class="container">
+    
     <div class="row profile justify-content-center">
         <div class="col-lg-10 push-lg-4">
-       
-            <img style="height:35%; width:100%;" src={{ Storage::url('/event_photo/'.$event->photo['url']) }} alt="" class="img-fluid" width="100%">
+       <br><br><br>
+            <img style="height:35%; width:100%;" src={{ Storage::url('event_photo/'.$event['photo']) }} alt="" class="img-fluid" width="100%">
 
             @include('partials.events.eventheader', ['event_title' => $event['title'], 'event_id' => $event['id']])
          
