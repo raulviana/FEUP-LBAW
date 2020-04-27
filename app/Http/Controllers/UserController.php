@@ -29,7 +29,7 @@ class UserController extends Controller
             $this->validate($request, [
                 'password' => 'required|string|min:6|confirmed',
             ]);
-            $user->password = $request->input('password');
+            $user->password = bcrypt($request->input('password'));
 
         }
 

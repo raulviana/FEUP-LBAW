@@ -41,7 +41,7 @@ class EventController extends Controller
             'photo' => 'required'
         ]);
 
-        $path = $request->file('photo')->store('public/event_photo');
+        $path = $request->file('photo')->store('/event_photo');
         $filename = basename($path);
         $event = new Event;
         

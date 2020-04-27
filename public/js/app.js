@@ -23,9 +23,7 @@ function addEventListeners() {
   }
 }
 
-function validatePassword(){
-  console.log(passwordField);
-  
+function validatePassword(){ 
   if(passwordField.value != confirmPasswordField.value) {
     confirmPasswordField.setCustomValidity("Passwords Don't Match");
   } else {
