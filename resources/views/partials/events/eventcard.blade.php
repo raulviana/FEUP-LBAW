@@ -22,7 +22,7 @@
       
       <hr>
       
-      <p id="event-card-body" class="card-text"> {{$event['details']}}  </p>
+      <p id="event-card-body" class="card-text"> {{\Illuminate\Support\Str::limit($event['details'], 420, $end=" (...)")}}  </p>
       
     <div class="row justify-content-between align-items-center">
       <div class="col">

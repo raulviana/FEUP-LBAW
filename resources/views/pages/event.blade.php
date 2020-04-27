@@ -11,7 +11,7 @@
        <br><br><br>
             <img style="height:35%; width:100%;" src={{ Storage::url('event_photo/'.$event['photo']) }} alt="" class="img-fluid" width="100%">
 
-            @include('partials.events.eventheader', ['event_title' => $event['title'], 'event_id' => $event['id']])
+            @include('partials.events.eventheader', ['event' => $event])
          
             <div class="row justify-content-center">
                 <div class="col-12">
@@ -30,7 +30,7 @@
                     </ul>
 
                     
-          
+                    
 
                     <div class="tab-content p-b-3">
                         <div class="tab-pane active" id="info">
@@ -39,25 +39,28 @@
 
                             <div class="row">
                                 <div class="col">
-                                    <p style="margin-bottom:0" id="event-info"> 📌 <b>Where:</b> {{$event['local']['name']}}</p>
+                                    <p style="margin-bottom:0" id="event-info"> 📌 <b>Where:</b> {{$event['local']['name']}} </p>
                                     <p id="event-info">🕒 <b>When:</b> {{$event['start_date'] }} </p>
                                 </div>
-                                <div class="col">
-                                    <div class="float-right">
-                                        <a id="event-maps-button" class="btn btn-light d-inline" href="https://www.google.com/maps/search/?api=1&query=vila+nova+de+gaia" role="button">Go to Google Maps</a>
-                                    </div>
-                                </div>
+                                <!--<div class="col">
+                                    <div class="float-right">-->
+                                        <a data-id={{$event->id}} id="up-vote"><i class="fa fa-caret-up"></i></a>                                       
+                                        <p id="event-reviews"> {{$event->review}}</p>                                  
+                                        <a data-id={{$event->id}} id="down-vote"><i class="fa fa-caret-down"></i></a>                                       
+                                 <!--  </div>
+                                </div>-->
+                               
                             </div>
 
-                               
-                            <div class="row text-center">
+                            <!--<a id="event-maps-button" class="btn btn-light d-inline" href="https://www.google.com/maps/search/?api=1&query=vila+nova+de+gaia" role="button">Go to Google Maps</a>-->
 
+
+                            <div class="row text-center">
                                       @if(count($event->tags) > 0)
                                         @each('partials.events.tags', $event->tags, 'tag')  
                                       @else 
                                         <small> This event has no tags </small>
                                       @endif
-                                    
                             </div>
                                 <br>
 

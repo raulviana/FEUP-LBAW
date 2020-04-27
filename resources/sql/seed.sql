@@ -69,6 +69,7 @@ CREATE TABLE "event" (
     photo TEXT NOT NULL,
     TYPE event_type NOT NULL,
     owner_id INTEGER NOT NULL REFERENCES "users" (id),
+    review INTEGER DEFAULT 0,
     CONSTRAINT valid_date CHECK (start_date < end_date)
 );
 
@@ -104,8 +105,10 @@ CREATE TABLE review (
     event_id INTEGER REFERENCES "event" (id) ON UPDATE CASCADE,
     user_id INTEGER REFERENCES "users" (id) ON UPDATE SET NULL,
     score INTEGER,
-    CONSTRAINT score_positive CHECK (score > 0),
-    PRIMARY KEY (event_id, user_id)
+    PRIMARY KEY (event_id, user_id),
+    CONSTRAINT score_value CHECK (
+        score = 1 OR score = -1
+    )
 );
 
 CREATE TABLE collaborators_event (
@@ -141,7 +144,61 @@ ALTER TABLE tag DROP CONSTRAINT IF EXISTS tag_name_uk;
 ALTER TABLE "file" ADD CONSTRAINT file_url_uk UNIQUE (url);
 ALTER TABLE tag ADD CONSTRAINT tag_name_uk  UNIQUE (id);
 
+
+CREATE OR REPLACE FUNCTION insert_review_function() RETURNS TRIGGER AS $$
+BEGIN   
+    UPDATE "event"
+    SET review = review + NEW.score
+    WHERE "event".id = NEW.event_id;
+
+    RETURN NEW;
+END;
+$$ LANGUAGE 'plpgsql';
+
+CREATE OR REPLACE FUNCTION update_review_function() RETURNS TRIGGER AS $$
+BEGIN   
+    UPDATE "event"
+    SET review = review + NEW.score - OLD.score
+    WHERE "event".id = NEW.event_id;
+
+    RETURN NEW;
+END;
+$$ LANGUAGE 'plpgsql';
+
+CREATE OR REPLACE FUNCTION delete_review_function() RETURNS TRIGGER AS $$
+BEGIN   
+    UPDATE "event"
+    SET review = review - OLD.score
+    WHERE "event".id = NEW.event_id;
+
+    RETURN OLD;
+END;
+$$ LANGUAGE 'plpgsql';
+
+
 --TRIGGERS
+
+DROP TRIGGER IF EXISTS insert_review ON review;
+DROP TRIGGER IF EXISTS update_review ON review;
+DROP TRIGGER IF EXISTS delete_review ON review;
+
+CREATE TRIGGER insert_review
+    AFTER INSERT ON review
+    FOR EACH ROW
+    EXECUTE PROCEDURE insert_review_function();
+
+CREATE TRIGGER update_review
+    AFTER UPDATE ON review
+    FOR EACH ROW
+    EXECUTE PROCEDURE update_review_function();
+
+
+CREATE TRIGGER delete_review
+    AFTER DELETE ON review
+    FOR EACH ROW
+    EXECUTE PROCEDURE delete_review_function();
+
+
 
 CREATE OR REPLACE FUNCTION past_event() RETURNS TRIGGER AS
 $BODY$
@@ -325,17 +382,17 @@ insert into post (file_id, content, date, post_time, event_id, user_id) values (
 insert into post (file_id, content, date, post_time, event_id, user_id) values (null, 'Wow! Just wow!', '2020-07-14', '2020-02-14 11:23:00+00', 5, 21);
 
 ---------------------------------------------------- REVIEW ---------------------------------------------------- 
-insert into review (event_id, user_id, score) values (2, 2, 5);
-insert into review (event_id, user_id, score) values (2, 4, 4);
-insert into review (event_id, user_id, score) values (2, 5, 5);
-insert into review (event_id, user_id, score) values (2, 6, 3);
-insert into review (event_id, user_id, score) values (5, 15, 4);
-insert into review (event_id, user_id, score) values (5, 18, 5);
-insert into review (event_id, user_id, score) values (5, 19, 5);
-insert into review (event_id, user_id, score) values (5, 21, 5);
-insert into review (event_id, user_id, score) values (5, 22, 5);
-insert into review (event_id, user_id, score) values (5, 23, 5);
-insert into review (event_id, user_id, score) values (5, 4, 5);
+insert into review (event_id, user_id, score) values (2, 2, 1);
+insert into review (event_id, user_id, score) values (2, 4, 1);
+insert into review (event_id, user_id, score) values (2, 5, 1);
+insert into review (event_id, user_id, score) values (2, 6, 1);
+insert into review (event_id, user_id, score) values (5, 15, 1);
+insert into review (event_id, user_id, score) values (5, 18, 1);
+insert into review (event_id, user_id, score) values (5, 19, 1);
+insert into review (event_id, user_id, score) values (5, 21, 1);
+insert into review (event_id, user_id, score) values (5, 22, 1);
+insert into review (event_id, user_id, score) values (5, 23, 1);
+insert into review (event_id, user_id, score) values (5, 4, 1);
 
 ---------------------------------------------------- COLABORATORS EVENT ---------------------------------------------------- 
 insert into collaborators_event (event_id, user_id) values (1, 3);

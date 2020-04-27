@@ -14,10 +14,8 @@
                       </div>
                       @if(Auth::user()->id == $user->id)
                         <a class="nav-link" href="/profile/{{$user->id}}/edit">⚙️</a>
-                      @endif
-                      
+                      @endif                    
                   </div>
-
 
                     <div class="row">
                         <div class="col-md-6">

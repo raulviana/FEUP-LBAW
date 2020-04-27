@@ -50,11 +50,13 @@ Route::post('/events/{id}/edit', 'EventController@update');
 Route::get('/events/{id}', 'EventController@show');
 
 
+//Tags
 Route::get('/tags/{name}', 'TagController@show');
  
 
 //Posts
 Route::put('api/events/{id}/posts/create', 'PostController@store');
 
-
-
+//Reviews
+Route::put('api/events/{id}/up', 'ReviewController@likeVote');
+Route::put('api/events/{id}/down', 'ReviewController@dislikeVote');
