@@ -15,14 +15,16 @@
                     <a class="nav-link" href="#"> 🛒 </a>
                 </li>
 
-                @if((Auth::user()->admin) || (Auth::user()->id == $event->user_id))
-                <li class="nav-item">
-                    <a class="nav-link" href="/events/{{$event->id}}/edit">⚙️</a>
-                </li>
+                @if(Auth::check())
+                  @if((Auth::user()->admin) || (Auth::user()->id == $event->user_id))
+                  <li class="nav-item">
+                      <a class="nav-link" href="/events/{{$event->id}}/edit">⚙️</a>
+                  </li>
 
-                <li class="nav-item">
-                    <a data-toggle="modal" data-target="#modal-delete-event" class="nav-link">🗑️</a> 
-                </li>
+                  <li class="nav-item">
+                      <a data-toggle="modal" data-target="#modal-delete-event" class="nav-link">🗑️</a> 
+                  </li>
+                  @endif
                 @endif
 
            

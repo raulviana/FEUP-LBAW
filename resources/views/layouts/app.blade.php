@@ -25,7 +25,7 @@
   </head>  
   <body>
     <section id="content">
-        @yield('content')    
+      @yield('content')    
     </section>
 
     @include('partials.inc.navbar')    

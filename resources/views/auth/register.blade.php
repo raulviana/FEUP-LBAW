@@ -53,7 +53,6 @@
                             
                                 <p class="text-center"> Already have an account? <br> <a class="button button-outline" href="{{ route('login') }}">Click here to sign in!</a></p>
                                
-
                               </div>
                           </div>
                       </div>
