@@ -1,5 +1,5 @@
 /* GET BUTTONS */
-//const deleteUserBtn = document.getElementById("delete-user-btn");
+
 const addPostBtn = document.querySelector("div#new-post button");
 
 const passwordField = document.getElementById('password');
@@ -10,11 +10,23 @@ const dislikeBtn  =document.querySelector("a#down-vote");
 
 const delEventBtn = document.querySelector("button#del-event");
 
+
 function addEventListeners() {
-  let userDeleters = document.querySelectorAll("div#manage-users button");
+  let userDeleters = document.querySelectorAll("div#manage-users button#delete-user-btn");
   [].forEach.call(userDeleters, function(deleter) {
     deleter.addEventListener('click', sendDeleteUserRequest);
   });
+
+  let userRestorers = document.querySelectorAll("div#manage-users button#restore-user-btn");
+  [].forEach.call(userRestorers, function(restorer) {
+    restorer.addEventListener('click', sendRestoreUserRequest);
+  });
+
+  let collaboratorDeleters = document.querySelectorAll("a#remove-collaborator");
+  [].forEach.call(collaboratorDeleters, function(collabdeleter) {
+    collabdeleter.addEventListener('click', sendRemoveCollaborator);
+  });
+
 
   if(addPostBtn){
     addPostBtn.addEventListener('click', sendCreatePostRequest);
@@ -59,6 +71,15 @@ function sendAjaxRequest(method, url, data, handler) {
 }
 /* SENDERS */
 
+function sendRemoveCollaborator(event){
+  event.preventDefault();
+  let user_id = this.closest('a').getAttribute('data-id');
+  let event_id = this.closest('tbody').getAttribute('data-id');
+
+
+  sendAjaxRequest("delete", `/api/events/${event_id}/remove/${user_id}`, {event_id: event_id, user_id: user_id}, collaboratorRemovedHandler);
+}
+
 function sendLikeVoteRequest(event){
   event.preventDefault();
   let event_id = this.closest('a').getAttribute('data-id');
@@ -80,7 +101,15 @@ function sendDeleteUserRequest(event) {
  
   let id = this.closest('button').getAttribute('data-id');
 
-  sendAjaxRequest("delete", `/api/admin/users/${id}`, {}, userDeletedHandler);
+  sendAjaxRequest("delete", `/api/users/${id}/delete`, {id:id}, userDeletedHandler);
+}
+
+function sendRestoreUserRequest(event){
+  event.preventDefault();
+ 
+  let id = this.closest('button').getAttribute('data-id');
+
+  sendAjaxRequest("post", `/api/users/${id}/restore`, {id:id}, userRestoreHandler);
 }
 
 function sendCreatePostRequest(event){
@@ -106,10 +135,19 @@ function sendDeleteEventRequest(event){
 
 /* HANDLERS */
 
+function collaboratorRemovedHandler(){
+  let row = JSON.parse(this.responseText);
+  let event_id = row['event_id'];
+  let user_id = row.user_id;
+
+  if(this.status != 200) window.location = `/events/${event_id}`;
+
+  let tabelRow = document.querySelector('tr[data-id="' + user_id +'"]');
+  tabelRow.remove();  
+}
+
 function eventDeletedHandler(){
-  if(this.status==200){
-    window.location = '/';
-  }
+  window.location = '/';
 }
 
 function reviewEventHandler(){
@@ -158,10 +196,10 @@ function userDeletedHandler() {
   let user = JSON.parse(this.responseText);
 
   const alert = document.createElement('div');
-  alert.classList.add("alert", "alert-danger");
+  alert.classList.add("alert", "alert-success");
   alert.innerText = "User " + user.name + " was suspended.";
 
-  let btn = document.querySelector('button[data-id="' + user.id + '"]');
+  let btn = document.querySelector('button#delete-user-btn[data-id="' + user.id + '"]');
   btn.disabled=true;
 
   let state = document.querySelector('td[data-id="' + user.id + '"]');
@@ -176,135 +214,30 @@ function userDeletedHandler() {
   }, 3000);
 }
 
-
-function sendDeleteItemRequest() {
-  let id = this.closest('li.item').getAttribute('data-id');
-
-  sendAjaxRequest('delete', '/api/item/' + id, null, itemDeletedHandler);
-}
-
-function sendCreateItemRequest(event) {
-  let id = this.closest('article').getAttribute('data-id');
-  let description = this.querySelector('input[name=description]').value;
-
-  if (description != '')
-    sendAjaxRequest('put', '/api/cards/' + id, {description: description}, itemAddedHandler);
-
-  event.preventDefault();
-}
-
-function sendDeleteCardRequest(event) {
-  let id = this.closest('article').getAttribute('data-id');
-
-  sendAjaxRequest('delete', '/api/cards/' + id, null, cardDeletedHandler);
-}
-
-function sendCreateCardRequest(event) {
-  let name = this.querySelector('input[name=name]').value;
-
-  if (name != '')
-    sendAjaxRequest('put', '/api/cards/', {name: name}, cardAddedHandler);
-
-  event.preventDefault();
-}
-
-function itemUpdatedHandler() {
-  let item = JSON.parse(this.responseText);
-  let element = document.querySelector('li.item[data-id="' + item.id + '"]');
-  let input = element.querySelector('input[type=checkbox]');
-  element.checked = item.done == "true";
-}
-
-function itemAddedHandler() {
+function userRestoreHandler() {
   if (this.status != 200) window.location = '/';
-  let item = JSON.parse(this.responseText);
+  
+  let user = JSON.parse(this.responseText);
 
-  // Create the new item
-  let new_item = createItem(item);
+  const alert = document.createElement('div');
+  alert.classList.add("alert", "alert-success");
+  alert.innerText = "User " + user.name + " was restored.";
 
-  // Insert the new item
-  let card = document.querySelector('article.card[data-id="' + item.card_id + '"]');
-  let form = card.querySelector('form.new_item');
-  form.previousElementSibling.append(new_item);
+  let btn = document.querySelector('button#restore-user-btn[data-id="' + user.id + '"]');
+  btn.disabled=true;
 
-  // Reset the new item form
-  form.querySelector('[type=text]').value="";
+  let state = document.querySelector('td[data-id="' + user.id + '"]');
+  state.innerHTML="Active";
+
+  const manageUserDiv = document.querySelector('div#admin-management');
+  (manageUserDiv.parentElement).insertBefore(alert, manageUserDiv);
+
+
+  setTimeout(() => {
+    alert.parentElement.removeChild(alert);
+  }, 3000);
 }
-
-function itemDeletedHandler() {
-  if (this.status != 200) window.location = '/';
-  let item = JSON.parse(this.responseText);
-  let element = document.querySelector('li.item[data-id="' + item.id + '"]');
-  element.remove();
-}
-
-function cardDeletedHandler() {
-  if (this.status != 200) window.location = '/';
-  let card = JSON.parse(this.responseText);
-  let article = document.querySelector('article.card[data-id="'+ card.id + '"]');
-  article.remove();
-}
-
-function cardAddedHandler() {
-  if (this.status != 200) window.location = '/';
-  let card = JSON.parse(this.responseText);
-
-  // Create the new card
-  let new_card = createCard(card);
-
-  // Reset the new card input
-  let form = document.querySelector('article.card form.new_card');
-  form.querySelector('[type=text]').value="";
-
-  // Insert the new card
-  let article = form.parentElement;
-  let section = article.parentElement;
-  section.insertBefore(new_card, article);
-
-  // Focus on adding an item to the new card
-  new_card.querySelector('[type=text]').focus();
-}
-
-function createCard(card) {
-  let new_card = document.createElement('article');
-  new_card.classList.add('card');
-  new_card.setAttribute('data-id', card.id);
-  new_card.innerHTML = `
-
-  <header>
-    <h2><a href="cards/${card.id}">${card.name}</a></h2>
-    <a href="#" class="delete">&#10761;</a>
-  </header>
-  <ul></ul>
-  <form class="new_item">
-    <input name="description" type="text">
-  </form>`;
-
-  let creator = new_card.querySelector('form.new_item');
-  creator.addEventListener('submit', sendCreateItemRequest);
-
-  let deleter = new_card.querySelector('header a.delete');
-  deleter.addEventListener('click', sendDeleteCardRequest);
-
-  return new_card;
-}
-
-function createItem(item) {
-  let new_item = document.createElement('li');
-  new_item.classList.add('item');
-  new_item.setAttribute('data-id', item.id);
-  new_item.innerHTML = `
-  <label>
-    <input type="checkbox"> <span>${item.description}</span><a href="#" class="delete">&#10761;</a>
-  </label>
-  `;
-
-  new_item.querySelector('input').addEventListener('change', sendItemUpdateRequest);
-  new_item.querySelector('a.delete').addEventListener('click', sendDeleteItemRequest);
-
-  return new_item;
-}
-
 
 
 addEventListeners();
+

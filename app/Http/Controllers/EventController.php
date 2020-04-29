@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Event;
+use App\EventCollaborators;
 use App\User;
 use Auth;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -73,7 +74,6 @@ class EventController extends Controller
     }
 
     public function delete(Request $request){
-
         $event = Event::find($request['id']);
         
         try{
@@ -88,5 +88,20 @@ class EventController extends Controller
             return response()->json([], 404);
         } 
 
+    }
+
+    public function removeCollaborator(Request $request){
+        $row = EventCollaborators::where('event_id', $request['event_id'])
+                                ->where('user_id', $request['user_id'])
+                                ->get();
+
+        try{
+            ($row[0])->delete();
+            $request->session()->flash('success', 'Collaborator was removed');
+            return response()->json($row[0]);
+        } catch(ModelNotFoundException $e){
+            $request->session()->flash('error', 'Ups! Cant remove collaborator');
+            return response()->json([], 404);
+        }
     }
 }
