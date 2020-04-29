@@ -115,7 +115,7 @@ CREATE TABLE review (
 CREATE TABLE collaborators_event (
     id SERIAL PRIMARY KEY,
     event_id INTEGER REFERENCES "event" (id) ON UPDATE CASCADE,
-    user_id INTEGER REFERENCES "users" (id) ON UPDATE SET NULL
+    user_id INTEGER REFERENCES "users" (id) ON UPDATE SET NULL,
 );
 
 CREATE TABLE event_social_media (

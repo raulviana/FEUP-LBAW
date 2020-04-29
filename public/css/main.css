@@ -42,58 +42,58 @@ button#dropdown-navbar.btn.dropdown-toggle:hover{
 }
 
 
-button#tag-button.btn {
+#tag-button.btn {
     color: white;
-    font-size: 0.65rem;
-    padding-bottom: 0.2rem;
-    padding-top: 0.2rem;
-    padding-left: 1.25rem;
-    padding-right: 1.25rem;
+    font-size: 0.55rem;
+    padding-bottom: 0.1rem;
+    padding-top: 0.1rem;
+    padding-left: 1.10rem;
+    padding-right: 1.10rem;
     font-weight: 500;
 }
 
 
-button#tag-button.btn.theater-tag{
+#tag-button.btn.theater-tag{
     font-size: 0.9rem;
     background: #c43227; /* dark red */
 }
 
-button#tag-button.btn.dance-tag{
+#tag-button.btn.dance-tag{
      font-size: 0.9rem;
     background: #4c3ac2; /* indigo */
 }
 
-button#tag-button.btn.sculpture-tag{
+#tag-button.btn.sculpture-tag{
      font-size: 0.9rem;
     background: #e0d426; /* yellow */
 }
 
-button#tag-button.btn.music-tag{
+#tag-button.btn.music-tag{
      font-size: 0.9rem;
     background: #db27d5; /* purple */
 }
 
-button#tag-button.btn.literature-tag{
+#tag-button.btn.literature-tag{
      font-size: 0.9rem;
     background: #43b52a; /* green */
 }
 
-button#tag-button.btn.comedy-tag{
+#tag-button.btn.comedy-tag{
      font-size: 0.9rem;
     background: #2a97b5; /* dark cyan */
 }
 
-button#tag-button.btn.paintings-tag{
+#tag-button.btn.paintings-tag{
      font-size: 0.9rem;
     background: #d45008; /* dark orage */
 }
 
-button#tag-button.btn.others-tag{
+#tag-button.btn.others-tag{
      font-size: 0.95rem;
     background: #000FFF; /* dark orage */
 }
 
-button#tag-button.btn:hover {
+#tag-button.btn:hover {
      font-size: 0.95rem;
     background:  lightgrey;
         border-color: #292b2c;

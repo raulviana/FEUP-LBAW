@@ -8,8 +8,11 @@ use Illuminate\Http\Request;
 use App\Event;
 use App\EventCollaborators;
 use App\User;
+use App\Tag;
 use Auth;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\DB;
+
 
 class EventController extends Controller
 {
@@ -50,7 +53,9 @@ class EventController extends Controller
         $event->details = $request->input('details');
         $event->start_date = $request->input('start_date');
         $event->end_date = $request->input('end_date');
+
         $event->local_id = 1;
+
         $event->photo = $filename;
         if($request->input('is_private') == 'off')
             $event->type = 'public';
@@ -60,7 +65,16 @@ class EventController extends Controller
         $event->owner_id = Auth::user()->id;
 
         $event->save();
-        
+
+        if($request['tag_theater']) $this->addTag('Theater', $event->id);
+        if($request['tag_sculpture']) $this->addTag('Sculpture', $event->id);
+        if($request['tag_dance']) $this->addTag('Dance', $event->id);
+        if($request['tag_music']) $this->addTag('Music', $event->id);
+        if($request['tag_paintings']) $this->addTag('Painting', $event->id);
+        if($request['tag_comedy']) $this->addTag('Comedy', $event->id);
+        if($request['tag_literature']) $this->addTag('Literature', $event->id);
+        if($request['tag_others']) $this->addTag('Others', $event->id);
+    
         return redirect('/')->with('success', 'Event created with sucess!');
     }
 
@@ -103,5 +117,13 @@ class EventController extends Controller
             $request->session()->flash('error', 'Ups! Cant remove collaborator');
             return response()->json([], 404);
         }
+    }
+
+    public function addTag($tag_name, $event_id){
+        $tag = Tag::where('name', 'like', $tag_name)->get();
+
+        DB::table('event_tag')->updateOrInsert(
+            ['event_id' => $event_id, 'tag_id' => $tag[0]->id]
+        );
     }
 }
