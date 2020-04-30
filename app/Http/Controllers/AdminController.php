@@ -12,9 +12,9 @@ class AdminController extends Controller
 
     public function users(){
         $users = User::where('admin', 'false')->paginate(AdminController::USER_MAXPAG);
-        $s_users = User::onlyTrashed()->paginate(AdminController::USER_MAXPAG);
 
-        return view('pages.admin.manage-users', ['users' => $users, 'susp_users' => $s_users]);
+
+        return view('pages.admin.manage-users', ['users' => $users]);
     }
 
     public function deleteUser($id){

@@ -56,7 +56,7 @@ CREATE TABLE "users" (
     password text NOT NULL,
     admin BOOLEAN,
     about text,
-    deleted_at TIMESTAMP WITH TIME zone
+    is_active BOOLEAN default true
 );
 
 CREATE TABLE "event" (
@@ -113,9 +113,9 @@ CREATE TABLE review (
 );
 
 CREATE TABLE collaborators_event (
+    id SERIAL PRIMARY KEY,
     event_id INTEGER REFERENCES "event" (id) ON UPDATE CASCADE,
-    user_id INTEGER REFERENCES "users" (id) ON UPDATE SET NULL,
-    PRIMARY KEY (event_id, user_id)
+    user_id INTEGER REFERENCES "users" (id) ON UPDATE SET NULL
 );
 
 CREATE TABLE event_social_media (

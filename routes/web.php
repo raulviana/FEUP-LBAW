@@ -27,6 +27,9 @@ Route::post('register', 'Auth\RegisterController@register');
 Route::get('profile/{id}', 'UserController@show');
 Route::get('profile/{id}/edit', 'UserController@edit');
 Route::post('profile/{id}/edit', 'UserController@update');
+Route::delete('api/users/{id}/delete', 'UserController@delete');
+Route::post('api/users/{id}/restore', 'UserController@restore');
+Route::post('api/users/search', 'UserController@search');
 
 // Static pages
 Route::get('faq' , 'HomepageController@faq')->name('faq');
@@ -49,6 +52,10 @@ Route::get('/events/{id}/edit', 'EventController@edit');
 Route::post('/events/{id}/edit', 'EventController@update');
 Route::get('/events/{id}', 'EventController@show');
 Route::delete('api/events/{id}/delete', 'EventController@delete');
+
+Route::delete('api/events/{event_id}/remove/{user_id}', 'EventController@removeCollaborator');
+Route::put('api/events/{event_id}/add/{user_id}', 'EventController@addCollaborator');
+
 
 
 //Tags

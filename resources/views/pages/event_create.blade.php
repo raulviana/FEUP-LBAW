@@ -24,7 +24,7 @@
 
                         <div class="file-field">
                             <svg class="bi bi-paperclip" width="1em" height="1em" >
-                                <path fill-rule="evenodd" d="M4.5 3a2.5 2.5 0 015 0v9a1.5 1.5 0 01-3 0V5a.5.5 0 011 0v7a.5.5 0 001 0V3a1.5 1.5 0 10-3 0v9a2.5 2.5 0 005 0V5a.5.5 0 011 0v7a3.5 3.5 0 11-7 0V3z" clip-rule="evenodd" />
+                                <path fill-rule="evenodd" d="M4.25 3a2.25 2.25 0 0125 0v9a1.25 1.25 0 01-3 0V25a.25.25 0 011 0v7a.25.25 0 001 0V3a1.25 1.25 0 10-3 0v9a2.25 2.25 0 0025 0V25a.25.25 0 011 0v7a3.25 3.25 0 11-7 0V3z" clip-rule="evenodd" />
                             </svg>
                             <input type="file" id="photo" name="photo">
                         </div>
@@ -54,29 +54,45 @@
                 <!-- tags -->
                 <h4>Tags</h4>
                 <div class="row">
-                    <div style="font-size:0.65rem;" class="col">
+                    <div style="font-size:0.625rem;" class="col">
 
                         <p id="search-by">Choose some tags related to your event</p>
                         <br>
-                        <!-- todo: change checkbox to label button --> 
 
-                        <label class="checkbox-inline mr-2"><input type="checkbox" name="tag_theater"><button id="tag-button" type="button" class="btn theater-tag">Theater</button></label>
+                        <div class="d-flex justify-content-center btn-group btn-group-toggle" data-toggle="buttons">
+                            
+                            <label style="margin-right: 0.25rem; margin-left: 0.25rem;" id="tag-button" class="btn theater-tag">
+                             <input name="tag_theater" type="checkbox" autocomplete="off"> Theater
+                            </label>
+                 
+                            <label style="margin-right: 0.25rem; margin-left: 0.25rem;" id="tag-button" class="btn sculpture-tag">
+                             <input name="tag_sculpture" type="checkbox" autocomplete="off"> Sculpture
+                            </label>
+                     
+                            <label style="margin-right: 0.25rem; margin-left: 0.25rem;" id="tag-button" class="btn dance-tag">
+                               <input name="tag_dance" type="checkbox" autocomplete="off"> Dance
+                            </label>
+                         
+                            <label style="margin-right: 0.25rem; margin-left: 0.25rem;" id="tag-button" class="btn music-tag">
+                               <input name="tag_music" type="checkbox" autocomplete="off"> Music
+                            </label>
+                           
+                            <label style="margin-right: 0.25rem; margin-left: 0.25rem;" id="tag-button" class="btn paintings-tag">
+                              <input  name="tag_paintings" type="checkbox" autocomplete="off"> Paintings
+                            </label>
 
-                        <label class="checkbox-inline mr-2"><input type="checkbox" name="tag_sculpture"><button id="tag-button" type="button" class="btn sculpture-tag">Sculpture</button> </label>
-
-                        <label class="checkbox-inline mr-2"><input type="checkbox" name="tag_dance"><button id="tag-button" type="button" class="btn dance-tag">Dance</button></label>
-
-                        <label class="checkbox-inline mr-2"><input type="checkbox" name="tag_music"><button id="tag-button" type="button" class="btn music-tag">Music</button></label>
-
-                        <label class="checkbox-inline mr-2"><input type="checkbox" name="tag_paintings"><button id="tag-button" type="button" class="btn paintings-tag">Paintings</button></label>
-
-                        <label class="checkbox-inline mr-2"><input type="checkbox" name="tag_comedy"><button id="tag-button" type="button" class="btn comedy-tag">Comedy</button></label>
-
-                        <label class="checkbox-inline mr-2"><input type="checkbox" name="tag_literature"><button id="tag-button" type="button" class="btn literature-tag">Literature</button></label>
-
-                        <label class="checkbox-inline mr-2"><input type="checkbox" name="tag_others"><button id="tag-button" type="button" class="btn others-tag">Others</button></label>
-
-
+                            <label style="margin-right: 0.25rem; margin-left: 0.25rem;" id="tag-button" class="btn comedy-tag">
+                                <input name="tag_comedy" type="checkbox" autocomplete="off"> Comedy
+                             </label>
+                            
+                             <label style="margin-right: 0.25rem; margin-left: 0.25rem;"  id="tag-button" class="btn literature-tag">
+                               <input name="tag_literature" type="checkbox" autocomplete="off"> Literature
+                             </label>
+                             <label style="margin-right: 0.25rem; margin-left: 0.25rem;"id="tag-button" class="btn others-tag">
+                                <input name="tag_others" type="checkbox" autocomplete="off"> Others
+                             </label>
+                            
+                        </div>
                     </div>
                 </div>
 
@@ -84,10 +100,10 @@
 
                 <h4>Details</h4>
                 <div class="form-group">
-                    <textarea class="form-control" rows="3" name="details" placeholder={{empty($event) ? " Event title " : $event['details']}}></textarea>
+                    <textarea class="form-control" rows="3" name="details" value={{empty($event) ? " Event details " : $event['details']}}></textarea>
                 </div>
 
-                <button id="button-save-changes" type="submit" class="btn"> {{empty($event) ? "Create" : "Confirm Changes"}} </button>
+                <button id="button-save-changes" type="submit" class="btn"> {{empty($event) ? "CREATE" : "CONFIRM CHANGES"}} </button>
 
             </form>
         </div>

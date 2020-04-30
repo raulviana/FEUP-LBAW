@@ -9,11 +9,10 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable
 {
     use Notifiable;
-    use SoftDeletes;
+
 
     // Don't add create and update timestamps in database.
     public $timestamps  = false;
-    public $dates = ['deleted_at'];
 
     /**
      * The attributes that are mass assignable.
@@ -47,5 +46,11 @@ class User extends Authenticatable
         return $this->hasMany('App\Post');
     }
 
+    /**
+     * The events where user is a collaborator
+     */
+    public function collaborates(){
+        return $this->belongsToMany('App\Event', 'collaborators_event', 'user_id', 'event_id');
+    }
 
 }

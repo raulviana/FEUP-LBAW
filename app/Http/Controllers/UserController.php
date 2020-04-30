@@ -45,4 +45,52 @@ class UserController extends Controller
 
         return redirect('/profile/'.$id)->with('success', 'Your profile is up to date!');     
     }
+
+    public function delete(Request $request){
+        $user = User::find($request['id']);
+
+        try{
+            $user->is_active = false;
+            $user->save();
+
+            return response()->json($user, 200);
+        } catch(ModelNotFoundException $e){
+            
+            $request->session()->flash('error', 'Ups! User was not suspended');
+            return response()->json($user, 404);
+        } 
+    }
+
+    public function restore(Request $request){
+        $user = User::find($request['id']);
+
+        try{
+            $user->is_active = true;
+            $user->save();
+
+            return response()->json($user, 200);
+        } catch(ModelNotFoundException $e){
+            
+            $request->session()->flash('error', 'Ups! User was not suspended');
+            return response()->json($user, 404);
+        } 
+    }
+
+    public function search(Request $request){
+        $query = $request['searchField'];
+        if($query != ''){
+            $users = User::where('name', 'like', '%'.$query.'%')
+                        ->orWhere('email', 'like', '%'.$query.'%')
+                        ->orderBy('id', 'asc')
+                        ->get();
+
+            return response()->json($users, 200);
+        }
+        else{
+
+            return response()->json($users, 404);
+        }
+
+      
+    }
 }

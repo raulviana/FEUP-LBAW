@@ -33,4 +33,8 @@ class Event extends Model
     return $this->hasMany('App\Post');
   }
 
+  public function collaborators(){
+    return $this->belongsToMany('App\User', 'collaborators_event', 'event_id', 'user_id');
+  }
+
 }
