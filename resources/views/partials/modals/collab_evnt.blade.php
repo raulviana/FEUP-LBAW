@@ -12,8 +12,18 @@
             <small> Enter the email of the collaborator </small>
             
             <div class="md-form mb-3 mt-0">
-                <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+                <input id="search-users" class="form-control" type="text" placeholder="Search" aria-label="Search">
             </div>
+            <table class="table table-striped" id="search-results">
+                <thead>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Add</th>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+            
                 
             <table class="table table-striped">
                 <thead>
@@ -35,7 +45,7 @@
         
         <div class="modal-footer">
             <button type="button" class="btn" data-dismiss="modal" id="light-btn">CLOSE</button>          
-            <button data-event-id={{$event->id}} type="submit" class="btn float-right" id="save-changes-btn">SAVE CHANGES</button> 
+            <button onclick="location.href='/events/{{$event->id}}';" data-event-id={{$event->id}} class="btn float-right" id="save-changes-btn">SAVE CHANGES</button> 
         </div>
 
       </div>

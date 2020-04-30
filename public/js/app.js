@@ -10,6 +10,7 @@ const dislikeBtn  =document.querySelector("a#down-vote");
 
 const delEventBtn = document.querySelector("button#del-event");
 
+const searchUsersField = document.querySelector("input#search-users");
 
 function addEventListeners() {
   let userDeleters = document.querySelectorAll("div#manage-users button#delete-user-btn");
@@ -27,6 +28,11 @@ function addEventListeners() {
     collabdeleter.addEventListener('click', sendRemoveCollaborator);
   });
 
+  let collaboratorAdd = document.querySelectorAll("a#add-collaborator");
+  [].forEach.call(collaboratorAdd, function(collabadd) {
+    collabadd.addEventListener('click', sendAddCollaboratorRequest);
+  });
+
 
   if(addPostBtn){
     addPostBtn.addEventListener('click', sendCreatePostRequest);
@@ -42,6 +48,11 @@ function addEventListeners() {
 
   if(delEventBtn){
     delEventBtn.addEventListener('click', sendDeleteEventRequest);
+  }
+
+  if(searchUsersField){
+    console.log(searchUsersField);
+    searchUsersField.addEventListener('keyup', sendSearchUserRequest);
   }
 }
 
@@ -70,6 +81,18 @@ function sendAjaxRequest(method, url, data, handler) {
   request.send(encodeForAjax(data));
 }
 /* SENDERS */
+function sendAddCollaboratorRequest(event){
+  event.preventDefault();
+  console.log("workin");
+}
+function sendSearchUserRequest(event){
+  event.preventDefault();
+
+  let searchField = searchUsersField.value;
+ 
+  sendAjaxRequest("post", `/api/users/search`, {searchField: searchField}, userResultsHandler);
+}
+
 
 function sendRemoveCollaborator(event){
   event.preventDefault();
@@ -134,6 +157,41 @@ function sendDeleteEventRequest(event){
 /*--------*/
 
 /* HANDLERS */
+
+function userResultsHandler(){
+  if(this.status == 200){
+    let users = JSON.parse(this.responseText);
+
+    if(users.length > 0){
+      let searchResults = document.querySelector("table#search-results");
+      let old_tbody = document.querySelector("table#search-results tbody");
+    
+      
+      let new_tbody = document.createElement('tbody');
+      
+      for(let i=0; i<users.length; i++){
+        // Create an empty <tr> element and add it to the 1st position of the table:
+        let row = new_tbody.insertRow(0);
+
+        // Insert new cells (<td> elements) at the 1st and 2nd position of the "new" <tr> element:
+        let cell1 = row.insertCell(0);
+        let cell2 = row.insertCell(1);
+        let cell3 = row.insertCell(2);
+
+        cell1.innerText = users[i].name;
+        cell2.innerText = users[i].email;
+        cell3.innerHTML = `<a data-id=${users[i].id} id="add-collaborator" class="nav-link"> Make collaborator </a>`; 
+    }
+
+      old_tbody.parentNode.replaceChild(new_tbody, old_tbody)
+          
+    }
+    else{
+      console.log("nao ha resultaods");
+    }
+    
+  }
+}
 
 function collaboratorRemovedHandler(){
   let row = JSON.parse(this.responseText);
