@@ -507,5 +507,31 @@ div#session-alerts{
     top:10%;
 }
 
+input#search-users{
+    padding: 0.5rem;
+    border: 1px solid #292b2c;
+    float: left;
+    width: 90%;
+}
 
+
+button#search-users {
+    border-radius: 0;
+    float: left;
+    width: 10%;
+    padding: 0.5rem;
+    background: #292b2c;
+    color: #f7f7f7;
+    font-weight: 600;
+    font-size: 1rem;
+    border: 0.1rem solid #292b2c;
+    border-left: none; /* Prevent double borders */
+    cursor: pointer;
+  }
   
+button#search-users:hover {
+    background: lightgray;  
+    border-color: #292b2c;
+}
+  
+ 

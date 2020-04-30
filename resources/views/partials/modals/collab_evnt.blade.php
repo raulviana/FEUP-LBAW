@@ -9,19 +9,15 @@
         </div>
 
         <div class="modal-body">
-            <small> Enter the email of the collaborator </small>
             
-            <div class="md-form mb-3 mt-0">
-                <input id="search-users" class="form-control" type="text" placeholder="Search" aria-label="Search">
-            </div>
-            <table class="table table-striped" id="search-results">
-                <thead>
-                    <th scope="col">Name</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Add</th>
-                </thead>
-                <tbody>
-                </tbody>
+            <small> Enter the email of the collaborator</small>  
+            <form>
+                <input id="search-users" type="text" placeholder="Search.." name="search">
+                <button id="search-users" type="submit" class="btn">+</button>
+            </form>
+          
+            <table class="table table-striped" id="search-results">          
+                <tbody>  </tbody> <!-- tbody used in javascript !-->
             </table>
             
                 
@@ -33,7 +29,7 @@
                         <th scope="col">Remove</th>
                     </tr>
                 </thead>
-                <tbody data-id={{$event->id}}>
+                <tbody id="edit-collaborators" data-id={{$event->id}}>
                     @if(count ($event->collaborators()->get()) > 0)
                         @each('partials.events.collaborators.edit_collaborator', $event->collaborators()->orderBy('id', 'asc')->get(), 'user')
                     @endif
