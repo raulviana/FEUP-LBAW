@@ -477,3 +477,11 @@ div#session-alerts{
     right:2.5%;
     top:10%;
 }
+
+#imageResult{
+    border-radius: 50%;
+    border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 5px;
+  width: 150px;
+}

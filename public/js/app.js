@@ -306,5 +306,37 @@ function createItem(item) {
 }
 
 
+/*  ==========================================
+    USER PROFILE UPLOAD PHOTO SNIPPET
+* ========================================== */
+
+//SHOW UPLOADED IMAGE/*  
+
+    function readImage(input) {
+      debugger;
+      console.log("IN shwo IMAGE");
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+    
+        reader.onload = function(e) {
+          $('#imageResult')
+            .attr('src', e.target.result);
+        };
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+    
+    $(function() {
+      $('#upload-photo').on('change', function() {
+        readURL(input);
+      });
+    });
+   
+    
 
 addEventListeners();
+
+
+
+
+
