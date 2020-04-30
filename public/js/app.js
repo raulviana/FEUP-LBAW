@@ -164,7 +164,7 @@ function sendDeleteEventRequest(event){
 
 /* HANDLERS */
 function addCollaboratorHandler(){
-   if(this.status != 200){
+   if(this.status == 404){
       let old_tbody = document.querySelector("table#search-results tbody");
       let new_tbody = document.createElement('tbody');  
       let row = new_tbody.insertRow(0);
@@ -173,7 +173,7 @@ function addCollaboratorHandler(){
       cell1.innerText = "Invalid email: make sure the user is registered.";
       old_tbody.parentNode.replaceChild(new_tbody, old_tbody);
    }
-   else{
+   else if (this.status==200){
      let user = JSON.parse(this.responseText);
      let tbody = document.querySelector("tbody#edit-collaborators");
 
@@ -186,11 +186,16 @@ function addCollaboratorHandler(){
       <a data-id=${user.id} id="remove-collaborator" class="nav-link">🗑️</a> 
       </td>
       </tr>
-    `;
-
-    
-
-        
+    `;       
+   }
+   else if(this.status == 500){
+    let old_tbody = document.querySelector("table#search-results tbody");
+    let new_tbody = document.createElement('tbody');  
+    let row = new_tbody.insertRow(0);
+    let cell1= row.insertCell(0);
+    cell1.classList.add("alert-warning");
+    cell1.innerText = "User is already collaborating.";
+    old_tbody.parentNode.replaceChild(new_tbody, old_tbody);
    }
 
 }

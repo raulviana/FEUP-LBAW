@@ -535,3 +535,12 @@ button#search-users:hover {
 }
   
  
+/* User photo upload */
+#imageResult{
+  padding: 5px;
+  width: 150px;
+}
+
+input#upload-photo{
+    color: blue;
+}

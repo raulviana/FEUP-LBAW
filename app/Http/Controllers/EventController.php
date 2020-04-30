@@ -126,6 +126,7 @@ class EventController extends Controller
         if(count($users) == 1){
             $user = $users[0];
 
+            //TODO: como saber se foi update or insert ?
             DB::table('collaborators_event')->updateOrInsert(
                 ['event_id' => $request['event_id'], 'user_id' => $user->id]
             );
