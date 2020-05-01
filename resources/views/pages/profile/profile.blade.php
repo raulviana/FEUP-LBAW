@@ -19,7 +19,7 @@
 
                     <div class="row">
                         <div class="col-md-6">
-                            <center><img src="https://media-manager.noticiasaominuto.com/1920/1569938681/naom_59ad8a23b9585.jpg?crop_params=eyJwb3J0cmFpdCI6eyJjcm9wV2lkdGgiOjEwNTAsImNyb3BIZWlnaHQiOjE4NjYsImNyb3BYIjoxMDI5LCJjcm9wWSI6MH0sImxhbmRzY2FwZSI6eyJjcm9wV2lkdGgiOjI4MDAsImNyb3BIZWlnaHQiOjE1NzQsImNyb3BYIjowLCJjcm9wWSI6Njd9fQ==" alt="" width="400" class="mb-4">
+                            <center><img src={{ Storage::url('users/'.$user['photo']) }}  alt="User photo" width="400" class="mb-4">
                             </center>
                         </div>
 

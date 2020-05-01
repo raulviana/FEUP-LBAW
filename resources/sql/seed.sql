@@ -55,6 +55,7 @@ CREATE TABLE "users" (
     name text NOT NULL,
     password text NOT NULL,
     admin BOOLEAN,
+    photo TEXT DEFAULT 'default_user.jpg',
     about text,
     is_active BOOLEAN default true
 );
@@ -327,7 +328,9 @@ INSERT INTO users VALUES (
   'John Doe',
   '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W',
   FALSE,
-  ''
+  'default_user.jpg',
+  'not very artisitc',
+  TRUE
 ); -- Password is 1234. Generated using Hash::make('1234')
 
 ---------------------------------------------------- EVENT ----------------------------------------------------  

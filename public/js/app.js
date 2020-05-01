@@ -304,7 +304,6 @@ function userRestoreHandler() {
 //SHOW UPLOADED IMAGE/*  
 
     function readImage(input) {
-      console.log("IN shwo IMAGE");
       if (input.files && input.files[0]) {
         var reader = new FileReader();
     
