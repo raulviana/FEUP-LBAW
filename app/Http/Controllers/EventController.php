@@ -10,6 +10,7 @@ use App\EventCollaborators;
 use App\User;
 use App\Tag;
 use Auth;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\DB;
 
@@ -116,6 +117,23 @@ class EventController extends Controller
             $request->session()->flash('error', 'Ups! Cant remove collaborator');
             return response()->json([], 404);
         }
+    }
+
+    public function addCollaborator(Request $request){
+        $users = User::where('email', $request['query'])->get();
+
+        if(count($users) == 1){
+            $user = $users[0];
+
+            //TODO: como saber se foi update or insert ?
+            DB::table('collaborators_event')->updateOrInsert(
+                ['event_id' => $request['event_id'], 'user_id' => $user->id]
+            );
+
+            return response()->json($user, 200);
+        }
+        
+        return response()->json([], 404);
     }
 
     public function addTag($tag_name, $event_id){
