@@ -6,9 +6,9 @@
 
 <div class="container">
     <div class="row profile justify-content-center">
-        <div class="col-lg-10 push-lg-4">
+        <div class="col-lg-10 h-10%">
         <br><br><br>
-        <img style="height:35%; width:100%;" src={{ Storage::url('event_photo/'.$event['photo']) }} alt="" class="img-fluid" width="100%">
+        <img style="width:100%;" src={{ Storage::url('event_photo/'.$event['photo']) }} alt="" class="img-fluid">
 
         @include('partials.events.eventheader', ['event' => $event])
          

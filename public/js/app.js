@@ -261,18 +261,18 @@ function reviewEventHandler(){
 }
 
 function postCreatedHandler() {
-  //if(this.status != 200) window.location = '/';
+  //post[0]->post post[1]->username post[2]->user photo path
   let post = JSON.parse(this.responseText);
-
+  console.log(post[0]);
   let new_post = document.createElement('article');
   new_post.classList.add('post', 'p-3', 'mb-3');
   new_post.innerHTML = `
     <div class="d-flex flex-row align-items-center">
-        <img src="https://pbs.twimg.com/profile_images/973548356462051329/PldBA7ID_400x400.jpg" class="rounded-circle mr-2" alt="Owner" width="50px">
-        <h6> <b>${post.user_id}</b> says... </h6>
+        <img src=${post[2]} class="rounded-circle mr-2" alt="Owner" width="50px">
+        <h6> <b>${post[1]}</b> says... </h6>
     </div>
-    <p id="comment-body">${post.content}</p>
-    <p id="comment-datetime" class="text-right">${post.post_time}</p>
+    <p id="comment-body">${post[0].content}</p>
+    <p id="comment-datetime" class="text-right">${post[0].post_time}</p>
     <hr>
   `;
   

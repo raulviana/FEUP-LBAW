@@ -5,25 +5,24 @@
 @section('content')
 <br><br><br>
 
-<form method="POST" action="{{ route('register') }}">
 
-  {{ csrf_field() }}
 
-  <div id="login-form" class="container">
-    <div class="row justify-content-center">
-      <div class="col-8">
-        <div class="tab-content p-b-3">
-          <div class="tab-pane active" id="login">
-            <div class="col-md-12 flex-column justify-content-center">
+<div id="login-form" class="container">
+  <div class="row justify-content-center">
+    <div class="col-8">
+      <div class="tab-content p-b-3">
+        <div class="tab-pane active" id="login">
+          <div class="col-md-12 flex-column justify-content-center">
 
-              <div id="text-banner-login" class="container">
-                <img style="height:25%; width:100%;filter: brightness(80%);" src="{{asset('images/banner_2.jpg')}}" class="img-fluid" width="100%">
-                <div id="text-banner-login" class="centered">Register</div>
-              </div>
-              <br><br>
-              <div class="card-body">
-
-                <div class="form-group">
+            <div id="text-banner-login" class="container">
+              <img style="height:25%; width:100%;filter: brightness(80%);" src="{{asset('images/banner_2.jpg')}}" class="img-fluid" width="100%">
+              <div id="text-banner-login" class="centered">Register</div>
+            </div>
+            <br><br>
+            <div class="card-body">
+              <form method="POST" enctype="multipart/form-data" action="{{ "/register" }}">
+                {{ csrf_field() }}
+               
                   <!-- Upload image input-->
                   <div class="input-group" id="upload-group">
                     <label id="upload-button">
@@ -39,7 +38,8 @@
                   <!-- Uploaded image area-->
                   <div class="image-area mt-4 img-thumbnail"><img id="imageResult" src="#" alt="" class="img-fluid rounded float-center shadow-sm mx-auto d-block">
                   </div>
-                </div>
+
+              
                 <div class="form-group">
                   <label for="inputsm">Email</label>
                   <input id="email" class="form-control input-sm" type="email" name="email" value="{{ old('email') }}" required autofocus>
@@ -70,12 +70,12 @@
 
                 <p class="text-center"> Already have an account? <br> <a class="button button-outline" href="{{ route('login') }}">Click here to sign in!</a></p>
 
-              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>
 </form>
 @endsection

@@ -11,6 +11,7 @@
 |
 */
 
+use App\Http\Controllers\UserController;
 
 Route::get('/', 'HomepageController@display')->name('home');
 
@@ -24,6 +25,8 @@ Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('re
 Route::post('register', 'Auth\RegisterController@register');
 
 // User 
+
+//++++++++++++++++
 Route::get('profile/{id}', 'UserController@show');
 Route::get('profile/{id}/edit', 'UserController@edit');
 Route::post('profile/{id}/edit', 'UserController@update');
