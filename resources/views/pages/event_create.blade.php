@@ -10,7 +10,7 @@
     <div class="row profile justify-content-center">
         <div id="edit-event" class="col-lg-10 push-lg-4">
 
-            <form method="post" enctype="multipart/form-data" action="{{empty($event) ? "/events/create" : "/events/".$event->event_id."/edit"}}">
+            <form method="post" enctype="multipart/form-data" action="{{empty($event) ? "/events/create" : "/events/".$event->id."/edit"}}">
                 {{ csrf_field() }}
                 <div class="row">
                     <div class="col">
@@ -22,11 +22,20 @@
                    <!-- photo -->
                     <div class="col-lg-6 mx-auto text-right">
 
-                        <div class="file-field">
-                            <svg class="bi bi-paperclip" width="1em" height="1em" >
-                                <path fill-rule="evenodd" d="M4.25 3a2.25 2.25 0 0125 0v9a1.25 1.25 0 01-3 0V25a.25.25 0 011 0v7a.25.25 0 001 0V3a1.25 1.25 0 10-3 0v9a2.25 2.25 0 0025 0V25a.25.25 0 011 0v7a3.25 3.25 0 11-7 0V3z" clip-rule="evenodd" />
-                            </svg>
-                            <input type="file" id="photo" name="photo">
+                         <!-- Upload image input-->
+                         <div class="input-group" id="upload-group">
+                            <label id="upload-button">
+                                <input id="upload-photo" name="upload-photo" type="file" onchange="readImage(this);">
+                                <span>Event Photo
+                                    <svg class="bi bi-upload" width="1em" height="1em" viewBox="0 -2 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M.5 8a.5.5 0 01.5.5V12a1 1 0 001 1h12a1 1 0 001-1V8.5a.5.5 0 011 0V12a2 2 0 01-2 2H2a2 2 0 01-2-2V8.5A.5.5 0 01.5 8zM5 4.854a.5.5 0 00.707 0L8 2.56l2.293 2.293A.5.5 0 1011 4.146L8.354 1.5a.5.5 0 00-.708 0L5 4.146a.5.5 0 000 .708z" clip-rule="evenodd" />
+                                        <path fill-rule="evenodd" d="M8 2a.5.5 0 01.5.5v8a.5.5 0 01-1 0v-8A.5.5 0 018 2z" clip-rule="evenodd" />
+                                    </svg>
+                                </span>
+                            </label>
+                        </div>
+                        <!-- Uploaded image area-->
+                        <div class="image-area mt-4 img-thumbnail"><img id="imageResult" src="#" alt="" class="img-fluid rounded float-center shadow-sm mx-auto d-block">
                         </div>
                     </div>
                 </div>
@@ -105,6 +114,10 @@
 
                 <button id="button-save-changes" type="submit" class="btn"> {{empty($event) ? "CREATE" : "CONFIRM CHANGES"}} </button>
 
+                @if(empty($event))
+                @else
+                    <input name="id" type="hidden" value={{$event->id}}>
+                @endif
             </form>
         </div>
     </div>

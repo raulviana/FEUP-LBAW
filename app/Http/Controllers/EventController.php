@@ -43,10 +43,9 @@ class EventController extends Controller
             'start_date' => 'required',
             'end_date' => 'required',
             'details' => 'required',
-            'photo' => 'required'
+            'upload-photo' => 'required'
         ]);
-
-        $path = $request->file('photo')->store('/event_photo');
+        $path = $request->file('upload-photo')->store('/public/event_photo');
         $filename = basename($path);
         $event = new Event;
         
@@ -55,7 +54,6 @@ class EventController extends Controller
         $event->start_date = $request->input('start_date');
         $event->end_date = $request->input('end_date');
 
-        $event->local_id = 1;
 
         $event->photo = $filename;
         if($request->input('is_private') == 'off')
@@ -64,6 +62,8 @@ class EventController extends Controller
             $event->type = 'private';
             
         $event->owner_id = Auth::user()->id;
+
+        $event->local_id = $this->addLocal($request['local']);
 
         $event->save();
 
@@ -85,7 +85,36 @@ class EventController extends Controller
     }
 
     public function update(Request $request){
-        return 123;
+        $event = Event::find($request['id']);
+       
+
+        if(!is_null($request->input('title'))){
+            $event->title = $request->input('title');
+        }
+        
+        if(!is_null($request->input('local'))){
+            $event->local_id = $this->addLocal($request->input('local'));
+    
+        }
+       
+        if(!is_null($request->input('start_date'))){
+            $event->start_date = $request->input('start_date');
+    
+        }
+
+        if(!is_null($request->input('end_date'))){
+            $event->start_date = $request->input('start_date');
+    
+        }
+
+        if(!is_null($request->input('details'))){
+            $event->details = $request->input('details');
+    
+        }
+       
+        $event->save();
+
+        return redirect('/events/'.$event->id)->with('success', 'Your event is up to date!');    
     }
 
     public function delete(Request $request){
@@ -98,7 +127,6 @@ class EventController extends Controller
             $request->session()->flash('success', $event->title.' was deleted');
             return response()->json([], 200);
         } catch(ModelNotFoundException $e){
-            
             $request->session()->flash('error', 'Ups! The event was not deleted');
             return response()->json([], 404);
         } 
@@ -143,5 +171,13 @@ class EventController extends Controller
         DB::table('event_tag')->updateOrInsert(
             ['event_id' => $event_id, 'tag_id' => $tag[0]->id]
         );
+    }
+
+    public function addLocal($local_name){
+        $idLocal = DB::table('local')->insertGetId(
+            ['name' => $local_name]
+        );
+
+        return $idLocal;
     }
 }

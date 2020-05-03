@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Support\Facades\Input;
+
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
@@ -62,7 +64,13 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+
+        print_r($data);
+        $path = Input::file('upload-photo')->store('public/users');
+       
+        $filename = basename($path);
         return User::create([
+            'photo' => $filename,
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),

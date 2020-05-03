@@ -76,6 +76,7 @@ class UserController extends Controller
         } 
     }
 
+
     public function search(Request $request){
         $query = $request['searchField'];
         if($query != ''){
@@ -91,7 +92,6 @@ class UserController extends Controller
 
             return response()->json($users, 404);
         }
-
-      
     }
+        
 }

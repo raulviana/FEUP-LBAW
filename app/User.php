@@ -20,7 +20,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'photo',
     ];
 
     /**
@@ -32,12 +32,15 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    protected $appends = ['name'];
+
     /**
      * The events this user owns.
      */
     public function events() {
       return $this->hasMany('App\Event');
     }
+
 
     /**
      * The posts that were written by the user

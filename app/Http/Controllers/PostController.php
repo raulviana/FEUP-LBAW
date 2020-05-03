@@ -2,16 +2,24 @@
 
 namespace App\Http\Controllers;
 
+ use Illuminate\Support\Facades\Auth;
+ use Illuminate\Support\Facades\Storage;
+
 use Illuminate\Http\Request;
 use App\Post;
-use App\Auth;
 use Carbon\Carbon;
 
 class PostController extends Controller
 {
     public function store(Request $request){
        
+        
+        $user_name = Auth::user()->name;
+        $user_photo = Storage::url('users/'. Auth::user()->photo);
+        
+        
         $post = new Post();
+        
 
         $post->user_id = $request->input('userid');
         $post->event_id = $request->input('eventid');
@@ -20,6 +28,9 @@ class PostController extends Controller
 
         $post->save();
 
-        return $post;
+        $post->post_time = Carbon::parse($post->post_time)->format('Y-m-d h:i:s');
+        $out = array($post, $user_name, $user_photo);
+
+        return $out;
     }
 }
