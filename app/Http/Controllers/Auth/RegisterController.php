@@ -65,7 +65,6 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
 
-        print_r($data);
         $path = Input::file('upload-photo')->store('public/users');
        
         $filename = basename($path);

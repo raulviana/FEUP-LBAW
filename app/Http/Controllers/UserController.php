@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Input;
 use Illuminate\Http\Request;
 use App\User;
 use Auth;
@@ -40,7 +40,14 @@ class UserController extends Controller
         if(!is_null($request->input('about'))){
             $user->about = $request->input('about');
         }
-       
+
+        if(!is_null($request->file('upload-photo'))){
+            //TODO erase previous user photo
+            $path = $request->file('upload-photo')->store('/public/users');
+            $filename = basename($path);
+            
+            $user->photo = $filename;
+        }
         $user->save();
 
         return redirect('/profile/'.$id)->with('success', 'Your profile is up to date!');     

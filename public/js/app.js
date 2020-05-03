@@ -268,8 +268,8 @@ function postCreatedHandler() {
   new_post.classList.add('post', 'p-3', 'mb-3');
   new_post.innerHTML = `
     <div class="d-flex flex-row align-items-center">
-        <img src=${post[2]} class="rounded-circle mr-2" alt="Owner" width="50px">
-        <h6> <b>${post[1]}</b> says... </h6>
+        <img src=${post[2]} class="rounded-circle mr-2" alt="User Photo" width="50px">
+        <h6> <b>${post[1]}</b> says: </h6>
     </div>
     <p id="comment-body">${post[0].content}</p>
     <p id="comment-datetime" class="text-right">${post[0].post_time}</p>
