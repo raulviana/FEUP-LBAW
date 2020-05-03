@@ -38,7 +38,7 @@ Route::get('aboutus', 'HomepageController@about')->name('aboutus');
 //Admin
 //Route::get('/admin/users', 'AdminController@display')->name('admin');
 Route::get('/admin/users', 'AdminController@users')->name('admin-users');
-Route::delete('api/admin/users/{id}', 'AdminController@deleteUser')->name('admin-del-user');
+//Route::delete('api/admin/users/{id}', 'AdminController@deleteUser')->name('admin-del-user');
 Route::get('/admin/events', 'AdminController@events')->name('admin-events');
 
 
