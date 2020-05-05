@@ -554,3 +554,20 @@ img#imageResult{
 }
 
 
+
+/*SHOW EVENT DETAIL ADMIN*/
+
+button#show-event-detail{
+    background-color: gainsboro;
+  border: none;
+  color: #3B5998;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  transition-duration: 0.2s;
+  
+}
+button#show-event-detail:hover{
+    background-color: rgb(206, 201, 201);
+    border: none;
+}

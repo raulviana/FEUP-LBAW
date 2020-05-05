@@ -298,6 +298,8 @@ function userDeletedHandler() {
 
   let user = JSON.parse(this.responseText);
 
+  console.log(user);
+
   const alert = document.createElement('div');
   alert.classList.add("alert", "alert-success");
   alert.innerText = "User " + user.name + " was suspended.";

@@ -51,8 +51,8 @@ CREATE TABLE photo (
 
 CREATE TABLE "users" (
     id SERIAL PRIMARY KEY,
-    email text NOT NULL UNIQUE,
     name text NOT NULL,
+    email text NOT NULL UNIQUE,
     password text NOT NULL,
     admin BOOLEAN,
     photo TEXT DEFAULT 'default_user.jpg',

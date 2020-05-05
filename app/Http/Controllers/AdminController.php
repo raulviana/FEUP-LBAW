@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Event;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\User;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class AdminController extends Controller
 {
@@ -18,10 +20,15 @@ class AdminController extends Controller
     }
 
     public function deleteUser($id){
-        $user = User::find($id);
-        $user->delete();
+        try{
+            $user = User::find($id);
+            $user->delete();
 
-        return response()->json($user);
+            return response()->json($user, 200);
+        }
+        catch(ModelNotFoundException $e){
+            return response()->json($user, 400);
+        }
     }
 
     public function restoreUser($id){
@@ -29,6 +36,7 @@ class AdminController extends Controller
     }
 
     public function events(){
-        return 123;
+        $events = Event::with('owner', 'local', 'tags', 'posts')->get();
+        return view('pages.admin.manage-events', ['events' => $events]);
     }
 }
