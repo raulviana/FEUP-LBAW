@@ -119,16 +119,16 @@ class EventController extends Controller
 
     public function delete(Request $request){
         $event = Event::find($request['id']);
-        
+       
         try{
             $event->is_active = false;
             $event->save();
 
             $request->session()->flash('success', $event->title.' was deleted');
-            return response()->json([], 200);
+            return response()->json($event, 200);
         } catch(ModelNotFoundException $e){
             $request->session()->flash('error', 'Ups! The event was not deleted');
-            return response()->json([], 404);
+            return response()->json($event, 404);
         } 
 
     }

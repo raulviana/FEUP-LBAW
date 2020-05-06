@@ -8,7 +8,7 @@ const confirmPasswordField = document.getElementById('confirm-password');
 const likeBtn = document.querySelector("a#up-vote");
 const dislikeBtn  =document.querySelector("a#down-vote");
 
-const delEventBtn = document.querySelector("button#del-event");
+const delEventBtn = document.querySelector("button#delete-event-btn");
 
 const searchUsersField = document.querySelector("input#search-users");
 
@@ -250,7 +250,36 @@ function collaboratorRemovedHandler(){
 }
 
 function eventDeletedHandler(){
-    window.location = '/';
+  let event = JSON.parse(this.responseText);
+  let eventrow = document.createElement('div');
+  let elements = document.getElementById('event' + event['id']);
+ 
+  eventrow.innerHtml =
+  `<th scope="row">${event['id']}</th>
+  <td>${event['title']}}</td>
+  <td>${event['start_date']}}</td>
+  <td>
+      <button id="show-event-detail" class="btn btn-primary float-center" type="button" data-toggle="collapse" data-target="#${event['id']}" aria-expanded="false" aria-controls="collapseExample">
+          Details
+      </button>
+      </p>
+      <div class="collapse" id=${event['id']}}>
+          <div class="card card-body">
+              <small>${event['details']}</small>
+          </div>
+      </div>
+  </td>
+  @if(${event['is_active']})
+  <td> <button id="delete-event-btn" data-id=${event['id']} type="button" class="btn btn-danger"> Suspend </button> </td>
+  <td data-id=${event['id']}>Active</td>
+  @else
+  <td> <button id="restore-event-btn" data-id=${event['id']} type="button" class="btn btn-success"> Restore </button> </td>
+  <td>Deleted</td>
+  @endif`;
+ 
+  
+  elements.parentNode.insertBefore(eventrow, elements);
+  elements.parentNode.removeChild(elements);
 }
 
 function reviewEventHandler(){
@@ -263,7 +292,6 @@ function reviewEventHandler(){
 function postCreatedHandler() {
   //post[0]->post post[1]->username post[2]->user photo path
   let post = JSON.parse(this.responseText);
-  console.log(post[0]);
   let new_post = document.createElement('article');
   new_post.classList.add('post', 'p-3', 'mb-3');
   new_post.innerHTML = `
@@ -298,7 +326,6 @@ function userDeletedHandler() {
 
   let user = JSON.parse(this.responseText);
 
-  console.log(user);
 
   const alert = document.createElement('div');
   alert.classList.add("alert", "alert-success");

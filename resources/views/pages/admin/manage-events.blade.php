@@ -12,14 +12,14 @@
   
          <div class="tab-content p-b-3">
              <div class="tab-pane active" id="manage-users">
-                 <h6> Manage Events </h6>
+                 <h6> <strong>Manage Events</strong> </h6>
                  <input id="search-users" type="text" placeholder="Search..">
                  
                  <table class="table table-striped">
                     <thead>
                         <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Location</th>
+                        <th scope="col">Title</th>
                         <th scope="col">Date</th>
                         <th scope="col"></th>
                         <th scope="col"></th>
