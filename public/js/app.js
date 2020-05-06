@@ -251,11 +251,12 @@ function collaboratorRemovedHandler(){
 
 function eventDeletedHandler(){
   let event = JSON.parse(this.responseText);
-  let eventrow = document.createElement('div');
+  let eventrow = document.createElement('tr');
   let elements = document.getElementById('event' + event['id']);
  
-  eventrow.innerHtml =
-  `<th scope="row">${event['id']}</th>
+  eventrow.innerHtml = "<p> updated </p>";
+  /* `
+  <th scope="row">${event['id']}</th>
   <td>${event['title']}}</td>
   <td>${event['start_date']}}</td>
   <td>
@@ -275,10 +276,11 @@ function eventDeletedHandler(){
   @else
   <td> <button id="restore-event-btn" data-id=${event['id']} type="button" class="btn btn-success"> Restore </button> </td>
   <td>Deleted</td>
-  @endif`;
+  @endif
+  `;*/
  
-  
-  elements.parentNode.insertBefore(eventrow, elements);
+  console.log(eventrow);
+  elements.insertAdjacentElement('afterend', eventrow);
   elements.parentNode.removeChild(elements);
 }
 
