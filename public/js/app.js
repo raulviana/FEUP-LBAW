@@ -251,37 +251,17 @@ function collaboratorRemovedHandler(){
 
 function eventDeletedHandler(){
   let event = JSON.parse(this.responseText);
-  let eventrow = document.createElement('tr');
-  let elements = document.getElementById('event' + event['id']);
  
-  eventrow.innerHtml = "<p> updated </p>";
-  /* `
-  <th scope="row">${event['id']}</th>
-  <td>${event['title']}}</td>
-  <td>${event['start_date']}}</td>
-  <td>
-      <button id="show-event-detail" class="btn btn-primary float-center" type="button" data-toggle="collapse" data-target="#${event['id']}" aria-expanded="false" aria-controls="collapseExample">
-          Details
-      </button>
-      </p>
-      <div class="collapse" id=${event['id']}}>
-          <div class="card card-body">
-              <small>${event['details']}</small>
-          </div>
-      </div>
-  </td>
-  @if(${event['is_active']})
-  <td> <button id="delete-event-btn" data-id=${event['id']} type="button" class="btn btn-danger"> Suspend </button> </td>
-  <td data-id=${event['id']}>Active</td>
-  @else
-  <td> <button id="restore-event-btn" data-id=${event['id']} type="button" class="btn btn-success"> Restore </button> </td>
-  <td>Deleted</td>
-  @endif
-  `;*/
- 
-  console.log(eventrow);
-  elements.insertAdjacentElement('afterend', eventrow);
-  elements.parentNode.removeChild(elements);
+  let new_button = document.createElement('button');
+  new_button.innerHTML = `<button id="restore-event-btn" type="button" class="btn btn-success"> Restore </button> `;
+  new_button.style = ('border:none');
+  let new_info = document.createElement('td');
+  new_info.innerHTML = "Deleted";
+
+  let old_button = document.querySelector('button#delete-event-btn');
+  old_button.replaceWith(new_button);
+  let old_status = document.querySelector('td#status-info');
+  old_status.replaceWith(new_info);
 }
 
 function reviewEventHandler(){

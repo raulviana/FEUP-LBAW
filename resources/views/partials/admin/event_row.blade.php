@@ -1,5 +1,4 @@
 <tr id="event{{$event->id}}">
-    <div id='cell'>
         <th scope="row">{{$event->id}}</th>
         <td>{{$event->title}}</td>
         <td>{{$event->start_date}}</td>
@@ -16,10 +15,9 @@
         </td>
         @if($event->is_active)
         <td> <button id="delete-event-btn" data-id={{$event->id}} type="button" class="btn btn-danger"> Suspend </button> </td>
-        <td data-id={{$event->id}}>Active</td>
+        <td id="status-info" data-id={{$event->id}}>Active</td>
         @else
         <td> <button id="restore-event-btn" data-id={{$event->id}} type="button" class="btn btn-success"> Restore </button> </td>
         <td>Deleted</td>
         @endif
-    </div>
 <tr>

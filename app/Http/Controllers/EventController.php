@@ -10,6 +10,7 @@ use App\EventCollaborators;
 use App\User;
 use App\Tag;
 use Auth;
+use Session;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\DB;
@@ -123,11 +124,10 @@ class EventController extends Controller
         try{
             $event->is_active = false;
             $event->save();
-
-            $request->session()->flash('success', $event->title.' was deleted');
+            Session::flash('success', 'Event Deleted!');
             return response()->json($event, 200);
         } catch(ModelNotFoundException $e){
-            $request->session()->flash('error', 'Ups! The event was not deleted');
+            Session::flash('error', 'Something wrong: event not deleted!');
             return response()->json($event, 404);
         } 
 
