@@ -8,7 +8,9 @@ const confirmPasswordField = document.getElementById('confirm-password');
 const likeBtn = document.querySelector("a#up-vote");
 const dislikeBtn  =document.querySelector("a#down-vote");
 
-const delEventBtn = document.querySelector("button#delete-event-btn");
+const delEventBtn = document.querySelectorAll("button#delete-event-btn");
+
+const restEventBtn = document.querySelectorAll('button#restore-event-btn');
 
 const searchUsersField = document.querySelector("input#search-users");
 
@@ -30,22 +32,18 @@ function addEventListeners() {
     collabdeleter.addEventListener('click', sendRemoveCollaborator);
   });
 
-  if(addPostBtn){
-    addPostBtn.addEventListener('click', sendCreatePostRequest);
+  for(let i = 0; i < delEventBtn.length; i++){
+    delEventBtn[i].addEventListener('click', sendDeleteEventRequest);
   }
 
-  if(likeBtn){
-    likeBtn.addEventListener('click', sendLikeVoteRequest);
+  for(let i = 0; i < restEventBtn.length; i++){
+    restEventBtn[i].addEventListener('click', sendRestoreEventRequest);
   }
 
   if(dislikeBtn){
     dislikeBtn.addEventListener('click', sendDislikeVoteRequest);
   }
-
-  if(delEventBtn){
-    delEventBtn.addEventListener('click', sendDeleteEventRequest);
-  }
-
+  
   if(searchUsersField){
     searchUsersField.addEventListener('keyup', sendSearchUserRequest);
   }
@@ -154,11 +152,18 @@ function sendCreatePostRequest(event){
 }
 
 function sendDeleteEventRequest(event){
-  event.preventDefault();
   
   let id = this.closest('button').getAttribute('data-id');
 
   sendAjaxRequest("delete", `/api/events/${id}/delete`, {id: id}, eventDeletedHandler);
+}
+
+function sendRestoreEventRequest(event){
+  event.preventDefault();
+
+  let id = this.closest('button').getAttribute('data-id');
+
+  sendAjaxRequest("put", `/api/events/${id}/restore`, {id: id}, eventRestoreHandler);
 }
 /*--------*/
 
@@ -252,11 +257,25 @@ function collaboratorRemovedHandler(){
 function eventDeletedHandler(){
   let event = JSON.parse(this.responseText);
  
-  let new_button = document.createElement('button');
-  new_button.innerHTML = `<button id="restore-event-btn" type="button" class="btn btn-success"> Restore </button> `;
-  new_button.style = ('border:none');
+  let new_button = document.createElement('div');
+  //new_button.innerHTML = `<button id="restore-event-btn" type="button" class="btn btn-success"> Restore </button> `;
+  //new_button.style = ('border:none');
+  new_button.innerHTML = "";
   let new_info = document.createElement('td');
   new_info.innerHTML = "Deleted";
+
+  let old_button = document.querySelector('button#delete-event-btn');
+  old_button.replaceWith(new_button);
+  let old_status = document.querySelector('td#status-info');
+  old_status.replaceWith(new_info);
+}
+
+function eventRestoreHandler(){
+  let new_button = document.createElement('button');
+  new_button.innerHTML = `<button id="delete-event-btn" type="button" class="btn btn-success"> Delete </button> `;
+  new_button.style = ('border:none');
+  let new_info = document.createElement('td');
+  new_info.innerHTML = "Active";
 
   let old_button = document.querySelector('button#delete-event-btn');
   old_button.replaceWith(new_button);

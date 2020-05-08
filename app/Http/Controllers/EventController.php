@@ -124,13 +124,26 @@ class EventController extends Controller
         try{
             $event->is_active = false;
             $event->save();
-            Session::flash('success', 'Event Deleted!');
+           // Session::flash('success', 'Event Deleted!');
             return response()->json($event, 200);
         } catch(ModelNotFoundException $e){
-            Session::flash('error', 'Something wrong: event not deleted!');
+           // Session::flash('error', 'Something wrong: event not deleted!');
             return response()->json($event, 404);
         } 
 
+    }
+
+    public function restore(Request $request){
+        $event = Event::find($request['id']);
+
+        try{
+            $event->is_active = false;
+            $event->save();
+            return response()->json($event, 200);
+        }
+        catch(ModelNotFoundException $e){
+            return response()->json($event, 404);
+        }
     }
 
     public function removeCollaborator(Request $request){
