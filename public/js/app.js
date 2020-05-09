@@ -1,6 +1,6 @@
 /* GET BUTTONS */
 
-const addPostBtn = document.querySelector("div#new-post button");
+const addPostBtn = document.querySelector("button#btn-add-post");
 
 const passwordField = document.getElementById('password');
 const confirmPasswordField = document.getElementById('confirm-password');
@@ -38,6 +38,10 @@ function addEventListeners() {
 
   for(let i = 0; i < restEventBtn.length; i++){
     restEventBtn[i].addEventListener('click', sendRestoreEventRequest);
+  }
+
+  if(addPostBtn){
+    addPostBtn.addEventListener('click', sendCreatePostRequest);
   }
 
   if(dislikeBtn){
@@ -152,6 +156,7 @@ function sendCreatePostRequest(event){
 }
 
 function sendDeleteEventRequest(event){
+  event.preventDefault();
   
   let id = this.closest('button').getAttribute('data-id');
 
@@ -163,7 +168,7 @@ function sendRestoreEventRequest(event){
 
   let id = this.closest('button').getAttribute('data-id');
 
-  sendAjaxRequest("put", `/api/events/${id}/restore`, {id: id}, eventRestoreHandler);
+  sendAjaxRequest("post", `/api/events/${id}/restore`, {id: id}, eventRestoreHandler);
 }
 /*--------*/
 
@@ -256,31 +261,110 @@ function collaboratorRemovedHandler(){
 
 function eventDeletedHandler(){
   let event = JSON.parse(this.responseText);
- 
-  let new_button = document.createElement('div');
-  //new_button.innerHTML = `<button id="restore-event-btn" type="button" class="btn btn-success"> Restore </button> `;
-  //new_button.style = ('border:none');
-  new_button.innerHTML = "";
-  let new_info = document.createElement('td');
-  new_info.innerHTML = "Deleted";
+  if(this.status == 200){
+    let cell = document.createElement('tr');
+    cell.innerHTML = `<tr id="cell${event['id']}">
+    <th scope="row">${event['id']}</th>
+    <td>${event['title']}</td>
+    <td>${event['start_date']}</td>
+    <td>
+        <button id="show-event-detail" class="btn btn-primary float-center" type="button" data-toggle="collapse" data-target="#${event['id']}" aria-expanded="false" aria-controls="collapseExample">
+            Details
+        </button>
+        </p>
+        <div class="collapse" id=${event['id']}>
+            <div class="card card-body">
+                <small>${event['details']}</small>
+            </div>
+        </div>
+    </td>
+    <td> <button id="restore-event-btn" data-id=${event['id']} type="button" class="btn btn-success"> Restore </button> </td>
+    <td id="status-info" data-id=${event['id']}>Deleted</td>
+    <tr>`;
+    let old_cell = document.querySelector('#cell' + event['id']);
+    old_cell.replaceWith(cell);
 
-  let old_button = document.querySelector('button#delete-event-btn');
-  old_button.replaceWith(new_button);
-  let old_status = document.querySelector('td#status-info');
-  old_status.replaceWith(new_info);
+    const alert = document.createElement('div');
+    alert.classList.add("alert", "alert-success");
+    alert.innerText = "Event was successfully deleted!";
+    const manageEventDiv = document.querySelector('div#admin-management');
+    (manageEventDiv.parentElement).insertBefore(alert, manageEventDiv);
+
+    setTimeout(() => {
+      alert.parentElement.removeChild(alert);
+    }, 3000);
+  }
+  else if(this.status == 404){
+    const alert = document.createElement('div');
+    alert.classList.add("alert", "alert-danger");
+    alert.innerText = "Something wrong, event not found!";
+    const manageEventDiv = document.querySelector('div#admin-management');
+    (manageEventDiv.parentElement).insertBefore(alert, manageEventDiv);
+    setTimeout(() => {
+      alert.parentElement.removeChild(alert);
+    }, 3000);
+  }
+  else{
+    const alert = document.createElement('div');
+    alert.classList.add("alert", "alert-danger");
+    alert.innerText = "Something wrong, event not deleted!";
+    const manageEventDiv = document.querySelector('div#admin-management');
+    (manageEventDiv.parentElement).insertBefore(alert, manageEventDiv);
+    setTimeout(() => {
+      alert.parentElement.removeChild(alert);
+    }, 3000);
+    window.location = '/';
+  }
 }
 
 function eventRestoreHandler(){
-  let new_button = document.createElement('button');
-  new_button.innerHTML = `<button id="delete-event-btn" type="button" class="btn btn-success"> Delete </button> `;
-  new_button.style = ('border:none');
-  let new_info = document.createElement('td');
-  new_info.innerHTML = "Active";
+  let event = JSON.parse(this.responseText);
+ 
+  if(this.status == 200){
+    let cell = document.createElement('tr');
+    cell.innerHTML = `<tr id="cell${event['id']}">
+    <th scope="row">${event['id']}</th>
+    <td>${event['title']}</td>
+    <td>${event['start_date']}</td>
+    <td>
+        <button id="show-event-detail" class="btn btn-primary float-center" type="button" data-toggle="collapse" data-target="#${event['id']}" aria-expanded="false" aria-controls="collapseExample">
+            Details
+        </button>
+        </p>
+        <div class="collapse" id=${event['id']}>
+            <div class="card card-body">
+                <small>${event['details']}</small>
+            </div>
+        </div>
+    </td>
+    <td> <button id="delete-event-btn" data-id=${event['id']} type="button" class="btn btn-danger">Suspend</button> </td>
+    <td id="status-info" data-id=${event['id']}>Active</td>
+    <tr>`;
+    let old_cell = document.querySelector('#cell' + event['id']);
+    old_cell.replaceWith(cell);
+  }
+  else if(this.status == 404){
+    const alert = document.createElement('div');
+    alert.classList.add("alert", "alert-danger");
+    alert.innerText = "Something wrong, event not found!";
+    const manageEventDiv = document.querySelector('div#admin-management');
+    (manageEventDiv.parentElement).insertBefore(alert, manageEventDiv);
+    setTimeout(() => {
+      alert.parentElement.removeChild(alert);
+    }, 3000);
+  }
+  else{
+    const alert = document.createElement('div');
+    alert.classList.add("alert", "alert-danger");
+    alert.innerText = "Something wrong, event not deleted!";
+    const manageEventDiv = document.querySelector('div#admin-management');
+    (manageEventDiv.parentElement).insertBefore(alert, manageEventDiv);
+    setTimeout(() => {
+      alert.parentElement.removeChild(alert);
+    }, 3000);
+    window.location = '/';
+  }
 
-  let old_button = document.querySelector('button#delete-event-btn');
-  old_button.replaceWith(new_button);
-  let old_status = document.querySelector('td#status-info');
-  old_status.replaceWith(new_info);
 }
 
 function reviewEventHandler(){

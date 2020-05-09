@@ -11,6 +11,7 @@
 |
 */
 
+use App\Http\Controllers\PostController;
 
 Route::get('/', 'HomepageController@display')->name('home');
 
@@ -52,7 +53,7 @@ Route::get('/events/{id}/edit', 'EventController@edit');
 Route::post('/events/{id}/edit', 'EventController@update');
 Route::get('/events/{id}', 'EventController@show');
 Route::delete('api/events/{id}/delete', 'EventController@delete');
-Route::put('/api/events/${id}/restore', 'EventController@restore');
+Route::post('api/events/{id}/restore', 'EventController@restore');
 Route::delete('api/events/{event_id}/remove/{user_id}', 'EventController@removeCollaborator');
 Route::put('api/events/{event_id}/add/{user_id}', 'EventController@addCollaborator');
 
@@ -64,6 +65,7 @@ Route::get('/tags/{name}', 'TagController@show');
 
 //Posts
 Route::put('api/events/{id}/posts/create', 'PostController@store');
+Route::get('api/events/{id}/posts/get', 'PostController@get');
 
 //Reviews
 Route::put('api/events/{id}/up', 'ReviewController@likeVote');

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Events management - Artnow')
+@section('title', 'Events Management - Artnow')
 
 @section('content')
 
@@ -26,10 +26,11 @@
                         <th scope="col">Status</th>
                         </tr>
                     </thead>
-                    <tbody>                             
-                        @foreach ($events as $event)
-                            @include('partials.admin.event_row', ['event' => $event])
-                        @endforeach
+                    <tbody> 
+                        <?php
+                        print_r($posts);
+                        ?>                            
+                      
                     </tbody>              
                 </table>    
                   

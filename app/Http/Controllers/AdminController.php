@@ -39,4 +39,6 @@ class AdminController extends Controller
         $events = Event::with('owner', 'local', 'tags', 'posts')->get();
         return view('pages.admin.manage-events', ['events' => $events]);
     }
+
+    
 }

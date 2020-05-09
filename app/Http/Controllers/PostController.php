@@ -13,7 +13,6 @@ class PostController extends Controller
 {
     public function store(Request $request){
        
-        
         $user_name = Auth::user()->name;
         $user_photo = Storage::url('users/'. Auth::user()->photo);
         
@@ -32,5 +31,12 @@ class PostController extends Controller
         $out = array($post, $user_name, $user_photo);
 
         return $out;
+    }
+
+    public function get(Request $request){
+
+        $posts = Post::where('event_id',  $request['id']);
+            
+        return view('pages.admin.manage-events-posts', ['posts' => $posts]);
     }
 }
