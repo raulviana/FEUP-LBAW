@@ -5,8 +5,11 @@ namespace App\Http\Controllers;
  use Illuminate\Support\Facades\Auth;
  use Illuminate\Support\Facades\Storage;
 
+use DB;
 use Illuminate\Http\Request;
 use App\Post;
+use App\User;
+use App\Event;
 use Carbon\Carbon;
 
 class PostController extends Controller
@@ -35,8 +38,16 @@ class PostController extends Controller
 
     public function get(Request $request){
 
-        $posts = Post::where('event_id',  $request['id']);
+        $posts = DB::table('post')->where('event_id', '=', $request['id'])->get();
+        $event = Event::find($posts[0]->event_id);
+        $eventTitle = $event->title;
+        foreach($posts as $post){
+            $post->post_time = Carbon::parse($post->post_time)->format('Y-m-d h:i:s');
+            $user = User::find($post->user_id);
             
-        return view('pages.admin.manage-events-posts', ['posts' => $posts]);
+            $post->user_id = $user->name;
+        }
+    
+        return view('pages.admin.manage-events-posts', ['posts' => $posts, 'event_title' => $eventTitle]);
     }
 }

@@ -14,7 +14,7 @@
             </div>
         </td>
         @if($event->is_active)
-        <td> <button id="delete-event-btn" data-id={{$event->id}} type="button" class="btn btn-danger"> Suspend </button> </td>
+        <td> <button id="delete-event-btn" data-id={{$event->id}} type="button" class="btn btn-danger"> Delete </button> </td>
         <td id="status-info" data-id={{$event->id}}>Active</td>
         @else
         <td> <button id="restore-event-btn" data-id={{$event->id}} type="button" class="btn btn-success"> Restore </button> </td>
