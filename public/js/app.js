@@ -12,7 +12,6 @@ const delEventBtn = document.querySelectorAll("button#delete-event-btn");
 
 const restEventBtn = document.querySelectorAll('button#restore-event-btn');
 
-const searchUsersField = document.querySelector("input#search-users");
 
 const addCollaboratorBtn = document.querySelector("button#search-users");
 
@@ -47,10 +46,11 @@ function addEventListeners() {
   if(dislikeBtn){
     dislikeBtn.addEventListener('click', sendDislikeVoteRequest);
   }
-  
-  if(searchUsersField){
-    searchUsersField.addEventListener('keyup', sendSearchUserRequest);
+
+  if(likeBtn){
+    likeBtn.addEventListener('click', sendLikeVoteRequest);
   }
+
 
   if(addCollaboratorBtn){
     addCollaboratorBtn.addEventListener('click', sendAddCollaboratorRequest);
@@ -91,16 +91,6 @@ function sendAddCollaboratorRequest(event){
   
   sendAjaxRequest("put", `/api/events/{event_id}/add/{user_id})`, {query: query, event_id : event_id}, addCollaboratorHandler);
 }
-
-
-function sendSearchUserRequest(event){
-  event.preventDefault();
-
-  let searchField = searchUsersField.value;
- 
-  sendAjaxRequest("post", `/api/users/search`, {searchField: searchField}, userResultsHandler);
-}
-
 
 function sendRemoveCollaborator(event){
   event.preventDefault();
@@ -208,44 +198,6 @@ function addCollaboratorHandler(){
     old_tbody.parentNode.replaceChild(new_tbody, old_tbody);
    }
 
-}
-
-function userResultsHandler(){
-  if(this.status == 200){
-    let users = JSON.parse(this.responseText);
-
-    if(users.length > 0){
-      let old_tbody = document.querySelector("table#search-results tbody");
-    
-      let new_tbody = document.createElement('tbody');
-      
-      for(let i=0; i<users.length; i++){
-        // Create an empty <tr> element and add it to the 1st position of the table:
-        let row = new_tbody.insertRow(0);
-
-        // Insert new cells (<td> elements) at the 1st and 2nd position of the "new" <tr> element:
-        let cell1 = row.insertCell(0);
-        let cell2 = row.insertCell(1);
-        let cell3 = row.insertCell(2);
-
-        cell1.innerText = users[i].id;
-        cell2.innerText = users[i].name;
-        cell3.innerText = users[i].email; 
-    }
-
-      old_tbody.parentNode.replaceChild(new_tbody, old_tbody)
-          
-    }
-    else{
-      let old_tbody = document.querySelector("table#search-results tbody");
-      let new_tbody = document.createElement('tbody');  
-      let row = new_tbody.insertRow(0);
-      let cell1= row.insertCell(0);
-      cell1.innerText = "No results to match "
-      old_tbody.parentNode.replaceChild(new_tbody, old_tbody);
-    }
-    
-  }
 }
 
 function collaboratorRemovedHandler(){
@@ -377,6 +329,7 @@ function eventRestoreHandler(){
 }
 
 function reviewEventHandler(){
+  
   let review = JSON.parse(this.responseText);
 
   let review_score = document.querySelector("p#event-reviews");
@@ -484,7 +437,10 @@ function userRestoreHandler() {
     }
    
    
-    
+function validateNewEvent(){
+  console.log("validating");
+  return true;
+}    
 
 addEventListeners();
 

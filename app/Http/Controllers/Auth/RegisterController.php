@@ -65,11 +65,11 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
 
-        $path = Input::file('upload-photo')->store('public/users');
+        /*$path = Input::file('upload-photo')->store('public/users');*/
        
-        $filename = basename($path);
+        /*$filename = basename($path);*/
         return User::create([
-            'photo' => $filename,
+           /* 'photo' => $filename, */
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),

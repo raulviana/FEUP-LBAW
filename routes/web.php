@@ -30,7 +30,7 @@ Route::get('profile/{id}/edit', 'UserController@edit');
 Route::post('profile/{id}/edit', 'UserController@update');
 Route::delete('api/users/{id}/delete', 'UserController@delete');
 Route::post('api/users/{id}/restore', 'UserController@restore');
-Route::post('api/users/search', 'UserController@search');
+Route::get('api/users/search', 'UserController@search');
 
 // Static pages
 Route::get('faq' , 'HomepageController@faq')->name('faq');

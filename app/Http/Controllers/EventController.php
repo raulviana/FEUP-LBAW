@@ -166,12 +166,19 @@ class EventController extends Controller
         if(count($users) == 1){
             $user = $users[0];
 
-            //TODO: como saber se foi update or insert ?
-            DB::table('collaborators_event')->updateOrInsert(
-                ['event_id' => $request['event_id'], 'user_id' => $user->id]
-            );
+            $candidate = DB::table('collaborators_event')->where('event_id', '=', $request['event_id'])
+                                                        ->where('user_id', '=', $user->id)
+                                                        ->get();
 
-            return response()->json($user, 200);
+            if(count($candidate) == 0){
+                DB::table('collaborators_event')->updateOrInsert(
+                    ['event_id' => $request['event_id'], 'user_id' => $user->id]
+                );
+    
+                return response()->json($user, 200);
+            }      
+            else
+                return response()->json($user, 500);      
         }
         
         return response()->json([], 404);

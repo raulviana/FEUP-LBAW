@@ -9,7 +9,7 @@
         <div class="col-lg-12 push-lg-4">
             <div class="tab-pane active" id="edit">
 
-                <h4 style="margin-bottom: 1.5rem; font-weight: 900;">Edit profile</h4>
+                <h5 style="margin-bottom: 1.5rem; font-weight: 900;">Edit profile</h5>
                 <hr>
                 <form id="edit-profile" method="post" enctype="multipart/form-data" action="/profile/{{Auth::user()->id}}/edit">
                     {{ csrf_field() }}

@@ -543,17 +543,24 @@ input#upload-photo{
 
 }
 
-label#upload-button:hover{
-    background-color: lightcyan;
-    border-radius: 15px 50px;
-}
+
 
 img#imageResult{
-    max-width: 25%;
-    max-height: 25%;
+    margin: 0rem;
+   width: 25%;
 }
 
+label#upload-button{
+    background: #292b2c;
+    color: #f7f7f7;
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin:0;
+}
 
+label#upload-button:hover{
+    background: lightgray;
+ }
 
 /*SHOW EVENT DETAIL ADMIN*/
 
@@ -570,4 +577,22 @@ button#show-event-detail{
 button#show-event-detail:hover{
     background-color: rgb(206, 201, 201);
     border: none;
+}
+
+a#up-vote{
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+    border-radius: 20%;
+    background-color: rgb(173, 209, 162);
+    color: rgb(14, 49, 4);
+    margin-right: 1rem;
+}
+
+a#down-vote{
+    margin-left: 1rem;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+    border-radius: 20%;
+    background-color: rgb(223, 183, 188);
+    color: rgb(14, 49, 4);
 }

@@ -37,19 +37,19 @@
                                 <p style="margin-bottom:0" id="event-info"> 📌 <b>Where:</b> {{$event['local']['name']}} </p>
                                 <p id="event-info">🕒 <b>When:</b> {{$event['start_date'] }} </p>
                             </div>
-                                <!--<div class="col">
-                                    <div class="float-right">-->
-                                @if(Auth::check())
-                                    <a data-id={{$event->id}} id="up-vote"><i class="fa fa-caret-up"></i></a>          
-                                @endif                             
-                                <p id="event-reviews"> {{$event->review}}</p>                
-                                @if(Auth::check())                  
-                                    <a data-id={{$event->id}} id="down-vote"><i class="fa fa-caret-down"></i></a>   
-                                @endif                                    
-                                 <!--  </div>
-                                </div>-->
-                               
+                            @if(Auth::check())
+                                <div class="col text-right">                               
+                                    <div class="arrow">   
+                                        <a data-id={{$event->id}} id="up-vote"><i class="fa fa-thumbs-up"></i></a> 
+                                        <p style="display:inline;" id="event-reviews"> {{$event->review}}</p>                
+                                        <a data-id={{$event->id}} id="down-vote"><i class="fa fa-thumbs-down"></i></a> 
+                                    </div>
+                                </div>
+                                
+                            @endif                              
                         </div>
+
+                        <br>
 
                             <!--<a id="event-maps-button" class="btn btn-light d-inline" href="https://www.google.com/maps/search/?api=1&query=vila+nova+de+gaia" role="button">Go to Google Maps</a>-->
                         <div class="row text-center">

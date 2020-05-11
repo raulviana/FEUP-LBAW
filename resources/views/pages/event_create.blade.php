@@ -7,38 +7,51 @@
 <br><br><br>
 
 <div class="container">
+
     <div class="row profile justify-content-center">
+
         <div id="edit-event" class="col-lg-10 push-lg-4">
 
-            <form method="post" enctype="multipart/form-data" action="{{empty($event) ? "/events/create" : "/events/".$event->id."/edit"}}">
+            @if(empty($event))
+            <h3 style="margin-bottom: 1.5rem; font-weight: 900;">Create new event</h3>
+            @else 
+            <h3 style="margin-bottom: 1.5rem; font-weight: 900;">Edit - {{$event->title}}</h3>
+            @endif
+
+<hr>
+
+
+
+            <form method="post" onsubmit="return validateNewEvent()" enctype="multipart/form-data" action="{{empty($event) ? "/events/create" : "/events/".$event->id."/edit"}}">
                 {{ csrf_field() }}
-                <div class="row">
+                <h4>Title</h4>
+
+                <div class="row">                    
                     <div class="col">
-                        <input class="form-control form-control-md" name="title" type="text" placeholder={{empty($event) ? " Event title " : $event->title }}>
-                        <label class="checkbox-inline mr-2"><input name="is_private" type="checkbox"><span style="font-size:0.9rem;"><i> This is a private event.</i></span></label>
-
+                        <input class="form-control form-control-md" name="title" type="text" placeholder="Event title">
+                        
+                        @if(empty($event))
+                        <input name="is_private" type="checkbox"><span style="font-size:0.9rem; margin-left:0.25rem;">This is a private event.</span>
+                        @endif
                     </div>
 
+                
                    <!-- photo -->
-                    <div class="col-lg-6 mx-auto text-right">
+                   <div class="col text-center">
+                   
+                     <!-- Upload image input-->
+                     <!--<div class="input-group" id="upload-group">-->
+                        <label class="btn" id="upload-button">
+                            <input id="upload-photo" name="upload-photo" type="file" onchange="readImage(this);"><center>
+                            UPLOAD PHOTO <i style="margin-left:0.5rem; padding:0" class="fa fa-camera fa-xs"> </i> </center>
+                        </label>
+                  <!--  </div>-->
+                    <!-- Uploaded image area-->
+                    <div class="image-area img-thumbnail"><img id="imageResult" src="#" alt="" class="img-fluid rounded float-center shadow-sm mx-auto d-block"></div>
 
-                         <!-- Upload image input-->
-                         <div class="input-group" id="upload-group">
-                            <label id="upload-button">
-                                <input id="upload-photo" name="upload-photo" type="file" onchange="readImage(this);">
-                                <span>Event Photo
-                                    <svg class="bi bi-upload" width="1em" height="1em" viewBox="0 -2 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd" d="M.5 8a.5.5 0 01.5.5V12a1 1 0 001 1h12a1 1 0 001-1V8.5a.5.5 0 011 0V12a2 2 0 01-2 2H2a2 2 0 01-2-2V8.5A.5.5 0 01.5 8zM5 4.854a.5.5 0 00.707 0L8 2.56l2.293 2.293A.5.5 0 1011 4.146L8.354 1.5a.5.5 0 00-.708 0L5 4.146a.5.5 0 000 .708z" clip-rule="evenodd" />
-                                        <path fill-rule="evenodd" d="M8 2a.5.5 0 01.5.5v8a.5.5 0 01-1 0v-8A.5.5 0 018 2z" clip-rule="evenodd" />
-                                    </svg>
-                                </span>
-                            </label>
-                        </div>
-                        <!-- Uploaded image area-->
-                        <div class="image-area mt-4 img-thumbnail"><img id="imageResult" src="#" alt="" class="img-fluid rounded float-center shadow-sm mx-auto d-block">
-                        </div>
+
                     </div>
-                </div>
+                </div>           
 
                 <br>
 
@@ -53,12 +66,12 @@
                     <div class="col">
                         <p id="event-info">🕒 <b>When:</b><br>
                             <small>Start date: </small><input class="form-control form-control-sm" name="start_date" type="date" placeholder="Start date">
-                            <small>End date (opt):</small><input class="form-control form-control-sm" name="end_date" type="date" placeholder="End date">
+                            <small>End date: </small><input class="form-control form-control-sm" name="end_date" type="date" placeholder="End date">
                         </p>
                     </div>
                 </div>
 
-                <br>
+            
 
                 <!-- tags -->
                 <h4>Tags</h4>

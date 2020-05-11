@@ -83,22 +83,5 @@ class UserController extends Controller
         } 
     }
 
-
-    public function search(Request $request){
-        $query = $request['searchField'];
-        if($query != ''){
-            $users = User::where('is_active', true)
-                        ->where('name', 'like', '%'.$query.'%')
-                        ->orWhere('email', 'like', '%'.$query.'%')
-                        ->orderBy('id', 'asc')
-                        ->get();
-
-            return response()->json($users, 200);
-        }
-        else{
-
-            return response()->json($users, 404);
-        }
-    }
         
 }

@@ -32,7 +32,7 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    protected $appends = ['name'];
+   // protected $appends = ['name'];
 
     /**
      * The events this user owns.
