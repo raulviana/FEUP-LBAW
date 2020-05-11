@@ -465,6 +465,19 @@ button#btn-add-post.btn.float-right:hover{
     border-color: #292b2c;
 }
 
+
+button#btn-edit-post.btn.float-right{
+    text-transform: uppercase;
+    padding-bottom:  0.2rem;
+    padding-top:  0.2rem;
+    padding-right:  0.5rem;
+    padding-left:  0.5rem;
+    background: #2a3135;
+    color: #f7f7f7;
+    font-weight: 600;
+    font-size: 0.85rem;
+}
+
 button#btn-login.btn.float-left{
     text-transform: uppercase;
     padding-bottom:  0.2rem;

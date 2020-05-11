@@ -1,5 +1,3 @@
-
-
 <article class="post p-3 mb-3">
     <div style="margin-bottom: 1.5rem;" class="d-flex flex-row align-items-center">
         <img src={{ Storage::url('users/'.$post['writer']['photo'])}} class="rounded-circle mr-2" alt="Owner" width="50px">
@@ -10,9 +8,49 @@
                 <h6> <b> {{$post['writer']['name']}} </b> says: </h6>
             @endif 
 
+            <div class="col-lg-9">
+            @if(Auth::check())
+                @if(Auth::user() == $post['writer'])
+                    <button data-post-content={{$post->content}} type="submit" class="edit btn float-right" id="btn-edit-post">Edit</button>        
+                   <!--<a href="/events/{{$post->event_id}}/posts/{{$post->id}}/edit" class= "btn btn-default">Edit</a>  -->  
+                @endif
+            @endif
+            </div>
+            
+
+
     </div>
     <p id="comment-body">{{$post->content}}</p>
     <p id="comment-datetime" class="text-right">{{$post->post_time}}</p>
 </article>
+
+
+<div class="modal" tabindex="-1" role="dialog" id="edit-modal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Edit post</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form >
+            <div class="form-group">
+                <textarea class="form-control" name="post-body" id="post-body" rows="5"></textarea>
+            </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-post-content={{$post->content}} data-post-id={{$post->id}} data-post-event={{$post->event_id}} id="edit-save">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
 <hr>
                                 

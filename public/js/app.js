@@ -1,6 +1,9 @@
 /* GET BUTTONS */
-
 const addPostBtn = document.querySelector("button#btn-add-post");
+
+const editPostBtn = document.querySelector("button#btn-edit-post");
+
+const savePostBtn = document.querySelector("button#edit-save");
 
 const passwordField = document.getElementById('password');
 const confirmPasswordField = document.getElementById('confirm-password');
@@ -41,6 +44,14 @@ function addEventListeners() {
 
   if(addPostBtn){
     addPostBtn.addEventListener('click', sendCreatePostRequest);
+  }
+
+  if(editPostBtn){
+    editPostBtn.addEventListener('click', EditPost)}
+
+
+  if(savePostBtn){
+    savePostBtn.addEventListener('click', sendSavePostRequest);
   }
 
   if(dislikeBtn){
@@ -144,6 +155,25 @@ function sendCreatePostRequest(event){
   sendAjaxRequest("put", `/api/events/${eventid}/posts/create`, {eventid: eventid, userid: userid, content: content}, postCreatedHandler);
 
 }
+
+function EditPost(event){
+  event.preventDefault();
+
+
+       postContent = $('#post-body');
+       let content = this.closest('button').getAttribute('data-post-content');
+      
+      $('#post-body').val(content);
+      $('#edit-modal').modal();
+}
+
+function sendSavePostRequest(){
+  let postid = this.closest('button').getAttribute('data-post-id');
+  let eventid = this.closest('button').getAttribute('data-post-event');
+
+  sendAjaxRequest('POST', `/api/events/${eventid}/posts/${postid}/edit`, {eventid: eventid, content: $('#post-body').val(), postid: postid}, savePostHandler)
+}
+
 
 function sendDeleteEventRequest(event){
   event.preventDefault();
@@ -367,6 +397,12 @@ function postCreatedHandler() {
   let form_field = document.querySelector('textarea#post-content');
   form_field.value="";
 }
+
+function savePostHandler(msg){
+  $(postContent).text(msg['new_content']);
+  $('#edit-modal').modal('hide');
+}
+
 
 function userDeletedHandler() {
   if (this.status != 200) window.location = '/';

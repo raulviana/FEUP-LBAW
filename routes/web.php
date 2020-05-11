@@ -66,6 +66,7 @@ Route::get('/tags/{name}', 'TagController@show');
 //Posts
 Route::put('api/events/{id}/posts/create', 'PostController@store');
 Route::get('api/events/{id}/posts/get', 'PostController@get');
+Route::post('api/events/{eventid}/posts/{postid}/edit', 'PostController@edit');
 
 //Reviews
 Route::put('api/events/{id}/up', 'ReviewController@likeVote');

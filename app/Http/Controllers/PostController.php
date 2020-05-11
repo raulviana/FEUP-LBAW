@@ -50,4 +50,18 @@ class PostController extends Controller
     
         return view('pages.admin.manage-events-posts', ['posts' => $posts, 'event_title' => $eventTitle]);
     }
+
+    public function edit(Request $request){
+        
+        $this->validate($request, [
+            'content' => 'required'
+        ]);
+
+        $post = Post::find($request['postid']);
+
+        $post->content = $request['content'];
+        $post->update();
+
+        return response()->json(['new_content' => $post->content],200);
+    }
 }
