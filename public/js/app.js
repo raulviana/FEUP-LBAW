@@ -396,52 +396,113 @@ function savePostHandler(msg){
 
 
 function userDeletedHandler() {
-  if (this.status != 200) window.location = '/';
-
   let user = JSON.parse(this.responseText);
+  if(this.status == 200){
+    //chanage button
+    let new_button = document.createElement('button');
+    new_button.classList.add('btn', 'btn-success');
+    new_button.setAttribute('id', 'restore-user-btn');
+    new_button.setAttribute('type', 'buttton');
+    new_button.setAttribute('data-id', user['id']);
+    new_button.innerHTML = "Restore";
+    new_button.addEventListener('click', sendRestoreUserRequest);
+    let old_button = document.getElementById('changeable-element' + user['id']).firstElementChild;
+    old_button.replaceWith(new_button);
+    //change info
+    let new_info = document.createElement('td');
+    new_info.setAttribute('id', 'deleted-status' + user['id']);
+    new_button.setAttribute('data-id', user['id']);
+    new_info.innerHTML = "Suspended";
+    let old_info = document.getElementById('active-status' + user['id']);
+    old_info.replaceWith(new_info);
 
+    const alert = document.createElement('div');
+    alert.classList.add("alert", "alert-success");
+    alert.innerText = "User was successfully banned!";
+    const manageEventDiv = document.querySelector('div#admin-management');
+    (manageEventDiv.parentElement).insertBefore(alert, manageEventDiv);
 
-  const alert = document.createElement('div');
-  alert.classList.add("alert", "alert-success");
-  alert.innerText = "User " + user.name + " was suspended.";
-
-  let btn = document.querySelector('button#delete-user-btn[data-id="' + user.id + '"]');
-  btn.disabled=true;
-
-  let state = document.querySelector('td[data-id="' + user.id + '"]');
-  state.innerHTML="Suspended";
-
-  const manageUserDiv = document.querySelector('div#admin-management');
-  (manageUserDiv.parentElement).insertBefore(alert, manageUserDiv);
-
-
-  setTimeout(() => {
-    alert.parentElement.removeChild(alert);
-  }, 3000);
+    setTimeout(() => {
+      alert.parentElement.removeChild(alert);
+    }, 3000);
+  }
+  else if(this.status == 404){
+    const alert = document.createElement('div');
+    alert.classList.add("alert", "alert-danger");
+    alert.innerText = "Something wrong, user not found!";
+    const manageEventDiv = document.querySelector('div#admin-management');
+    (manageEventDiv.parentElement).insertBefore(alert, manageEventDiv);
+    setTimeout(() => {
+      alert.parentElement.removeChild(alert);
+    }, 3000);
+  }
+  else{
+    const alert = document.createElement('div');
+    alert.classList.add("alert", "alert-danger");
+    alert.innerText = "Something wrong, user not deleted!";
+    const manageEventDiv = document.querySelector('div#admin-management');
+    (manageEventDiv.parentElement).insertBefore(alert, manageEventDiv);
+    setTimeout(() => {
+      alert.parentElement.removeChild(alert);
+    }, 3000);
+    window.location = '/';
+  }
 }
 
+
 function userRestoreHandler() {
-  if (this.status != 200) window.location = '/';
-  
   let user = JSON.parse(this.responseText);
+ 
+  if(this.status == 200){
+    //chanage button
+    let new_button = document.createElement('button');
+    new_button.classList.add('btn', 'btn-danger');
+    new_button.setAttribute('id', 'restore-user-btn');
+    new_button.setAttribute('type', 'buttton');
+    new_button.setAttribute('data-id', user['id']);
+    new_button.innerHTML = "Suspend";
+    new_button.addEventListener('click', sendDeleteUserRequest);
+    let old_button = document.getElementById('changeable-element' + user['id']).firstElementChild;
+    old_button.replaceWith(new_button);
+    //change info
+    let new_info = document.createElement('td');
+    new_info.setAttribute('id', 'active-status' + user['id']);
+    new_button.setAttribute('data-id', user['id']);
+    new_info.innerHTML = "Active";
+    let old_info = document.getElementById('deleted-status' + user['id']);
+    old_info.replaceWith(new_info);
 
-  const alert = document.createElement('div');
-  alert.classList.add("alert", "alert-success");
-  alert.innerText = "User " + user.name + " was restored.";
-
-  let btn = document.querySelector('button#restore-user-btn[data-id="' + user.id + '"]');
-  btn.disabled=true;
-
-  let state = document.querySelector('td[data-id="' + user.id + '"]');
-  state.innerHTML="Active";
-
-  const manageUserDiv = document.querySelector('div#admin-management');
-  (manageUserDiv.parentElement).insertBefore(alert, manageUserDiv);
-
-
-  setTimeout(() => {
-    alert.parentElement.removeChild(alert);
-  }, 3000);
+    const alert = document.createElement('div');
+    alert.classList.add("alert", "alert-success");
+    alert.innerText = "User was successfully restored!";
+    const manageEventDiv = document.querySelector('div#admin-management');
+    (manageEventDiv.parentElement).insertBefore(alert, manageEventDiv);
+    
+    setTimeout(() => {
+      alert.parentElement.removeChild(alert);
+    }, 3000);
+  }
+  else if(this.status == 404){
+    const alert = document.createElement('div');
+    alert.classList.add("alert", "alert-danger");
+    alert.innerText = "Something wrong, user not found!";
+    const manageEventDiv = document.querySelector('div#admin-management');
+    (manageEventDiv.parentElement).insertBefore(alert, manageEventDiv);
+    setTimeout(() => {
+      alert.parentElement.removeChild(alert);
+    }, 3000);
+  }
+  else{
+    const alert = document.createElement('div');
+    alert.classList.add("alert", "alert-danger");
+    alert.innerText = "Something wrong, user not deleted!";
+    const manageEventDiv = document.querySelector('div#admin-management');
+    (manageEventDiv.parentElement).insertBefore(alert, manageEventDiv);
+    setTimeout(() => {
+      alert.parentElement.removeChild(alert);
+    }, 3000);
+    window.location = '/';
+  }
 }
 
 
