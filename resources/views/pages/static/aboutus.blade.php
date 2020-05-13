@@ -6,7 +6,7 @@
 
 
 <div class="container">
-
+    <br><br><br>
     <h4 class="mt3">About Us</h4>
     <hr>
 
@@ -25,12 +25,14 @@
                 organizing the gig of a newly formed band to bigger scale events, like a music or a dance
                 festival.
             </p>
+            <p id="about-us">
+                So, whatever your art event is, advertise it with us!
+            </p>
         </div>
         <div class="col">
-            <img style="width: 75%; heigth:auto;" src="images/about_us.jpg" alt="Events" class="rouded-float-left">
+            <img style="width: 90%; height: 70%;" src="images/about_us.jpg" alt="Events" class="rouded-float-right">
         </div>
     </div>
-
 
     <h4 class="mt3">Our Team</h1>
         <hr>
