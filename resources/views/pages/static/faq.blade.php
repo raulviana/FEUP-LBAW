@@ -80,6 +80,24 @@
                 </div>
             </div>
         </div>
+
+         <!--5-->
+         <div class="card">
+            <div class="card-header" id="HFive">
+                <h2 class="mb-0">
+                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseFive"
+                        aria-expanded="false" aria-controls="collapseThree">
+                        What's the difference between public and private events?
+                    </button>
+                </h2>
+            </div>
+
+            <div id="collapseFive" class="panel-collapse collapse in" aria-labelledby="HFive"
+                data-parent="#FAQ">
+                <div class="card-body">
+                The public events can be seen by everyone while private events are only accessible to whom the owner has invited. Public events are destined to advertize big, massive art events, while private events are destined to organize small scale more controllable ones. </div>
+            </div>
+        </div>
     </div>
 </div>
     
