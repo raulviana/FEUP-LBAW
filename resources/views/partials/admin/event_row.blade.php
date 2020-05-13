@@ -1,4 +1,4 @@
-<tr id="cell{{$event->id}}">
+<tr id="cell">
         <th scope="row">{{$event->id}}</th>
         <td>{{$event->title}}</td>
         <td><a href="/api/events/{{$event->id}}/posts/get" class="btn btn-info" role="button">Posts</a></td>
@@ -14,10 +14,10 @@
             </div>
         </td>
         @if($event->is_active)
-        <td> <button id="delete-event-btn" data-id={{$event->id}} type="button" class="btn btn-danger"> Delete </button> </td>
-        <td id="status-info" data-id={{$event->id}}>Active</td>
+        <td id="element-delete{{$event->id}}"> <button id="delete-event-btn" data-id={{$event->id}} type="button" class="btn btn-danger"> Delete </button> </td>
+        <td id="active-status{{$event->id}}" data-id={{$event->id}}>Active</td>
         @else
-        <td> <button id="restore-event-btn" data-id={{$event->id}} type="button" class="btn btn-success"> Restore </button> </td>
-        <td id="status-info" data-id={{$event->id}}>Deleted</td>
+        <td id="element-restore{{$event->id}}"> <button id="restore-event-btn" data-id={{$event->id}} type="button" class="btn btn-success"> Restore </button> </td>
+        <td id="deleted-status{{$event->id}}" data-id={{$event->id}}>Deleted</td>
         @endif
 <tr>

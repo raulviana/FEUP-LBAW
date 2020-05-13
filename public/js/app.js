@@ -132,7 +132,7 @@ function sendDeleteUserRequest(event) {
   event.preventDefault();
  
   let id = this.closest('button').getAttribute('data-id');
-
+console.log("deleteID: " + id);
   sendAjaxRequest("delete", `/api/users/${id}/delete`, {id:id}, userDeletedHandler);
 }
 
@@ -140,7 +140,7 @@ function sendRestoreUserRequest(event){
   event.preventDefault();
  
   let id = this.closest('button').getAttribute('data-id');
-
+  console.log("erestoreID: " + id);
   sendAjaxRequest("post", `/api/users/${id}/restore`, {id:id}, userRestoreHandler);
 }
 
@@ -244,27 +244,22 @@ function collaboratorRemovedHandler(){
 function eventDeletedHandler(){
   let event = JSON.parse(this.responseText);
   if(this.status == 200){
-    let cell = document.createElement('tr');
-    cell.innerHTML = `<tr id="cell${event['id']}">
-    <th scope="row">${event['id']}</th>
-    <td>${event['title']}</td>
-    <td><a href="/api/events/${event['id']}}/posts/get" class="btn btn-info" role="button">Posts</a></td>
-    <td>
-        <button id="show-event-detail" class="btn btn-primary float-center" type="button" data-toggle="collapse" data-target="#${event['id']}" aria-expanded="false" aria-controls="collapseExample">
-            Details
-        </button>
-        </p>
-        <div class="collapse" id=${event['id']}>
-            <div class="card card-body">
-                <small>${event['details']}</small>
-            </div>
-        </div>
-    </td>
-    <td> <button id="restore-event-btn" data-id=${event['id']} type="button" class="btn btn-success"> Restore </button> </td>
-    <td id="status-info" data-id=${event['id']}>Deleted</td>
-    <tr>`;
-    let old_cell = document.querySelector('#cell' + event['id']);
-    old_cell.replaceWith(cell);
+    //chanage button
+    let new_button = document.createElement('button');
+    new_button.classList.add('btn', 'btn-success');
+    new_button.setAttribute('id', 'restore-event-btn');
+    new_button.setAttribute('type', 'buttton');
+    new_button.setAttribute('data-id', event['id']);
+    new_button.innerHTML = "Restore";
+    new_button.addEventListener('click', sendRestoreEventRequest);
+    let old_button = document.getElementById('element-delete' + event['id']).firstElementChild;
+    old_button.replaceWith(new_button);
+    //change info
+    let new_info = document.createElement('td');
+    new_info.setAttribute('id', 'deleted-status' + event['id']);
+    new_info.innerHTML = "Deleted";
+    let old_info = document.getElementById('active-status' + event['id']);
+    old_info.replaceWith(new_info);
 
     const alert = document.createElement('div');
     alert.classList.add("alert", "alert-success");
@@ -303,27 +298,23 @@ function eventRestoreHandler(){
   let event = JSON.parse(this.responseText);
  
   if(this.status == 200){
-    let cell = document.createElement('tr');
-    cell.innerHTML = `<tr id="cell${event['id']}">
-    <th scope="row">${event['id']}</th>
-    <td>${event['title']}</td>
-    <td><a href="/api/events/${event['id']}}/posts/get" class="btn btn-info" role="button">Posts</a></td>
-    <td>
-        <button id="show-event-detail" class="btn btn-primary float-center" type="button" data-toggle="collapse" data-target="#${event['id']}" aria-expanded="false" aria-controls="collapseExample">
-            Details
-        </button>
-        </p>
-        <div class="collapse" id=${event['id']}>
-            <div class="card card-body">
-                <small>${event['details']}</small>
-            </div>
-        </div>
-    </td>
-    <td> <button id="delete-event-btn" data-id=${event['id']} type="button" class="btn btn-danger">Delete</button> </td>
-    <td id="status-info" data-id=${event['id']}>Active</td>
-    <tr>`;
-    let old_cell = document.querySelector('#cell' + event['id']);
-    old_cell.replaceWith(cell);
+    //chanage button
+    let new_button = document.createElement('button');
+    new_button.classList.add('btn', 'btn-danger');
+    new_button.setAttribute('id', 'restore-event-btn');
+    new_button.setAttribute('type', 'buttton');
+    new_button.setAttribute('data-id', event['id']);
+    new_button.innerHTML = "Delete";
+    new_button.addEventListener('click', sendDeleteEventRequest);
+    let old_button = document.getElementById('element-restore' + event['id']).firstElementChild;
+    old_button.replaceWith(new_button);
+    //change info
+    let new_info = document.createElement('td');
+    new_info.setAttribute('id', 'active-status' + event['id']);
+    new_info.innerHTML = "Active";
+    let old_info = document.getElementById('deleted-status' + event['id']);
+    old_info.replaceWith(new_info);
+
     const alert = document.createElement('div');
     alert.classList.add("alert", "alert-success");
     alert.innerText = "Event Restored!";

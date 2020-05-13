@@ -53,7 +53,7 @@ Route::get('/events/{id}/edit', 'EventController@edit');
 Route::post('/events/{id}/edit', 'EventController@update');
 Route::get('/events/{id}', 'EventController@show');
 Route::delete('api/events/{id}/delete', 'EventController@delete');
-Route::post('api/events/{id}/restore', 'EventController@restore');
+Route::post('/api/events/{id}/restore', 'EventController@restore');
 Route::delete('api/events/{event_id}/remove/{user_id}', 'EventController@removeCollaborator');
 Route::put('api/events/{event_id}/add/{user_id}', 'EventController@addCollaborator');
 
