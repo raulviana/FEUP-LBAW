@@ -252,7 +252,7 @@ function eventDeletedHandler(){
     new_button.setAttribute('data-id', event['id']);
     new_button.innerHTML = "Restore";
     new_button.addEventListener('click', sendRestoreEventRequest);
-    let old_button = document.getElementById('element-delete' + event['id']).firstElementChild;
+    let old_button = document.getElementById('changeable-element' + event['id']).firstElementChild;
     old_button.replaceWith(new_button);
     //change info
     let new_info = document.createElement('td');
@@ -306,7 +306,7 @@ function eventRestoreHandler(){
     new_button.setAttribute('data-id', event['id']);
     new_button.innerHTML = "Delete";
     new_button.addEventListener('click', sendDeleteEventRequest);
-    let old_button = document.getElementById('element-restore' + event['id']).firstElementChild;
+    let old_button = document.getElementById('changeable-element' + event['id']).firstElementChild;
     old_button.replaceWith(new_button);
     //change info
     let new_info = document.createElement('td');
@@ -317,7 +317,7 @@ function eventRestoreHandler(){
 
     const alert = document.createElement('div');
     alert.classList.add("alert", "alert-success");
-    alert.innerText = "Event Restored!";
+    alert.innerText = "Event was successfully restored!";
     const manageEventDiv = document.querySelector('div#admin-management');
     (manageEventDiv.parentElement).insertBefore(alert, manageEventDiv);
     

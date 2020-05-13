@@ -8,7 +8,7 @@
 
 <div class="container" >
     <div class="row profile justify-content-center" >
-        <div class="col-lg-10 push-lg-4" id="admin-management">
+        <div class="col-lg-10 " id="admin-management">
   
          <div class="tab-content p-b-3">
              <div class="tab-pane active" id="manage-users">
