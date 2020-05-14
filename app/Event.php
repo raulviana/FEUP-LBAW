@@ -37,4 +37,8 @@ class Event extends Model
     return $this->belongsToMany('App\User', 'collaborators_event', 'event_id', 'user_id');
   }
 
+  public function socialmedia(){
+    return $this->belongsToMany('App\SocialMedia', 'event_social_media', 'event_id', 'social_media_id'); 
+
+  }
 }

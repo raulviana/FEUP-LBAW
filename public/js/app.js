@@ -121,7 +121,7 @@ function validateEventCreation(){
     input_local.style.border = "1px solid red";
   }
 
-  errors = errors + validateEventDate();
+  errors = errors + validateEventDate() + validateURLs();
 
   if(errors > 0){
     event.preventDefault();
@@ -134,8 +134,11 @@ function validateEventEdit(){
    if(validateEventDateEdit() > 0){
      event.preventDefault();
    }
+   if(validateURLs() > 0){
+     event.preventDefault();
+   }
    else
-   eventForm.submit();
+    eventForm.submit();
 }
 
 function validateEventDateEdit(){
@@ -148,6 +151,11 @@ function validateEventDateEdit(){
       return 1;
     }
   }
+  return 0;
+}
+
+//TODO: validate with regex
+function validateURLs(){
   return 0;
 }
 

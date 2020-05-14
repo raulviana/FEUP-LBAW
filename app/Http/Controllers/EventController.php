@@ -76,6 +76,13 @@ class EventController extends Controller
         if($request['tag_comedy']) $this->addTag('Comedy', $event->id);
         if($request['tag_literature']) $this->addTag('Literature', $event->id);
         if($request['tag_others']) $this->addTag('Others', $event->id);
+
+        if($request['url_facebook']) $this->addSocialMedia('Facebook', $request['url_facebook'] , $event->id);
+        if($request['url_twitter']) $this->addSocialMedia('Twitter', $request['url_twitter'], $event->id);
+        if($request['url_instagram']) $this->addSocialMedia('Instagram', $request['url_instagram'], $event->id);
+        if($request['url_youtube']) $this->addSocialMedia('Youtube', $request['url_youtube'], $event->id);
+        if($request['url_website']) $this->addSocialMedia('Website', $request['url_website'], $event->id);
+
     
         return redirect('/')->with('success', 'Event created with sucess!');
     }
@@ -198,5 +205,15 @@ class EventController extends Controller
         );
 
         return $idLocal;
+    }
+
+    public function addSocialMedia($name, $url, $event_id){
+        $idSocialMedia = DB::table('social_media')->insertGetId(
+            ['name' => $name, 'url' => $url]
+        );
+
+        DB::table('event_social_media')->insert(
+            ['event_id' => $event_id, 'social_media_id' => $idSocialMedia]
+        );
     }
 }
