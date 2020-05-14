@@ -43,9 +43,9 @@ class EventController extends Controller
             'local' => 'required',
             'start_date' => 'required',
             'end_date' => 'required',
-            'details' => 'required',
             'upload-photo' => 'required'
         ]);
+        
         $path = $request->file('upload-photo')->store('/public/event_photo');
         $filename = basename($path);
         $event = new Event;

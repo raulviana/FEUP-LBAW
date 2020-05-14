@@ -15,8 +15,9 @@ const delEventBtn = document.querySelectorAll("button#delete-event-btn");
 
 const restEventBtn = document.querySelectorAll('button#restore-event-btn');
 
-
 const addCollaboratorBtn = document.querySelector("button#search-users");
+
+const eventForm = document.getElementById("event-settings-form");
 
 function addEventListeners() {
   let userDeleters = document.querySelectorAll("div#manage-users button#delete-user-btn");
@@ -66,8 +67,13 @@ function addEventListeners() {
   if(addCollaboratorBtn){
     addCollaboratorBtn.addEventListener('click', sendAddCollaboratorRequest);
   }
+
+  if(eventForm){
+    eventForm.addEventListener('submit', validateEventForm);
+  }
 }
 
+/* VALIDATE INPUTS */
 function validatePassword(){ 
   if(passwordField.value != confirmPasswordField.value) {
     confirmPasswordField.setCustomValidity("Passwords don't match");
@@ -75,6 +81,96 @@ function validatePassword(){
     confirmPasswordField.setCustomValidity('');
   }
 }
+
+function validateEventForm(){
+  event.preventDefault();
+
+  let event_id = this.closest('form').getAttribute("data-id");
+  if(event_id == "none"){
+    validateEventCreation();
+  }
+  else {
+    validateEventEdit();
+  }
+}
+
+
+function validateEventCreation(){
+  let errors = 0;
+  let input_title = document.querySelector("form#event-settings-form input#event-title");
+  let input_photo = document.querySelector("form#event-settings-form input#upload-photo");
+  let input_local = document.querySelector("form#event-settings-form input#event-local");
+
+  if(input_title.value == "")
+  {
+    errors++;
+    let invalid_title = document.querySelector("small#title-invalid").innerHTML="Please fill this field";
+    input_title.style.border = "1px solid red";
+  }
+  
+  if(input_photo.value == "")
+  { 
+    errors++;
+    let invalid_photo = document.querySelector("small#photo-invalid").innerHTML="Please upload a photo";
+  }
+
+  if(input_local.value == "")
+  {
+    errors++;
+    let invalid_local = document.querySelector("small#local-invalid").innerHTML="Please fill this field";
+    input_local.style.border = "1px solid red";
+  }
+
+  errors = errors + validateEventDate();
+
+  if(errors > 0){
+    event.preventDefault();
+  }
+  else
+    eventForm.submit();
+}
+
+function validateEventEdit(){
+   if(validateEventDateEdit() > 0){
+     event.preventDefault();
+   }
+   else
+   eventForm.submit();
+}
+
+function validateEventDateEdit(){
+  let input_sdate = document.querySelector("form#event-settings-form input#event-start-date");
+  let input_edate = document.querySelector("form#event-settings-form input#event-end-date");
+
+  if(input_sdate != "" && input_edate != ""){
+    if(input_edate.value < input_sdate.value){
+      let invalide_date = document.querySelector("small#date-invalid").innerHTML="Please enter a valid end date";
+      return 1;
+    }
+  }
+  return 0;
+}
+
+
+function validateEventDate(){
+    let errors = 0;
+    let input_sdate = document.querySelector("form#event-settings-form input#event-start-date");
+    let input_edate = document.querySelector("form#event-settings-form input#event-end-date");
+
+    if(input_sdate.value == "" || input_edate.value == ""){
+      errors++;
+      let invalide_date = document.querySelector("small#date-invalid").innerHTML="Please fill both date fields";
+      input_sdate.style.border = "1px solid red";
+      input_edate.style.border = "1px solid red";
+    }
+  
+    if(input_edate.value < input_sdate.value){
+      let invalide_date = document.querySelector("small#date-invalid").innerHTML="Please enter a valid end date";
+    }
+
+    return errors;
+}
+/* ---------------- */
 
 function encodeForAjax(data) {
   if (data == null) return null;

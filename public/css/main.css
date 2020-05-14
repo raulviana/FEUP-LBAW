@@ -609,3 +609,28 @@ a#down-vote{
     background-color: rgb(223, 183, 188);
     color: rgb(14, 49, 4);
 }
+
+
+
+a#tooltip {
+   font-size: 0.75rem;
+   font-weight: bold;
+    background-color: lightgrey;
+    color: #292b2c;
+    padding: 0.10rem;
+    padding-right: 0.25rem;
+    padding-left: 0.25rem ;
+    border-radius: 2rem;
+   
+}
+.tooltip {
+  font-size: 0.75rem;
+}
+
+.tooltip-inner {
+  padding: 0.5rem;
+  color: #fff;
+  text-align: center;
+  background-color:  #292b2c;
+  border-radius: 0.5rem;
+}
