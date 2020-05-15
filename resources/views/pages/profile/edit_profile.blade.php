@@ -28,7 +28,7 @@
                             </label>
                         </div>
                         <!-- Uploaded image area-->
-                        <div class="image-area mt-4 img-thumbnail"><img id="imageResult" src="#" alt="" class="img-fluid rounded float-center shadow-sm mx-auto d-block">
+                        <div class="image-area mt-4 img-thumbnail"><img id="imageResult" src={{ Storage::url('users/'.$user['photo']) }} alt="" class="img-fluid rounded float-center shadow-sm mx-auto d-block">
                         </div>
               
                        
@@ -72,7 +72,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group row">
+                    <div id="buttons-edit-profile" class="form-group row">
                         <label class="col-lg-3 col-form-label form-control-label"></label>
                         <div class="col-lg-9">
                             <button onclick="location.href = '/profile/{{Auth::user()->id}}';" class="btn float-left" id="btn-login">Back</button>

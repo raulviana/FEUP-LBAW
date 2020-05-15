@@ -1,0 +1,17 @@
+
+Done:
+    - home;
+    - faq;
+    - aboutus;
+    - login;
+    - register;
+    - user profile;
+    - update user profile;
+    - update admin profile;
+    - admin profile;
+    - event page;
+    - admin manage users;
+    - admin manage events;
+    - admin manage event posts;
+    
+    

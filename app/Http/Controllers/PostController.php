@@ -39,7 +39,7 @@ class PostController extends Controller
     public function get(Request $request){
 
         $posts = DB::table('post')->where('event_id', '=', $request['id'])->get();
-        $event = Event::find($posts[0]->event_id);
+        $event = Event::find($request['id']);
         $eventTitle = $event->title;
         foreach($posts as $post){
             $post->post_time = Carbon::parse($post->post_time)->format('Y-m-d h:i:s');

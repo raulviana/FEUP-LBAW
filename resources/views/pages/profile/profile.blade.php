@@ -13,7 +13,7 @@
                         <h4 style="margin-bottom: 1.5rem; font-weight: 900;">Profile</h4>
                     </div>
                     @if(Auth::user()->id == $user->id)
-                    <a class="nav-link" href="/profile/{{$user->id}}/edit">⚙️</a>
+                    <a id="edit_profile_button" class="nav-link" href="/profile/{{$user->id}}/edit">⚙️</a>
                     @endif
                 </div>
 

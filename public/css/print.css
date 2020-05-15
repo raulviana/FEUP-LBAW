@@ -1,0 +1,93 @@
+body::before{
+    content: 'ArtNow';
+    font-size: large;
+    text-align: center;
+}
+
+/*  FAQ  */
+
+div#collapseOne{
+    display: inline;
+}
+div#collapseTwo{
+    display: inline;
+}
+div#collapseThree{
+    display: inline;
+}
+div#collapseFour{
+    display: inline;
+}
+div#collapseFive{
+    display: inline;
+}
+
+/* ABOUT US*/
+
+img#about_us_image{
+    display: none;
+}
+
+/*HOME*/
+
+div#tags-search{
+    display: none;
+}
+
+button#button-header{
+    display: none;
+}
+
+div#tags-container{
+    display: none;
+}
+
+div#home-search-container{
+    display: none;
+}
+
+/*EDIT PROFILE*/
+div#upload-group{
+    display: none;
+}
+
+div#buttons-edit-profile{
+    display: none;
+}
+
+a#edit_profile_button{
+    display: none;
+}
+
+/* EVENT CARD*/
+
+div#info{
+    display: inline;
+}
+div#posts{
+    display: inline;
+}
+div#related{
+    display: inline;
+}
+
+div#input-new-post-area{
+    display: none;
+}
+h5#add-new-post-header{
+    display: none;
+}
+
+div#info{
+    page-break-after: always !important;
+}
+div#post-listing::before{
+    content: 'Posts';
+    font-size:35px;
+}
+
+/*ADMIN MANAGE USERS*/
+
+input#search-users{
+    display: none;
+}

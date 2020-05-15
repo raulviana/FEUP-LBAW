@@ -15,7 +15,7 @@
         
         <div class="row justify-content-center">
             <div class="col-12">
-                <ul class="nav nav-tabs nav-fill w-100">
+                <ul id="pane-list" class="nav nav-tabs nav-fill w-100">
                     <li class="nav-item">
                         <a href="" data-target="#info" data-toggle="tab" class="nav-link active">Info</a>
                     </li>
@@ -95,7 +95,7 @@
 
                     <div class="tab-pane" id="posts">   
                         @if(Auth::check())
-                            <h5>Add new post</h5>
+                            <h5 id="add-new-post-header">Add new post</h5>
                             @include('partials.events.posts.create_post', ['event' => $event])
                         @else 
                             <p class="text-center"> Don't have an account? <br> <a class="button button-outline" href="{{ route('register') }}">Click here to register and leave posts!</a></p>

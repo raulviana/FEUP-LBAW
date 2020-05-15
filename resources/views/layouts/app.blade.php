@@ -15,7 +15,9 @@
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <link href="{{ asset('css/main.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/main.css') }}" media="screen" rel="stylesheet">
+
+    <link href="{{ asset('css/print.css') }}" media="print" rel="stylesheet">
     
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="{{ asset('js/app.js') }}" defer></script>

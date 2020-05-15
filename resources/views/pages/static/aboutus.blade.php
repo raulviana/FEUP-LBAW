@@ -30,7 +30,7 @@
             </p>
         </div>
         <div class="col">
-            <img style="width: 90%; height: 70%;" src="images/about_us.jpg" alt="Events" class="rouded-float-right">
+            <img id="about_us_image" style="width: 90%; height: 70%;" src="images/about_us.jpg" alt="Events" class="rouded-float-right">
         </div>
     </div>
 

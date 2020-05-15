@@ -1,5 +1,5 @@
 <!-- search by text -->
-<div class="container">
+<div id="home-search-container" class="container">
     
     <div class="md-form mt-0">
         <input class="form-control" type="text" aria-label="Search">
