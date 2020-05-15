@@ -69,9 +69,10 @@
                             
                         <h5>Contacts</h5>
 
-                        <div class="container">
-                            <a href="#" class="fa fa-facebook"></a>
-                            <a href="#" class="fa fa-twitter"></a>    
+                        <div class="container"> 
+                            @if(count ($event->socialmedia()->get()) > 0)
+                                @each('partials.events.social_media.sm_button', $event->socialmedia()->get(), 'social_media')
+                            @endif
                         </div>
                             
                         <hr>

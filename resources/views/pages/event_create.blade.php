@@ -22,34 +22,32 @@
 
 
 
-            <form method="post" onsubmit="return validateNewEvent()" enctype="multipart/form-data" action="{{empty($event) ? "/events/create" : "/events/".$event->id."/edit"}}">
+            <form id="event-settings-form" data-id={{empty($event) ? "none" : $event->id}} method="post" enctype="multipart/form-data" action="{{empty($event) ? "/events/create" : "/events/".$event->id."/edit"}}">
                 {{ csrf_field() }}
                 <h4>Title</h4>
 
                 <div class="row">                    
                     <div class="col">
-                        <input class="form-control form-control-md" name="title" type="text" placeholder="Event title">
-                        
+                        <input id="event-title" class="form-control form-control-md" name="title" type="text" placeholder="Event title">
+                        <p id="event-info"><small id="title-invalid" class="text-danger"></small></p>
                         @if(empty($event))
                         <input name="is_private" type="checkbox"><span style="font-size:0.9rem; margin-left:0.25rem;">This is a private event.</span>
+                        
+                        <a id="tooltip" class="float-right" href="#" data-toggle="tooltip" data-placement="left" title="A private event will only be seen by you and your guests. You wont be able to edit this field later."> ? </a>
+
                         @endif
                     </div>
 
                 
                    <!-- photo -->
                    <div class="col text-center">
-                   
-                     <!-- Upload image input-->
-                     <!--<div class="input-group" id="upload-group">-->
                         <label class="btn" id="upload-button">
                             <input id="upload-photo" name="upload-photo" type="file" onchange="readImage(this);"><center>
                             UPLOAD PHOTO <i style="margin-left:0.5rem; padding:0" class="fa fa-camera fa-xs"> </i> </center>
-                        </label>
-                  <!--  </div>-->
-                    <!-- Uploaded image area-->
-                    <div class="image-area img-thumbnail"><img id="imageResult" src="#" alt="" class="img-fluid rounded float-center shadow-sm mx-auto d-block"></div>
+                        </label> <br>
+                        <p id="event-info"><small id="photo-invalid" class="text-danger"></small></p>
 
-
+                        <div class="image-area img-thumbnail"><img id="imageResult" src="#" alt="" class="img-fluid rounded float-center shadow-sm mx-auto d-block"></div>
                     </div>
                 </div>           
 
@@ -61,12 +59,15 @@
                     <div class="col">
                         <p id="event-info"> 📌 <b>Where:</b><br>
                             <small> Local: </small>
-                            <input class="form-control form-control-sm" name="local" type="text" placeholder="Location"> </p>
+                            <input id="event-local" class="form-control form-control-sm" name="local" type="text" placeholder="Location"> 
+                            <small id="local-invalid" class="text-danger"></small></p>
+
                     </div>
                     <div class="col">
                         <p id="event-info">🕒 <b>When:</b><br>
-                            <small>Start date: </small><input class="form-control form-control-sm" name="start_date" type="date" placeholder="Start date">
-                            <small>End date: </small><input class="form-control form-control-sm" name="end_date" type="date" placeholder="End date">
+                            <small>Start date: </small>  <input id="event-start-date" class="form-control form-control-sm" name="start_date" type="date" placeholder="Start date"> 
+                            <small>End date: </small>  <input id="event-end-date" class="form-control form-control-sm" name="end_date" type="date" placeholder="End date"> 
+                            <small id="date-invalid" class="text-danger"></small>
                         </p>
                     </div>
                 </div>
@@ -118,6 +119,17 @@
                     </div>
                 </div>
 
+                <br><br>
+
+                <h4>Social media</h4>
+                
+                    @include('partials.events.social_media.sm_input_form', ['sm_name' => "Facebook", 'sm_url' => "url_facebook"])
+                    @include('partials.events.social_media.sm_input_form', ['sm_name' => "Youtube", 'sm_url' => "url_youtube"])
+                    @include('partials.events.social_media.sm_input_form', ['sm_name' => "Instagram", 'sm_url' => "url_instagram"])
+                    @include('partials.events.social_media.sm_input_form', ['sm_name' => "Twitter", 'sm_url' => "url_twitter"])
+                    @include('partials.events.social_media.sm_input_form', ['sm_name' => "Website", 'sm_url' => "url_website"])
+                   
+                   
                 <br>
 
                 <h4>Details</h4>

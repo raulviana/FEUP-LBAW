@@ -16,7 +16,7 @@
           </div>
               
           <div class="col text-right">
-           <p id="event-card-info" class="text-muted"> X going</p>
+           <p id="event-card-info" class="text-muted"> {{$event->review}} likes </p>
           </div>
       </div>
       
