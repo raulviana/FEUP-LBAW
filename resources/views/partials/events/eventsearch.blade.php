@@ -2,7 +2,15 @@
 <div id="home-search-container" class="container">
     
     <div class="md-form mt-0">
-        <input class="form-control" type="text" aria-label="Search">
+        <form action="{{ route('search') }}" method="GET" class="search-form">
+           <!-- <input type="text" placeholder="Search" name="query" id="query" class="search-box"> -->
+            <input name="query" id="query" class="form-control" type="text" aria-label="Search" placeholder="Search">
+        </form> 
+        <form action="{{ route('searchLocation') }}" method="GET" class="search-form">
+           <!-- <input type="text" placeholder="Search" name="query" id="query" class="search-box"> -->
+            <input name="query" id="query" class="form-control" type="text" aria-label="Search" placeholder="Search by location">
+        </form> 
+        
     </div>
 
 

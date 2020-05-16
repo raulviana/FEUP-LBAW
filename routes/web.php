@@ -71,3 +71,7 @@ Route::post('api/events/{eventid}/posts/{postid}/edit', 'PostController@edit');
 //Reviews
 Route::put('api/events/{id}/up', 'ReviewController@likeVote');
 Route::put('api/events/{id}/down', 'ReviewController@dislikeVote');
+
+//Search
+Route::get('/search','EventController@search')->name('search');
+Route::get('/searchLocation','EventController@searchLocation')->name('searchLocation');

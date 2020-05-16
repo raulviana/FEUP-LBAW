@@ -9,6 +9,7 @@ use App\Event;
 use App\EventCollaborators;
 use App\User;
 use App\Tag;
+use App\Local;
 use Auth;
 use Session;
 use Illuminate\Database\Eloquent\Model;
@@ -215,5 +216,40 @@ class EventController extends Controller
         DB::table('event_social_media')->insert(
             ['event_id' => $event_id, 'social_media_id' => $idSocialMedia]
         );
+    }
+
+    public function search(Request $request){
+        $request->validate([
+            'query'=>'required|min:3',
+        ]);
+        $query = $request->input('query');
+
+        $events = Event::where('title', 'like', "%$query%")
+                            ->orWhere('details', 'like', "%$query%")
+                            ->orWhere('start_date', 'like', "%$query%")
+                            ->get();
+        
+                        
+
+        return view('pages.search_results')->with('events', $events);
+    }
+
+    public function searchLocation(Request $request){
+        $request->validate([
+            'query' => 'required|min:3',
+        ]);
+
+        $query = $request->input('query');
+
+        $local = Local::where('name', 'like', "%$query%")->get();
+
+        $id = $local[0]['id'];
+
+        $events = Event::where('local_id', 'like' , "%$id%")->get();
+     
+        
+                        
+
+        return view('pages.search_results')->with('events', $events);
     }
 }
