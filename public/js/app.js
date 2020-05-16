@@ -495,6 +495,7 @@ function postCreatedHandler() {
 
 function savePostHandler(msg){
   $(postContent).text(msg['new_content']);
+  $('#comment-body').text($('#post-body').val());
   $('#edit-modal').modal('hide');
 }
 

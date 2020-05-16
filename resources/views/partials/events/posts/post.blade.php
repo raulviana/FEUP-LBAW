@@ -10,7 +10,7 @@
 
             <div class="col-lg-9">
             @if(Auth::check())
-                @if(Auth::user() == $post['writer'])
+                @if(Auth::user()->name == $post['writer']['name'])
                     <button data-post-content={{$post->content}} type="submit" class="edit btn float-right" id="btn-edit-post">Edit</button>        
                    <!--<a href="/events/{{$post->event_id}}/posts/{{$post->id}}/edit" class= "btn btn-default">Edit</a>  -->  
                 @endif
