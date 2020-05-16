@@ -53,7 +53,7 @@
                     <div class="form-group row">
                         <label class="col-lg-3 col-form-label form-control-label">About</label>
                         <div class="col-lg-9">
-                            <textarea class="form-control" name="about" rows="6" placeholder={{$user->about}}></textarea>
+                            <textarea class="form-control" name="about" rows="6" placeholder="{{$user->about}}"></textarea>
                         </div>
                     </div>
 

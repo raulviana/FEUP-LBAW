@@ -569,10 +569,17 @@ label#upload-button{
     font-weight: 600;
     font-size: 0.9rem;
     margin:0;
+    border-radius: 4px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: none;
 }
 
 label#upload-button:hover{
     background: lightgray;
+    border-style: solid;
+    border-width: 1px;
+    border-color: black;
  }
 
 /*SHOW EVENT DETAIL ADMIN*/
