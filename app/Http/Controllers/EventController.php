@@ -120,6 +120,25 @@ class EventController extends Controller
             $event->details = $request->input('details');
     
         }
+
+
+        if($request['tag_theater']) $this->addTag('Theater', $event->id);
+        if($request['tag_sculpture']) $this->addTag('Sculpture', $event->id);
+        if($request['tag_dance']) $this->addTag('Dance', $event->id);
+        if($request['tag_music']) $this->addTag('Music', $event->id);
+        if($request['tag_paintings']) $this->addTag('Painting', $event->id);
+        if($request['tag_comedy']) $this->addTag('Comedy', $event->id);
+        if($request['tag_literature']) $this->addTag('Literature', $event->id);
+        if($request['tag_others']) $this->addTag('Others', $event->id);
+
+
+        if($request['url_facebook']) $this->addSocialMedia('Facebook', $request['url_facebook'] , $event->id);
+        if($request['url_twitter']) $this->addSocialMedia('Twitter', $request['url_twitter'], $event->id);
+        if($request['url_instagram']) $this->addSocialMedia('Instagram', $request['url_instagram'], $event->id);
+        if($request['url_youtube']) $this->addSocialMedia('Youtube', $request['url_youtube'], $event->id);
+        if($request['url_website']) $this->addSocialMedia('Website', $request['url_website'], $event->id);
+
+
        
         $event->save();
 
