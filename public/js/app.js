@@ -5,10 +5,14 @@ const editPostBtn = document.querySelector("button#btn-edit-post");
 
 const savePostBtn = document.querySelector("button#edit-save");
 
+const deletePostBtn = document.querySelectorAll("button#delete-post-btn");
+
 const passwordField = document.getElementById('password');
+
 const confirmPasswordField = document.getElementById('confirm-password');
 
 const likeBtn = document.querySelector("a#up-vote");
+
 const dislikeBtn  =document.querySelector("a#down-vote");
 
 const delEventBtn = document.querySelectorAll("button#delete-event-btn");
@@ -49,6 +53,10 @@ function addEventListeners() {
 
   if(editPostBtn){
     editPostBtn.addEventListener('click', EditPost)}
+
+  for (let i = 0; i < deletePostBtn.length; i++){
+    deletePostBtn[i].addEventListener('click', sendDeletePost);
+  }
 
 
   if(savePostBtn){
@@ -198,6 +206,12 @@ function sendAjaxRequest(method, url, data, handler) {
 }
 /* SENDERS */
 
+function sendDeletePost(event){
+  event.preventDefault();
+  let post_id = this.closest('button').getAttribute('data-id');
+  sendAjaxRequest("delete", `/api/posts/${post_id}/delete`, {post_id: post_id}, deletePostHandler);
+}
+
 function sendAddCollaboratorRequest(event){
   event.preventDefault();
   
@@ -236,7 +250,6 @@ function sendDeleteUserRequest(event) {
   event.preventDefault();
  
   let id = this.closest('button').getAttribute('data-id');
-console.log("deleteID: " + id);
   sendAjaxRequest("delete", `/api/users/${id}/delete`, {id:id}, userDeletedHandler);
 }
 
@@ -244,7 +257,6 @@ function sendRestoreUserRequest(event){
   event.preventDefault();
  
   let id = this.closest('button').getAttribute('data-id');
-  console.log("erestoreID: " + id);
   sendAjaxRequest("post", `/api/users/${id}/restore`, {id:id}, userRestoreHandler);
 }
 
@@ -297,6 +309,53 @@ function sendRestoreEventRequest(event){
 /*--------*/
 
 /* HANDLERS */
+
+function deletePostHandler(){
+  let post_id = JSON.parse(this.responseText);
+console.log(post_id);
+  if(this.status == 200){
+    
+    //erase post row
+    let new_tr = document.createElement('tr');
+    new_tr.innerHTML = "";
+    console.log("cell" + post_id['postID']);
+    let old_tr = document.getElementById('cell' + post_id['postID']);
+    old_tr.replaceWith(new_tr);
+
+    const alert = document.createElement('div');
+    alert.classList.add("alert", "alert-success");
+    alert.innerText = "Post with id:" + post_id['postID'] + " was successfully deleted!";
+    const managePostDiv = document.querySelector('div#insert-alert');
+    (managePostDiv.parentElement).insertBefore(alert, managePostDiv);
+
+    setTimeout(() => {
+      alert.parentElement.removeChild(alert);
+    }, 3000);
+  }
+  else if(this.status == 404){
+    const alert = document.createElement('div');
+    alert.classList.add("alert", "alert-danger");
+    alert.innerText = "Something wrong, event not found!!";
+    const managePostDiv = document.querySelector('div#insert-alert');
+    (managePostDiv.parentElement).insertBefore(alert, managePostDiv);
+
+    setTimeout(() => {
+      alert.parentElement.removeChild(alert);
+    }, 3000);
+  }
+  else{
+    const alert = document.createElement('div');
+    alert.classList.add("alert", "alert-danger");
+    alert.innerText = "Something wrong, post not deleted!";
+    const managePostDiv = document.querySelector('div#insert-alert');
+    (managePostDiv.parentElement).insertBefore(alert, managePostDiv);
+    setTimeout(() => {
+      alert.parentElement.removeChild(alert);
+    }, 3000);
+    window.location = '/';
+  }
+}
+
 function addCollaboratorHandler(){
    if(this.status == 404){
       let old_tbody = document.querySelector("table#search-results tbody");

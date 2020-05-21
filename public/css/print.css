@@ -61,6 +61,10 @@ a#edit_profile_button{
 
 /* EVENT CARD*/
 
+div#event-no-log-in-register{
+    display: none;
+}
+
 div#info{
     display: inline;
 }

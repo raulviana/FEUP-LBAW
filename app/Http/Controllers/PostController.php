@@ -64,4 +64,11 @@ class PostController extends Controller
 
         return response()->json(['new_content' => $post->content],200);
     }
+
+    public function delete(Request $request){
+                
+        $post = Post::find($request['postid']);
+        $post->delete();
+        return response()->json(['postID' => $post->id], 200);
+    }
 }
