@@ -85,34 +85,34 @@
                         <div class="d-flex justify-content-center btn-group btn-group-toggle" data-toggle="buttons">
                             
                             <label style="margin-right: 0.25rem; margin-left: 0.25rem;" id="tag-button" class="btn theater-tag">
-                             <input name="tag_theater" type="checkbox" autocomplete="off"> Theater
+                                <input id="selected-tags" name="tag_theater" type="checkbox" autocomplete="off"> Theater
                             </label>
                  
                             <label style="margin-right: 0.25rem; margin-left: 0.25rem;" id="tag-button" class="btn sculpture-tag">
-                             <input name="tag_sculpture" type="checkbox" autocomplete="off"> Sculpture
+                                <input id="selected-tags" name="tag_sculpture" type="checkbox" autocomplete="off"> Sculpture
                             </label>
                      
                             <label style="margin-right: 0.25rem; margin-left: 0.25rem;" id="tag-button" class="btn dance-tag">
-                               <input name="tag_dance" type="checkbox" autocomplete="off"> Dance
+                               <input input="selected-tags" name="tag_dance" type="checkbox" autocomplete="off"> Dance
                             </label>
                          
                             <label style="margin-right: 0.25rem; margin-left: 0.25rem;" id="tag-button" class="btn music-tag">
-                               <input name="tag_music" type="checkbox" autocomplete="off"> Music
+                               <input id="selected-tags" name="tag_music" type="checkbox" autocomplete="off"> Music
                             </label>
                            
                             <label style="margin-right: 0.25rem; margin-left: 0.25rem;" id="tag-button" class="btn paintings-tag">
-                              <input  name="tag_paintings" type="checkbox" autocomplete="off"> Paintings
+                              <input id="selected-tags" name="tag_paintings" type="checkbox" autocomplete="off"> Paintings
                             </label>
 
                             <label style="margin-right: 0.25rem; margin-left: 0.25rem;" id="tag-button" class="btn comedy-tag">
-                                <input name="tag_comedy" type="checkbox" autocomplete="off"> Comedy
+                                <input id="selected-tags" name="tag_comedy" type="checkbox" autocomplete="off"> Comedy
                              </label>
                             
                              <label style="margin-right: 0.25rem; margin-left: 0.25rem;"  id="tag-button" class="btn literature-tag">
-                               <input name="tag_literature" type="checkbox" autocomplete="off"> Literature
+                               <input id="selected-tags" name="tag_literature" type="checkbox" autocomplete="off"> Literature
                              </label>
                              <label style="margin-right: 0.25rem; margin-left: 0.25rem;"id="tag-button" class="btn others-tag">
-                                <input name="tag_others" type="checkbox" autocomplete="off"> Others
+                                <input id="selected-tags" name="tag_others" type="checkbox" autocomplete="off"> Others
                              </label>
                             
                         </div>

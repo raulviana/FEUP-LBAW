@@ -1,6 +1,8 @@
 /* GET BUTTONS */
 const addPostBtn = document.querySelector("button#btn-add-post");
 
+const selectTag = document.querySelectorAll("label#tag-button");
+
 const editPostBtn = document.querySelector("button#btn-edit-post");
 
 const savePostBtn = document.querySelector("button#edit-save");
@@ -39,6 +41,9 @@ function addEventListeners() {
     collabdeleter.addEventListener('click', sendRemoveCollaborator);
   });
 
+  for(let i = 0; i < selectTag.length; i++){
+    selectTag[i].addEventListener('click', alterTag);
+  }
   for(let i = 0; i < delEventBtn.length; i++){
     delEventBtn[i].addEventListener('click', sendDeleteEventRequest);
   }
@@ -669,6 +674,12 @@ function userRestoreHandler() {
   }
 }
 
+function alterTag(event){
+  event.preventDefault();
+  let label = event.target;
+  label.setAttribute('style', 'margin-right: 0.25rem; margin-left: 0.25rem; color: black; font-weight: bold;');
+}
+
 
 /*  ==========================================
     USER PROFILE UPLOAD PHOTO SNIPPET
@@ -688,6 +699,7 @@ function userRestoreHandler() {
       }
     }
    
+  
    
 function validateNewEvent(){
   console.log("validating");

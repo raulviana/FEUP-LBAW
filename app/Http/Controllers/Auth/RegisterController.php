@@ -9,6 +9,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
+use Illuminate\Support\Facades\Log;
+
+
 class RegisterController extends Controller
 {
     /*
@@ -65,11 +68,11 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
 
-        /*$path = Input::file('upload-photo')->store('public/users');*/
-       
-        /*$filename = basename($path);*/
+        $path = Input::file('upload-photo')->store('public/users');
+        $filename = basename($path);
         return User::create([
-           /* 'photo' => $filename, */
+            'about' => $data['about'],
+            'photo' => $filename,
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
