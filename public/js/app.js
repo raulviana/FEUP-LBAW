@@ -284,7 +284,7 @@ function EditPost(event){
        postContent = $('#post-body');
        let content = this.closest('button').getAttribute('data-post-content');
       
-      $('#post-body').val(content);
+      $('#post-body').val("Write your new post!");
       $('#edit-modal').modal();
 }
 
