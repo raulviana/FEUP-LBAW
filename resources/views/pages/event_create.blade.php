@@ -47,7 +47,9 @@
                         </label> <br>
                         <p id="event-info"><small id="photo-invalid" class="text-danger"></small></p>
 
-                        <div class="image-area img-thumbnail"><img id="imageResult" src="#" alt="" class="img-fluid rounded float-center shadow-sm mx-auto d-block"></div>
+                        <div class="image-area img-thumbnail">
+                            <img id="imageResult" src="#" alt="" class="img-fluid rounded float-center shadow-sm mx-auto d-block">
+                        </div>
                     </div>
                 </div>           
 
