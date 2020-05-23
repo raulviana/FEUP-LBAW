@@ -25,6 +25,7 @@ const addCollaboratorBtn = document.querySelector("button#search-users");
 
 const eventForm = document.getElementById("event-settings-form");
 
+
 function addEventListeners() {
   let userDeleters = document.querySelectorAll("div#manage-users button#delete-user-btn");
   [].forEach.call(userDeleters, function(deleter) {
@@ -40,6 +41,12 @@ function addEventListeners() {
   [].forEach.call(collaboratorDeleters, function(collabdeleter) {
     collabdeleter.addEventListener('click', sendRemoveCollaborator);
   });
+
+  let invitationDeleters = document.querySelectorAll("a#remove-guest");
+  [].forEach.call(invitationDeleters, function(guestdeleter) {
+    guestdeleter.addEventListener('click', sendRemoveInvitation);
+  });
+
 
   for(let i = 0; i < selectTag.length; i++){
     selectTag[i].addEventListener('click', alterTag);
@@ -210,6 +217,13 @@ function sendAjaxRequest(method, url, data, handler) {
   request.send(encodeForAjax(data));
 }
 /* SENDERS */
+function sendRemoveInvitation(event){
+  event.preventDefault();
+  let invite_id = this.closest('a').getAttribute('data-id');
+
+  
+  sendAjaxRequest("delete", `/api/events/{event_id}/invitations/{inv_id}/delete`, {invite_id: invite_id}, deleteInviteHandler);
+}
 
 function sendDeletePost(event){
   event.preventDefault();
@@ -314,6 +328,17 @@ function sendRestoreEventRequest(event){
 /*--------*/
 
 /* HANDLERS */
+
+function deleteInviteHandler(){
+  let row = JSON.parse(this.responseText);
+  let event_id = row['event_id'];
+  let invite_id = row['invite_id'];
+
+  if(this.status != 200) window.location = `/events/${event_id}`;
+
+  let tableRow = document.querySelector('tr[data-id="' + invite_id +'"]');
+  tableRow.remove();  
+}
 
 function deletePostHandler(){
   let post_id = JSON.parse(this.responseText);
@@ -701,10 +726,10 @@ function alterTag(event){
    
   
    
-function validateNewEvent(){
+/*function validateNewEvent(){
   console.log("validating");
   return true;
-}    
+}    */
 
 addEventListeners();
 

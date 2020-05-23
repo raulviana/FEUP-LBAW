@@ -57,7 +57,8 @@ Route::post('/api/events/{id}/restore', 'EventController@restore');
 Route::delete('api/events/{event_id}/remove/{user_id}', 'EventController@removeCollaborator');
 Route::put('api/events/{event_id}/add/{user_id}', 'EventController@addCollaborator');
 
-
+//Invitations
+Route::delete('api/events/{event_id}/invitations/{invite_id}/delete', 'InvitationController@delete');
 
 //Tags
 Route::get('/tags/{name}', 'TagController@show');
