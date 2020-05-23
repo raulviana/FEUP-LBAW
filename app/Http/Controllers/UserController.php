@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Http\Request;
 use App\User;
 use Auth;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -42,14 +44,15 @@ class UserController extends Controller
         }
 
         if(!is_null($request->file('upload-photo'))){
-            //TODO erase previous user photo
+            $old_photo = $user->photo;
+            Storage::delete('/public/users/' . $old_photo);
             $path = $request->file('upload-photo')->store('/public/users');
             $filename = basename($path);
             
             $user->photo = $filename;
         }
         $user->save();
-
+        Log::info('User ' . $user->name . ' with id:' . $user->id . ' updated profile');
         return redirect('/profile/'.$id)->with('success', 'Your profile is up to date!');     
     }
 
@@ -59,6 +62,8 @@ class UserController extends Controller
         try{
             $user->is_active = false;
             $user->save();
+
+            Log::info('Banned user '.$user['name']);
 
             return response()->json($user, 200);
         } catch(ModelNotFoundException $e){
@@ -77,7 +82,7 @@ class UserController extends Controller
 
             return response()->json($user, 200);
         } catch(ModelNotFoundException $e){
-            
+            Log::warning('User ' . $user->name . ' with id:' . $user->id . ' was not found during UserController@restore');
             $request->session()->flash('error', 'Ups! User was not suspended');
             return response()->json($user, 404);
         } 

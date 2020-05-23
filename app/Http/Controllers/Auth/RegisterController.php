@@ -70,6 +70,7 @@ class RegisterController extends Controller
 
         $path = Input::file('upload-photo')->store('public/users');
         $filename = basename($path);
+        Log::info('New user resgistered: ' . $data['email']);
         return User::create([
             'about' => $data['about'],
             'photo' => $filename,

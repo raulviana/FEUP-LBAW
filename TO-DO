@@ -3,3 +3,16 @@
 -> transacoes duas chamadas??
 -> print error log
 -> formulario create event de exemplo, required, javascript, help, html5 required, 
+
+->!!!! no refgisto de user, quando algum dos inputs não é devolvido como incorreto, a foto mantém-se na página, mas torna-se null, e quando se tenta fazer o registo pela segunda vez, apenas alterando os dados que estavam incorretos, vao dar erro em store(), pois vai tentar gravar null... 
+
+
+LARAVEL LOG LEVELS:
+Log::emergency($message);
+Log::alert($message);
+Log::critical($message);
+Log::error($message);
+Log::warning($message);
+Log::notice($message);
+Log::info($message);
+Log::debug($message);

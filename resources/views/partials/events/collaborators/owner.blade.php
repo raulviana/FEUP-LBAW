@@ -1,1 +1,1 @@
-<a href="/profile/{{$user->id}}"><img src="https://evada-images.global.ssl.fastly.net/76d1ea39-a4eb-4270-b9dc-899653415f8f/home-tile-person-3.jpg?width=345&height=345" class="rounded-circle mr-2" alt="Collaborator" width="55px"></a>
+<a href="/profile/{{$user->id}}"><img src={{ Storage::url('users/'.$user['photo']) }} class="rounded-circle mr-2" alt="Collaborator" width="55px"></a>
