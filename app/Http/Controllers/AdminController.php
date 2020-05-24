@@ -23,10 +23,11 @@ class AdminController extends Controller
         try{
             $user = User::find($id);
             $user->delete();
-
+            Log::info('User '.$user->name . ' with id:' . $user->id . 'banned');
             return response()->json($user, 200);
         }
         catch(ModelNotFoundException $e){
+            Log::error('Couldnt ban user '. $user->name . ' with id:' . $user->id . ' - not found');
             return response()->json($user, 400);
         }
     }

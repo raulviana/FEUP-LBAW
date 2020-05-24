@@ -15,6 +15,7 @@ use Session;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 
 class EventController extends Controller
@@ -151,11 +152,12 @@ class EventController extends Controller
         try{
             $event->is_active = false;
             $event->save();
+            Log::info('Event ' . $event->title . ' with id:' . $event->id . ' deleted');
             return response()->json($event, 200);
         } catch(ModelNotFoundException $e){
+            Log::error('Could not delete event' . $event->title . ' with id:' . $event->id . ' - not found');
             return response()->json($event, 404);
         } 
-
     }
 
     public function restore(Request $request){
@@ -165,9 +167,11 @@ class EventController extends Controller
         try{
             $event->is_active = true;
             $event->save();
+            Log::info('Event ' . $event->title . ' with id:' . $event->id . ' restored');
             return response()->json($event, 200);
         }
         catch(ModelNotFoundException $e){
+            Log::error('Could not restore event' . $event->title . ' with id:' . $event->id . ' - not found');
             return response()->json($event, 404);
         }
     }
@@ -182,6 +186,7 @@ class EventController extends Controller
             $request->session()->flash('success', 'Collaborator was removed');
             return response()->json($row[0]);
         } catch(ModelNotFoundException $e){
+            Log::error('Unable to remove Collaborator from event with id:' . $request['event_id']);
             $request->session()->flash('error', 'Ups! Cant remove collaborator');
             return response()->json([], 404);
         }
@@ -204,10 +209,14 @@ class EventController extends Controller
     
                 return response()->json($user, 200);
             }      
-            else
-                return response()->json($user, 500);      
+            else {
+                Log::error('Unable to add collaborator to event with id:' . $request['event_id'] . ' - internal error (500)');
+                return response()->json($user, 500);
+            }
+
+                     
         }
-        
+        Log::error('Unable to add collaborator to event with id:' . $request['event_id'] . ' - not found (404)');
         return response()->json([], 404);
     }
 
