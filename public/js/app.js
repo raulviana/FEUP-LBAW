@@ -3,7 +3,7 @@ const addPostBtn = document.querySelector("button#btn-add-post");
 
 const selectTag = document.querySelectorAll("label#tag-button");
 
-const editPostBtn = document.querySelector("button#btn-edit-post");
+const editPostBtn = document.querySelectorAll("button#btn-edit-post");
 
 const savePostBtn = document.querySelector("button#edit-save");
 
@@ -63,8 +63,8 @@ function addEventListeners() {
     addPostBtn.addEventListener('click', sendCreatePostRequest);
   }
 
-  if(editPostBtn){
-    editPostBtn.addEventListener('click', EditPost)}
+  for(let i = 0; i < editPostBtn.length; i++){
+    editPostBtn[i].addEventListener('click', EditPost)}
 
   for (let i = 0; i < deletePostBtn.length; i++){
     deletePostBtn[i].addEventListener('click', sendDeletePost);
@@ -295,16 +295,15 @@ function EditPost(event){
   event.preventDefault();
 
 
-       postContent = $('#post-body');
-       let content = this.closest('button').getAttribute('data-post-content');
-      
-      $('#post-body').val("Write your new post!");
-      $('#edit-modal').modal();
+  postContent = $('#post-body');
+  postid = this.closest('button').getAttribute('data-post-id');
+  eventid = this.closest('button').getAttribute('data-post-event');
+
+  $('#edit-modal').modal();    
 }
 
 function sendSavePostRequest(){
-  let postid = this.closest('button').getAttribute('data-post-id');
-  let eventid = this.closest('button').getAttribute('data-post-event');
+  
 
   sendAjaxRequest('POST', `/api/events/${eventid}/posts/${postid}/edit`, {eventid: eventid, content: $('#post-body').val(), postid: postid}, savePostHandler)
 }
@@ -581,6 +580,7 @@ function postCreatedHandler() {
   let form_field = document.querySelector('textarea#post-content');
   form_field.value="";
 }
+
 
 function savePostHandler(msg){
   $(postContent).text(msg['new_content']);
