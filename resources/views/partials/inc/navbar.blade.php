@@ -20,7 +20,10 @@
         </ul>
         
     
+
         @if(Auth::guest())
+
+            
             <ul class="nav navbar-nav navbar-right ml-auto">
                 <li><a class="nav-link" href="{{route('login')}}"> LOGIN </a>   </li>
                 <li><a class="nav-link" href="{{route('register')}}"> REGISTER </a>   </li>
@@ -31,18 +34,20 @@
             @if(Auth::user()->admin)
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="{{ route('admin-users') }}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        MANAGEMENT
+                        <i class="fa fa-gear"></i> <!-- admin management -->
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                      <a class="dropdown-item" href="{{ route('admin-users') }}">Manage users</a>
-                      <a class="dropdown-item" href="{{ route('admin-events') }}">Manage events</a>
+                      <a class="dropdown-item" href="{{ route('admin-users') }}"> Manage users </a>
+                      <a class="dropdown-item" href="{{ route('admin-events') }}"> Manage events </a>
                     </div>
                   </li>
 
             @endif         
-                <li><a class="nav-link" href="/profile/{{Auth::user()->id}}"> MY PROFILE </a> </li>
+                <li><a class="nav-link" href="/profile/users/{{Auth::user()->id}}/events"> <i class="fa fa-heart"></i> </a> </li> <!-- user events -->
+
+                <li><a class="nav-link" href="/profile/{{Auth::user()->id}}"> <i class="fa fa-user"></i> </a> </li> <!-- profile -->
             
-                <li><a class="nav-link" href="{{route('logout')}}"> LOGOUT </a>   </li>
+                <li><a class="nav-link" href="{{route('logout')}}"> <i class="fa fa-sign-out"></i> </a> </li> <!-- logout -->
             </ul>
         @endif
  

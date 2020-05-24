@@ -3,7 +3,7 @@ const addPostBtn = document.querySelector("button#btn-add-post");
 
 const selectTag = document.querySelectorAll("label#tag-button");
 
-const editPostBtn = document.querySelector("button#btn-edit-post");
+const editPostBtn = document.querySelectorAll("button#btn-edit-post");
 
 const savePostBtn = document.querySelector("button#edit-save");
 
@@ -25,6 +25,7 @@ const addCollaboratorBtn = document.querySelector("button#search-users");
 
 const eventForm = document.getElementById("event-settings-form");
 
+
 function addEventListeners() {
   let userDeleters = document.querySelectorAll("div#manage-users button#delete-user-btn");
   [].forEach.call(userDeleters, function(deleter) {
@@ -41,6 +42,12 @@ function addEventListeners() {
     collabdeleter.addEventListener('click', sendRemoveCollaborator);
   });
 
+  let invitationDeleters = document.querySelectorAll("a#remove-guest");
+  [].forEach.call(invitationDeleters, function(guestdeleter) {
+    guestdeleter.addEventListener('click', sendRemoveInvitation);
+  });
+
+
   for(let i = 0; i < selectTag.length; i++){
     selectTag[i].addEventListener('click', alterTag);
   }
@@ -56,8 +63,8 @@ function addEventListeners() {
     addPostBtn.addEventListener('click', sendCreatePostRequest);
   }
 
-  if(editPostBtn){
-    editPostBtn.addEventListener('click', EditPost)}
+  for(let i = 0; i < editPostBtn.length; i++){
+    editPostBtn[i].addEventListener('click', EditPost)}
 
   for (let i = 0; i < deletePostBtn.length; i++){
     deletePostBtn[i].addEventListener('click', sendDeletePost);
@@ -210,6 +217,13 @@ function sendAjaxRequest(method, url, data, handler) {
   request.send(encodeForAjax(data));
 }
 /* SENDERS */
+function sendRemoveInvitation(event){
+  event.preventDefault();
+  let invite_id = this.closest('a').getAttribute('data-id');
+
+  
+  sendAjaxRequest("delete", `/api/events/{event_id}/invitations/{inv_id}/delete`, {invite_id: invite_id}, deleteInviteHandler);
+}
 
 function sendDeletePost(event){
   event.preventDefault();
@@ -281,16 +295,15 @@ function EditPost(event){
   event.preventDefault();
 
 
-       postContent = $('#post-body');
-       let content = this.closest('button').getAttribute('data-post-content');
-      
-      $('#post-body').val("Write your new post!");
-      $('#edit-modal').modal();
+  postContent = $('#post-body');
+  postid = this.closest('button').getAttribute('data-post-id');
+  eventid = this.closest('button').getAttribute('data-post-event');
+
+  $('#edit-modal').modal();    
 }
 
 function sendSavePostRequest(){
-  let postid = this.closest('button').getAttribute('data-post-id');
-  let eventid = this.closest('button').getAttribute('data-post-event');
+  
 
   sendAjaxRequest('POST', `/api/events/${eventid}/posts/${postid}/edit`, {eventid: eventid, content: $('#post-body').val(), postid: postid}, savePostHandler)
 }
@@ -314,6 +327,17 @@ function sendRestoreEventRequest(event){
 /*--------*/
 
 /* HANDLERS */
+
+function deleteInviteHandler(){
+  let row = JSON.parse(this.responseText);
+  let event_id = row['event_id'];
+  let invite_id = row['invite_id'];
+
+  if(this.status != 200) window.location = `/events/${event_id}`;
+
+  let tableRow = document.querySelector('tr[data-id="' + invite_id +'"]');
+  tableRow.remove();  
+}
 
 function deletePostHandler(){
   let post_id = JSON.parse(this.responseText);
@@ -557,6 +581,7 @@ function postCreatedHandler() {
   form_field.value="";
 }
 
+
 function savePostHandler(msg){
   $(postContent).text(msg['new_content']);
   $('#comment-body').text($('#post-body').val());
@@ -701,10 +726,10 @@ function alterTag(event){
    
   
    
-function validateNewEvent(){
+/*function validateNewEvent(){
   console.log("validating");
   return true;
-}    
+}    */
 
 addEventListeners();
 

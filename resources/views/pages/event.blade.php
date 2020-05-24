@@ -82,14 +82,29 @@
                             @include('partials.events.collaborators.owner', ['user' => $event['owner']])
 
                             @if(count ($event->collaborators()->where('is_active', 'true')->get()) > 0)
-                            @each('partials.events.collaborators.collaborator', $event->collaborators()->orderBy('id', 'asc')->get(), 'user')
+                                @each('partials.events.collaborators.collaborator', $event->collaborators()->orderBy('id', 'asc')->get(), 'user')
                             @endif
 
-                            @if(Auth::check())
-                            @if(Auth::user()->id == $event['owner']['id'] || Auth::user()->admin)
-                            <button type="button" class="btn float-right" data-toggle="modal" data-target="#collaborators-settings"> + </button>
-                            @include('partials.modals.collab_evnt', ['event' => $event])
+                            @if(Auth::check()) <!-- TODO !! use policies to check this -->
+                                @if(Auth::user()->id == $event['owner']['id'] || Auth::user()->admin)
+                                    <button type="button" class="btn float-right" data-toggle="modal" data-target="#collaborators-settings"> + </button>
+                                    @include('partials.modals.collab_evnt', ['event' => $event])
+                                @endif
                             @endif
+
+
+                            <hr>
+
+                            <h5 class="text-center"> {{count ($event->invites()->where('accepted', true)->get())}} coming to this event</h5>
+                            @if(count ($event->invites()->get()) > 0)
+                                @each('partials.events.invites.guest', $event->invites()->take(20)->get(), 'invite')
+                            @endif
+                            
+                            @if(Auth::check())
+                                @if(Auth::user()->id == $event['owner']['id'] || Auth::user()->admin) <!-- TODO !! use policies to check this -->
+                                    <button type="button" class="btn float-right" data-toggle="modal" data-target="#guest-settings"> + </button>
+                                    @include('partials.modals.guest_evnt', ['event' => $event])
+                                @endif
                             @endif
 
                         </div>

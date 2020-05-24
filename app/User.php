@@ -38,7 +38,7 @@ class User extends Authenticatable
      * The events this user owns.
      */
     public function events() {
-      return $this->hasMany('App\Event');
+      return $this->hasMany('App\Event', 'owner_id');
     }
 
 
@@ -54,6 +54,14 @@ class User extends Authenticatable
      */
     public function collaborates(){
         return $this->belongsToMany('App\Event', 'collaborators_event', 'user_id', 'event_id');
+    }
+
+    public function invites(){
+        return $this->hasMany('App\Invitation');
+    }
+
+    public function wasInvited(){
+        return $this->hasMany('App\Invitation', 'invited_id');
     }
 
 }

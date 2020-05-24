@@ -31,6 +31,7 @@ Route::post('profile/{id}/edit', 'UserController@update');
 Route::delete('api/users/{id}/delete', 'UserController@delete');
 Route::post('api/users/{id}/restore', 'UserController@restore');
 Route::get('api/users/search', 'UserController@search');
+Route::get('profile/users/{id}/events', 'UserController@events');
 
 // Static pages
 Route::get('faq' , 'HomepageController@faq')->name('faq');
@@ -47,7 +48,7 @@ Route::get('/admin/events', 'AdminController@events')->name('admin-events');
 //Events
 //Route::resource('events', 'EventController');
 Route::get('/events', 'EventController@list');
-Route::get('/events/create', 'EventController@create');
+Route::get('/events/create', 'EventController@create')->name('new-event');
 Route::post('/events/create', 'EventController@store');
 Route::get('/events/{id}/edit', 'EventController@edit');
 Route::post('/events/{id}/edit', 'EventController@update');
@@ -57,7 +58,8 @@ Route::post('/api/events/{id}/restore', 'EventController@restore');
 Route::delete('api/events/{event_id}/remove/{user_id}', 'EventController@removeCollaborator');
 Route::put('api/events/{event_id}/add/{user_id}', 'EventController@addCollaborator');
 
-
+//Invitations
+Route::delete('api/events/{event_id}/invitations/{invite_id}/delete', 'InvitationController@delete');
 
 //Tags
 Route::get('/tags/{name}', 'TagController@show');

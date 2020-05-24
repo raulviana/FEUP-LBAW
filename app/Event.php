@@ -41,4 +41,8 @@ class Event extends Model
     return $this->belongsToMany('App\SocialMedia', 'event_social_media', 'event_id', 'social_media_id'); 
 
   }
+
+  public function invites(){
+    return $this->hasMany('App\Invitation'); 
+  }
 }

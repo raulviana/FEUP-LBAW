@@ -138,7 +138,7 @@ CREATE TABLE invitation (
     invited_id INTEGER REFERENCES "users" (id) ON UPDATE SET NULL,
     message TEXT NOT NULL,
     date DATE NOT NULL DEFAULT CURRENT_DATE,
-    accepted BOOLEAN
+    accepted BOOLEAN DEFAULT null
 );
 
 ALTER TABLE "file" DROP CONSTRAINT IF EXISTS file_url_uk;
@@ -428,9 +428,9 @@ insert into wish_list (event_id, user_id) values (5, 16);
 insert into wish_list (event_id, user_id) values (5, 18);
 
 ---------------------------------------------------- INVITATION ---------------------------------------------------- 
-insert into invitation (event_id, invited_id, inviter_id, message, date, accepted) values ( 2, 5, 20, 'Vem a este evento fantástico!', '10-03-2020', TRUE);
-insert into invitation (event_id, invited_id, inviter_id, message, date, accepted) values ( 2, 6, 20, 'Vem a este evento fantástico!', '10-03-2020', FALSE);
-insert into invitation (event_id, invited_id, inviter_id, message, date, accepted) values ( 2, 7, 20, 'Vem a este evento fantástico!', '10-03-2020', TRUE);
-insert into invitation (event_id, invited_id, inviter_id, message, date, accepted) values ( 2, 1, 17, 'Hey my friend! Thought you might me interested in this great exhibition!', '05-03-2020', TRUE);
+insert into invitation (event_id, invited_id, inviter_id, message, date) values ( 1, 26, 20, 'Vem a este evento fantástico!', '10-03-2020');
+insert into invitation (event_id, invited_id, inviter_id, message, date, accepted) values ( 2, 26, 20, 'Vem a este evento fantástico!', '10-03-2020', FALSE);
+insert into invitation (event_id, invited_id, inviter_id, message, date, accepted) values ( 3, 26, 20, 'Vem a este evento fantástico!', '10-03-2020', TRUE);
+insert into invitation (event_id, invited_id, inviter_id, message, date, accepted) values ( 4, 26, 17, 'Hey my friend! Thought you might me interested in this great exhibition!', '05-03-2020', TRUE);
 
 
