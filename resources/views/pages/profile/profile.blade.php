@@ -52,14 +52,6 @@
                     <hr>
 
                     <div class="col-md-12">
-                        <h4 class="m-t-2">Going to </h4>
-                    </div>
-
-                    <div class="col-md-12">
-                        <h4 class="m-t-2">My events </h4>
-                    </div>
-
-                    <div class="col-md-12">
                         <h4 class="m-t-2">Wishlist </h4>
                     </div>
                 </div>

@@ -641,3 +641,40 @@ a#tooltip {
   border-radius: 0.5rem;
 }
 
+.card-horizontal {
+    display: flex;
+    flex: 1 1 auto;
+}
+
+div#my-events{
+    padding: 1rem;
+    background:white;
+}
+
+
+.row-height{
+    height: 80vh;
+}
+
+.left{
+    height: 100%;
+    overflow-y: scroll;
+}
+
+.right{
+    height: 100%;
+    overflow-y: scroll;
+}
+
+a#accept-invite-btn {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+a#reject-invite-btn {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+

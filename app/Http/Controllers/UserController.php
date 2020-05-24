@@ -88,5 +88,15 @@ class UserController extends Controller
         } 
     }
 
+
+    public function events($id){
+        $user = User::find($id);
+
+        $invited_to = $user->wasInvited()->get();
+        $own_by = $user->events()->get();
+        $collaborates_in = $user->collaborates()->get();
+
+        return view('pages.profile.my_events', ['invitedTo' => $invited_to, 'collaboratingIn' => $collaborates_in, 'myEvents' => $own_by]);
+    }
         
 }
