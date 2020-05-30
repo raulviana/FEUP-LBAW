@@ -41,7 +41,11 @@
                     @else   
                         <small> You are currently invited to {{count($invitedTo)}} events. </small>
                         @foreach ($invitedTo as $invite)
-                            @include('partials.events.invites.invite_row', ['invite' => $invite])
+                            @if($invite->event->is_active)
+                                @include('partials.events.invites.invite_row', ['invite' => $invite])
+                            @else 
+                                This event has been deleted! :(
+                            @endif
                         @endforeach
                     @endif
             </div>

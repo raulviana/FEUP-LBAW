@@ -6,8 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Invitation extends Model
 {
-
+    public $timestamps  = false;
     protected $table = 'invitation';
+
 
     public function event()
     {

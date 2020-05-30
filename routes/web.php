@@ -60,6 +60,9 @@ Route::put('api/events/{event_id}/add/{user_id}', 'EventController@addCollaborat
 
 //Invitations
 Route::delete('api/events/{event_id}/invitations/{invite_id}/delete', 'InvitationController@delete');
+Route::put('api/profile/{user_id}/invitations/{inv_id}/accept', 'InvitationController@accept');
+Route::put('api/profile/{user_id}/invitations/{inv_id}/reject', 'InvitationController@reject');
+
 
 //Tags
 Route::get('/tags/{name}', 'TagController@show');
