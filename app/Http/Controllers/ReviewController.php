@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Auth;
 use App\Event;
+use App\Review;
 
 class ReviewController extends Controller
 {
@@ -13,6 +14,8 @@ class ReviewController extends Controller
         $validated_data = $request->validate([
             'event_id' => 'required'
         ]);
+
+        $this->authorize('create', Review::class);
 
         $event_id = $validated_data["event_id"];
         $user_id = Auth::user()->id;
@@ -33,6 +36,8 @@ class ReviewController extends Controller
             'event_id' => 'required'
         ]);
 
+        $this->authorize('create', Review::class);
+        
         $event_id = $validated_data["event_id"];
         $user_id = Auth::user()->id;
 

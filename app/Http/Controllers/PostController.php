@@ -15,14 +15,14 @@ use Carbon\Carbon;
 class PostController extends Controller
 {
     public function store(Request $request){
-       
+       $this->authorize('create', Post::class);
+
         $user_name = Auth::user()->name;
         $user_photo = Storage::url('users/'. Auth::user()->photo);
         
         
         $post = new Post();
         
-
         $post->user_id = $request->input('userid');
         $post->event_id = $request->input('eventid');
         $post->content = $request->input('content');
@@ -66,7 +66,6 @@ class PostController extends Controller
     }
 
     public function delete(Request $request){
-                
         $post = Post::find($request['postid']);
         $post->delete();
         return response()->json(['postID' => $post->id], 200);
