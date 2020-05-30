@@ -65,4 +65,7 @@ class User extends Authenticatable
         return $this->hasMany('App\Invitation', 'invited_id');
     }
 
+    public function wishlist(){
+        return $this->belongsToMany('App\Event', 'wish_list', 'user_id', 'event_id');
+    }
 }

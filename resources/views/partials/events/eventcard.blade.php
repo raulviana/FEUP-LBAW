@@ -16,8 +16,15 @@
           </div>
               
           <div class="col text-right">
-           <p id="event-card-info" class="text-muted"> {{$event->review}} likes </p>
+            @if(Auth::check())
+              @if(Auth::user()->wishlist->contains($event))
+                <a data-id={{$event->id}} data-active="1" id="wishlist-btn" style="color: #b30000;" href="#"><i class="fa fa-heart"></i></a>
+              @else 
+                <a data-id={{$event->id}} data-active="0" id="wishlist-btn" style="color: #292b2c" href="#"><i class="fa fa-heart-o"></i></a>
+              @endif 
+            @endif
           </div>
+
       </div>
       
       <hr>
@@ -30,7 +37,7 @@
         </div>
         
       <div class="col text-right">
-        <a id="event-card-button-buy" class="btn btn-sm btn-outline-dark" href="" role="button">Buy</a>
+        <a id="event-card-button-buy" class="btn btn-sm btn-outline-dark">{{$event->review}} likes</a>
       </div>
     </div>
   </div>   

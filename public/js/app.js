@@ -87,7 +87,6 @@ function addEventListeners() {
     deletePostBtn[i].addEventListener('click', sendDeletePost);
   }
 
-
   if(savePostBtn){
     savePostBtn.addEventListener('click', sendSavePostRequest);
   }
@@ -99,7 +98,6 @@ function addEventListeners() {
   if(likeBtn){
     likeBtn.addEventListener('click', sendLikeVoteRequest);
   }
-
 
   if(addCollaboratorBtn){
     addCollaboratorBtn.addEventListener('click', sendAddCollaboratorRequest);
@@ -418,7 +416,7 @@ function deleteInviteHandler(){
 function deleteOwnedInviteHandler(){
   let info = JSON.parse(this.responseText);
   let invited_id = info['invited_id'];
-  window.location = `/profile/users${invited_id}/events`;
+  window.location = `/profile/users/${invited_id}/events`;
 }
 
 

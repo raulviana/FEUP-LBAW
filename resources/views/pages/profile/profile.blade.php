@@ -52,7 +52,16 @@
                     <hr>
 
                     <div class="col-md-12">
-                        <h4 class="m-t-2">Wishlist </h4>
+                        <h4 class="m-t-2">Wishlist </h4>  
+                        <div class="container">
+                            <div class="row">                 
+                                @foreach ($user->wishlist as $event)
+                                    @if($event->is_active)
+                                        @include('partials.events.eventcard', ['event' => $event])
+                                    @endif
+                                @endforeach
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

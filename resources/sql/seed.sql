@@ -126,9 +126,9 @@ CREATE TABLE event_social_media (
 );
 
 CREATE TABLE wish_list (
-    event_id INTEGER REFERENCES "event" ON UPDATE SET NULL,
-    user_id INTEGER REFERENCES "users" ON UPDATE SET NULL,
-    PRIMARY KEY (event_id, user_id)
+    id SERIAL PRIMARY KEY,
+    event_id INTEGER REFERENCES "event" (id) ON UPDATE SET NULL,
+    user_id INTEGER REFERENCES "users" (id) ON UPDATE SET NULL
 );
 
 CREATE TABLE invitation (
@@ -416,16 +416,17 @@ insert into event_social_media (event_id, social_media_id) values (5, 6);
 ---------------------------------------------------- WISHLIST ---------------------------------------------------- 
 insert into wish_list (event_id, user_id) values (1, 3);
 insert into wish_list (event_id, user_id) values (1, 19);
-insert into wish_list (event_id, user_id) values (1, 13);
+insert into wish_list (event_id, user_id) values (1, 26);
 insert into wish_list (event_id, user_id) values (1, 14);
 insert into wish_list (event_id, user_id) values (4, 7);
-insert into wish_list (event_id, user_id) values (4, 8);
+insert into wish_list (event_id, user_id) values (4, 26);
 insert into wish_list (event_id, user_id) values (4, 12);
 insert into wish_list (event_id, user_id) values (4, 14);
-insert into wish_list (event_id, user_id) values (5, 14);
+insert into wish_list (event_id, user_id) values (5, 26);
 insert into wish_list (event_id, user_id) values (5, 15);
 insert into wish_list (event_id, user_id) values (5, 16);
 insert into wish_list (event_id, user_id) values (5, 18);
+
 
 ---------------------------------------------------- INVITATION ---------------------------------------------------- 
 insert into invitation (event_id, invited_id, inviter_id, message, date) values ( 1, 26, 20, 'Vem a este evento fantástico!', '10-03-2021');
