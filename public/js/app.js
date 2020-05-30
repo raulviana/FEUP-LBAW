@@ -25,6 +25,7 @@ const addCollaboratorBtn = document.querySelector("button#search-users");
 
 const eventForm = document.getElementById("event-settings-form");
 
+const deleteEvntBtn = document.querySelector("button#del-event");
 
 function addEventListeners() {
   let userDeleters = document.querySelectorAll("div#manage-users button#delete-user-btn");
@@ -90,6 +91,11 @@ function addEventListeners() {
 
   if(eventForm){
     eventForm.addEventListener('submit', validateEventForm);
+  }
+
+  if(deleteEvntBtn){
+    console.log(deleteEvntBtn);
+    deleteEvntBtn.addEventListener('click', sendRegularDeleteEvent);
   }
 }
 
@@ -308,13 +314,22 @@ function sendSavePostRequest(){
   sendAjaxRequest('POST', `/api/events/${eventid}/posts/${postid}/edit`, {eventid: eventid, content: $('#post-body').val(), postid: postid}, savePostHandler)
 }
 
-
+/* used form admin operations */
 function sendDeleteEventRequest(event){
   event.preventDefault();
   
   let id = this.closest('button').getAttribute('data-id');
 
   sendAjaxRequest("delete", `/api/events/${id}/delete`, {id: id}, eventDeletedHandler);
+}
+
+/* used for regular user operations */
+function sendRegularDeleteEvent(event){
+  event.preventDefault();
+  
+  let id = this.closest('button').getAttribute('data-id');
+
+  sendAjaxRequest("delete", `/api/events/${id}/delete`, {id: id}, regularEventDeletedHandler);
 }
 
 function sendRestoreEventRequest(event){
@@ -705,6 +720,11 @@ function alterTag(event){
   label.setAttribute('style', 'margin-right: 0.25rem; margin-left: 0.25rem; color: black; font-weight: bold;');
 }
 
+function regularEventDeletedHandler(){
+  window.location = '/';
+
+ // console.log(JSON.parse(this.responseText));
+}
 
 /*  ==========================================
     USER PROFILE UPLOAD PHOTO SNIPPET

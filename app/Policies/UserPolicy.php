@@ -12,7 +12,12 @@ class UserPolicy
     use HandlesAuthorization;
 
     public function update(User $user){
-        /* Any logged user can update his profile */
-        return Auth::check();
+        /* Any logged user can update his own profile */
+        return Auth::user()->id == $user->id;
     }
+
+    public function myevents(User $user){
+        return Auth::user()->id == $user->id;
+    }
+
 }

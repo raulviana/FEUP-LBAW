@@ -11,11 +11,13 @@ use App\User;
 use App\Tag;
 use App\Local;
 use Auth;
-use Session;
-use Illuminate\Database\Eloquent\Model;
+
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Validator;
+
 
 
 class EventController extends Controller
@@ -29,13 +31,15 @@ class EventController extends Controller
 
     public function show($id)
     {
-      $event = Event::find($id);
-      
-      return view('pages.event', ['event' => $event]);
+        $event = Event::find($id);
+        $this->authorize('is_active', $event);
+        return view('pages.event', ['event' => $event]);
     }
 
     public function create()
     {
+        $this->authorize('create', Event::class);
+
         return view('pages.event_create');
     }
 
@@ -43,54 +47,70 @@ class EventController extends Controller
         $this->validate($request, [
             'title' => 'required',
             'local' => 'required',
-            'start_date' => 'required',
-            'end_date' => 'required',
+            'start_date' => 'required | date',
+            'end_date' => 'required | date | after:start_date',
             'upload-photo' => 'required'
         ]);
+
+      
         
         $path = $request->file('upload-photo')->store('/public/event_photo');
         $filename = basename($path);
-        $event = new Event;
-        
-        $event->title = $request->input('title');
-        $event->details = $request->input('details');
-        $event->start_date = $request->input('start_date');
-        $event->end_date = $request->input('end_date');
 
+        DB::beginTransaction();
 
-        $event->photo = $filename;
-        if($request->input('is_private') == 'off')
-            $event->type = 'public';
-        else
-            $event->type = 'private';
+        try {
+            $event = new Event;
             
-        $event->owner_id = Auth::user()->id;
+            $event->title = $request->input('title');
+            $event->details = $request->input('details');
+            $event->start_date = $request->input('start_date');
+            $event->end_date = $request->input('end_date');
 
-        $event->local_id = $this->addLocal($request['local']);
 
-        $event->save();
+            $event->photo = $filename;
+            if($request->input('is_private') == 'off')
+                $event->type = 'public';
+            else
+                $event->type = 'private';
+                
+            $event->owner_id = Auth::user()->id;
 
-        if($request['tag_theater']) $this->addTag('Theater', $event->id);
-        if($request['tag_sculpture']) $this->addTag('Sculpture', $event->id);
-        if($request['tag_dance']) $this->addTag('Dance', $event->id);
-        if($request['tag_music']) $this->addTag('Music', $event->id);
-        if($request['tag_paintings']) $this->addTag('Painting', $event->id);
-        if($request['tag_comedy']) $this->addTag('Comedy', $event->id);
-        if($request['tag_literature']) $this->addTag('Literature', $event->id);
-        if($request['tag_others']) $this->addTag('Others', $event->id);
+            $event->local_id = $this->addLocal($request['local']);
 
-        if($request['url_facebook']) $this->addSocialMedia('Facebook', $request['url_facebook'] , $event->id);
-        if($request['url_twitter']) $this->addSocialMedia('Twitter', $request['url_twitter'], $event->id);
-        if($request['url_instagram']) $this->addSocialMedia('Instagram', $request['url_instagram'], $event->id);
-        if($request['url_youtube']) $this->addSocialMedia('Youtube', $request['url_youtube'], $event->id);
-        if($request['url_website']) $this->addSocialMedia('Website', $request['url_website'], $event->id);
+            $event->save();
 
-    
-        return redirect('/')->with('success', 'Event created with sucess!');
+            if($request['tag_theater']) $this->addTag('Theater', $event->id);
+            if($request['tag_sculpture']) $this->addTag('Sculpture', $event->id);
+            if($request['tag_dance']) $this->addTag('Dance', $event->id);
+            if($request['tag_music']) $this->addTag('Music', $event->id);
+            if($request['tag_paintings']) $this->addTag('Painting', $event->id);
+            if($request['tag_comedy']) $this->addTag('Comedy', $event->id);
+            if($request['tag_literature']) $this->addTag('Literature', $event->id);
+            if($request['tag_others']) $this->addTag('Others', $event->id);
+
+            if($request['url_facebook']) $this->addSocialMedia('Facebook', $request['url_facebook'] , $event->id);
+            if($request['url_twitter']) $this->addSocialMedia('Twitter', $request['url_twitter'], $event->id);
+            if($request['url_instagram']) $this->addSocialMedia('Instagram', $request['url_instagram'], $event->id);
+            if($request['url_youtube']) $this->addSocialMedia('Youtube', $request['url_youtube'], $event->id);
+            if($request['url_website']) $this->addSocialMedia('Website', $request['url_website'], $event->id);
+
+            DB::commit();
+            return redirect('/')->with('success', 'Event created with sucess!');
+
+        } catch(QueryException $e){
+            DB::rollBack();
+            return redirect('/')->with('error', 'Error in submiting request to database');
+        }
+
+
     }
 
     public function edit($id){
         $event = Event::find($id);
+
+        $this->authorize('update', $event);
+
         return view('pages.event_create', ['event' => $event]);
     }
 
@@ -153,7 +173,7 @@ class EventController extends Controller
             $event->is_active = false;
             $event->save();
             Log::info('Event ' . $event->title . ' with id:' . $event->id . ' deleted');
-            return response()->json($event, 200);
+            return response()->json($event, 200)->with('success', 'Event was removed!');
         } catch(ModelNotFoundException $e){
             Log::error('Could not delete event' . $event->title . ' with id:' . $event->id . ' - not found');
             return response()->json($event, 404);
@@ -161,7 +181,6 @@ class EventController extends Controller
     }
 
     public function restore(Request $request){
-     
        $event = Event::find($request['id']);
        
         try{
@@ -276,8 +295,7 @@ class EventController extends Controller
         $events = Event::where('local_id', 'like' , "%$id%")->get();
      
         
-                        
-
+                    
         return view('pages.search_results')->with('events', $events);
     }
 }

@@ -10,7 +10,8 @@
                 </li>
 
                 @if(Auth::check())
-                  @if((Auth::user()->admin) || (Auth::user()->id == $event->user_id))
+                  @if((Auth::user()->admin) || (Auth::user()->events->contains($event)) || (Auth::user()->collaborates->contains($event)))
+                  
                   <li class="nav-item">
                       <a style="color: #292b2c" class="nav-link" href="/events/{{$event->id}}/edit"><i class="fa fa-cogs"></i></a>
                   </li>
@@ -21,9 +22,7 @@
                       @include('partials.modals.delete_evnt', ['event' => $event])
                   </li>
                   @endif
-                @endif
-
-           
+                @endif           
         </div>
     </div>
 </nav>
