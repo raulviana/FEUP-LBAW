@@ -1,9 +1,11 @@
 
+-> links a azul
 
--> transacoes duas chamadas??
+-> preencher o a9
 
--> formulario create event de exemplo, required, javascript, help, html5 required, 
+-> recuperação de password
 
-->!!!! no refgisto de user, quando algum dos inputs não é devolvido como incorreto, a foto mantém-se na página, mas torna-se null, e quando se tenta fazer o registo pela segunda vez, apenas alterando os dados que estavam incorretos, vao dar erro em store(), pois vai tentar gravar null... 
+
+
 
 -> ao criar o evento apenas é possível adicionar datas, falta as horas.

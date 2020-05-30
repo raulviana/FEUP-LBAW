@@ -14,7 +14,7 @@
         <div class="card">
             <div class="card-header" id="HOne">
                 <h2 class="mb-0">
-                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
+                    <button class="btn btn-link text-dark" type="button" data-toggle="collapse" data-target="#collapseOne"
                         aria-expanded="false" aria-controls="collapseOne">
                         What's the purpose of Art Now?
                     </button>
@@ -31,7 +31,7 @@
         <div class="card">
             <div class="card-header" id="HTwo">
                 <h2 class="mb-0">
-                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseTwo"
+                    <button class="btn btn-link text-dark" type="button" data-toggle="collapse" data-target="#collapseTwo"
                         aria-expanded="false" aria-controls="collapseTwo">
                         What can I use Art Now for?
                     </button>
@@ -49,7 +49,7 @@
         <div class="card">
             <div class="card-header" id="HThree">
                 <h2 class="mb-0">
-                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseThree"
+                    <button class="btn btn-link text-dark" type="button" data-toggle="collapse" data-target="#collapseThree"
                         aria-expanded="false" aria-controls="collapseThree">
                         How can I search for events?
                     </button>
@@ -67,7 +67,7 @@
         <div class="card">
             <div class="card-header" id="HFour">
                 <h2 class="mb-0">
-                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseFour"
+                    <button class="btn btn-link text-dark" type="button" data-toggle="collapse" data-target="#collapseFour"
                         aria-expanded="false" aria-controls="collapseFour">
                         How can I advertise my event on Art Now?
                     </button>
@@ -86,7 +86,7 @@
          <div class="card">
             <div class="card-header" id="HFive">
                 <h2 class="mb-0">
-                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseFive"
+                    <button class="btn btn-link text-dark" type="button" data-toggle="collapse" data-target="#collapseFive"
                         aria-expanded="false" aria-controls="collapseThree">
                         What's the difference between public and private events?
                     </button>

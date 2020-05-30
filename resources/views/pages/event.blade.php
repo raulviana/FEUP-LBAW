@@ -8,7 +8,7 @@
     <div class="row profile justify-content-center">
         <div class="col-lg-10 h-10%">
             <br><br><br>
-            <img style="width:100%;" src={{ Storage::url('event_photo/'.$event['photo']) }} alt="" class="img-fluid">
+            <img style="width:100%; height:20%;" src={{ Storage::url('event_photo/'.$event['photo']) }} alt="" class="img-fluid">
 
             @include('partials.events.eventheader', ['event' => $event])
 
@@ -17,15 +17,15 @@
                 <div class="col-12">
                     <ul id="pane-list" class="nav nav-tabs nav-fill w-100">
                         <li class="nav-item">
-                            <a href="" data-target="#info" data-toggle="tab" class="nav-link active">Info</a>
+                            <a href="" data-target="#info" data-toggle="tab" class="nav-link active text-dark">Info</a>
                         </li>
 
                         <li class="nav-item">
-                            <a href="" data-target="#posts" data-toggle="tab" class="nav-link">Posts</a>
+                            <a href="" data-target="#posts" data-toggle="tab" class="nav-link text-dark">Posts</a>
                         </li>
 
                         <li class="nav-item">
-                            <a href="" data-target="#related" data-toggle="tab" class="nav-link">Related</a>
+                            <a href="" data-target="#related" data-toggle="tab" class="nav-link text-dark">Related</a>
                         </li>
                     </ul>
 
