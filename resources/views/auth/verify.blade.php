@@ -4,7 +4,7 @@
 
 @section('content')
 <br><br><br>
-<form method="POST" action="{{ route('login') }}">
+<form method="POST" action="{{ route('password.recover') }}">
 
     {{ csrf_field() }}
 
@@ -17,31 +17,21 @@
                                 
                                 <div id="text-banner-login" class="container">
                                     <img style="height:25%; width:100%;filter: brightness(80%);" src="{{asset('images/banner_2.jpg')}}" class="img-fluid" width="100%">
-                                    <div id="text-banner-login" class="centered">Sign in</div>
+                                    <div id="text-banner-login" class="centered">Verify Mail</div>
                                 </div>
                                                                    
                                 <div class="card-body">
                                    
                                         <div class="form-group">
+                                            <br>
                                             <label for="inputsm">Email</label>
                                             <input id="email" class="form-control input-sm" type="email" name="email" value="{{ old('email') }}" required autofocus>
                                         </div>
-
-                                        <div class="form-group">
-                                            <label for="inputsm">Password</label>
-                                            <input id="password" class="form-control input-sm" type="password" name="password" required>                               
+                                        <div class="col">
+                                                 <button type="submit" class="btn float-right" id="btn-login">Get new Password</button>                                   
                                         </div>
-
-                                        <div class="row">
-                                            <div class="col">
-                                                <div class="form-group">
-                                                    <small id="recover_password"><a class="button button-outline text-muted" href="{{ route('verify.mail') }}">Forgot your password?</a></small>
-                                                </div>
-                                            </div>
-                                            <div class="col">
-                                                 <button type="submit" class="btn float-right" id="btn-login">Sign in</button>                                   
-                                            </div>
-                                        </div>
+                                       
+                                        <br><br>
 
                                         @include('partials.inc.messages')
                                     

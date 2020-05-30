@@ -15,7 +15,9 @@ use App\Http\Controllers\PostController;
 
 Route::get('/', 'HomepageController@display')->name('home');
 
-
+//ResetPassword
+Route::view('verify.mail', 'auth.verify')->name('verify.mail');
+Route::post('password.recover', 'Recovery@recover')->name('password.recover');
 
 // Authentication
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
