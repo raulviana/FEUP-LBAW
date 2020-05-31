@@ -5,11 +5,15 @@
     <div class="navbar-collapse w-100">
         <div class="row navbar-nav ml-auto">
     
-                <li class="nav-item">
-                    <a style="color: #292b2c" class="nav-link" href="#"><i class="fa fa-shopping-cart"></i></a>
-                </li>
-
                 @if(Auth::check())
+                    <li class="nav-item">
+                        @if(Auth::user()->wishlist->contains($event))
+                        <a data-id={{$event->id}} data-active="1" id="wishlist-btn" style="color: #b30000" class="nav-link" href="#" role="button"><i class="fa fa-heart"></i></a>
+                        @else 
+                        <a data-id={{$event->id}} data-active="0" id="wishlist-btn" style="color: #292b2c" class="nav-link" href="#" role="button"><i class="fa fa-heart-o"></i></a>
+                        @endif
+                    </li>
+
                   @if((Auth::user()->admin) || (Auth::user()->events->contains($event)) || (Auth::user()->collaborates->contains($event)))
                   
                   <li class="nav-item">

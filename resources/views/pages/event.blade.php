@@ -24,9 +24,7 @@
                             <a href="" data-target="#posts" data-toggle="tab" class="nav-link text-dark">Posts</a>
                         </li>
 
-                        <li class="nav-item">
-                            <a href="" data-target="#related" data-toggle="tab" class="nav-link text-dark">Related</a>
-                        </li>
+                       
                     </ul>
 
                     <div class="tab-content p-b-3">
@@ -44,6 +42,8 @@
                                         <p style="display:inline;" id="event-reviews"> {{$event->review}}</p>
                                         <a data-id={{$event->id}} id="down-vote"><i class="fa fa-thumbs-down"></i></a>
                                     </div>
+
+
                                 </div>
 
                                 @endif
@@ -130,12 +130,7 @@
                             </div>
                         </div>
 
-                        <div class="tab-pane" id="related">
-                            <div class="row">
-
-
-                            </div>
-                        </div>
+                        
                     </div>
                 </div>
             </div>

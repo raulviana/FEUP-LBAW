@@ -173,6 +173,11 @@ a#event-card-button-buy.btn.btn-sm.btn-outline-dark{
     font-weight: 625;
 }
 
+a#event-card-button-buy.btn.btn-sm.btn-outline-dark:hover{
+    background-color: white;
+}
+
+
 .image {
   display: block;
   width: 100%;
@@ -678,3 +683,10 @@ a#reject-invite-btn {
     font-weight: 600;
 }
 
+nav#event-navbar a.nav-link:hover{
+  color: lightslategrey!important;
+}
+
+a#wishlist-btn:hover{
+    color: lightslategrey!important;
+}

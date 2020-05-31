@@ -27,6 +27,7 @@ const eventForm = document.getElementById("event-settings-form");
 
 const deleteEvntBtn = document.querySelector("button#del-event");
 
+
 function addEventListeners() {
   let userDeleters = document.querySelectorAll("div#manage-users button#delete-user-btn");
   [].forEach.call(userDeleters, function(deleter) {
@@ -48,6 +49,21 @@ function addEventListeners() {
     guestdeleter.addEventListener('click', sendRemoveInvitation);
   });
 
+  let invitationAccepters = document.querySelectorAll("button#accept-invite-btn");
+  [].forEach.call(invitationAccepters, function(invitationAccepter) {
+    invitationAccepter.addEventListener('click', sendAcceptInvitation);
+  });
+
+
+  let invitationRejecters = document.querySelectorAll("button#reject-invite-btn");
+  [].forEach.call(invitationRejecters, function(invitationRejecter) {
+    invitationRejecter.addEventListener('click', sendRejectInvitation);
+  });
+  
+  let invitationOwnedDeleters = document.querySelectorAll("a#remove-invitation");
+  [].forEach.call(invitationOwnedDeleters, function(invitedeleter) {
+    invitedeleter.addEventListener('click', sendRemoveInvitationOwned);
+  });
 
   for(let i = 0; i < selectTag.length; i++){
     selectTag[i].addEventListener('click', alterTag);
@@ -71,7 +87,6 @@ function addEventListeners() {
     deletePostBtn[i].addEventListener('click', sendDeletePost);
   }
 
-
   if(savePostBtn){
     savePostBtn.addEventListener('click', sendSavePostRequest);
   }
@@ -84,7 +99,6 @@ function addEventListeners() {
     likeBtn.addEventListener('click', sendLikeVoteRequest);
   }
 
-
   if(addCollaboratorBtn){
     addCollaboratorBtn.addEventListener('click', sendAddCollaboratorRequest);
   }
@@ -94,9 +108,10 @@ function addEventListeners() {
   }
 
   if(deleteEvntBtn){
-    console.log(deleteEvntBtn);
     deleteEvntBtn.addEventListener('click', sendRegularDeleteEvent);
   }
+
+
 }
 
 /* VALIDATE INPUTS */
@@ -180,12 +195,6 @@ function validateEventDateEdit(){
   return 0;
 }
 
-//TODO: validate with regex
-function validateURLs(){
-  return 0;
-}
-
-
 function validateEventDate(){
     let errors = 0;
     let input_sdate = document.querySelector("form#event-settings-form input#event-start-date");
@@ -223,12 +232,34 @@ function sendAjaxRequest(method, url, data, handler) {
   request.send(encodeForAjax(data));
 }
 /* SENDERS */
+function sendRejectInvitation(event){
+  event.preventDefault();
+  let invite_id = this.closest('button').getAttribute('data-id');
+
+  sendAjaxRequest("put", `/api/profile/{user_id}/invitations/{inv_id}/reject`, {invite_id: invite_id}, rejectInviteHandler);
+}
+
+function sendAcceptInvitation(event){
+  event.preventDefault();
+  let invite_id = this.closest('button').getAttribute('data-id');
+
+  sendAjaxRequest("put", `/api/profile/{user_id}/invitations/{inv_id}/accept`, {invite_id: invite_id}, acceptInviteHandler);
+}
+
+
 function sendRemoveInvitation(event){
   event.preventDefault();
   let invite_id = this.closest('a').getAttribute('data-id');
 
   
   sendAjaxRequest("delete", `/api/events/{event_id}/invitations/{inv_id}/delete`, {invite_id: invite_id}, deleteInviteHandler);
+}
+
+function sendRemoveInvitationOwned(event){
+  let invite_id = this.closest('a').getAttribute('data-id');
+
+  
+  sendAjaxRequest("delete", `/api/events/{event_id}/invitations/{inv_id}/delete`, {invite_id: invite_id}, deleteOwnedInviteHandler);
 }
 
 function sendDeletePost(event){
@@ -343,6 +374,34 @@ function sendRestoreEventRequest(event){
 
 /* HANDLERS */
 
+function rejectInviteHandler(){
+  let invite = JSON.parse(this.responseText);
+  
+  let message = document.querySelector('small#invite-confirmation-message[data-id="' + invite['invite_id'] +'"]');
+
+  message.innerHTML = "You didn't accept this invitation ! :(";
+
+  let rejectBtn = document.querySelector('button#reject-invite-btn[data-id="' + invite['invite_id'] +'"]');
+  let acceptBtn = document.querySelector('button#accept-invite-btn[data-id="' + invite['invite_id'] +'"]');
+
+  rejectBtn.disabled = true;
+  acceptBtn.disabled = false;
+}
+
+function acceptInviteHandler(){
+  let invite = JSON.parse(this.responseText);
+
+  let message = document.querySelector('small#invite-confirmation-message[data-id="' + invite['invite_id'] +'"]');
+  let acceptBtn = document.querySelector('button#accept-invite-btn[data-id="' + invite['invite_id'] +'"]');
+  let rejectBtn = document.querySelector('button#reject-invite-btn[data-id="' + invite['invite_id'] +'"]');
+
+
+  message.innerHTML = "You accepted this invitation ! :)";
+  acceptBtn.disabled=true;
+  rejectBtn.disabled =false;
+}
+
+
 function deleteInviteHandler(){
   let row = JSON.parse(this.responseText);
   let event_id = row['event_id'];
@@ -353,6 +412,13 @@ function deleteInviteHandler(){
   let tableRow = document.querySelector('tr[data-id="' + invite_id +'"]');
   tableRow.remove();  
 }
+
+function deleteOwnedInviteHandler(){
+  let info = JSON.parse(this.responseText);
+  let invited_id = info['invited_id'];
+  window.location = `/profile/users/${invited_id}/events`;
+}
+
 
 function deletePostHandler(){
   let post_id = JSON.parse(this.responseText);
