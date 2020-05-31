@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Contracts\Auth\CanResetPassword;
+use Illuminate\Database\Eloquent\Model;
 
 class User extends Authenticatable
 {
@@ -65,4 +66,8 @@ class User extends Authenticatable
         return $this->hasMany('App\Invitation', 'invited_id');
     }
 
+    public function setpasswordAttribute($value)
+    {
+        $this->attributes['password'] = $value;
+    }
 }
