@@ -19,6 +19,7 @@ class HomepageController extends Controller
             ['is_active', true],
             ['type', 'public']
         ])->get();
+
         return view('pages.homepage', ['events' => $events]);
     }
 

@@ -69,10 +69,10 @@ class EventController extends Controller
 
 
             $event->photo = $filename;
-            if($request->input('is_private') == 'off')
-                $event->type = 'public';
-            else
+            if($request->input('is_private'))
                 $event->type = 'private';
+            else
+                $event->type = 'public';
                 
             $event->owner_id = Auth::user()->id;
 
@@ -102,6 +102,8 @@ class EventController extends Controller
             DB::rollBack();
             return redirect('/')->with('error', 'Error in submiting request to database');
         }
+
+
     }
 
     public function edit($id){
