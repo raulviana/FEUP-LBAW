@@ -4,7 +4,7 @@
     <div class="md-form mt-0">
         <form action="{{ route('search') }}" method="GET" class="search-form">
            <!-- <input type="text" placeholder="Search" name="query" id="query" class="search-box"> -->
-            <input name="query" id="query" class="form-control" type="text" aria-label="Search" placeholder="Search by title, date or description">
+            <input name="query" id="query" class="form-control" type="text" aria-label="Search" placeholder="Search by title or description">
         </form> 
         <br>
         <form action="{{ route('searchLocation') }}" method="GET" class="search-form">

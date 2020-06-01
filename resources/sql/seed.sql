@@ -141,10 +141,14 @@ CREATE TABLE invitation (
     accepted BOOLEAN DEFAULT null
 );
 
+
 ALTER TABLE "file" DROP CONSTRAINT IF EXISTS file_url_uk;
 ALTER TABLE tag DROP CONSTRAINT IF EXISTS tag_name_uk;
 ALTER TABLE "file" ADD CONSTRAINT file_url_uk UNIQUE (url);
 ALTER TABLE tag ADD CONSTRAINT tag_name_uk  UNIQUE (id);
+
+ALTER TABLE "event" ADD COLUMN searchtext TSVECTOR;
+UPDATE "event" SET searchtext = to_tsvector('english', title || '' || details);
 
 
 CREATE OR REPLACE FUNCTION insert_review_function() RETURNS TRIGGER AS $$
@@ -183,6 +187,7 @@ $$ LANGUAGE 'plpgsql';
 DROP TRIGGER IF EXISTS insert_review ON review;
 DROP TRIGGER IF EXISTS update_review ON review;
 DROP TRIGGER IF EXISTS delete_review ON review;
+DROP TRIGGER IF EXISTS tsvector_update_trigger ON "event";
 
 CREATE TRIGGER insert_review
     AFTER INSERT ON review
@@ -200,6 +205,10 @@ CREATE TRIGGER delete_review
     FOR EACH ROW
     EXECUTE PROCEDURE delete_review_function();
 
+CREATE TRIGGER ts_searchtext
+    BEFORE INSERT OR UPDATE ON "event"
+    FOR EACH ROW
+    EXECUTE PROCEDURE tsvector_update_trigger('searchtext', 'pg_catalog.english', 'title', 'details');
 
 
 CREATE OR REPLACE FUNCTION past_event() RETURNS TRIGGER AS
@@ -257,11 +266,13 @@ DROP INDEX IF EXISTS event_local;
 DROP INDEX IF EXISTS event_tags;
 DROP INDEX IF EXISTS id;
 DROP INDEX IF EXISTS owner_events;
+DROP INDEX IF EXISTS searchtext_gin;
 
 CREATE INDEX event_local ON "event" USING hash(local_id);
 CREATE INDEX event_tags ON "event_tag" USING hash(tag_id);
 CREATE INDEX id ON "users" USING hash(id);
 CREATE INDEX owner_events ON "event" USING hash(owner_id);
+CREATE INDEX searchtext_gin ON "event" USING GIN(searchtext);
 
 
 

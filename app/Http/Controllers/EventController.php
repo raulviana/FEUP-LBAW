@@ -32,7 +32,7 @@ class EventController extends Controller
     public function show($id)
     {
         $event = Event::find($id);
-        $this->authorize('is_active', $event);
+
         return view('pages.event', ['event' => $event]);
     }
 
@@ -96,14 +96,12 @@ class EventController extends Controller
             if($request['url_website']) $this->addSocialMedia('Website', $request['url_website'], $event->id);
 
             DB::commit();
-            return redirect('/')->with('success', 'Event created with sucess!');
+            return redirect('/')->with('success', 'Event created with success!');
 
         } catch(QueryException $e){
             DB::rollBack();
             return redirect('/')->with('error', 'Error in submiting request to database');
         }
-
-
     }
 
     public function edit($id){
@@ -173,8 +171,11 @@ class EventController extends Controller
             $event->is_active = false;
             $event->save();
             Log::info('Event ' . $event->title . ' with id:' . $event->id . ' deleted');
-            return response()->json($event, 200)->with('success', 'Event was removed!');
+            $request->session()->flash('success', 'Event was removed');
+            return response()->json($event, 200); 
         } catch(ModelNotFoundException $e){
+            $request->session()->flash('error', 'Event couldnt be removed');
+
             Log::error('Could not delete event' . $event->title . ' with id:' . $event->id . ' - not found');
             return response()->json($event, 404);
         } 
@@ -268,13 +269,11 @@ class EventController extends Controller
     public function search(Request $request){
         $request->validate([
             'query'=>'required|min:3',
-        ]);
+        ]);     
+
         $query = $request->input('query');
 
-        $events = Event::where('title', 'like', "%$query%")
-                            ->orWhere('details', 'like', "%$query%")
-                            ->orWhere('start_date', 'like', "%$query%")
-                            ->get();
+        $events = Event::whereRaw('searchtext @@ plainto_tsquery(?)', [$query])->get();                        
         
                         
 
@@ -285,6 +284,7 @@ class EventController extends Controller
         $request->validate([
             'query' => 'required|min:3',
         ]);
+
 
         $query = $request->input('query');
 

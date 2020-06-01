@@ -3,7 +3,7 @@
   
      <img id="event-card-img" class="card-img-top" src={{ Storage::url('event_photo/'.$event['photo']) }} alt="Card image cap">
      <div class="card-body">
-      <p style="margin-bottom:0.5rem;" id="event-card-title" class="card-text"> {{$event['title']}} </p>
+      <a style="margin-bottom:0.5rem;" id="event-card-title" href="/events/{{ $event['id'] }}" class="card-text"> {{$event['title']}} </a>
   
       <div class="row">
           <div class="col">

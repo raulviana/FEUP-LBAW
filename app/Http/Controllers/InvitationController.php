@@ -8,7 +8,6 @@ use App\Invitation;
 class InvitationController extends Controller
 {
     public function delete(Request $request){
-                
         $invitation = Invitation::find($request['invite_id']);
         $invitation->delete();
 

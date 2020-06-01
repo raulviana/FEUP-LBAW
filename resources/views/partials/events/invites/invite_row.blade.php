@@ -37,11 +37,11 @@
                     
                     <div class="card-footer text-center">
                         @if($invite->accepted == true)
-                            <small id="invite-confirmation-message" data-id={{$invite->id}}> You accepted this invitation ! :) </small>
+                            <small id="invite-confirmation-message" data-id={{$invite->id}}><b> You accepted this invitation ! :) </b></small>
                         @elseif($invite->accepted == false)
-                            <small id="invite-confirmation-message" data-id={{$invite->id}}> You didn't accept this invitation ! :( </small>
+                            <small id="invite-confirmation-message" data-id={{$invite->id}}><b>  You didn't accept this invitation ! :( </b></small>
                         @else
-                            <small id="invite-confirmation-message" data-id={{$invite->id}}> You haven't answered this invitation! :( </small>
+                            <small id="invite-confirmation-message" data-id={{$invite->id}}><b>  You haven't answered this invitation! :( </b> </small>
                         @endif
                     </div>
                 </div>
