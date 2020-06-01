@@ -18,7 +18,6 @@ class WishlistController extends Controller
 
         $wishlist->save();
 
-        $request->session()->flash('success', 'The event was added to your wishlist');
         return response()->json($wishlist, 200);
     }
 
@@ -30,7 +29,6 @@ class WishlistController extends Controller
         
         $wishlist->delete();
 
-        $request->session()->flash('success', 'The event was removed from your wishlist');
         return response()->json($wishlist, 200);                     
     }
 }

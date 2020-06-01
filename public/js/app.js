@@ -557,6 +557,7 @@ function collaboratorRemovedHandler(){
 }
 
 function eventDeletedHandler(){
+  console.log(this.responseText);
   let event = JSON.parse(this.responseText);
   if(this.status == 200){
     //chanage button

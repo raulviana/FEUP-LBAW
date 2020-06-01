@@ -15,8 +15,6 @@
          <div class="tab-content p-b-3">
              <div class="tab-pane active" id="manage-users">
                  <h6> Manage Users </h6>
-                 <input id="search-users" type="text" placeholder="Search..">
-                 <small> Todo: add search bar to search for users emails </small>
                 <table class="table table-striped">
                     <thead>
                         <tr>
