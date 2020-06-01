@@ -171,8 +171,11 @@ class EventController extends Controller
             $event->is_active = false;
             $event->save();
             Log::info('Event ' . $event->title . ' with id:' . $event->id . ' deleted');
-            return response()->json($event, 200)->with('success', 'Event was removed!');
+            $request->session()->flash('success', 'Event was removed');
+            return response()->json($event, 200); 
         } catch(ModelNotFoundException $e){
+            $request->session()->flash('error', 'Event couldnt be removed');
+
             Log::error('Could not delete event' . $event->title . ' with id:' . $event->id . ' - not found');
             return response()->json($event, 404);
         } 
