@@ -564,7 +564,6 @@ function addCollaboratorHandler(){
 
 
 function inviteSentHandler(){  
-  console.log(this.responseText);
   if(this.status == 404){
     let old_tbody = document.querySelector("table#search-results-invite tbody");
     let new_tbody = document.createElement('tbody');  
@@ -576,7 +575,6 @@ function inviteSentHandler(){
  }
  else if (this.status==200){
    let data = JSON.parse(this.responseText);
-console.log(data);
 
    let tbody = document.querySelector("tbody#edit-guests");
 
