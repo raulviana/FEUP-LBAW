@@ -17,7 +17,7 @@
                                 
                                 <div id="text-banner-login" class="container">
                                     <img style="height:25%; width:100%;filter: brightness(80%);" src="{{asset('images/banner_2.jpg')}}" class="img-fluid" width="100%">
-                                    <div id="text-banner-login" class="centered">Verify Mail</div>
+                                    <div id="text-banner-login" class="centered">Request Password</div>
                                 </div>
                                                                    
                                 <div class="card-body">
