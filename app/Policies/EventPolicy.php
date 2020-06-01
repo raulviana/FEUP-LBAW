@@ -28,8 +28,5 @@ class EventPolicy
         return $user->collaborates->contains($event) || $user->admin || $user->events->contains($event);
     }
 
-    public function is_active(User $user, Event $event){
-        // Only an active event can be displayed.
-        return $event->is_active;
-    }
+
 }

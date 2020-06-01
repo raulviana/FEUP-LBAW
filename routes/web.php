@@ -34,6 +34,9 @@ Route::delete('api/users/{id}/delete', 'UserController@delete');
 Route::post('api/users/{id}/restore', 'UserController@restore');
 Route::get('api/users/search', 'UserController@search');
 Route::get('profile/users/{id}/events', 'UserController@events');
+Route::put('api/wishlist/{user_id}/add', 'WishlistController@add');
+Route::delete('api/wishlist/{user_id}/remove', 'WishlistController@remove');
+
 
 // Static pages
 Route::get('faq' , 'HomepageController@faq')->name('faq');

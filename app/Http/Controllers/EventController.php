@@ -32,7 +32,7 @@ class EventController extends Controller
     public function show($id)
     {
         $event = Event::find($id);
-        $this->authorize('is_active', $event);
+
         return view('pages.event', ['event' => $event]);
     }
 
@@ -96,14 +96,12 @@ class EventController extends Controller
             if($request['url_website']) $this->addSocialMedia('Website', $request['url_website'], $event->id);
 
             DB::commit();
-            return redirect('/')->with('success', 'Event created with sucess!');
+            return redirect('/')->with('success', 'Event created with success!');
 
         } catch(QueryException $e){
             DB::rollBack();
             return redirect('/')->with('error', 'Error in submiting request to database');
         }
-
-
     }
 
     public function edit($id){

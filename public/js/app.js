@@ -112,6 +112,15 @@ function addEventListeners() {
   }
 
 
+  let wishlistBtns = document.querySelectorAll("a#wishlist-btn");
+  [].forEach.call(wishlistBtns, function(wishlist) {
+    let is_active = wishlist.closest('a').getAttribute('data-active');
+    
+    if(is_active == 1) wishlist.addEventListener('click', sendRemoveFromWishlist);
+    else wishlist.addEventListener('click', sendAddToWishlist);
+  });
+
+ 
 }
 
 /* VALIDATE INPUTS */
@@ -232,6 +241,21 @@ function sendAjaxRequest(method, url, data, handler) {
   request.send(encodeForAjax(data));
 }
 /* SENDERS */
+function sendAddToWishlist(event){
+  event.preventDefault();
+  let event_id = this.closest('a').getAttribute('data-id');
+  console.log(event_id);
+  sendAjaxRequest("put", `/api/wishlist/{user_id}/add`, {event_id: event_id}, addToWishlistHandler);
+}
+
+function sendRemoveFromWishlist(event){
+  event.preventDefault();
+  let event_id = this.closest('a').getAttribute('data-id');
+  console.log(event_id);
+
+  sendAjaxRequest("delete", `/api/wishlist/{user_id}/remove`, {event_id: event_id}, removeFromWishlistHandler);
+}
+
 function sendRejectInvitation(event){
   event.preventDefault();
   let invite_id = this.closest('button').getAttribute('data-id');
@@ -373,6 +397,21 @@ function sendRestoreEventRequest(event){
 /*--------*/
 
 /* HANDLERS */
+
+function removeFromWishlistHandler(){
+console.log(this.responseText);
+}
+
+
+function addToWishlistHandler(){
+  let wishlist = JSON.parse(this.responseText);
+  let heart = document.querySelector('a#wishlist-btn[data-id="' + wishlist['event_id'] + '"]' );
+
+  heart.innerHTML = `<i class="fa fa-heart">`;
+  heart.setAttribute('data-active', 1);
+  heart.style.color = "#b30000";
+}
+
 
 function rejectInviteHandler(){
   let invite = JSON.parse(this.responseText);

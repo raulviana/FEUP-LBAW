@@ -124,7 +124,8 @@ button#delete-button.btn{
     padding: 0.5rem;
 }
 
-p#event-card-title {
+a#event-card-title {
+    color: black;
     text-transform: uppercase;
     font-weight: 700;
     margin-bottom:0.1rem;
