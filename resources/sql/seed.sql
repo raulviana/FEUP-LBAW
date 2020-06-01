@@ -136,7 +136,7 @@ CREATE TABLE invitation (
     event_id INTEGER REFERENCES "event" (id) ON UPDATE CASCADE,
     inviter_id INTEGER REFERENCES "users" (id) ON UPDATE SET NULL,
     invited_id INTEGER REFERENCES "users" (id) ON UPDATE SET NULL,
-    message TEXT NOT NULL,
+    message TEXT DEFAULT 'Hello! I am inviting you to my event!',
     date DATE NOT NULL DEFAULT CURRENT_DATE,
     accepted BOOLEAN DEFAULT null
 );

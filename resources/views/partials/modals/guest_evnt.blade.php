@@ -10,16 +10,7 @@
 
         <div class="modal-body">
             
-            <small> Enter the email of the guest</small>  
-            <form>
-                <input id="search-users" type="text" placeholder="Search.." name="search">
-                <button id="search-users" type="submit" class="btn">+</button>
-            </form>
-          
-            <table class="table table-striped" id="search-results">          
-                <tbody>  </tbody> <!-- tbody used in javascript !-->
-            </table>
-            
+            @include('partials.events.invites.send_invite', ['event' => $event])
                 
             <table class="table table-striped">
                 <thead>

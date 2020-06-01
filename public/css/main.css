@@ -552,6 +552,33 @@ button#search-users:hover {
     border-color: #292b2c;
 }
   
+
+input#search-users-invite{
+    padding: 0.5rem;
+    border: 1px solid #292b2c;
+    float: left;
+    width: 90%;
+}
+
+
+button#search-users-invite {
+    border-radius: 0;
+    float: left;
+    width: 10%;
+    padding: 0.5rem;
+    background: #292b2c;
+    color: #f7f7f7;
+    font-weight: 600;
+    font-size: 1rem;
+    border: 0.1rem solid #292b2c;
+    border-left: none; /* Prevent double borders */
+    cursor: pointer;
+  }
+  
+button#search-users-invite:hover {
+    background: lightgray;  
+    border-color: #292b2c;
+}
  
 /* User photo upload */
 
@@ -690,4 +717,15 @@ nav#event-navbar a.nav-link:hover{
 
 a#wishlist-btn:hover{
     color: lightslategrey!important;
+}
+
+a#change-invite-message {
+    font-style: italic;
+    font-weight: 550;
+    font-size:0.9rem;
+    color: purple;
+}
+
+a{
+    color: purple;
 }

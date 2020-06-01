@@ -27,6 +27,7 @@ const eventForm = document.getElementById("event-settings-form");
 
 const deleteEvntBtn = document.querySelector("button#del-event");
 
+const sendInvite = document.querySelector("button#search-users-invite");
 
 function addEventListeners() {
   let userDeleters = document.querySelectorAll("div#manage-users button#delete-user-btn");
@@ -120,6 +121,10 @@ function addEventListeners() {
     else wishlist.addEventListener('click', sendAddToWishlist);
   });
 
+
+  if(sendInvite){
+    sendInvite.addEventListener('click', sendInviteRequest);
+  }
  
 }
 
@@ -306,6 +311,18 @@ function sendRemoveCollaborator(event){
 
 
   sendAjaxRequest("delete", `/api/events/${event_id}/remove/${user_id}`, {event_id: event_id, user_id: user_id}, collaboratorRemovedHandler);
+}
+
+function sendInviteRequest(event){
+  event.preventDefault();
+
+  let query = document.querySelector("input#search-users-invite").value;
+  let message = document.querySelector("textarea#invite-message").value;
+  let event_id = this.closest('form').getAttribute('data-id');
+ 
+  console.log("evenid");
+  sendAjaxRequest("post", `/api/events/${event_id}/invitations/send`, {event_id: event_id, query: query, message: message}, inviteSentHandler);
+
 }
 
 function sendLikeVoteRequest(event){
@@ -544,6 +561,47 @@ function addCollaboratorHandler(){
    }
 
 }
+
+
+function inviteSentHandler(){  
+  console.log(this.responseText);
+  if(this.status == 404){
+    let old_tbody = document.querySelector("table#search-results-invite tbody");
+    let new_tbody = document.createElement('tbody');  
+    let row = new_tbody.insertRow(0);
+    let cell1= row.insertCell(0);
+    cell1.classList.add("alert-danger");
+    cell1.innerText = "Invalid email: make sure the user is registered.";
+    old_tbody.parentNode.replaceChild(new_tbody, old_tbody);
+ }
+ else if (this.status==200){
+   let data = JSON.parse(this.responseText);
+console.log(data);
+
+   let tbody = document.querySelector("tbody#edit-guests");
+
+   let tr = tbody.insertRow(0);
+   tr.setAttribute('data-id', data.invite_id);
+   tr.innerHTML = `
+   <th scope="row">${data.user_id}</th>
+   <td>${data.user_name}</td>
+   <td>Pending...</td>    
+   <td> <a data-id=${data.invite_id} id="remove-guest" class="nav-link">🗑️</a> </td>
+  `;       
+
+  console.log(tbody);
+ }
+ else if(this.status == 500){
+  let old_tbody = document.querySelector("table#search-results-invite tbody");
+  let new_tbody = document.createElement('tbody');  
+  let row = new_tbody.insertRow(0);
+  let cell1= row.insertCell(0);
+  cell1.classList.add("alert-warning");
+  cell1.innerText = "User is already invited.";
+  old_tbody.parentNode.replaceChild(new_tbody, old_tbody);
+ }
+}
+
 
 function collaboratorRemovedHandler(){
   let row = JSON.parse(this.responseText);
