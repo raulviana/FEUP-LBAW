@@ -399,7 +399,12 @@ function sendRestoreEventRequest(event){
 /* HANDLERS */
 
 function removeFromWishlistHandler(){
-console.log(this.responseText);
+  let wishlist = JSON.parse(this.responseText);
+  let heart = document.querySelector('a#wishlist-btn[data-id="' + wishlist['event_id'] + '"]' );
+
+  heart.innerHTML = `<i class="fa fa-heart-o">`;
+  heart.setAttribute('data-active', 0);
+  heart.style.color = "#292b2c";
 }
 
 

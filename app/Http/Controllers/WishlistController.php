@@ -23,14 +23,14 @@ class WishlistController extends Controller
     }
 
     public function remove(Request $request){
-        $entry = DB::table('wish_list')->where([
-            ['event_id', $request['event_id']],
+        $wishlist = Wishlist::where([
+            ['event_id',$request['event_id']],
             ['user_id', Auth::user()->id]
-        ])->first();
+            ])->first();
+        
+        $wishlist->delete();
 
-        $entry->delete();
-
-        $request->session()->flash('success', 'The event was added to your wishlist');
-        return response()->json($request['event_id'], 200);                               
+        $request->session()->flash('success', 'The event was removed from your wishlist');
+        return response()->json($wishlist, 200);                     
     }
 }
