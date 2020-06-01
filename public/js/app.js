@@ -171,7 +171,7 @@ function validateEventCreation(){
     input_local.style.border = "1px solid red";
   }
 
-  errors = errors + validateEventDate() + validateURLs();
+  errors = errors + validateEventDate();
 
   if(errors > 0){
     event.preventDefault();
@@ -184,9 +184,7 @@ function validateEventEdit(){
    if(validateEventDateEdit() > 0){
      event.preventDefault();
    }
-   if(validateURLs() > 0){
-     event.preventDefault();
-   }
+   
    else
     eventForm.submit();
 }

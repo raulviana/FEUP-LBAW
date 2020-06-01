@@ -101,12 +101,14 @@
                             @endif
                             
                             @if(Auth::check())
-                                @if(Auth::user()->id == $event['owner']['id'] || Auth::user()->admin) <!-- TODO !! use policies to check this -->
+                                @if(Auth::user()->id == $event->owner->id || Auth::user()->admin || $event->collaborators->contains(Auth::user()))
                                     <button type="button" class="btn float-right" data-toggle="modal" data-target="#guest-settings"> + </button>
                                     @include('partials.modals.guest_evnt', ['event' => $event])
                                 @endif
                             @endif
 
+                            <br>
+                            <hr>
                         </div>
 
                         <div class="tab-pane" id="posts">

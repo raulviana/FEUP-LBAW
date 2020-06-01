@@ -15,7 +15,10 @@ class HomepageController extends Controller
     const ITEMS_PER_PAGE = 10;
 
     public function display(){
-        $events = Event::where('is_active', true)->get();
+        $events = Event::where([
+            ['is_active', true],
+            ['type', 'public']
+        ])->get();
         return view('pages.homepage', ['events' => $events]);
     }
 
