@@ -13,7 +13,17 @@ class UserController extends Controller
 {
     public function show($id){
         $user = User::find($id);
-        return view('pages.profile.profile', ['user' => $user]);
+        $tags = array();
+        foreach($user->wishlist as $event){
+            if($event['is_active']){
+                foreach($event->tags as $tag){
+                    if(!in_array($tag['name'], $tags, true)){
+                        array_push($tags, $tag['name']);
+                    }
+                }
+            }
+        }
+        return view('pages.profile.profile', ['user' => $user, 'tags' => $tags]);
     }
 
     public function edit($id){
@@ -86,7 +96,7 @@ class UserController extends Controller
 
             return response()->json($user, 200);
         } catch(ModelNotFoundException $e){
-            
+            Log::error('User '.$user['name'] . ' not found - user not banned');
             $request->session()->flash('error', 'Ups! User was not suspended');
             return response()->json($user, 404);
         } 

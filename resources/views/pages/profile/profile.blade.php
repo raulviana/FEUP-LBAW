@@ -34,23 +34,17 @@
                         <p id="user-about"> {{$user->about}} </p>
 
                         <h6>Preferences</h6>
-                        <div class="row text-center">
-                            @if(count($user->wishlist) > 0)
-                                @foreach ($user->wishlist as $event)
-                                    @if($event->is_active )
-                                        @each('partials.events.tags.tags', $event->tags, 'tag')
-                                    @endif
-                                @endforeach
-                            @endif
+                        <div class="row justify-content-left">
+                            @each('partials.events.tags.tags', $tags, 'tag')
                         </div>
                     </div>
 
                     <hr>
 
                     <div class="col-md-12">
-                        <h4 class="m-t-2">Wishlist </h4>  
+                        <h4 class="m-t-2">Wishlist </h4>
                         <div class="container">
-                            <div class="row">                 
+                            <div class="row">
                                 @foreach ($user->wishlist as $event)
                                     @if($event->is_active)
                                         @include('partials.events.eventcard', ['event' => $event])
