@@ -34,18 +34,14 @@
                         <p id="user-about"> {{$user->about}} </p>
 
                         <h6>Preferences</h6>
-                        <div class="row">
-                            <div class="col px-md-6">
-                                <button id="tag-button" type="button" class="btn music-tag">Music</button>
-                            </div>
-
-                            <div class="col px-md-6">
-                                <button id="tag-button" type="button" class="btn paintings-tag">Paintings</button>
-                            </div>
-
-                            <div class="col px-md-6">
-                                <button id="tag-button" type="button" class="btn comedy-tag">Comedy</button>
-                            </div>
+                        <div class="row text-center">
+                            @if(count($user->wishlist) > 0)
+                                @foreach ($user->wishlist as $event)
+                                    @if($event->is_active )
+                                        @each('partials.events.tags.tags', $event->tags, 'tag')
+                                    @endif
+                                @endforeach
+                            @endif
                         </div>
                     </div>
 
