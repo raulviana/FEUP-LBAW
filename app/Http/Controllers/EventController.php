@@ -266,13 +266,11 @@ class EventController extends Controller
     public function search(Request $request){
         $request->validate([
             'query'=>'required|min:3',
-        ]);
+        ]);     
+
         $query = $request->input('query');
 
-        $events = Event::where('title', 'like', "%$query%")
-                            ->orWhere('details', 'like', "%$query%")
-                            ->orWhere('start_date', 'like', "%$query%")
-                            ->get();
+        $events = Event::whereRaw('searchtext @@ plainto_tsquery(?)', [$query])->get();                        
         
                         
 
@@ -283,6 +281,7 @@ class EventController extends Controller
         $request->validate([
             'query' => 'required|min:3',
         ]);
+
 
         $query = $request->input('query');
 
