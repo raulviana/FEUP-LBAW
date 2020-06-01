@@ -148,7 +148,7 @@ ALTER TABLE "file" ADD CONSTRAINT file_url_uk UNIQUE (url);
 ALTER TABLE tag ADD CONSTRAINT tag_name_uk  UNIQUE (id);
 
 ALTER TABLE "event" ADD COLUMN searchtext TSVECTOR;
-UPDATE "event" SET searchtext = to_tsvector('english', title || '' || details);
+UPDATE "event" SET searchtext = to_tsvector( title || '' || details);
 
 
 CREATE OR REPLACE FUNCTION insert_review_function() RETURNS TRIGGER AS $$

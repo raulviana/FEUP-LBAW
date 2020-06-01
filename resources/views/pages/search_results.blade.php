@@ -6,12 +6,20 @@
 
 <br><br><br><br>
 
-<div class="md-form mt-0">
+<div class='container'>
+    <div class='column'>
         <form action="{{ route('search') }}" method="GET" class="search-form">
-            <input name="query" id="query" class="form-control" type="text" aria-label="Search" value="{{ request()->input('query') }}">
-        </form> 
-        
+            <input name="query" id="query" class="form-control" type="text" aria-label="Search" placeholder="Search by title or description">
+        </form>
     </div>
+    <div class='column'>
+        <form action="{{ route('searchLocation') }}" method="GET" class="search-form">
+            <input name="query" id="query" class="form-control" type="text" aria-label="Search" placeholder="Search by location">
+        </form> 
+    </div>        
+</div>
+
+<br><br><br><br>
 
 <main id="event-list">
     <div class="album py-5 bg-light" >
