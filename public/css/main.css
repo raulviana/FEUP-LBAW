@@ -10,6 +10,13 @@ body{
     font-weight: 600;
 }
 
+.column {
+    float: left;
+    width: 50.00%;
+    padding: 5px;
+    align-items: center;
+}
+
 /* Buttons */
 .btn-margin {
     margin: 12.5px;

@@ -290,7 +290,10 @@ class EventController extends Controller
 
         $local = Local::where('name', 'like', "%$query%")->get();
 
-        $id = $local[0]['id'];
+        if(count($local) > 0){
+            $id = $local[0]['id'];
+        }else $id = -1;
+        
 
         $events = Event::where('local_id', 'like' , "%$id%")->get();
      
