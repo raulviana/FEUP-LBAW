@@ -79,7 +79,7 @@ class UserController extends Controller
             
         } catch(QueryException $e){
             DB::rollBack();
-            return redirect('/')->with('error', 'Error in submiting request to database');
+            return redirect('/')->with('error', 'Error in submiting request to database'); 
         }
         
 
