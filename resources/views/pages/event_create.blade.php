@@ -66,7 +66,11 @@
 
                     </div>
                     <div class="col">
-                        <p id="event-info">🕒 <b>When:</b><br>
+                
+                            <p id="event-info">🕒 <b>When:</b>
+                            <a id="tooltip" class="float-right" href="#" data-toggle="tooltip" data-placement="left" title="You should indicate both start and end dates. Start date should be smaller than end date."> ? </a>
+                     
+                            <br>
                             <small>Start date: </small>  <input id="event-start-date" class="form-control form-control-sm" name="start_date" type="date" placeholder="Start date"> 
                             <small>End date: </small>  <input id="event-end-date" class="form-control form-control-sm" name="end_date" type="date" placeholder="End date"> 
                             <small id="date-invalid" class="text-danger"></small>
@@ -168,7 +172,9 @@
                     @include('partials.events.social_media.sm_input_form', ['sm_name' => "Youtube", 'sm_url' => "url_youtube"])
                     @include('partials.events.social_media.sm_input_form', ['sm_name' => "Instagram", 'sm_url' => "url_instagram"])
                     @include('partials.events.social_media.sm_input_form', ['sm_name' => "Twitter", 'sm_url' => "url_twitter"])
-                    @include('partials.events.social_media.sm_input_form', ['sm_name' => "Website", 'sm_url' => "url_website"])                
+                    @include('partials.events.social_media.sm_input_form', ['sm_name' => "Website", 'sm_url' => "url_website"])
+        
+                
                 @endif
                 <br>
 

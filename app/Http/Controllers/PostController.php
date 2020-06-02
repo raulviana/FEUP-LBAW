@@ -60,12 +60,12 @@ class PostController extends Controller
         $post = Post::find($request['postid']);
 
         $post->content = $request['content'];
-     
-        $post->post_time = Carbon::now('UTC');
+        $time = Carbon::now('UTC'); //->timestamp;
+        $post->post_time = $time;
      
         $post->update();
 
-        return response()->json(['new_content' => $post->content, 'id' => $post->id],200);
+        return response()->json(['new_content' => $post->content, 'id' => $post->id, 'updated_at' => $post->post_time, 'event_id' => $post->event_id],200);
     } 
 
     public function delete(Request $request){

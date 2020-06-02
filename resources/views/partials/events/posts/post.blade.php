@@ -8,45 +8,23 @@
               <h6> <b> {{$post['writer']['name']}} </b> says: </h6>
           @endif 
 
-          <div class="col-lg-9">
+          <!--<div class="col-lg-9">
             @if(Auth::check())
               @if(Auth::user()->name == $post['writer']['name'])
                 <button id="btn-edit-post" data-post-id={{$post->id}} data-post-event={{$post->event_id}} type="submit" class="edit btn float-right" >Edit</button>          
               @endif
             @endif
-          </div> 
+          </div> -->
     </div>
-    <p id="comment-body{{$post->id}}">{{$post->content}}</p>
-    <p id="comment-datetime{{$post->id}}" class="text-right">{{$post->post_time}}</p>
+   
+      <p id="comment-body" data-id={{$post->id}}>{{$post->content}}</p>
+
+      <div class="row float-right">
+        <p id="comment-datetime" class="text-right">{{$post->post_time}}</p>
+        @if(Auth::check() && ((Auth::user()->name == $post['writer']['name']) || Auth::user()->admin))
+        <button id="edit-post-button" type="button" class="btn float-right" data-toggle="modal" data-target="#edit-modal{{$post->id}}"> [ edit ] </button>
+        @endif
+      </div>
 </article>
 
-<div class="modal" tabindex="-1" role="dialog" id="edit-modal">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Edit post</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form >
-            <div class="form-group">
-                <textarea class="form-control" name="post-body" id="post-body" rows="5" placeholder="Write your new post!"></textarea>
-            </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" id="edit-save">Save changes</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
-
-
-
-                                
+@include('partials.modals.edit_post', ['post' => $post])
