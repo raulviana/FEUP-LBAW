@@ -16,8 +16,8 @@
             @endif
           </div> 
     </div>
-    <p id="comment-body">{{$post->content}}</p>
-    <p id="comment-datetime" class="text-right">{{$post->post_time}}</p>
+    <p id="comment-body{{$post->id}}">{{$post->content}}</p>
+    <p id="comment-datetime{{$post->id}}" class="text-right">{{$post->post_time}}</p>
 </article>
 
 <div class="modal" tabindex="-1" role="dialog" id="edit-modal">
