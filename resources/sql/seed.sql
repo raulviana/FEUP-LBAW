@@ -443,6 +443,6 @@ insert into wish_list (event_id, user_id) values (5, 18);
 insert into invitation (event_id, invited_id, inviter_id, message, date) values ( 1, 26, 20, 'Vem a este evento fantástico!', '10-03-2021');
 insert into invitation (event_id, invited_id, inviter_id, message, date, accepted) values ( 2, 26, 20, 'Vem a este evento fantástico!', '10-03-2021', FALSE);
 insert into invitation (event_id, invited_id, inviter_id, message, date, accepted) values ( 3, 26, 20, 'Vem a este evento fantástico!', '10-03-2021', TRUE);
-insert into invitation (event_id, invited_id, inviter_id, message, date, accepted) values ( 4, 26, 17, 'Hey my friend! Thought you might me interested in this great exhibition!', '05-03-2021', TRUE);
+insert into invitation (event_id, invited_id, inviter_id, message, date, accepted) values ( 4, 26, 17, 'Hey my friend! Thought you might me interested in this great exhibition!', '2021-03-05', TRUE);
 
 

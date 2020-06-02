@@ -433,6 +433,8 @@ function addToWishlistHandler(){
 
 
 function rejectInviteHandler(){
+  console.log(this.responseText);
+
   let invite = JSON.parse(this.responseText);
   
   let message = document.querySelector('small#invite-confirmation-message[data-id="' + invite['invite_id'] +'"]');
@@ -447,6 +449,8 @@ function rejectInviteHandler(){
 }
 
 function acceptInviteHandler(){
+  console.log(this.responseText);
+
   let invite = JSON.parse(this.responseText);
 
   let message = document.querySelector('small#invite-confirmation-message[data-id="' + invite['invite_id'] +'"]');

@@ -50,7 +50,7 @@ class InvitationController extends Controller
                 $invitation->inviter_id = Auth::user()->id;
                 $invitation->invited_id = $user->id;
                 $invitation->event_id = $request['event_id'];
-                $invitation->message = $request['message'];
+                $invitation->message = $request['message'] ? $request['message'] : "Hello! I am inviting you to my event!";
                 $invitation->save();
 
                 return response()->json(['invite_id' => $invitation->id, 'user_id' => $user->id, 'user_name' => $user->name], 200);
