@@ -13,7 +13,6 @@
          <div class="tab-content p-b-3">
              <div class="tab-pane active" id="manage-users">
                  <h6> <strong>Manage Events</strong> </h6>
-                 <input id="search-users" type="text" placeholder="Search..">
                  
                  <table class="table table-striped">
                     <thead>
