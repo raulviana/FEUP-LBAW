@@ -766,30 +766,30 @@ function postCreatedHandler() {
 
 
 function savePostHandler(msg){
-  // let message = JSON.parse(this.responseText);
-  // let new_text = document.createElement('p');
-  // new_text.setAttribute('id', 'comment-body' + message['id']);
-  // new_text.innerHTML = message['new_content'];
-  // let old_text = document.getElementById('comment-body' + message['id']);
-  // old_text.replaceWith(new_text);
+  let message = JSON.parse(this.responseText);
+  let new_text = document.createElement('p');
+  new_text.setAttribute('id', 'comment-body' + message['id']);
+  new_text.innerHTML = message['new_content'];
+  let old_text = document.getElementById('comment-body' + message['id']);
+  old_text.replaceWith(new_text);
   
-  // let currentdate = new Date(); 
-  // let datetime = currentdate.getFullYear() + "-" + 
-  //               ("0" + (currentdate.getMonth() + 1)).slice(-2) + "-" + 
-  //               ("0" + (currentdate.getDate() + 1)).slice(-2) + " " +
-  //                currentdate.getHours() + ":"  
-  //               + currentdate.getMinutes() + ":" 
-  //               + currentdate.getSeconds() + "+" + "00";
+  let currentdate = new Date(); 
+  let datetime = currentdate.getFullYear() + "-" + 
+                ("0" + (currentdate.getMonth() + 1)).slice(-2) + "-" + 
+                ("0" + (currentdate.getDate() + 1)).slice(-2) + " " +
+                 currentdate.getHours() + ":"  
+                + currentdate.getMinutes() + ":" 
+                + currentdate.getSeconds() + "+" + "00";
   
-  // let new_time = document.createElement('p');
-  // new_time.setAttribute('id', 'comment-datetime' + message['id']);
-  // new_time.setAttribute('class', 'text-right');
-  // new_time.innerHTML = datetime;
-  // let old_time = document.getElementById('comment-datetime' + message['id']);
-  // old_time.replaceWith(new_time);
+  let new_time = document.createElement('p');
+  new_time.setAttribute('id', 'comment-datetime' + message['id']);
+  new_time.setAttribute('class', 'text-right');
+  new_time.innerHTML = datetime;
+  let old_time = document.getElementById('comment-datetime' + message['id']);
+  old_time.replaceWith(new_time);
 
 
-  // $('#edit-modal').modal('hide');
+  $('#edit-modal').modal('hide');
 
 }
 

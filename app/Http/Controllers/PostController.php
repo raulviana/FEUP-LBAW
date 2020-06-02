@@ -60,8 +60,8 @@ class PostController extends Controller
         $post = Post::find($request['postid']);
 
         $post->content = $request['content'];
-        $time =  Carbon::now()->timestamp;
-        $post->post_time = $time;
+     
+        $post->post_time = Carbon::now('UTC');
      
         $post->update();
 
