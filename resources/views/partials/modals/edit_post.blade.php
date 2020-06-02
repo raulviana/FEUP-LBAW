@@ -8,7 +8,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form >
+        <form>
             <div class="form-group">
                 <textarea data-post-id={{$post->id}} class="form-control" name="post-body" id="post-body" rows="5" placeholder="{{$post->content}}"></textarea>
             </div>

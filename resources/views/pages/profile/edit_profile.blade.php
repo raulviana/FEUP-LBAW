@@ -16,17 +16,17 @@
 
                    
                         <!-- Upload image input-->
-                        <div class="input-group" id="upload-group">
-                            <label id="upload-button">
-                                <input id="upload-photo" name="upload-photo" type="file" onchange="readImage(this);">
-                                <span>Change Profile Photo
-                                    <svg class="bi bi-upload" width="1em" height="1em" viewBox="0 -2 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd" d="M.5 8a.5.5 0 01.5.5V12a1 1 0 001 1h12a1 1 0 001-1V8.5a.5.5 0 011 0V12a2 2 0 01-2 2H2a2 2 0 01-2-2V8.5A.5.5 0 01.5 8zM5 4.854a.5.5 0 00.707 0L8 2.56l2.293 2.293A.5.5 0 1011 4.146L8.354 1.5a.5.5 0 00-.708 0L5 4.146a.5.5 0 000 .708z" clip-rule="evenodd" />
-                                        <path fill-rule="evenodd" d="M8 2a.5.5 0 01.5.5v8a.5.5 0 01-1 0v-8A.5.5 0 018 2z" clip-rule="evenodd" />
-                                    </svg>
-                                </span>
-                            </label>
+                        <div class="col text-center">
+                            <label class="btn" id="upload-button">
+                                <input id="upload-photo" name="upload-photo" type="file" onchange="readImage(this);"><center>
+                                UPLOAD PHOTO <i style="margin-left:0.5rem; padding:0" class="fa fa-camera fa-xs"> </i> </center>
+                            </label> <br>
+    
+                            <div class="image-area img-thumbnail">
+                                <img id="imageResult" src="#" alt="" class="img-fluid rounded float-center shadow-sm mx-auto d-block">
+                            </div>
                         </div>
+                        
                         <!-- Uploaded image area-->
                         <div class="image-area mt-4 img-thumbnail"><img id="imageResult" src={{ Storage::url('users/'.$user['photo']) }} alt="" class="img-fluid rounded float-center shadow-sm mx-auto d-block">
                         </div>
@@ -45,7 +45,7 @@
                     <div class="form-group row">
                         <label class="col-lg-3 col-form-label form-control-label">Email</label>
                         <div class="col-lg-9">
-                            <input class="form-control" type="text" name="email" placeholder={{$user->email}}>
+                            <input class="form-control" type="email" name="email" placeholder={{$user->email}}>
                         </div>
                     </div>
 
