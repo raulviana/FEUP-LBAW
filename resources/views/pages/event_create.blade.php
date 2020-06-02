@@ -82,39 +82,72 @@
                     <div style="font-size:0.625rem;" class="col">
 
                         <p id="search-by">Choose some tags related to your event</p>
-                        <br>
-
-                        <div class="d-flex justify-content-center btn-group btn-group-toggle" data-toggle="buttons">
-                            
+                        <br>  
+                 
+                        <div class="d-flex justify-content-center btn-group" data-toggle="buttons">
+                    
                             <label style="margin-right: 0.25rem; margin-left: 0.25rem;" id="tag-button" class="btn theater-tag">
-                                <input id="selected-tags" name="tag_theater" type="checkbox" autocomplete="off"> Theater
+                                @if(!empty($event) && count($event->tags->where('name', 'like', 'Theater')) > 0)
+                                    <input id="selected-tags" name="tag_theater" type="checkbox" autocomplete="off" checked> Theater
+                                @else 
+                                    <input id="selected-tags" name="tag_theater" type="checkbox" autocomplete="off"> Theater
+                                @endif
                             </label>
                  
                             <label style="margin-right: 0.25rem; margin-left: 0.25rem;" id="tag-button" class="btn sculpture-tag">
-                                <input id="selected-tags" name="tag_sculpture" type="checkbox" autocomplete="off"> Sculpture
+                                @if(!empty($event) && count($event->tags->where('name', 'like', 'Sculpture')) > 0)
+                                    <input id="selected-tags" name="tag_sculpture" type="checkbox" autocomplete="off" checked> Sculpture
+                                @else 
+                                    <input id="selected-tags" name="tag_sculpture" type="checkbox" autocomplete="off"> Sculpture
+                                @endif
                             </label>
                      
                             <label style="margin-right: 0.25rem; margin-left: 0.25rem;" id="tag-button" class="btn dance-tag">
-                               <input input="selected-tags" name="tag_dance" type="checkbox" autocomplete="off"> Dance
+                                @if(!empty($event) && count($event->tags->where('name', 'like', 'Dance')) > 0)
+                                    <input input="selected-tags" name="tag_dance" type="checkbox" autocomplete="off" checked > Dance
+                                @else 
+                                    <input input="selected-tags" name="tag_dance" type="checkbox" autocomplete="off" > Dance
+                                @endif
                             </label>
                          
                             <label style="margin-right: 0.25rem; margin-left: 0.25rem;" id="tag-button" class="btn music-tag">
-                               <input id="selected-tags" name="tag_music" type="checkbox" autocomplete="off"> Music
+                                @if(!empty($event) && count($event->tags->where('name', 'like', 'Music')) > 0)
+                                    <input id="selected-tags" name="tag_music" type="checkbox" autocomplete="off" checked> Music
+                                @else
+                                    <input id="selected-tags" name="tag_music" type="checkbox" autocomplete="off"> Music
+                                @endif
                             </label>
                            
                             <label style="margin-right: 0.25rem; margin-left: 0.25rem;" id="tag-button" class="btn paintings-tag">
-                              <input id="selected-tags" name="tag_paintings" type="checkbox" autocomplete="off"> Paintings
+                                @if(!empty($event) && count($event->tags->where('name', 'like', 'Paintings')) > 0)
+                                <input id="selected-tags" name="tag_paintings" type="checkbox" autocomplete="off" checked> Paintings
+                                @else
+                                <input id="selected-tags" name="tag_paintings" type="checkbox" autocomplete="off"> Paintings
+                                @endif
                             </label>
 
                             <label style="margin-right: 0.25rem; margin-left: 0.25rem;" id="tag-button" class="btn comedy-tag">
-                                <input id="selected-tags" name="tag_comedy" type="checkbox" autocomplete="off"> Comedy
+                                @if(!empty($event) && count($event->tags->where('name', 'like', 'Comedy')) > 0)
+                                    <input id="selected-tags" name="tag_comedy" type="checkbox" autocomplete="off" checked> Comedy
+                                @else
+                                    <input id="selected-tags" name="tag_comedy" type="checkbox" autocomplete="off" > Comedy
+                                @endif
                              </label>
                             
                              <label style="margin-right: 0.25rem; margin-left: 0.25rem;"  id="tag-button" class="btn literature-tag">
-                               <input id="selected-tags" name="tag_literature" type="checkbox" autocomplete="off"> Literature
+                                @if(!empty($event) && count($event->tags->where('name', 'like', 'Literature')) > 0)
+                               <input id="selected-tags" name="tag_literature" type="checkbox" autocomplete="off" checked> Literature
+                               @else 
+                               <input id="selected-tags" name="tag_literature" type="checkbox" autocomplete="off" > Literature
+                               @endif
                              </label>
+
                              <label style="margin-right: 0.25rem; margin-left: 0.25rem;"id="tag-button" class="btn others-tag">
+                                @if(!empty($event) && count($event->tags->where('name', 'like', 'Others')) > 0)
+                                <input id="selected-tags" name="tag_others" type="checkbox" autocomplete="off" checked> Others
+                                @else
                                 <input id="selected-tags" name="tag_others" type="checkbox" autocomplete="off"> Others
+                                @endif
                              </label>
                             
                         </div>
@@ -124,12 +157,12 @@
                 <br><br>
 
                 <h4>Social media</h4>
-                
-                    @include('partials.events.social_media.sm_input_form', ['sm_name' => "Facebook", 'sm_url' => "url_facebook"])
-                    @include('partials.events.social_media.sm_input_form', ['sm_name' => "Youtube", 'sm_url' => "url_youtube"])
-                    @include('partials.events.social_media.sm_input_form', ['sm_name' => "Instagram", 'sm_url' => "url_instagram"])
-                    @include('partials.events.social_media.sm_input_form', ['sm_name' => "Twitter", 'sm_url' => "url_twitter"])
-                    @include('partials.events.social_media.sm_input_form', ['sm_name' => "Website", 'sm_url' => "url_website"])
+                {{$event->socialmedia}}
+                    @include('partials.events.social_media.sm_input_form', ['event' => $event, 'sm_name' => "Facebook", 'sm_url' => "url_facebook"])
+                    @include('partials.events.social_media.sm_input_form', ['event' => $event, 'sm_name' => "Youtube", 'sm_url' => "url_youtube"])
+                    @include('partials.events.social_media.sm_input_form', ['event' => $event, 'sm_name' => "Instagram", 'sm_url' => "url_instagram"])
+                    @include('partials.events.social_media.sm_input_form', ['event' => $event, 'sm_name' => "Twitter", 'sm_url' => "url_twitter"])
+                    @include('partials.events.social_media.sm_input_form', ['event' => $event, 'sm_name' => "Website", 'sm_url' => "url_website"])
                    
                    
                 <br>

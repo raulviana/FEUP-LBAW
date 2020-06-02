@@ -362,12 +362,12 @@ The captions, however, are brutally cringe and we could do with a whole lot more
 
 
 ---------------------------------------------------- SOCIAL MEDIA ---------------------------------------------------- 
-insert into social_media (name, url) values ('website', 'www.paredesdecoura.com');
-insert into social_media (name, url) values ('facebook', 'https://www.facebook.com/festivalparedesdecoura/');
-insert into social_media (name, url) values ('instagram', 'https://www.instagram.com/vodafoneparedesdecoura');
-insert into social_media (name, url) values ('facebook', 'https://www.facebook.com/events/europarque/world-of-dance-portugal-2020/965765303821049/');
-insert into social_media (name, url) values ('website', 'http://www.fantasporto.com/');
-insert into social_media (name, url) values ('website', 'https://www.nationalgallery.org.uk/exhibitions/titian-love-desire-death');
+insert into social_media (name, url) values ('Website', 'www.paredesdecoura.com');
+insert into social_media (name, url) values ('Facebook', 'https://www.facebook.com/festivalparedesdecoura/');
+insert into social_media (name, url) values ('Instagram', 'https://www.instagram.com/vodafoneparedesdecoura');
+insert into social_media (name, url) values ('Facebook', 'https://www.facebook.com/events/europarque/world-of-dance-portugal-2020/965765303821049/');
+insert into social_media (name, url) values ('Website', 'http://www.fantasporto.com/');
+insert into social_media (name, url) values ('Website', 'https://www.nationalgallery.org.uk/exhibitions/titian-love-desire-death');
 
 ---------------------------------------------------- TAG ---------------------------------------------------- 
 insert into tag (name) values ('Music');
