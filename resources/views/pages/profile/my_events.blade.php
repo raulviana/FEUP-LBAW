@@ -40,6 +40,8 @@
                         <p class="text-center"> You haven't been invited to any events :( </p>
                     @else   
                         <small> You are currently invited to {{count($invitedTo)}} events. </small>
+                        <a id="tooltip" class="float-right" href="#" data-toggle="tooltip" data-placement="left" title="Use the 🗑️ to remove the unwanted invitations. "> ? </a>
+
                         @foreach ($invitedTo as $invite)
                             @if($invite->event->is_active)
                                 @include('partials.events.invites.invite_row', ['invite' => $invite])

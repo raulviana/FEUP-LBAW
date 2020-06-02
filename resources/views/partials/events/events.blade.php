@@ -9,7 +9,6 @@
                     @each('partials.events.eventcard', $events, 'event')
                 @endif
                
-                
 
             </div>
         </div>

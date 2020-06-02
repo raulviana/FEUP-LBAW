@@ -317,7 +317,6 @@ p#comment-body{
 
 p#comment-datetime{
     font-size: 0.65rem;
-
 }
 
 div#event-title {
@@ -409,7 +408,7 @@ div.tab-pane.active{
 }
 
 div#edit-event{
-        padding: 1.5rem;
+    padding: 1.5rem;
     background: white;
 }
 
@@ -477,6 +476,15 @@ button#btn-add-post.btn.float-right:hover{
     border-color: #292b2c;
 }
 
+button#edit-post-button{
+    background-color: white;
+    padding:0.25rem;
+    font-size:0.9rem;
+}
+
+button#edit-post-button:hover{
+    color:purple;
+}
 
 button#btn-edit-post.btn.float-right{
     text-transform: uppercase;

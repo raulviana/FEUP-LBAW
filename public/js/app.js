@@ -3,10 +3,6 @@ const addPostBtn = document.querySelector("button#btn-add-post");
 
 const selectTag = document.querySelectorAll("label#tag-button");
 
-const editPostBtn = document.querySelectorAll("button#btn-edit-post");
-
-const savePostBtn = document.querySelector("button#edit-save");
-
 const deletePostBtn = document.querySelectorAll("button#delete-post-btn");
 
 const passwordField = document.getElementById('password');
@@ -66,6 +62,12 @@ function addEventListeners() {
     invitedeleter.addEventListener('click', sendRemoveInvitationOwned);
   });
 
+  let postEditors = document.querySelectorAll("button#edit-save");
+  [].forEach.call(postEditors, function(postEditor) {
+    postEditor.addEventListener('click', sendEditPostRequest);
+  });
+
+
   /*for(let i = 0; i < selectTag.length; i++){
     selectTag[i].addEventListener('click', alterTag);
   }*/
@@ -81,15 +83,10 @@ function addEventListeners() {
     addPostBtn.addEventListener('click', sendCreatePostRequest);
   }
 
-  for(let i = 0; i < editPostBtn.length; i++){
-    editPostBtn[i].addEventListener('click', EditPost)}
+
 
   for (let i = 0; i < deletePostBtn.length; i++){
     deletePostBtn[i].addEventListener('click', sendDeletePost);
-  }
-
-  if(savePostBtn){
-    savePostBtn.addEventListener('click', sendSavePostRequest);
   }
 
   if(dislikeBtn){
@@ -247,14 +244,12 @@ function sendAjaxRequest(method, url, data, handler) {
 function sendAddToWishlist(event){
   event.preventDefault();
   let event_id = this.closest('a').getAttribute('data-id');
-  console.log(event_id);
   sendAjaxRequest("put", `/api/wishlist/{user_id}/add`, {event_id: event_id}, addToWishlistHandler);
 }
 
 function sendRemoveFromWishlist(event){
   event.preventDefault();
   let event_id = this.closest('a').getAttribute('data-id');
-  console.log(event_id);
 
   sendAjaxRequest("delete", `/api/wishlist/{user_id}/remove`, {event_id: event_id}, removeFromWishlistHandler);
 }
@@ -367,21 +362,16 @@ function sendCreatePostRequest(event){
 
 }
 
-function EditPost(event){
+function sendEditPostRequest(event){
   event.preventDefault();
 
+  let post_id = this.closest('button').getAttribute('data-id');
+  let event_id = this.closest('button').getAttribute('data-event-id');
+  let content = document.querySelector('textarea#post-body[data-post-id="' + post_id + '"]').value;
 
-  postContent = $('#post-body');
-  postid = this.closest('button').getAttribute('data-post-id');
-  eventid = this.closest('button').getAttribute('data-post-event');
-  $('#edit-modal').modal();    
+  sendAjaxRequest('POST', `/api/events/${event_id}/posts/${post_id}/edit`, {content: content, postid: post_id}, saveEditedPostHandler)
 }
 
-function sendSavePostRequest(){
-  
-
-  sendAjaxRequest('POST', `/api/events/${eventid}/posts/${postid}/edit`, {eventid: eventid, content: $('#post-body').val(), postid: postid}, savePostHandler)
-}
 
 /* used form admin operations */
 function sendDeleteEventRequest(event){
@@ -413,6 +403,7 @@ function sendRestoreEventRequest(event){
 /* HANDLERS */
 
 function removeFromWishlistHandler(){
+  //console.log(this.responseText);
   let wishlist = JSON.parse(this.responseText);
   let heart = document.querySelector('a#wishlist-btn[data-id="' + wishlist['event_id'] + '"]' );
 
@@ -423,6 +414,8 @@ function removeFromWishlistHandler(){
 
 
 function addToWishlistHandler(){
+  //console.log(this.responseText);
+
   let wishlist = JSON.parse(this.responseText);
   let heart = document.querySelector('a#wishlist-btn[data-id="' + wishlist['event_id'] + '"]' );
 
@@ -733,7 +726,6 @@ function reviewEventHandler(){
 }
 
 function postCreatedHandler() {
-  //post[0]->post post[1]->username post[2]->user photo path
   let post = JSON.parse(this.responseText);
   let new_post = document.createElement('article');
   new_post.classList.add('post', 'p-3', 'mb-3');
@@ -765,32 +757,18 @@ function postCreatedHandler() {
 }
 
 
-function savePostHandler(msg){
-  // let message = JSON.parse(this.responseText);
-  // let new_text = document.createElement('p');
-  // new_text.setAttribute('id', 'comment-body' + message['id']);
-  // new_text.innerHTML = message['new_content'];
-  // let old_text = document.getElementById('comment-body' + message['id']);
-  // old_text.replaceWith(new_text);
-  
-  // let currentdate = new Date(); 
-  // let datetime = currentdate.getFullYear() + "-" + 
-  //               ("0" + (currentdate.getMonth() + 1)).slice(-2) + "-" + 
-  //               ("0" + (currentdate.getDate() + 1)).slice(-2) + " " +
-  //                currentdate.getHours() + ":"  
-  //               + currentdate.getMinutes() + ":" 
-  //               + currentdate.getSeconds() + "+" + "00";
-  
-  // let new_time = document.createElement('p');
-  // new_time.setAttribute('id', 'comment-datetime' + message['id']);
-  // new_time.setAttribute('class', 'text-right');
-  // new_time.innerHTML = datetime;
-  // let old_time = document.getElementById('comment-datetime' + message['id']);
-  // old_time.replaceWith(new_time);
+function saveEditedPostHandler(){
+  let message = JSON.parse(this.responseText);
+  let post_id = message.id;
+  let new_content = message.new_content;
+  let updated_at = message.updated_at;
+  let event_id = message.event_id;
 
+  let post_body = document.querySelector('p#comment-body[data-id="' + post_id +'"]').innerText = new_content;
+  let post_date = document.querySelector('p#comment-datetime[data-id="' + post_id + '"]').innerText = updated_at;
 
-  // $('#edit-modal').modal('hide');
-
+  $('#edit-modal'+post_id).modal('hide');
+ // window.location="/events/" + event_id;
 }
 
 
@@ -904,13 +882,6 @@ function userRestoreHandler() {
   }
 }
 
-/*
-function alterTag(event){
-  event.preventDefault();
-  let label = event.target;
-  label.setAttribute('style', 'margin-right: 0.25rem; margin-left: 0.25rem; color: black; font-weight: bold;');
-}
-*/
 
 function regularEventDeletedHandler(){
   window.location = '/';

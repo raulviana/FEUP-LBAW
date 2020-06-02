@@ -14,10 +14,10 @@
         </div>        
     </div>
 
-
 <!-- search by tags -->
     <br>
     <br>
+<br>
     <p id="search-by">Search by tag: </p>
     <div class="row mx-md-n6">
         <div class="col px-md-6">
@@ -52,4 +52,5 @@
             <button onclick="location.href='tags/others';" id="tag-button" type="button" class="btn others-tag">Others</button> 
         </div>
         </div>
+
 </div>
