@@ -39,7 +39,7 @@ button#dropdown-navbar.btn.dropdown-toggle {
     text-decoration: none;
     border: none;
     font-size: 0.8rem;
-    font-weight: 650;
+    font-weight: 700;
 }
 
 
@@ -164,7 +164,7 @@ a#event-card-button.btn.btn-sm{
     text-decoration: none;
 
     font-size: 0.7rem;
-    font-weight: 625;
+    font-weight: 600;
 }
 
 
@@ -178,7 +178,7 @@ a#event-card-button-buy.btn.btn-sm.btn-outline-dark{
     text-transform: uppercase;
     text-decoration: none;
     font-size: 0.7rem;
-    font-weight: 625;
+    font-weight: 600;
 }
 
 a#event-card-button-buy.btn.btn-sm.btn-outline-dark:hover{
@@ -228,7 +228,7 @@ div.text-centered {
   left: 50%;
   transform: translate(-50%, -50%);
     text-transform: uppercase;
-    font-weight: 650;
+    font-weight: 700;
 
 }
 
@@ -241,7 +241,7 @@ button#button-header.btn.btn-light.btn-sm.btn-margin {
     text-decoration: none;
     border: none;
     font-size: 0.7rem;
-    font-weight: 650;
+    font-weight: 700;
 
 }
 
@@ -340,7 +340,7 @@ nav#event-navbar{
 
 a#event-title.navbar-brand{
     font-size: 1.75rem;
-    font-weight: 550;
+    font-weight: 600;
     
 }
 
@@ -518,7 +518,7 @@ div#text-banner-login.centered{
 
 div#text-banner-login.container{
     text-transform: uppercase;
-    font-weight: 550;
+    font-weight: 500;
   position: relative;
   text-align: center;
   color: white;
@@ -611,7 +611,6 @@ label#upload-button{
     border-radius: 4px;
     border-style: solid;
     border-width: 1px;
-    border-color: none;
 }
 
 label#upload-button:hover{
@@ -728,7 +727,7 @@ a#wishlist-btn:hover{
 
 a#change-invite-message {
     font-style: italic;
-    font-weight: 550;
+    font-weight: bold;
     font-size:0.9rem;
     color: purple;
 }

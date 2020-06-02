@@ -66,9 +66,9 @@ function addEventListeners() {
     invitedeleter.addEventListener('click', sendRemoveInvitationOwned);
   });
 
-  for(let i = 0; i < selectTag.length; i++){
+  /*for(let i = 0; i < selectTag.length; i++){
     selectTag[i].addEventListener('click', alterTag);
-  }
+  }*/
   for(let i = 0; i < delEventBtn.length; i++){
     delEventBtn[i].addEventListener('click', sendDeleteEventRequest);
   }

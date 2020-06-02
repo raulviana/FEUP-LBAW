@@ -157,14 +157,19 @@
                 <br><br>
 
                 <h4>Social media</h4>
-                {{$event->socialmedia}}
+                @if(!empty($event))
                     @include('partials.events.social_media.sm_input_form', ['event' => $event, 'sm_name' => "Facebook", 'sm_url' => "url_facebook"])
                     @include('partials.events.social_media.sm_input_form', ['event' => $event, 'sm_name' => "Youtube", 'sm_url' => "url_youtube"])
                     @include('partials.events.social_media.sm_input_form', ['event' => $event, 'sm_name' => "Instagram", 'sm_url' => "url_instagram"])
                     @include('partials.events.social_media.sm_input_form', ['event' => $event, 'sm_name' => "Twitter", 'sm_url' => "url_twitter"])
                     @include('partials.events.social_media.sm_input_form', ['event' => $event, 'sm_name' => "Website", 'sm_url' => "url_website"])
-                   
-                   
+                @else 
+                    @include('partials.events.social_media.sm_input_form', ['sm_name' => "Facebook", 'sm_url' => "url_facebook"])
+                    @include('partials.events.social_media.sm_input_form', ['sm_name' => "Youtube", 'sm_url' => "url_youtube"])
+                    @include('partials.events.social_media.sm_input_form', ['sm_name' => "Instagram", 'sm_url' => "url_instagram"])
+                    @include('partials.events.social_media.sm_input_form', ['sm_name' => "Twitter", 'sm_url' => "url_twitter"])
+                    @include('partials.events.social_media.sm_input_form', ['sm_name' => "Website", 'sm_url' => "url_website"])                
+                @endif
                 <br>
 
                 <h4>Details</h4>
