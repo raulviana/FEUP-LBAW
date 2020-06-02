@@ -54,9 +54,11 @@
                             <!--<a id="event-maps-button" class="btn btn-light d-inline" href="https://www.google.com/maps/search/?api=1&query=vila+nova+de+gaia" role="button">Go to Google Maps</a>-->
                             <div class="row text-center">
                                 @if(count($event->tags) > 0)
-                                @each('partials.events.tags.tags', $event->tags, 'tag')
+                                    @foreach($event->tags as $tag)
+                                        @include('partials.events.tags.tags', ['tag' => $tag->name])
+                                    @endforeach
                                 @else
-                                <small> This event has no tags </small>
+                                    <small> This event has no tags :(s) </small>
                                 @endif
                             </div>
 

@@ -1,46 +1,46 @@
-@if($tag->name == "Theater")
+@if($tag == "Theater")
     <div class="col px-md-6">
         <button id="tag-button" class="btn theater-tag">Theater</button>
     </div>
 @endif
 
-@if($tag->name== "Sculpture")
+@if($tag== "Sculpture")
     <div class="col px-md-6">
         <button id="tag-button" class="btn sculpture-tag">Sculpture</button> 
     </div>
 @endif
 
-@if($tag->name == "Dance")
+@if($tag == "Dance")
     <div class="col px-md-6">
         <button id="tag-button" class="btn dance-tag">Dance</button> 
     </div>
 @endif
 
-@if($tag->name == "Music")
+@if($tag == "Music")
     <div class="col px-md-6">
         <button id="tag-button" class="btn music-tag">Music</button> 
     </div>
 @endif
 
-@if($tag->name == "Painting")
+@if($tag == "Painting")
     <div class="col px-md-6">
         <button id="tag-button" class="btn paintings-tag">Paintings</button> 
     </div>
 @endif
 
-@if($tag->name == "Comedy")
+@if($tag == "Comedy")
     <div class="col px-md-6">
         <button id="tag-button" class="btn comedy-tag">Comedy</button> 
     </div>    
 @endif
 
-@if($tag->name == "Literature")
+@if($tag == "Literature")
     <div class="col px-md-6">
         <button id="tag-button" class="btn literature-tag">Literature</button> 
     </div>
 @endif
 
-@if($tag->name == "Others")
+@if($tag == "Others")
     <div class="col px-md-6">
         <button id="tag-button" class="btn others-tag">Others</button> 
     </div>
