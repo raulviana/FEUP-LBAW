@@ -10,6 +10,7 @@ use App\EventCollaborators;
 use App\User;
 use App\Tag;
 use App\Local;
+use App\SocialMedia;
 use Auth;
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -102,8 +103,6 @@ class EventController extends Controller
             DB::rollBack();
             return redirect('/')->with('error', 'Error in submiting request to database');
         }
-
-
     }
 
     public function edit($id){
@@ -144,23 +143,41 @@ class EventController extends Controller
 
 
         if($request['tag_theater']) $this->addTag('Theater', $event->id);
+        else $this->removeTag('Theater', $event->id);
+
         if($request['tag_sculpture']) $this->addTag('Sculpture', $event->id);
+        else $this->removeTag('Sculpture', $event->id);
+
         if($request['tag_dance']) $this->addTag('Dance', $event->id);
+        else $this->removeTag('Dance', $event->id);
+
         if($request['tag_music']) $this->addTag('Music', $event->id);
+        else $this->removeTag('Music', $event->id);
+
         if($request['tag_paintings']) $this->addTag('Painting', $event->id);
+        else $this->removeTag('Painting', $event->id);
+
         if($request['tag_comedy']) $this->addTag('Comedy', $event->id);
+        else $this->removeTag('Comedy', $event->id);
+
         if($request['tag_literature']) $this->addTag('Literature', $event->id);
+        else $this->removeTag('Literature', $event->id);
+
         if($request['tag_others']) $this->addTag('Others', $event->id);
+        else $this->removeTag('Others', $event->id);
 
 
         if($request['url_facebook']) $this->addSocialMedia('Facebook', $request['url_facebook'] , $event->id);
+        else $this->removeSocialMedia('Facebook', $event->id);
         if($request['url_twitter']) $this->addSocialMedia('Twitter', $request['url_twitter'], $event->id);
+        else $this->removeSocialMedia('Twitter', $event->id);
         if($request['url_instagram']) $this->addSocialMedia('Instagram', $request['url_instagram'], $event->id);
+        else $this->removeSocialMedia('Instagram', $event->id);
         if($request['url_youtube']) $this->addSocialMedia('Youtube', $request['url_youtube'], $event->id);
+        else $this->removeSocialMedia('Youtube', $event->id);
         if($request['url_website']) $this->addSocialMedia('Website', $request['url_website'], $event->id);
+        else $this->removeSocialMedia('Website', $event->id);
 
-
-       
         $event->save();
 
         return redirect('/events/'.$event->id)->with('success', 'Your event is up to date!');    
@@ -250,6 +267,21 @@ class EventController extends Controller
         );
     }
 
+    public function removeTag($tag_name, $event_id){
+       $tag = Tag::where('name', 'like', $tag_name)->first();
+
+       $x = DB::table('event_tag')->where(
+            ['event_id' => $event_id, 'tag_id' => $tag->id]
+        )->first();
+        
+     
+        if($x) {
+            DB::table('event_tag')->where(
+                ['event_id' => $event_id, 'tag_id' => $tag->id]
+            )->delete();
+        }
+    }
+
     public function addLocal($local_name){
         $idLocal = DB::table('local')->insertGetId(
             ['name' => $local_name]
@@ -259,13 +291,40 @@ class EventController extends Controller
     }
 
     public function addSocialMedia($name, $url, $event_id){
-        $idSocialMedia = DB::table('social_media')->insertGetId(
-            ['name' => $name, 'url' => $url]
-        );
+        $event = Event::find($event_id);
+        $event_sm = $event->socialmedia;
+        
+  
+        /* update if it exists */
+        foreach($event_sm as $sm)
+            if($sm->name == $name){
+                $update = SocialMedia::find($sm->id);
+                $update->url = $url;
+                $update->save();
+                return;
+            }
 
+        
+
+        /* add new if it doesnt exists*/ 
+        $idSocialMedia = DB::table('social_media')->insertGetId(['name' => $name, 'url' => $url]);
         DB::table('event_social_media')->insert(
             ['event_id' => $event_id, 'social_media_id' => $idSocialMedia]
         );
+    }
+
+    public function removeSocialMedia($name, $event_id){
+        $event = Event::find($event_id);
+        $event_sm = $event->socialmedia;
+  
+        /* update if it exists */
+        foreach($event_sm as $sm)
+            if($sm->name == $name){
+                DB::table('event_social_media')->where([
+                    ['event_id', '=', $event_id],
+                    ['social_media_id', '=', $sm->id]
+                ])->delete();
+            }
     }
 
     public function search(Request $request){

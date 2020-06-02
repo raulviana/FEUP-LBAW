@@ -900,11 +900,13 @@ function userRestoreHandler() {
   }
 }
 
+/*
 function alterTag(event){
   event.preventDefault();
   let label = event.target;
   label.setAttribute('style', 'margin-right: 0.25rem; margin-left: 0.25rem; color: black; font-weight: bold;');
 }
+*/
 
 function regularEventDeletedHandler(){
   window.location = '/';
