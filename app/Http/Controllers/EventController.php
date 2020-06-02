@@ -54,9 +54,11 @@ class EventController extends Controller
         ]);
 
       
-        
         $path = $request->file('upload-photo')->store('/public/event_photo');
         $filename = basename($path);
+
+        $begin_timestamp = $request->input('start_date') . " " . $request->input('start_time') . ":" . "00+00";
+        $end_timespamp = $request->input('end_date') . " " . $request->input('end_time') . ":" . "00+00";
 
         DB::beginTransaction();
 
@@ -65,8 +67,8 @@ class EventController extends Controller
             
             $event->title = $request->input('title');
             $event->details = $request->input('details');
-            $event->start_date = $request->input('start_date');
-            $event->end_date = $request->input('end_date');
+            $event->start_date = $begin_timestamp;
+            $event->end_date = $end_timespamp;
 
 
             $event->photo = $filename;
@@ -126,19 +128,29 @@ class EventController extends Controller
     
         }
        
-        if(!is_null($request->input('start_date'))){
-            $event->start_date = $request->input('start_date');
-    
+        if(! is_null($request->input('start_date'))){
+            if(! is_null($request->input('start_time'))){
+                $begin_timestamp = $request->input('start_date') . " " . $request->input('start_time') . ":" . "00+00";
+            }
+            else{
+                $begin_timestamp = $request->input('start_date') . " " . "00:00:00+00";
+            }
+            
+        }        
+        $event->start_date = $request->input('start_date');
+        
+        if(! is_null($request->input('end_date'))){
+            if($request->input('end_time')){
+                $end_timespamp = $request->input('end_date') . " " . $request->input('end_time') . ":" . "00+00";
+            }
+            else{
+                $end_timestamp = $request->input('end_date') . " " . "00:00:00+00";
+            }
         }
-
-        if(!is_null($request->input('end_date'))){
-            $event->start_date = $request->input('start_date');
+        $event->start_date = $request->input('start_date');
     
-        }
-
         if(!is_null($request->input('details'))){
             $event->details = $request->input('details');
-    
         }
 
 
