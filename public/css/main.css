@@ -528,8 +528,8 @@ div#text-banner-login.container{
 
 div#session-alerts{
     position: absolute;
-    right:2.5%;
-    top:10%;
+    right:5px;
+    top:5px;
 }
 
 input#search-users{
