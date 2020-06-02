@@ -339,6 +339,7 @@ class EventController extends Controller
             }
     }
 
+
     public function search(Request $request){
         $request->validate([
             'query'=>'required|min:3',

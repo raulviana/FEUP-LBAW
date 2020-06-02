@@ -527,9 +527,9 @@ div#text-banner-login.centered{
 div#text-banner-login.container{
     text-transform: uppercase;
     font-weight: 500;
-  position: relative;
-  text-align: center;
-  color: white;
+    position: relative;
+    text-align: center;
+    color: white;
     font-size: 2rem;
 }
 
@@ -537,7 +537,7 @@ div#text-banner-login.container{
 div#session-alerts{
     position: absolute;
     right:5px;
-    top:15px;
+    top:6rem;
 }
 
 input#search-users{
