@@ -46,7 +46,7 @@
                             @if($invite->event->is_active)
                                 @include('partials.events.invites.invite_row', ['invite' => $invite])
                             @else 
-                                This event has been deleted! :(
+                                <p><center>{{$invite->event->title}} has been deleted! :(</center></p>
                             @endif
                         @endforeach
                     @endif
