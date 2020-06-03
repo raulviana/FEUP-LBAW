@@ -14,10 +14,12 @@
 
             @if(empty($event))
             <h3 style="margin-bottom: 1.5rem; font-weight: 900;">Create new event</h3>
+            <small> <b>NOTE (*): </b>fill all required fields </small>
             @else
             <h3 style="margin-bottom: 1.5rem; font-weight: 900;">Edit - {{$event->title}}</h3>
             @endif
 
+            
             <hr>
 
 
@@ -28,7 +30,7 @@
 
                 <div class="row">
                     <div class="col">
-                        <input id="event-title" class="form-control form-control-md" name="title" type="text" placeholder="Event title">
+                        <input id="event-title" class="form-control form-control-md" name="title" type="text" placeholder="{{empty($event) ? "Event title (*)" : $event->title}}">
                         <p id="event-info"><small id="title-invalid" class="text-danger"></small></p>
                         @if(empty($event))
                         <input name="is_private" type="checkbox"><span style="font-size:0.9rem; margin-left:0.25rem;">This is a private event.</span>
@@ -61,8 +63,12 @@
                 <div class="row">
                     <div class="col">
                         <p id="event-info"> 📌 <b>Where:</b><br>
+                            @if(empty($event))
+                            <small> Local (*): </small>
+                            @else 
                             <small> Local: </small>
-                            <input id="event-local" class="form-control form-control-sm" name="local" type="text" placeholder="Location">
+                            @endif
+                            <input id="event-local" class="form-control form-control-sm" name="local" type="text" placeholder="{{empty($event) ? "Local" : $event->local->name}}">
                             <small id="local-invalid" class="text-danger"></small></p>
 
                     </div>
@@ -72,12 +78,21 @@
                             <a id="tooltip" class="float-right" href="#" data-toggle="tooltip" data-placement="left" title="You should indicate both start and end dates. Start date should be earlier than end date."> ? </a>
 
                             <br>
-
-                            <small>Start date and time: </small> <input id="event-start-date" class="form-control form-control-sm" name="start_date" type="date" placeholder="Start date">
+                            @if(empty($event))
+                            <small>Start date and time: (*) </small> 
+                            @else 
+                            <small>Start date and time:  </small> 
+                            @endif                                                                           
+                                                                 <input id="event-start-date" class="form-control form-control-sm" name="start_date" type="date" placeholder="Start date">
                                                                  <input id="event-start-time" class="form-control form-control-sm" name="start_time" type="time" placeholder="Start time">
                   <br>
 
-                            <small>End date and time: </small> <input id="event-end-date" class="form-control form-control-sm" name="end_date" type="date" placeholder="End date">
+                            @if(empty($event))
+                            <small>End date and time: (*) </small> 
+                            @else 
+                            <small>End date and time:  </small> 
+                            @endif  
+                                                               <input id="event-end-date" class="form-control form-control-sm" name="end_date" type="date" placeholder="End date">
                                                                <input id="event-end-time" class="form-control form-control-sm" name="end_time" type="time" placeholder="End time">
 
 
