@@ -22,3 +22,10 @@
     - manage events andd its posts
 
  
+ ## Users
+  * john@example.com - 1234
+  * trump@example.com - 13456
+  * dali@example.com - 123456
+
+## Events
+ Dali has a private event and invited trump and john

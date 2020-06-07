@@ -35,7 +35,7 @@
                                         <div class="row">
                                             <div class="col">
                                                 <div class="form-group">
-                                                    <small id="recover_password"><a class="button button-outline text-muted" href="{{ route('verify.mail') }}">Forgot your password?</a></small>
+                                                    <small id="recover_password"><a class="button button-outline text-muted" href="#">Forgot your password?</a></small>
                                                 </div>
                                             </div>
                                             <div class="col">
